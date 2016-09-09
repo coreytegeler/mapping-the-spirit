@@ -1,0 +1,46 @@
+title: Story
+pages: false
+files:
+  sortable: true
+template: story
+fields:
+  title:
+    label: Title
+    type:  text
+  text:
+    label: Text
+    type:  textarea
+  builder:
+    label: Sections
+    type: builder
+    fieldsets:
+      text:
+        label: Text
+        snippet: builder/text
+        fields:
+          text:
+            label: text
+            type: textarea
+      image:
+        label: Image
+        snippet: builder/image
+        fields:
+          image:
+            label: File
+            type: image
+          caption:
+            label: Caption
+            type: text
+      quote:
+        label: Quote
+        snippet: builder/quote
+        fields:
+          text:
+            label: Text
+            type: textarea
+          citation:
+            label: Citation
+            type: text
+  tags:
+    label: Tags
+    type:  tags

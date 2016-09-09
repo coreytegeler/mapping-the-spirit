@@ -1,0 +1,50 @@
+@import 'vars';
+@import 'mixins';
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: $lightest;
+	font-family: 'Helvetica Neue';
+	font-weight: bold;
+	font-size: 19px;
+	color: $medium;
+	line-height: 1.3em;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  display: flex;
+}
+h1 {
+	padding: 1em;
+	margin: 0;
+	font-family: 'Archivo Black';
+}
+main {
+	width: calc(78% - 4em);
+	float: left;
+	transition: opacity 200ms ease-in;
+	&.hide {
+  	opacity: 0;
+  	pointer-events: none;
+  }
+}
+figcaption {
+	font-family: 'Simplon BP Mono';
+	font-weight: 500;
+}
+aside {
+	width: 22%;
+	height: calc(100% - 4em);
+	position: fixed;
+	right: 0;
+	top: 0;
+	padding: 2em;
+	float: left;
+	overflow: auto;
+	// background-color: $lighter;
+}
+@import 'story';
+@import 'grid';

@@ -1,0 +1,28 @@
+$lightest: #edf7ef;
+$lighter: #e1f4e4;
+$medium: #569db1;
+
+$itemWidth: 10em;
+$gutterWidth: 4em;
+
+$phoneWidth: 667px;
+$tabletWidth: 768px;
+$desktopWidth: 1024px;
+
+@mixin phone {
+	@media (max-width: #{$tabletWidth}) {
+		@content;
+	}
+}
+
+@mixin tablet {
+  @media (min-width: #{$tabletWidth}) and (max-width: #{$desktopWidth - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktopWidth}) {
+    @content;
+  }
+}
