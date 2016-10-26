@@ -1,0 +1,23 @@
+title: Paper
+pages: false
+files: false
+fields:
+  title:
+    label: Title
+    type:  text
+  excerpt:
+    label: Excerpt
+    type:  wysiwyg 
+  text:
+    label: Text
+    type:  wysiwyg
+  size:
+    label: Size
+    type: select
+    default: small
+    options:
+      small: Small
+      large: Large
+  tags:
+    label: Tags
+    type:  tags

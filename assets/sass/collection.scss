@@ -1,0 +1,101 @@
+#collection {
+	width: 100%;
+	height: $smallItem;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	float: left;
+	overflow: auto;
+	display: flex;
+	border-top: 1px solid rgba($medium, .5);
+	overflow-y: hidden;
+	background: white;
+	z-index: 20;
+	&.empty {
+		.instruct {
+			opacity: .5;
+		}
+		.items {
+			opacity: 0;
+		}
+	}
+	&.over.empty .instruct {
+		opacity: 0;
+	}
+	.instruct {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		display: table;
+		opacity: 0;
+		transition: opacity 100ms ease-in;
+		.vert {
+			text-align: center;
+		}
+	}
+	.items {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		display: table;
+		transition: opacity 100ms ease-in;
+		z-index: 30;
+		&:hover {
+			.item .inner {
+				opacity: 1;
+			}
+		}
+	}
+	.item {
+		max-width: 300px;
+		height: $smallItem;
+		display: flex;
+		float: left;
+		border: solid rgba($medium, .5);
+		border-width: 0 1px 0 0;
+		position: static !important;
+		&:hover {
+			cursor: pointer;
+		}
+		.inner {
+			height: 100%;
+			padding: .5em;
+			transition: opacity 100ms ease-in, transform 50ms ease-in;
+			opacity: 0.5;
+			display: flex;
+			margin: auto;
+			align-items: center;
+			@include xSmallText;
+			.image {
+				height: 100%;
+		    display: block;
+				img {
+					height: 100%;
+					vertical-align: middle;
+					-webkit-filter: grayscale(100%);
+			    filter: grayscale(100%);
+			    // -webkit-transition: -webkit-filter 100ms ease-in;
+			    // transition: filter 100ms ease-in;
+				}
+			}
+			.caption {
+				float: left;
+				display: inline-block;
+				margin-left: 1em;
+			}
+		}
+		&.highlight, &:hover, &.selected {
+			.inner {
+				img {
+					-webkit-filter: grayscale(0%) !important;
+			    filter: grayscale(0%) !important;
+				}
+			}
+			&.bw {
+				img {
+					
+				}
+			}
+		}
+	}
+}

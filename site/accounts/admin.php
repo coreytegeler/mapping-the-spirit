@@ -7,4 +7,5 @@ email: coreytegeler@gmail.com
 language: en
 role: admin
 history:
-  - stories/an-example-story
+  - >
+    stories/the-moorish-science-temple-of-america

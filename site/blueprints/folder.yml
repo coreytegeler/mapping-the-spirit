@@ -1,0 +1,35 @@
+title: Folder
+pages: false
+files:
+  sortable: true
+  fields:
+    caption:
+      label: Caption
+      type: textarea
+fields:
+  title:
+    label: Title
+    type:  text
+  text:
+    label: Text
+    type:  wysiwyg
+  thumb:
+    label: Thumbnail
+    type:  selector
+    mode:  single
+    types:
+      - image
+  size:
+    label: Size
+    type: select
+    default: small
+    width: 1/2
+    options:
+      small: Small
+      large: Large
+  bw:
+    label: Black & White
+    type: toggle
+    default: false
+    text: yes/no
+    width: 1/2

@@ -6,45 +6,82 @@ html, body {
 	margin: 0;
 	padding: 0;
 	background-color: $lightest;
-	font-family: 'Helvetica Neue';
-	font-weight: bold;
+	font-family: 'Simplon BP Mono';
+	font-weight: normal;
 	font-size: 19px;
 	color: $medium;
 	line-height: 1.3em;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: hidden;
   overflow-x: hidden;
-  display: flex;
-}
-h1 {
-	padding: 1em;
-	margin: 0;
-	font-family: 'Archivo Black';
-}
-main {
-	width: calc(78% - 4em);
-	float: left;
-	transition: opacity 200ms ease-in;
-	&.hide {
-  	opacity: 0;
-  	pointer-events: none;
+  * {
+    -webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		-webkit-backface-visibility: hidden;
+   	backface-visibility: hidden;
   }
 }
-figcaption {
-	font-family: 'Simplon BP Mono';
-	font-weight: 500;
+h1 {
+	font-size: 5em;
+	line-height: 1.1em;
+	padding: 0;
+	margin: 0;
+	font-family: 'Reglo';
+	text-transform: uppercase;
 }
-aside {
-	width: 22%;
-	height: calc(100% - 4em);
-	position: fixed;
-	right: 0;
-	top: 0;
-	padding: 2em;
-	float: left;
-	overflow: auto;
-	// background-color: $lighter;
+.horz {
+	display: table;
+	margin: auto;
+}
+.vert {
+	display: table-cell;
+	vertical-align: middle;
+}
+header {
+	width: 100%;
+	height: $headerHeight;
+	color: rgba($medium, .8);
+	border-bottom: 1px solid rgba($medium, .5);
+	display: table;
+	.inner {
+		height: .5em;
+		position: relative;
+		font-family: 'Reglo';
+		font-weight: normal;
+		text-transform: uppercase;
+		line-height: .8em;
+	}
+	.title {
+		display: table;
+		padding: 0 0 0 .5em;
+	}
+	.subtitle {
+		position: absolute;
+		right: -100%;
+		top: 0;
+		padding: 0 .5em 0 0;
+		transition: opacity 500ms $ease;
+		&.hide {
+			opacity: 0;
+		}
+	}
+	.close {
+		width: 1em;
+		position: absolute;
+		left: calc(50% - .5em);
+		top: 0;
+		text-align: center;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 500ms $ease;
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }
 @import 'story';
-@import 'grid';
+@import 'collection';
+@import 'single';

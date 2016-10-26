@@ -1,101 +1,205 @@
-body.story {
-	transition: color 200ms ease-in, background-color 200ms ease-in, border-color 200ms ease-in;
-	&.reading {
-		background-color: $medium;
-		color: $lightest;
-		figcaption {
-			border-color: $lightest !important;
-		}
-	}
-	h1.title {
-		font-size: 1em;
-		display: block;
-		.wrap {
-			span {
-				font-size: 3em;
-				line-height: 1.1em;
+body.story {	
+	main {
+		width: 100%;
+		height: calc(100% - #{$headerHeight} - #{$smallItem});
+		position: relative;
+		overflow-x: scroll;
+		transition: opacity 200ms $ease, color 200ms $ease, background-color 200ms $ease, border-color 200ms $ease;
+		&.hide {
+	  	opacity: 0;
+	  	pointer-events: none;
+	  }
+	  .left {
+	  	float: left;
+	  }
+	  #table {
+	  	height: 100%;
+	  	width: 100%;
+	  	position: absolute;
+	  	left: 0;
+	  	top: 0;
+	  	z-index: 30;
+	    display: flex;
+	    flex-direction: row;
+	    overflow-x: scroll;
+	    overflow-y: visible;
+	  }
+		.spacer {
+			&.full {
+				width: 100%;
+				height: 100%;
+				display: table;
 			}
 		}
-	}
-	.grid {
-		display: table;
-	  margin: auto;
-	  transition: all 200ms ease-in;
-		.item {
-			width: $itemWidth;
-			margin-bottom: $gutterWidth;
-			cursor: pointer;
-			transition: transform 50ms ease-in;
-			&:hover, &.looking {
+		.title {
+			width: 100%;
+	  	height: 100%;
+	  	background: $lightest;
+	  	display: table;
+	  	float: left;
+	  	.horz {
+	  		height: 100%;
+	  		padding: 0 5em;
+	  	}
+	  	h1 {
+	  		max-width: 1200px;
+	  		text-align: center;
+	  		margin: auto;
+	  		padding: 0;
+	  		@include xLargeText;
+	  	}
+	  	.text {
+	  		max-width: 800px;
+	  		display: table;
+	  		margin: auto;
+	  		font-weight: normal;
+	  	}
+		}
+		#map {
+	  	height: 100%;
+	  	display: block;
+	  	float: left;
+	  	padding: 0 calc(#{$gutter} * 4);
+  		img {
+  			height: 100%;
+  		}
+		}
+		.chapter {
+			float: left;
+		}
+		.grid {
+			height: calc(100% - #{$gutter});
+			margin: $gutter 0 0 0;
+			display: table;
+			float: left;
+		  .item {
+		  	display: block;
+		  	margin: 0 $gutter 0 0;
+		  	float: left;
 				cursor: pointer;
-				transform: scale(1.008);
-			}
-		}
-		.item.text {
-			// display: none;
-			width: calc(8.5px * 23.6);
-			height: calc(11px * 25);
-			font-size: 0.5em;
-			line-height: 1.3em;
-			background-image: url(/assets/images/letter.svg);
-			background-repeat: no-repeat;
-			background-size: contain;
-			.text {
-				padding: 60px 20px 20px 20px;
-			}
-		}
-		.sizer {
-	  	width: $itemWidth;
-	  }
-	  .gutter {
-	  	width: $gutterWidth;
-	  }
-
-		.item.image {
-			img {
-				max-width: 100%;
-			}
-		}
-
-		.item.quote {
-
-		}
-	}
-	aside {
-		figcaption {
-			padding-bottom: 0.5em;
-			border-bottom: 1px solid rgba($medium, 0.5);
-			margin-bottom: 0.5em;
-			font-size: 0.82em;
-			line-height: 1.2em;
-			display: flex;
-			.inner {
-				transition: opacity 200ms ease-in, transform 50ms ease-in;
-				opacity: 0.5;
-			}
-			&.highlight, &:hover, &.selected {
-				.inner {
-					transform: scale(1.005);
-					opacity: 1;
+				&:hover, &.looking {
+					cursor: pointer;
+					color: $red;
+				}
+				&.folder, &.object {
+					.inner {
+						height: 100%;
+						.image {
+							height: 100%;
+							img {
+								// display: none;
+								max-height: 100%;
+								display: table;
+								margin: 0;
+							}
+						}
+			  	}
+					&.large {
+						// height: $largeItem;
+						// .image {
+						// 	img {
+						// 		// max-height: $largeItem;
+						// 	}
+						// }
+					}
+				}
+				&.paper {
+					width: 300px;
+			  	display: block;
+					.inner {
+						display: table-cell;
+						vertical-align: middle;
+						@include smallText;
+					}
 				}
 			}
-			&.image {
+			&:after {
+			  content: '';
+			  display: block;
+			  clear: both;
+			}
+			.sizer {
+		  	height: $medItem;
+		  	display: table;
+		  }
+		  .gutter {
+		  	width: $gutter;
+		  }
+		}
+	}
+	&.looking {
+		#collection {
+			z-index: 40;
+		}
+		header {
+			.close {
+				opacity: 1;
+				pointer-events: all;
+			}
+		}
+	}
+	.grid .item, .item.ui-draggable-dragging {
+		transition: none;
+		font-family: 'Simplon BP Mono';
+		// -webkit-transition: color 300ms $ease;
+		// transition: color 300ms $ease;
+		img {
+			display: table;
+			-webkit-filter: grayscale(100%);
+	    filter: grayscale(100%);
+	    // -webkit-transition: -webkit-filter 300ms $ease;
+	    // transition: filter 300ms $ease;
+		}
+		&:hover, &.looking {
+			.image.bw {
+				background-color: $red;
+			}
+			.image:not(.bw) {
+				img {
+					-webkit-filter: grayscale(0%) !important;
+			    filter: grayscale(0%) !important;
+				}
+			}
+		}
+		&.bw {
+  		background-color: black;
+  		// -webkit-transition: background-color 500ms $ease;
+	    // transition: background-color 500ms $ease;
+	    img {
+		    mix-blend-mode: lighten;
+		  }
+		}
+		&.ui-draggable-dragging {
+			max-width: 300px;
+			height: $smallItem !important;
+			display: flex;
+			z-index: 60;
+			margin: 0;
+			border: solid transparent;
+			border-width: 1px 1px 0 1px;
+			.inner {
+				height: 100%;
+				padding: .5em;
+				display: flex;
+		    align-items: center;
+				@include xSmallText;
 				.image {
-					width: 20%;
-					margin-right: 5%;
-					display: inline-block;
+					height: 100%;
+			    display: block;
 					img {
-						width: 100%;
+						height: 100% !important;
 						vertical-align: middle;
 					}
 				}
-				.caption {
-					width: 75%;
-					display: inline-block;
+			}
+			&.paper {
+				.inner {
+					
 				}
 			}
-			&.text  {
-
+			&.over {
+				background-color: white;
+				border-color: rgba($medium, .5);
 			}
 		}
 	}

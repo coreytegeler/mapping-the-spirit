@@ -1,0 +1,28 @@
+title: Object
+pages: false
+files:
+  max: 1
+fields:
+  title:
+    label: Title
+    type:  text
+  caption:
+    label: Text
+    type:  wysiwyg 
+  size:
+    label: Size
+    type: select
+    default: small
+    width: 1/2
+    options:
+      small: Small
+      large: Large
+  bw:
+    label: Black & White
+    type: toggle
+    default: false
+    text: yes/no
+    width: 1/2
+  tags:
+    label: Tags
+    type:  tags

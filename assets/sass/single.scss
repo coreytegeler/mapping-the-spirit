@@ -1,0 +1,136 @@
+#single {
+	width: 100%;
+	height: calc(100% - #{$smallItem} - #{$headerHeight});
+	position: fixed;
+	left: 0;
+	top: $headerHeight;
+	z-index: 40;
+	display: none;
+	opacity: 0;
+	transition: opacity 500ms cubic-bezier(0.86, 0, 0.07, 1);
+	background-color: white;
+	&.show {
+		display: flex;
+	}
+	&.loaded {
+		opacity: 1;
+	}
+	&.replacing section .inner {
+		opacity: 0;
+	}
+	section {
+		height: 100%;
+		position: relative;
+		min-width: 10em;
+		overflow: hidden;
+		.scroll {
+			height: 100%;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+		.inner {
+			transition: opacity 300ms cubic-bezier(0.86, 0, 0.07, 1);
+			opacity: 1;
+			.text {
+				line-height: 1.2em;
+				p {
+					margin: 0 0 1em 0;
+				}
+			}
+		}
+	}
+	&.paper {
+		section {
+			width: 100%;
+			.inner {
+				max-width: 800px;
+				display: table;
+				margin: auto;
+			}
+		}
+	}
+	&.folder {
+		section {
+			width: 50%;
+			&#left {
+				#handle {
+					height: 100%;
+					position: absolute;
+					right: -6px;
+					top: 0;
+					padding: 0 6px;
+					z-index: 100;
+					.line {
+						width: 4px;
+						height: 100%;
+						border: solid black;
+						border-width: 0 1px;
+					}
+					&:hover {
+						cursor: col-resize;
+					}
+				}
+			}
+			&#right {
+				.inner {
+					max-width: 800px;
+					display: table;
+					margin: auto;
+					.intro {
+						padding: 1em;
+					}
+				}
+			}
+		}
+	}
+	&.object {
+		section {
+			width: 100%;
+			.inner {
+				max-width: 800px;
+				height: 100%;
+				padding: $gutter;
+				display: table;
+				margin: auto;
+				img {
+					width: 100%;
+				}
+			}
+		}
+	}
+	.items {
+		.itemsWrap {
+			padding: .5em 1em;
+			.item {
+				padding: .5em 0;
+				transition: opacity 500ms cubic-bezier(0.86, 0, 0.07, 1);
+				&.image {
+					opacity: 0;	
+					&.loaded {
+						opacity: 1;
+					}
+				}
+				.itemWrap {
+					img {
+						max-width: 100%;
+						// max-height: calc(100vh - #{$headerHeight} - #{$smallItem});
+						display: table;
+						margin: auto;
+						vertical-align: middle;
+					}
+					.caption {
+						margin: 1em 0 0 0;
+					}
+				}
+				&.readable {
+					width: 100%;
+					img {
+						width: auto;
+						max-width: 100%;
+						max-height: 100%;
+					}
+				}
+			}
+		}
+	}
+}

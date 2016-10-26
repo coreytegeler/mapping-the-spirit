@@ -1,13 +1,38 @@
-$lightest: #edf7ef;
-$lighter: #e1f4e4;
-$medium: #569db1;
-
-$itemWidth: 10em;
-$gutterWidth: 4em;
+$lightest: white;
+$lighter: gray;
+$medium: black;
+$red: #e21b23;
 
 $phoneWidth: 667px;
 $tabletWidth: 768px;
 $desktopWidth: 1024px;
+
+
+$gutter: 20px;
+$headerHeight: 2em;
+$smallItem: 5em;
+$medItem: calc(50% - 1em);
+$largeItem: 100%;
+
+$ease: cubic-bezier(0.86, 0, 0.07, 1);
+
+@mixin xSmallText {
+	font-size: .75em;
+	line-height: 1.1em;
+	font-weight: normal;
+}
+
+@mixin smallText {
+	font-size: 1em;
+	line-height: 1.1em;
+	font-weight: normal;
+}
+
+@mixin xLargeText {
+	font-size: 5em;
+	line-height: 1.3em;
+	font-weight: normal;
+}
 
 @mixin phone {
 	@media (max-width: #{$tabletWidth}) {

@@ -5,7 +5,8 @@
   "scripts": {
     "watch-sass": "sass --watch assets/sass/styles.scss:assets/css/styles.css",
     "watch-coffee": "coffee -o assets/js/ -cw assets/coffee/",
-    "go": "npm run watch-sass & npm run watch-coffee"
+    "go": "npm run watch-sass & npm run watch-coffee",
+    "ssh": "ssh root@162.243.9.116"
   },
   "repository": {
     "type": "git",
