@@ -5,7 +5,7 @@ if(!kirby()->request()->ajax()) {
 	echo '<main>';
 	snippet( 'table', array( 'story' => $story ) );
 	snippet( 'footnotes' );
-	echo '<div id="single" class="show loaded paper" data-item="' . $page->slug() . '">';
+	echo '<div id="single" class="show paper open" data-item="' . $page->slug() . '">';
 }
 echo '<section>';
 	echo '<div class="scroll">';

@@ -5,11 +5,11 @@ html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background-color: $lightest;
+	background-color: white;
 	font-family: 'Simplon BP Mono';
 	font-weight: normal;
 	font-size: 19px;
-	color: $medium;
+	color: black;
 	line-height: 1.3em;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -43,45 +43,58 @@ h1 {
 header {
 	width: 100%;
 	height: $headerHeight;
-	color: rgba($medium, .8);
-	border-bottom: 1px solid rgba($medium, .5);
-	display: table;
+	color: black;
+	border-bottom: 1px solid $medium;
+	display: flex;
 	.inner {
-		height: .5em;
+		width: 100%;
 		position: relative;
 		font-family: 'Reglo';
 		font-weight: normal;
 		text-transform: uppercase;
 		line-height: .8em;
+		display: flex;
+		align-items: center;
 	}
 	.title {
-		display: table;
+		width: calc(50% - 1em);
 		padding: 0 0 0 .5em;
+		span {
+		}
 	}
 	.subtitle {
-		position: absolute;
-		right: -100%;
-		top: 0;
-		padding: 0 .5em 0 0;
-		transition: opacity 500ms $ease;
+		display: flex;
+		flex-grow: 1;
+    flex-direction: row-reverse;
+		transition: opacity 500ms $fadeEase;
+		span {
+			transform: translateX(100%);
+			padding: 0 .5em 0 0;
+			float: right;
+			text-align: right;
+		}
 		&.hide {
 			opacity: 0;
 		}
 	}
-	.close {
+	.tools {
 		width: 1em;
-		position: absolute;
-		left: calc(50% - .5em);
-		top: 0;
 		text-align: center;
 		opacity: 0;
 		pointer-events: none;
-		transition: opacity 500ms $ease;
-		&:hover {
-			cursor: pointer;
+		transition: opacity 500ms $fadeEase;
+		.tool {
+			width: 1em;
+			&.close {
+
+			}
+			&:hover {
+				cursor: pointer;
+			}
 		}
 	}
 }
+@import 'home';
 @import 'story';
 @import 'collection';
 @import 'single';

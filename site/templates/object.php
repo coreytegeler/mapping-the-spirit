@@ -5,7 +5,7 @@ if(!kirby()->request()->ajax()) {
 	echo '<main>';
 	snippet( 'table', array( 'story' => $story ) );
 	snippet( 'footnotes' );
-	echo '<div id="single" class="show loaded object" data-item="' . $page->slug() . '">';
+	echo '<div id="single" class="show open object" data-item="' . $page->slug() . '">';
 }
 $image = $page->images()->first();
 echo '<section>';

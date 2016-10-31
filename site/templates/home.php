@@ -1,8 +1,13 @@
-<?php snippet('header') ?>
+<?php
+snippet('header');
 
-  <main class="main" role="main">
+  echo '<main class="main" role="main">';
+  	echo '<div class="title">';
+	  	echo '<h1>';
+	  		echo $site->title();
+	  	echo '</h1>';
+	  echo '</maidiv>';
+  echo '</main>';
 
-
-  </main>
-
-<?php snippet('footer') ?>
+snippet('footer')
+?>

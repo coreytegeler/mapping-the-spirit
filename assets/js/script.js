@@ -6,7 +6,7 @@
     $body = $('body');
     $main = $('.main');
     $grid = $('.grid');
-    $subtitle = $('header .subtitle');
+    $subtitle = $('header .subtitle span');
     $table = $('#table');
     $single = $('#single');
     $collection = $('#collection');
@@ -48,14 +48,14 @@
       $grid.isotope({
         layoutMode: 'masonryHorizontal',
         itemSelector: '.item',
-        isAnimated: false,
         percentPosition: false,
         gutter: gutter,
+        transitionDuration: 0,
         masonryHorizontal: {
           rowHeight: '.sizer',
           gutter: gutter,
           percentPosition: true,
-          isAnimated: false
+          transitionDuration: 0
         },
         animationOptions: {
           duration: 0
@@ -76,7 +76,8 @@
           height: height
         });
       });
-      return $grid.isotope();
+      $grid.isotope();
+      return $grid.addClass('loaded');
     };
     horzScroll = function(self, event) {
       var delta;
@@ -90,12 +91,12 @@
       var $bigTitle, scrollLeft, titleRight;
       scrollLeft = $(self).scrollLeft();
       $bigTitle = $('#title');
-      titleRight = scrollLeft - $subtitle.innerWidth();
-      if (titleRight >= 0) {
+      titleRight = $subtitle.innerWidth() - scrollLeft;
+      if (titleRight <= 0) {
         titleRight = 0;
       }
       return $subtitle.css({
-        right: titleRight + 'px'
+        x: titleRight + 'px'
       });
     };
     dragAndDrop = function() {
@@ -113,6 +114,11 @@
           left: 0,
           top: 0
         },
+        start: function(event, ui) {
+          var $helper;
+          $helper = $(ui.helper);
+          return $grid.addClass('dragging');
+        },
         drag: function(event, ui) {
           var $helper, collectionTop, itemTop;
           $helper = $(ui.helper);
@@ -125,16 +131,16 @@
           }
         },
         stop: function(event, ui) {
-          var $helper;
-          return $helper = $(ui.helper);
+          return $grid.removeClass('dragging');
         }
       });
-      return $collection.droppable({
-        accept: '.item',
+      $collection.droppable({
+        accept: '.item.droppable',
         drop: function(event, ui) {
           var $item;
-          $item = $(ui.draggable[0]).clone();
           $(this).removeClass('over');
+          $item = $(ui.draggable[0]).clone();
+          $item.removeClass('droppable');
           return holdOn($item);
         },
         over: function(event, ui) {
@@ -142,6 +148,28 @@
         },
         out: function(event, ui) {
           return $collection.removeClass('over');
+        }
+      });
+      return $collection.find('.items').sortable({
+        items: '> .item',
+        containment: 'body',
+        helper: 'clone',
+        axis: 'x',
+        snap: '#collection .items',
+        snapMode: 'inner',
+        snapTolerance: 0,
+        scroll: false,
+        placeholder: 'placeholder',
+        forcePlaceholderSize: true,
+        cursorAt: {
+          left: 0,
+          top: 0
+        },
+        start: function(event, ui) {
+          return $collection.addClass('sorting');
+        },
+        stop: function(event, ui) {
+          return $collection.removeClass('sorting');
         }
       });
     };
@@ -158,16 +186,19 @@
       return $collection.find('.items').append($item);
     };
     pickUp = function(self) {
-      var $figcaption, $item, index, itemSlug, storySlug, type, url;
+      var $collected, $item, index, itemSlug, storySlug, type, url;
       index = $(self).data('index');
       type = $(self).data('type');
       $item = $(self);
       itemSlug = $item.data('slug');
       storySlug = $item.data('story');
-      $figcaption = $('aside figcaption[data-index="' + index + '"]');
-      $figcaption.addClass('selected');
+      $collected = $('#collection .item[data-index="' + index + '"]');
+      $collected.addClass('selected');
       $body.addClass('looking');
-      $single.addClass('show');
+      $single.addClass('open');
+      setTimeout(function() {
+        return $single.addClass('show');
+      }, 100);
       url = '/stories/' + storySlug + '/' + itemSlug;
       return $.ajax({
         url: url,
@@ -180,7 +211,7 @@
         success: function(response, status, jqXHR) {
           history.pushState('data', '', url);
           $subtitle.transition({
-            right: 0
+            x: 0
           }, 500, 'easeInOutCubic');
           $single.addClass(type).attr('data-item', itemSlug);
           if ($single.html()) {
@@ -196,20 +227,20 @@
       });
     };
     createSingle = function(html) {
-      $single.html(html);
-      $single.on(transEnd, function() {
+      return $single.on(transEnd, function() {
         $single.off(transEnd);
+        $single.html(html);
         loadSingle();
         return $single.removeClass('replacing');
       });
-      return setTimeout((function() {
-        return $single.addClass('loaded');
-      }), 100);
     };
     loadSingle = function() {
       $subtitle.css({
-        right: 0
+        x: 0
       });
+      setTimeout(function() {
+        return $single.addClass('loaded');
+      }, 100);
       imagesLoaded($single).on('progress', function(inst, image) {
         var $item;
         $item = $(image.img).parents('.item');
@@ -223,27 +254,28 @@
       });
     };
     putDown = function() {
-      var $figcaption, itemSlug, scrollLeft, subtitleRight, subtitleWidth, url;
+      var $collected, itemSlug, scrollLeft, subtitleRight, subtitleWidth, url;
       itemSlug = $single.attr('data-item');
       url = window.location.href.replace(itemSlug, '');
       history.replaceState({}, '', url);
-      $figcaption = $('aside figcaption.selected').removeClass('selected');
+      $collected = $('#collection .item.selected').removeClass('selected');
       $body.removeClass('looking folder');
-      $single.removeClass('loaded');
       scrollLeft = $table.scrollLeft();
       subtitleWidth = $subtitle.innerWidth();
-      subtitleRight = scrollLeft - subtitleWidth;
-      if (subtitleRight >= 0) {
+      subtitleRight = subtitleWidth - scrollLeft;
+      if (subtitleRight <= 0) {
         subtitleRight = 0;
       }
       $subtitle.transition({
-        right: subtitleRight
+        x: subtitleRight
       }, 500, 'easeInOutQuint');
-      return $single.on(transEnd, function() {
+      $single.on(transEnd, function() {
         $single.off(transEnd);
+        $single.removeClass('');
         $single.attr('class', '');
         return $single.html('');
       });
+      return $single.removeClass('show');
     };
     scrolls = {
       left: {
@@ -280,19 +312,22 @@
       });
     };
     lookAt = function(self) {
-      var $figcaption, $item, index;
+      var $collected, $item, index;
+      if ($grid.is('.dragging') || $collection.is('.sorting')) {
+        return;
+      }
       index = $(self).data('index');
       $item = $('.grid .item[data-index="' + index + '"]');
-      $figcaption = $('aside figcaption[data-index="' + index + '"]');
-      $figcaption.addClass('highlight');
+      $collected = $('#collection .item[data-index="' + index + '"]');
+      $collected.addClass('looking');
       return $item.addClass('looking');
     };
     lookAway = function(self) {
-      var $figcaption, $item, index;
+      var $collected, $item, index;
       index = $(self).data('index');
       $item = $('.grid .item[data-index="' + index + '"]');
-      $figcaption = $('aside figcaption[data-index="' + index + '"]');
-      $figcaption.removeClass('highlight');
+      $collected = $('#collection .item[data-index="' + index + '"]');
+      $collected.removeClass('looking');
       return $item.removeClass('looking');
     };
     return init();

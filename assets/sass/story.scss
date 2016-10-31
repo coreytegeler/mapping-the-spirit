@@ -4,7 +4,7 @@ body.story {
 		height: calc(100% - #{$headerHeight} - #{$smallItem});
 		position: relative;
 		overflow-x: scroll;
-		transition: opacity 200ms $ease, color 200ms $ease, background-color 200ms $ease, border-color 200ms $ease;
+		transition: opacity 500ms $fadeEase, color 500ms $fadeEase, background-color 500ms $fadeEase, border-color 500ms $fadeEase;
 		&.hide {
 	  	opacity: 0;
 	  	pointer-events: none;
@@ -34,7 +34,7 @@ body.story {
 		.title {
 			width: 100%;
 	  	height: 100%;
-	  	background: $lightest;
+	  	background: white;
 	  	display: table;
 	  	float: left;
 	  	.horz {
@@ -72,15 +72,16 @@ body.story {
 			margin: $gutter 0 0 0;
 			display: table;
 			float: left;
+			opacity: 0;
+			transition: opacity 500ms $fadeEase;
+			&.loaded {
+				opacity: 1;
+			}
 		  .item {
 		  	display: block;
 		  	margin: 0 $gutter 0 0;
 		  	float: left;
 				cursor: pointer;
-				&:hover, &.looking {
-					cursor: pointer;
-					color: $red;
-				}
 				&.folder, &.object {
 					.inner {
 						height: 100%;
@@ -132,14 +133,13 @@ body.story {
 			z-index: 40;
 		}
 		header {
-			.close {
+			.tools {
 				opacity: 1;
 				pointer-events: all;
 			}
 		}
 	}
-	.grid .item, .item.ui-draggable-dragging {
-		transition: none;
+	.grid .item, .item.ui-draggable-dragging, .item.ui-sortable-helper, #collection .item {
 		font-family: 'Simplon BP Mono';
 		// -webkit-transition: color 300ms $ease;
 		// transition: color 300ms $ease;
@@ -150,7 +150,9 @@ body.story {
 	    // -webkit-transition: -webkit-filter 300ms $ease;
 	    // transition: filter 300ms $ease;
 		}
-		&:hover, &.looking {
+		&.looking, &.selected {
+			cursor: pointer;
+			color: $red;
 			.image.bw {
 				background-color: $red;
 			}
@@ -161,7 +163,7 @@ body.story {
 				}
 			}
 		}
-		&.bw {
+		.image.bw {
   		background-color: black;
   		// -webkit-transition: background-color 500ms $ease;
 	    // transition: background-color 500ms $ease;
@@ -169,14 +171,17 @@ body.story {
 		    mix-blend-mode: lighten;
 		  }
 		}
-		&.ui-draggable-dragging {
+		&.ui-draggable-dragging, &.ui-sortable-helper {
 			max-width: 300px;
-			height: $smallItem !important;
+			height: calc(#{$smallItem} + 1px) !important;
+			position: fixed;
 			display: flex;
 			z-index: 60;
 			margin: 0;
-			border: solid transparent;
-			border-width: 1px 1px 0 1px;
+			background: white;
+			border: solid black;
+			border-width: 1px;
+			transform: translateY(1px);
 			.inner {
 				height: 100%;
 				padding: .5em;

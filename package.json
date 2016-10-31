@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "watch-sass": "sass --watch assets/sass/styles.scss:assets/css/styles.css",
-    "watch-coffee": "coffee -o assets/js/ -cw assets/coffee/",
-    "go": "npm run watch-sass & npm run watch-coffee",
+    "sass": "sass -w assets/sass/style.scss:assets/css/prestyle.css",
+    "prefix" : "postcss -w -u autoprefixer assets/css/prestyle.css -o assets/css/style.css",
+    "coffee": "coffee -o assets/js/ -cw assets/coffee/",
+    "go": "npm run sass & npm run prefix & npm run coffee",
     "ssh": "ssh root@162.243.9.116"
   },
   "repository": {
@@ -20,6 +21,8 @@
   "homepage": "https://github.com/coreytegeler/mapping-the-spirit#readme",
   "dependencies": {
     "coffee-script": "1.10.0",
-    "node-sass": "3.8.0"
+    "node-sass": "3.8.0",
+    "autoprefixer": "^6.5.1",
+    "cssnano": "^3.8.0"
   }
 }

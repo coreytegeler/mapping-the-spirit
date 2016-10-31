@@ -1,6 +1,6 @@
-$lightest: white;
-$lighter: gray;
-$medium: black;
+$lighter: #f2f2f9;
+$light: #e7e9f2;
+$medium: #3d3d3f;
 $red: #e21b23;
 
 $phoneWidth: 667px;
@@ -15,6 +15,7 @@ $medItem: calc(50% - 1em);
 $largeItem: 100%;
 
 $ease: cubic-bezier(0.86, 0, 0.07, 1);
+$fadeEase: cubic-bezier(1.000, 0.000, 0.000, 1.000);
 
 @mixin xSmallText {
 	font-size: .75em;

@@ -19,7 +19,7 @@ echo '<div id="table" class="horzScroll">';
 	  $items = $story->children()->visible();
 	  foreach( $items as $index => $item ) {
 	  	$type = $item->intendedTemplate();
-	  	echo '<div class="click item ' . $type . ' ' . $item->size() . '" data-index="' . $index . '" data-story="' . $story->slug() . '" data-slug="' . $item->slug() . '" data-type="' . $type . '">';
+	  	echo '<div class="click item droppable ' . $type . ' ' . $item->size() . '" data-index="' . $index . '" data-story="' . $story->slug() . '" data-slug="' . $item->slug() . '" data-type="' . $type . '">';
 	  		echo '<div class="inner">';
 				  snippet( 'items/' . $type, array( 'item' => $item ) );
 				echo '</div>';

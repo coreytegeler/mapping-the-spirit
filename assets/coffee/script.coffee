@@ -3,7 +3,7 @@ $ ->
 	$body = $('body')
 	$main = $('.main')
 	$grid = $('.grid')
-	$subtitle = $('header .subtitle')
+	$subtitle = $('header .subtitle span')
 	$table = $('#table')
 	$single = $('#single')
 	$collection = $('#collection')
@@ -39,14 +39,14 @@ $ ->
 		$grid.isotope
 			layoutMode: 'masonryHorizontal',
 			itemSelector: '.item',
-			isAnimated: false,
 			percentPosition: false,
 			gutter: gutter,
+			transitionDuration: 0
 			masonryHorizontal: {
 				rowHeight: '.sizer',
 				gutter: gutter,
 				percentPosition: true,
-				isAnimated: false
+				transitionDuration: 0
 			},
 			animationOptions: {
 				duration: 0
@@ -62,6 +62,7 @@ $ ->
 			$item.find('img').css
 				height: height
 		$grid.isotope()
+		$grid.addClass('loaded')
 
 	horzScroll = (self, event) ->
 		delta = event.deltaY
@@ -72,15 +73,11 @@ $ ->
 	tableScroll = (self) ->
 		scrollLeft = $(self).scrollLeft()
 		$bigTitle = $('#title')
-		# opacity = 1 - (scrollLeft/1000)
-		# if(opacity > .05)
-		# 	$bigTitle.css
-		# 		opacity: opacity
-		titleRight = scrollLeft - $subtitle.innerWidth()
-		if(titleRight >= 0)
+		titleRight = $subtitle.innerWidth() - scrollLeft
+		if(titleRight <= 0)
 			titleRight = 0
 		$subtitle.css
-			right: titleRight+'px'
+			x: titleRight+'px'
 
 	dragAndDrop = () ->
 		gutter = $grid.find('.gutter').innerWidth()
@@ -95,6 +92,9 @@ $ ->
 			cursorAt:
 				left: 0,
 				top: 0
+			start: (event, ui) ->
+				$helper = $(ui.helper)
+				$grid.addClass('dragging')
 			drag: (event, ui) ->
 				$helper = $(ui.helper)
 				itemTop = ui.offset.top
@@ -104,19 +104,39 @@ $ ->
 				else
 					$helper.removeClass('over')
 			stop: (event, ui) ->
-				$helper = $(ui.helper)
-				# $(ui.helper).removeClass('looking')
+				$grid.removeClass('dragging')
 
 		$collection.droppable
-			accept: '.item',
+			accept: '.item.droppable',
 			drop: (event, ui) ->
-				$item = $(ui.draggable[0]).clone()
 				$(this).removeClass('over')
+				$item = $(ui.draggable[0]).clone()
+				$item.removeClass('droppable')
 				holdOn($item)
 			over: (event, ui) ->
 				$collection.addClass('over')
 			out: (event, ui) ->
 				$collection.removeClass('over')
+
+		$collection.find('.items').sortable
+			items: '> .item',
+			containment: 'body',
+			helper: 'clone',
+			axis: 'x',
+			snap: '#collection .items',
+			snapMode: 'inner',
+			snapTolerance: 0,
+			scroll: false,
+			placeholder: 'placeholder',
+			forcePlaceholderSize: true,
+			cursorAt:
+				left: 0,
+				top: 0
+			start: (event, ui) ->
+				$collection.addClass('sorting')
+			stop: (event, ui) ->
+				$collection.removeClass('sorting')
+
 
 	holdOn = (item) ->
 		$item = $(item)
@@ -134,10 +154,13 @@ $ ->
 		$item = $(self)
 		itemSlug = $item.data('slug')
 		storySlug = $item.data('story')
-		$figcaption = $('aside figcaption[data-index="'+index+'"]')
-		$figcaption.addClass('selected')
+		$collected = $('#collection .item[data-index="'+index+'"]')
+		$collected.addClass('selected')
 		$body.addClass('looking')
-		$single.addClass('show')
+		$single.addClass('open')
+		setTimeout () ->
+			$single.addClass('show')
+		, 100
 		url = '/stories/' + storySlug + '/' + itemSlug
 		$.ajax
 			url: url
@@ -148,7 +171,7 @@ $ ->
 				console.error(err)
 			success: (response, status, jqXHR) ->
 				history.pushState('data', '', url);
-				$subtitle.transition({right: 0}, 500, 'easeInOutCubic')
+				$subtitle.transition({x: 0}, 500, 'easeInOutCubic')
 				$single.addClass(type).attr('data-item', itemSlug)
 				if($single.html())
 					$single.on transEnd, () ->
@@ -159,15 +182,17 @@ $ ->
 					createSingle(response)
 
 	createSingle = (html) ->
-		$single.html(html)
 		$single.on transEnd, () ->
 			$single.off(transEnd)
+			$single.html(html)
 			loadSingle()
 			$single.removeClass('replacing')
-		setTimeout (-> $single.addClass('loaded')), 100
 
 	loadSingle = () ->
-		$subtitle.css({right:0})
+		$subtitle.css({x:0})
+		setTimeout(->
+			$single.addClass('loaded')
+		,100)
 		imagesLoaded($single).on 'progress', (inst, image) ->
 			$item = $(image.img).parents('.item')
 			$item.addClass('loaded')
@@ -180,19 +205,20 @@ $ ->
 		itemSlug = $single.attr('data-item')
 		url = window.location.href.replace(itemSlug, '')
 		history.replaceState({}, '', url);
-		$figcaption = $('aside figcaption.selected').removeClass('selected')
+		$collected = $('#collection .item.selected').removeClass('selected')
 		$body.removeClass('looking folder')
-		$single.removeClass('loaded')
 		scrollLeft = $table.scrollLeft()
 		subtitleWidth = $subtitle.innerWidth()
-		subtitleRight = scrollLeft - subtitleWidth
-		if(subtitleRight >= 0)
+		subtitleRight = subtitleWidth - scrollLeft
+		if(subtitleRight <= 0)
 			subtitleRight = 0
-		$subtitle.transition({right: subtitleRight}, 500, 'easeInOutQuint')
+		$subtitle.transition({x: subtitleRight}, 500, 'easeInOutQuint')
 		$single.on transEnd, () ->
 			$single.off(transEnd)
+			$single.removeClass('')
 			$single.attr('class', '')
 			$single.html('')
+		$single.removeClass('show')
 
 	scrolls = { left: { top: 0, height: 0 }, right: { top: 0, height: 0 } }
 	resizeSects = () ->
@@ -212,17 +238,19 @@ $ ->
 				$sect.find('.text').css({fontSize:fontSize+'px'})
 
 	lookAt = (self) ->
+		if($grid.is('.dragging') || $collection.is('.sorting'))
+			return
 		index = $(self).data('index')
 		$item = $('.grid .item[data-index="'+index+'"]')
-		$figcaption = $('aside figcaption[data-index="'+index+'"]')
-		$figcaption.addClass('highlight')
+		$collected = $('#collection .item[data-index="'+index+'"]')
+		$collected.addClass('looking')
 		$item.addClass('looking')
 
 	lookAway = (self) ->
 		index = $(self).data('index')
 		$item = $('.grid .item[data-index="'+index+'"]')
-		$figcaption = $('aside figcaption[data-index="'+index+'"]')
-		$figcaption.removeClass('highlight')
+		$collected = $('#collection .item[data-index="'+index+'"]')
+		$collected.removeClass('looking')
 		$item.removeClass('looking')
 
 	init()

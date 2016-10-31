@@ -20,7 +20,7 @@
     'assets/js/transit.js',
     'assets/js/script.js',
   ));
-  echo css( '/assets/css/styles.css' );
+  echo css( '/assets/css/style.css' );
 
   if( !isset( $bodyClass ) ) {
     $bodyClass = [];
@@ -33,21 +33,25 @@
 </head>
 <body class="<?php echo implode( ' ', $bodyClass ) ?>">
   <header>
-    <div class="vert">
-      <div class="inner">
-        <div class="title">
+    <div class="inner">
+      <div class="title">
+        <span>
           Mapping The Spirit
-        </div>
-        <div class="subtitle">
-        <?php
-        if( isset( $story ) ) {
-          echo $story->title();
-        } else {
-          echo $page->title();
-        }
-        ?>
-        </div>
-        <div class="close">×</div>
+        </span>
+      </div>
+      <div class="tools">
+        <div class="tool close">×</div>
+      </div>
+      <div class="subtitle">
+        <span>
+          <?php
+          if( isset( $story ) ) {
+            echo $story->title();
+          } else {
+            echo $page->title();
+          }
+          ?>
+        </span>
       </div>
     </div>
   </header>

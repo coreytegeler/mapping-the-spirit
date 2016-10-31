@@ -40,45 +40,70 @@ h1 {
 header {
   width: 100%;
   height: 2em;
-  color: rgba(0, 0, 0, 0.8);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-  display: table; }
+  color: black;
+  border-bottom: 1px solid #3d3d3f;
+  display: flex; }
   header .inner {
-    height: .5em;
+    width: 100%;
     position: relative;
     font-family: 'Reglo';
     font-weight: normal;
     text-transform: uppercase;
-    line-height: .8em; }
+    line-height: .8em;
+    display: flex;
+    align-items: center; }
   header .title {
-    display: table;
+    width: calc(50% - 1em);
     padding: 0 0 0 .5em; }
   header .subtitle {
-    position: absolute;
-    right: -100%;
-    top: 0;
-    padding: 0 .5em 0 0;
-    transition: opacity 500ms cubic-bezier(0.86, 0, 0.07, 1); }
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row-reverse;
+    transition: opacity 500ms cubic-bezier(1, 0, 0, 1); }
+    header .subtitle span {
+      transform: translateX(100%);
+      padding: 0 .5em 0 0;
+      float: right;
+      text-align: right; }
     header .subtitle.hide {
       opacity: 0; }
-  header .close {
+  header .tools {
     width: 1em;
-    position: absolute;
-    left: calc(50% - .5em);
-    top: 0;
     text-align: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 500ms cubic-bezier(0.86, 0, 0.07, 1); }
-    header .close:hover {
-      cursor: pointer; }
+    transition: opacity 500ms cubic-bezier(1, 0, 0, 1); }
+    header .tools .tool {
+      width: 1em; }
+      header .tools .tool:hover {
+        cursor: pointer; }
+
+body.home {
+  background-color: black;
+  color: white; }
+  body.home header {
+    display: none; }
+  body.home main {
+    width: 100%;
+    height: 100%;
+    background-image: url(/assets/images/map.jpg);
+    background-position: center;
+    background-size: cover; }
+    body.home main .title {
+      height: 100%;
+      display: table;
+      margin: auto; }
+      body.home main .title h1 {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center; }
 
 body.story main {
   width: 100%;
   height: calc(100% - 2em - 5em);
   position: relative;
   overflow-x: scroll;
-  transition: opacity 200ms cubic-bezier(0.86, 0, 0.07, 1), color 200ms cubic-bezier(0.86, 0, 0.07, 1), background-color 200ms cubic-bezier(0.86, 0, 0.07, 1), border-color 200ms cubic-bezier(0.86, 0, 0.07, 1); }
+  transition: opacity 500ms cubic-bezier(1, 0, 0, 1), color 500ms cubic-bezier(1, 0, 0, 1), background-color 500ms cubic-bezier(1, 0, 0, 1), border-color 500ms cubic-bezier(1, 0, 0, 1); }
   body.story main.hide {
     opacity: 0;
     pointer-events: none; }
@@ -134,15 +159,16 @@ body.story main {
     height: calc(100% - 20px);
     margin: 20px 0 0 0;
     display: table;
-    float: left; }
+    float: left;
+    opacity: 0;
+    transition: opacity 500ms cubic-bezier(1, 0, 0, 1); }
+    body.story main .grid.loaded {
+      opacity: 1; }
     body.story main .grid .item {
       display: block;
       margin: 0 20px 0 0;
       float: left;
       cursor: pointer; }
-      body.story main .grid .item:hover, body.story main .grid .item.looking {
-        cursor: pointer;
-        color: #e21b23; }
       body.story main .grid .item.folder .inner, body.story main .grid .item.object .inner {
         height: 100%; }
         body.story main .grid .item.folder .inner .image, body.story main .grid .item.object .inner .image {
@@ -171,34 +197,39 @@ body.story main {
       width: 20px; }
 body.story.looking #collection {
   z-index: 40; }
-body.story.looking header .close {
+body.story.looking header .tools {
   opacity: 1;
   pointer-events: all; }
-body.story .grid .item, body.story .item.ui-draggable-dragging {
-  transition: none;
+body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item.ui-sortable-helper, body.story #collection .item {
   font-family: 'Simplon BP Mono'; }
-  body.story .grid .item img, body.story .item.ui-draggable-dragging img {
+  body.story .grid .item img, body.story .item.ui-draggable-dragging img, body.story .item.ui-sortable-helper img, body.story #collection .item img {
     display: table;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%); }
-  body.story .grid .item:hover .image.bw, body.story .grid .item.looking .image.bw, body.story .item.ui-draggable-dragging:hover .image.bw, body.story .item.ui-draggable-dragging.looking .image.bw {
-    background-color: #e21b23; }
-  body.story .grid .item:hover .image:not(.bw) img, body.story .grid .item.looking .image:not(.bw) img, body.story .item.ui-draggable-dragging:hover .image:not(.bw) img, body.story .item.ui-draggable-dragging.looking .image:not(.bw) img {
-    -webkit-filter: grayscale(0%) !important;
-    filter: grayscale(0%) !important; }
-  body.story .grid .item.bw, body.story .item.ui-draggable-dragging.bw {
+  body.story .grid .item.looking, body.story .grid .item.selected, body.story .item.ui-draggable-dragging.looking, body.story .item.ui-draggable-dragging.selected, body.story .item.ui-sortable-helper.looking, body.story .item.ui-sortable-helper.selected, body.story #collection .item.looking, body.story #collection .item.selected {
+    cursor: pointer;
+    color: #e21b23; }
+    body.story .grid .item.looking .image.bw, body.story .grid .item.selected .image.bw, body.story .item.ui-draggable-dragging.looking .image.bw, body.story .item.ui-draggable-dragging.selected .image.bw, body.story .item.ui-sortable-helper.looking .image.bw, body.story .item.ui-sortable-helper.selected .image.bw, body.story #collection .item.looking .image.bw, body.story #collection .item.selected .image.bw {
+      background-color: #e21b23; }
+    body.story .grid .item.looking .image:not(.bw) img, body.story .grid .item.selected .image:not(.bw) img, body.story .item.ui-draggable-dragging.looking .image:not(.bw) img, body.story .item.ui-draggable-dragging.selected .image:not(.bw) img, body.story .item.ui-sortable-helper.looking .image:not(.bw) img, body.story .item.ui-sortable-helper.selected .image:not(.bw) img, body.story #collection .item.looking .image:not(.bw) img, body.story #collection .item.selected .image:not(.bw) img {
+      -webkit-filter: grayscale(0%) !important;
+      filter: grayscale(0%) !important; }
+  body.story .grid .item .image.bw, body.story .item.ui-draggable-dragging .image.bw, body.story .item.ui-sortable-helper .image.bw, body.story #collection .item .image.bw {
     background-color: black; }
-    body.story .grid .item.bw img, body.story .item.ui-draggable-dragging.bw img {
+    body.story .grid .item .image.bw img, body.story .item.ui-draggable-dragging .image.bw img, body.story .item.ui-sortable-helper .image.bw img, body.story #collection .item .image.bw img {
       mix-blend-mode: lighten; }
-  body.story .grid .item.ui-draggable-dragging, body.story .item.ui-draggable-dragging.ui-draggable-dragging {
+  body.story .grid .item.ui-draggable-dragging, body.story .grid .item.ui-sortable-helper, body.story .item.ui-draggable-dragging.ui-draggable-dragging, body.story .item.ui-draggable-dragging.ui-sortable-helper, body.story .item.ui-sortable-helper.ui-draggable-dragging, body.story .item.ui-sortable-helper.ui-sortable-helper, body.story #collection .item.ui-draggable-dragging, body.story #collection .item.ui-sortable-helper {
     max-width: 300px;
-    height: 5em !important;
+    height: calc(5em + 1px) !important;
+    position: fixed;
     display: flex;
     z-index: 60;
     margin: 0;
-    border: solid transparent;
-    border-width: 1px 1px 0 1px; }
-    body.story .grid .item.ui-draggable-dragging .inner, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner {
+    background: white;
+    border: solid black;
+    border-width: 1px;
+    transform: translateY(1px); }
+    body.story .grid .item.ui-draggable-dragging .inner, body.story .grid .item.ui-sortable-helper .inner, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner, body.story .item.ui-sortable-helper.ui-sortable-helper .inner, body.story #collection .item.ui-draggable-dragging .inner, body.story #collection .item.ui-sortable-helper .inner {
       height: 100%;
       padding: .5em;
       display: flex;
@@ -206,15 +237,15 @@ body.story .grid .item, body.story .item.ui-draggable-dragging {
       font-size: .75em;
       line-height: 1.1em;
       font-weight: normal; }
-      body.story .grid .item.ui-draggable-dragging .inner .image, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner .image {
+      body.story .grid .item.ui-draggable-dragging .inner .image, body.story .grid .item.ui-sortable-helper .inner .image, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner .image, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner .image, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner .image, body.story .item.ui-sortable-helper.ui-sortable-helper .inner .image, body.story #collection .item.ui-draggable-dragging .inner .image, body.story #collection .item.ui-sortable-helper .inner .image {
         height: 100%;
         display: block; }
-        body.story .grid .item.ui-draggable-dragging .inner .image img, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner .image img {
+        body.story .grid .item.ui-draggable-dragging .inner .image img, body.story .grid .item.ui-sortable-helper .inner .image img, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner .image img, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner .image img, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner .image img, body.story .item.ui-sortable-helper.ui-sortable-helper .inner .image img, body.story #collection .item.ui-draggable-dragging .inner .image img, body.story #collection .item.ui-sortable-helper .inner .image img {
           height: 100% !important;
           vertical-align: middle; }
-    body.story .grid .item.ui-draggable-dragging.over, body.story .item.ui-draggable-dragging.ui-draggable-dragging.over {
+    body.story .grid .item.ui-draggable-dragging.over, body.story .grid .item.ui-sortable-helper.over, body.story .item.ui-draggable-dragging.ui-draggable-dragging.over, body.story .item.ui-draggable-dragging.ui-sortable-helper.over, body.story .item.ui-sortable-helper.ui-draggable-dragging.over, body.story .item.ui-sortable-helper.ui-sortable-helper.over, body.story #collection .item.ui-draggable-dragging.over, body.story #collection .item.ui-sortable-helper.over {
       background-color: white;
-      border-color: rgba(0, 0, 0, 0.5); }
+      border-color: rgba(61, 61, 63, 0.5); }
 
 #collection {
   width: 100%;
@@ -223,10 +254,9 @@ body.story .grid .item, body.story .item.ui-draggable-dragging {
   left: 0;
   bottom: 0;
   float: left;
-  overflow: auto;
   display: flex;
-  border-top: 1px solid rgba(0, 0, 0, 0.5);
-  overflow-y: hidden;
+  border-top: 1px solid #3d3d3f;
+  overflow: visible;
   background: white;
   z-index: 20; }
   #collection.empty .instruct {
@@ -235,6 +265,8 @@ body.story .grid .item, body.story .item.ui-draggable-dragging {
     opacity: 0; }
   #collection.over.empty .instruct {
     opacity: 0; }
+  #collection.sorting .items .item .inner {
+    opacity: 1; }
   #collection .instruct {
     width: 100%;
     height: 100%;
@@ -253,16 +285,27 @@ body.story .grid .item, body.story .item.ui-draggable-dragging {
     z-index: 30; }
     #collection .items:hover .item .inner {
       opacity: 1; }
+    #collection .items .placeholder {
+      float: left;
+      margin-left: -1px;
+      background: #f2f2f9;
+      border: solid #3d3d3f;
+      border-width: 0 1px; }
   #collection .item {
     max-width: 300px;
-    height: 5em;
+    height: calc(5em + 2px);
     display: flex;
     float: left;
-    border: solid rgba(0, 0, 0, 0.5);
-    border-width: 0 1px 0 0;
-    position: static !important; }
+    border: solid #3d3d3f;
+    border-width: 0 1px;
+    background: white;
+    margin-left: -1px; }
     #collection .item:hover {
       cursor: pointer; }
+    #collection .item.ui-sortable-helper {
+      transform: none; }
+    #collection .item.selected .inner {
+      opacity: 1; }
     #collection .item .inner {
       height: 100%;
       padding: .5em;
@@ -286,9 +329,6 @@ body.story .grid .item, body.story .item.ui-draggable-dragging {
         float: left;
         display: inline-block;
         margin-left: 1em; }
-    #collection .item.highlight .inner img, #collection .item:hover .inner img, #collection .item.selected .inner img {
-      -webkit-filter: grayscale(0%) !important;
-      filter: grayscale(0%) !important; }
 
 #single {
   width: 100%;
@@ -299,11 +339,13 @@ body.story .grid .item, body.story .item.ui-draggable-dragging {
   z-index: 40;
   display: none;
   opacity: 0;
-  transition: opacity 500ms cubic-bezier(0.86, 0, 0.07, 1);
+  transition: opacity 500ms cubic-bezier(1, 0, 0, 1);
   background-color: white; }
-  #single.show {
+  #single.open {
     display: flex; }
-  #single.loaded {
+  #single.show {
+    opacity: 1; }
+  #single.loaded section .inner {
     opacity: 1; }
   #single.replacing section .inner {
     opacity: 0; }
@@ -311,14 +353,14 @@ body.story .grid .item, body.story .item.ui-draggable-dragging {
     height: 100%;
     position: relative;
     min-width: 10em;
-    overflow: hidden; }
+    overflow: hidden;
+    transition: opacity 500ms cubic-bezier(1, 0, 0, 1); }
     #single section .scroll {
       height: 100%;
       overflow-y: auto;
       overflow-x: hidden; }
     #single section .inner {
-      transition: opacity 300ms cubic-bezier(0.86, 0, 0.07, 1);
-      opacity: 1; }
+      opacity: 0; }
       #single section .inner .text {
         line-height: 1.2em; }
         #single section .inner .text p {
@@ -365,7 +407,7 @@ body.story .grid .item, body.story .item.ui-draggable-dragging {
     padding: .5em 1em; }
     #single .items .itemsWrap .item {
       padding: .5em 0;
-      transition: opacity 500ms cubic-bezier(0.86, 0, 0.07, 1); }
+      transition: opacity 500ms cubic-bezier(1, 0, 0, 1); }
       #single .items .itemsWrap .item.image {
         opacity: 0; }
         #single .items .itemsWrap .item.image.loaded {
@@ -384,4 +426,4 @@ body.story .grid .item, body.story .item.ui-draggable-dragging {
           max-width: 100%;
           max-height: 100%; }
 
-/*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=prestyle.css.map */
