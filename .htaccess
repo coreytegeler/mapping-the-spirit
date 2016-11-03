@@ -49,8 +49,3 @@ RewriteRule ^(.*) index.php [L]
 # AddDefaultCharset UTF-8
 #
 # php_flag short_open_tag on
-
-AuthName "Secure Area"
-AuthType Basic
-AuthUserFile /var/www/mappingthespirit.com/html/.htpasswd
-require valid-user
