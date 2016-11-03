@@ -1,5 +1,5 @@
 <?php
-snippet('header');
+snippet('head');
 echo '<main>';
 	if( isset( $story ) ) {
 		$story = $page->find( 'stories' )->children()->find( $story );

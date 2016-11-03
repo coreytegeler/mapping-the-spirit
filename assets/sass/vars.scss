@@ -3,19 +3,26 @@ $light: #e7e9f2;
 $medium: #3d3d3f;
 $red: #e21b23;
 
+$mono: 'Office', monospace;
+$monoLight: 'Office Light', monospace;
+$monoLightItalic: 'Office Light Italic', monospace;
+$monoBold: 'Office Bold', monospace;
+$monoBoldItaloc: 'Office Bold Italic', monospace;
+$sans: 'Reglo', Helvetica, Arial, sans-serif;
+
 $phoneWidth: 667px;
 $tabletWidth: 768px;
 $desktopWidth: 1024px;
 
 
 $gutter: 20px;
-$headerHeight: 2em;
+$headerHeight: 2.5em;
 $smallItem: 5em;
 $medItem: calc(50% - 1em);
 $largeItem: 100%;
 
 $ease: cubic-bezier(0.86, 0, 0.07, 1);
-$fadeEase: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+$fadeEase: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 
 @mixin xSmallText {
 	font-size: .75em;
@@ -28,10 +35,18 @@ $fadeEase: cubic-bezier(1.000, 0.000, 0.000, 1.000);
 	line-height: 1.1em;
 	font-weight: normal;
 }
-
+@mixin mediumText {
+	font-size: 19px;
+	line-height: 1.3em;
+}
+@mixin largeText {
+	font-size: 2em;
+	line-height: 1.2em;
+	font-weight: normal;
+}
 @mixin xLargeText {
 	font-size: 5em;
-	line-height: 1.3em;
+	line-height: 1.2em;
 	font-weight: normal;
 }
 

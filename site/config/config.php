@@ -18,6 +18,7 @@ for more information: http://getkirby.com/license
 c::set('license', 'put your license key here');
 c::set('autopublish.templates', array('book', 'category'));
 c::set('scssNestedCheck', true);
+c::set('panel.install', true);
 
 /*
 

@@ -1,23 +1,84 @@
 body.home {	
-	background-color: black;
-	color: white;
-	header {
-		display: none;
-	}
+	overflow-y: auto; 
 	main {
 		width: 100%;
-		height: 100%;
-		background-image: url(/assets/images/map.jpg);
-		background-position: center;
-		background-size: cover;
-		.title {
-			height: 100%;
+		// height: 100%;
+		display: table;
+		section.map {
+			background-color: black;
+			color: white;
+			background-image: url(/assets/images/map.jpg);
+			background-position: center;
+			background-size: cover;
 			display: table;
-			margin: auto;
-			h1 {
+			.title {
+				height: 100%;
 				display: table-cell;
 				vertical-align: middle;
-				text-align: center;
+				h1 {
+					display: table;
+					margin: auto;
+					text-align: center;
+					cursor: default;
+				}
+			}
+		}
+		header {
+			.subtitle {
+				span {
+					transform: none;
+				}
+			}
+		}
+		section.stories {
+			border-top: 1px solid $medium;
+			.about {
+				@include mediumText;
+				width: calc(80% - 4em);
+				min-width: 20em;
+				max-width: 40em;
+				display: table;
+				margin: auto;
+				padding: 2em;
+			}
+			.story {
+				width: calc(100% - 1em);
+				padding: 2em 1em;
+				border-top: 10px solid white;
+				a {
+					color: black;
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					transition: color 100ms $fadeEase;
+					h1.title {
+						flex-grow: 1;
+					}
+					.image {
+						max-width: 30%;
+						background-color: black;
+						transition: background-color 100ms $fadeEase;
+						display: table;
+						vertical-align: middle;
+						img {
+							width: 100%;
+							display: table;
+							vertical-align: middle;
+							mix-blend-mode: lighten;
+							transition: filter 100ms $fadeEase;
+						}
+					}
+					&:hover {
+						color: $red;
+						cursor: pointer;
+						.image {
+							background-color: $red;
+							img {
+								filter: grayscale(1) contrast(1);
+						  }
+						}
+					}
+				}
 			}
 		}
 	}

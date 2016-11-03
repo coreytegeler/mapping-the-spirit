@@ -1,7 +1,7 @@
 <?php
 if(!kirby()->request()->ajax()) {
 	$story = $page->parent();
-	snippet( 'header', array( 'bodyClass' => array ( 'looking', 'story' ), 'story' => $story ) );
+	snippet( 'head', array( 'bodyClass' => array ( 'looking', 'story' ), 'story' => $story ) );
 	echo '<main>';
 	snippet( 'table', array( 'story' => $story ) );
 	snippet( 'footnotes' );

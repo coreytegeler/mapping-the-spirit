@@ -1,3 +1,4 @@
+@import 'fonts';
 @import 'vars';
 @import 'mixins';
 html, body {
@@ -6,11 +7,10 @@ html, body {
 	margin: 0;
 	padding: 0;
 	background-color: white;
-	font-family: 'Simplon BP Mono';
+	font-family: $mono;
 	font-weight: normal;
-	font-size: 19px;
 	color: black;
-	line-height: 1.3em;
+	@include mediumText;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,13 +24,25 @@ html, body {
    	backface-visibility: hidden;
   }
 }
-h1 {
-	font-size: 5em;
-	line-height: 1.1em;
+h1, h2, h3, h4 {
 	padding: 0;
 	margin: 0;
-	font-family: 'Reglo';
 	text-transform: uppercase;
+	font-weight: normal;
+}
+h1 {
+	font-family: $sans;
+	font-size: 5em;
+	line-height: 1.1em;
+}
+h4 {
+	font-family: $mono;
+	@include smallText;
+	text-align: center;
+	padding: 1em 0;
+	display: table;
+	margin: auto;
+	text-decoration: underline;
 }
 .horz {
 	display: table;
@@ -44,12 +56,17 @@ header {
 	width: 100%;
 	height: $headerHeight;
 	color: black;
+	background-color: white;
 	border-bottom: 1px solid $medium;
 	display: flex;
+	a {
+		color: black;
+		text-decoration: none;
+	}
 	.inner {
 		width: 100%;
 		position: relative;
-		font-family: 'Reglo';
+		font-family: $sans;
 		font-weight: normal;
 		text-transform: uppercase;
 		line-height: .8em;
@@ -59,8 +76,6 @@ header {
 	.title {
 		width: calc(50% - 1em);
 		padding: 0 0 0 .5em;
-		span {
-		}
 	}
 	.subtitle {
 		display: flex;
@@ -92,6 +107,33 @@ header {
 				cursor: pointer;
 			}
 		}
+	}
+	&.fixed {
+		left: 0;
+		top: 0;
+		position: fixed;
+	}
+}
+section {
+	width: 100%;
+	min-height: 100vh;
+}
+footer {
+	margin: 2em 0;
+	padding: 2em 0;
+	border-top: 1px solid $medium;
+}
+.dash {
+	width: 3em;
+	height: .5em;
+	display: table;
+	margin: 2em auto;
+	background-color: black;
+}
+.dashed {
+	svg {
+		width: 100%;
+		height: .5em;
 	}
 }
 @import 'home';

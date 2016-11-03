@@ -1,4 +1,4 @@
-  <footer role="footer">
+  <footer>
 
   </footer>
 

@@ -1,7 +1,8 @@
 $ ->
 	$window = $(window)
 	$body = $('body')
-	$main = $('.main')
+	$main = $('main')
+	$header = $('header')
 	$grid = $('.grid')
 	$subtitle = $('header .subtitle span')
 	$table = $('#table')
@@ -13,6 +14,8 @@ $ ->
 		dragAndDrop()
 		$body.on 'mousewheel', '.horzScroll', (event) ->
 			horzScroll(this, event)
+		$body.scroll (event) ->
+			vertScroll(this, event)
 		$table.scroll () ->
 			tableScroll(this)
 		$body.on 'click', '.item.click', () ->
@@ -33,6 +36,7 @@ $ ->
 		$(window).resize () ->
 			resizeSects()
 			resizeGrid()
+			vertScroll()
 
 	resizeGrid = () ->
 		gutter = $grid.find('.gutter').innerWidth()
@@ -63,6 +67,19 @@ $ ->
 				height: height
 		$grid.isotope()
 		$grid.addClass('loaded')
+
+	vertScroll = (self, event) ->
+		vertScrollTop = $main.scrollTop()
+		$section = $header.parents('section')
+		sectionTop = $section.offset().top
+		if(sectionTop <= 0)
+			$header.addClass('fixed')
+			paddingTop = $header.innerHeight()
+		else
+			$header.removeClass('fixed')
+			paddingTop = 0
+		$section.css
+			paddingTop: paddingTop
 
 	horzScroll = (self, event) ->
 		delta = event.deltaY
@@ -160,7 +177,7 @@ $ ->
 		$single.addClass('open')
 		setTimeout () ->
 			$single.addClass('show')
-		, 100
+		, 10
 		url = '/stories/' + storySlug + '/' + itemSlug
 		$.ajax
 			url: url
@@ -190,16 +207,15 @@ $ ->
 
 	loadSingle = () ->
 		$subtitle.css({x:0})
-		setTimeout(->
+		$single.find('section img').eq(0).imagesLoaded () ->
 			$single.addClass('loaded')
-		,100)
-		imagesLoaded($single).on 'progress', (inst, image) ->
-			$item = $(image.img).parents('.item')
-			$item.addClass('loaded')
-		$('section#left').resizable
-			handles: 'e',
-			resize: () ->
-				resizeSects()
+			imagesLoaded($single).on 'progress', (inst, image) ->
+				$item = $(image.img).parents('.item')
+				$item.addClass('loaded')
+			$('section#left').resizable
+				handles: 'e',
+				resize: () ->
+					resizeSects()
 
 	putDown = () ->
 		itemSlug = $single.attr('data-item')
