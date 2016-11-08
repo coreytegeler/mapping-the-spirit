@@ -7,7 +7,7 @@ body.home {
 		section.map {
 			background-color: black;
 			color: white;
-			background-image: url(/assets/images/map.jpg);
+			background-image: url(./../images/map.jpg);
 			background-position: center;
 			background-size: cover;
 			display: table;
@@ -24,7 +24,7 @@ body.home {
 			}
 		}
 		header {
-			.subtitle {
+			.pageTitle {
 				span {
 					transform: none;
 				}

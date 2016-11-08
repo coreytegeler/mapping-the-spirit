@@ -34,6 +34,16 @@
 <body class="<?php echo implode( ' ', $bodyClass ) ?>">
 <?php
 if($page->slug() != 'home') {
-  snippet( 'header', array( 'story' => $story ) );
+  if( $page->intendedTemplate() == 'story' ) {
+    $story = $page;
+  }
+  $headerArray = array();
+  if( isset( $story ) ) {
+    $headerArray['story'] = $story;
+  }
+  if( isset( $item ) ) {
+    $headerArray['item'] = $item;
+  }
+  snippet( 'header', $headerArray );
 }
 ?>

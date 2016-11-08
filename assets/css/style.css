@@ -1,55 +1,55 @@
 @font-face {
   font-family: 'Reglo';
-  src: url("/assets/fonts/Reglo/Reglo-Bold.eot");
-  src: url("/assets/fonts/Reglo/Reglo-Bold.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/Reglo/Reglo-Bold.woff2") format("woff2"), url("/assets/fonts/Reglo/Reglo-Bold.woff") format("woff"), url("/assets/fonts/Reglo/Reglo-Bold.ttf") format("truetype"), url("/assets/fonts/Reglo/Reglo-Bold.svg#Reglo-Bold") format("svg");
+  src: url("./../fonts/Reglo/Reglo-Bold.eot");
+  src: url("./../fonts/Reglo/Reglo-Bold.eot?#iefix") format("embedded-opentype"), url("./../fonts/Reglo/Reglo-Bold.woff2") format("woff2"), url("./../fonts/Reglo/Reglo-Bold.woff") format("woff"), url("./../fonts/Reglo/Reglo-Bold.ttf") format("truetype"), url("./../fonts/Reglo/Reglo-Bold.svg#Reglo-Bold") format("svg");
   font-weight: 500;
   font-style: italic; }
 @font-face {
   font-family: 'Office Light';
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-Light.eot");
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-Light.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Light.woff2") format("woff2"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Light.woff") format("woff"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Light.ttf") format("truetype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Light.svg#OfficeCodePro-Light") format("svg");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-Light.eot");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-Light.eot?#iefix") format("embedded-opentype"), url("./../fonts/OfficeCodePro/OfficeCodePro-Light.woff2") format("woff2"), url("./../fonts/OfficeCodePro/OfficeCodePro-Light.woff") format("woff"), url("./../fonts/OfficeCodePro/OfficeCodePro-Light.ttf") format("truetype"), url("./../fonts/OfficeCodePro/OfficeCodePro-Light.svg#OfficeCodePro-Light") format("svg");
   font-weight: 300;
   font-style: normal; }
 @font-face {
   font-family: 'Office Light Italic';
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-LightItalic.eot");
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-LightItalic.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-LightItalic.woff2") format("woff2"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-LightItalic.woff") format("woff"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-LightItalic.ttf") format("truetype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-LightItalic.svg#OfficeCodePro-LightItalic") format("svg");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.eot");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.eot?#iefix") format("embedded-opentype"), url("./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.woff2") format("woff2"), url("./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.woff") format("woff"), url("./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.ttf") format("truetype"), url("./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.svg#OfficeCodePro-LightItalic") format("svg");
   font-weight: 300;
   font-style: italic; }
 @font-face {
   font-family: 'Office';
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-Regular.eot");
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-Regular.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Regular.woff2") format("woff2"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Regular.woff") format("woff"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Regular.ttf") format("truetype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Regular.svg#OfficeCodePro-Regular") format("svg");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-Regular.eot");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-Regular.eot?#iefix") format("embedded-opentype"), url("./../fonts/OfficeCodePro/OfficeCodePro-Regular.woff2") format("woff2"), url("./../fonts/OfficeCodePro/OfficeCodePro-Regular.woff") format("woff"), url("./../fonts/OfficeCodePro/OfficeCodePro-Regular.ttf") format("truetype"), url("./../fonts/OfficeCodePro/OfficeCodePro-Regular.svg#OfficeCodePro-Regular") format("svg");
   font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: 'Office Italic';
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-RegularItalic.eot");
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-RegularItalic.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-RegularItalic.woff2") format("woff2"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-RegularItalic.woff") format("woff"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-RegularItalic.ttf") format("truetype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-RegularItalic.svg#OfficeCodePro-RegularItalic") format("svg");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.eot");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.eot?#iefix") format("embedded-opentype"), url("./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.woff2") format("woff2"), url("./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.woff") format("woff"), url("./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.ttf") format("truetype"), url("./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.svg#OfficeCodePro-RegularItalic") format("svg");
   font-weight: normal;
   font-style: italic; }
 @font-face {
   font-family: 'Office Medium';
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-Medium.eot");
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-Medium.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Medium.woff2") format("woff2"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Medium.woff") format("woff"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Medium.ttf") format("truetype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Medium.svg#OfficeCodePro-Medium") format("svg");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-Medium.eot");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-Medium.eot?#iefix") format("embedded-opentype"), url("./../fonts/OfficeCodePro/OfficeCodePro-Medium.woff2") format("woff2"), url("./../fonts/OfficeCodePro/OfficeCodePro-Medium.woff") format("woff"), url("./../fonts/OfficeCodePro/OfficeCodePro-Medium.ttf") format("truetype"), url("./../fonts/OfficeCodePro/OfficeCodePro-Medium.svg#OfficeCodePro-Medium") format("svg");
   font-weight: 500;
   font-style: normal; }
 @font-face {
   font-family: 'Office Medium Italic';
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-MediumItalic.eot");
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-MediumItalic.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-MediumItalic.woff2") format("woff2"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-MediumItalic.woff") format("woff"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-MediumItalic.ttf") format("truetype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-MediumItalic.svg#OfficeCodePro-MediumItalic") format("svg");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.eot");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.eot?#iefix") format("embedded-opentype"), url("./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.woff2") format("woff2"), url("./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.woff") format("woff"), url("./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.ttf") format("truetype"), url("./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.svg#OfficeCodePro-MediumItalic") format("svg");
   font-weight: 500;
   font-style: italic; }
 @font-face {
   font-family: 'Office Bold';
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-Bold.eot");
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-Bold.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Bold.woff2") format("woff2"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Bold.woff") format("woff"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Bold.ttf") format("truetype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-Bold.svg#OfficeCodePro-Bold") format("svg");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-Bold.eot");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-Bold.eot?#iefix") format("embedded-opentype"), url("./../fonts/OfficeCodePro/OfficeCodePro-Bold.woff2") format("woff2"), url("./../fonts/OfficeCodePro/OfficeCodePro-Bold.woff") format("woff"), url("./../fonts/OfficeCodePro/OfficeCodePro-Bold.ttf") format("truetype"), url("./../fonts/OfficeCodePro/OfficeCodePro-Bold.svg#OfficeCodePro-Bold") format("svg");
   font-weight: bold;
   font-style: normal; }
 @font-face {
   font-family: 'Office Bold Italic';
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-BoldItalic.eot");
-  src: url("/assets/fonts/OfficeCodePro/OfficeCodePro-BoldItalic.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-BoldItalic.woff2") format("woff2"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-BoldItalic.woff") format("woff"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-BoldItalic.ttf") format("truetype"), url("/assets/fonts/OfficeCodePro/OfficeCodePro-BoldItalic.svg#OfficeCodePro-BoldItalic") format("svg");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.eot");
+  src: url("./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.eot?#iefix") format("embedded-opentype"), url("./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.woff2") format("woff2"), url("./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.woff") format("woff"), url("./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.ttf") format("truetype"), url("./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.svg#OfficeCodePro-BoldItalic") format("svg");
   font-weight: bold;
   font-style: italic; }
 html, body {
@@ -105,13 +105,14 @@ h4 {
 
 header {
   width: 100%;
-  height: 2.5em;
+  height: 2em;
   color: black;
   background-color: white;
-  border-bottom: 1px solid #3d3d3f;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+  -webkit-transition: height 500ms cubic-bezier(0.86, 0, 0.07, 1);
+  transition: height 500ms cubic-bezier(0.86, 0, 0.07, 1); }
   header a {
     color: black;
     text-decoration: none; }
@@ -121,17 +122,30 @@ header {
     font-family: "Reglo", Helvetica, Arial, sans-serif;
     font-weight: normal;
     text-transform: uppercase;
-    line-height: .8em;
+    line-height: .8em; }
+  header .row {
+    width: 100%;
+    height: calc(2em);
+    position: absolute;
+    left: 0;
+    border-bottom: 1px solid #3d3d3f;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
         -ms-flex-align: center;
-            align-items: center; }
+            align-items: center;
+    background-color: white; }
+    header .row.primary {
+      top: 0;
+      z-index: 20; }
+    header .row.secondary {
+      bottom: 0;
+      z-index: 10;
+      position: absolute; }
   header .title {
-    width: calc(50% - 1em);
     padding: 0 0 0 .5em; }
-  header .subtitle {
+  header .pageTitle {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -144,13 +158,13 @@ header {
             flex-direction: row-reverse;
     -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
     transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-    header .subtitle span {
+    header .pageTitle span {
       -webkit-transform: translateX(100%);
               transform: translateX(100%);
       padding: 0 .5em 0 0;
       float: right;
       text-align: right; }
-    header .subtitle.hide {
+    header .pageTitle.hide {
       opacity: 0; }
   header .tools {
     width: 1em;
@@ -160,7 +174,8 @@ header {
     -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
     transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
     header .tools .tool {
-      width: 1em; }
+      width: 1em;
+      height: 1em; }
       header .tools .tool:hover {
         cursor: pointer; }
   header.fixed {
@@ -176,6 +191,9 @@ footer {
   margin: 2em 0;
   padding: 2em 0;
   border-top: 1px solid #3d3d3f; }
+
+.data {
+  display: none; }
 
 .dash {
   width: 3em;
@@ -196,7 +214,7 @@ body.home {
     body.home main section.map {
       background-color: black;
       color: white;
-      background-image: url(/assets/images/map.jpg);
+      background-image: url(./../images/map.jpg);
       background-position: center;
       background-size: cover;
       display: table; }
@@ -209,7 +227,7 @@ body.home {
           margin: auto;
           text-align: center;
           cursor: default; }
-    body.home main header .subtitle span {
+    body.home main header .pageTitle span {
       -webkit-transform: none;
               transform: none; }
     body.home main section.stories {
@@ -272,7 +290,7 @@ body.home {
 
 body.story main {
   width: 100%;
-  height: calc(100% - 2.5em - 5em);
+  height: calc(100% - 2em - 3.5em);
   position: relative;
   overflow-x: scroll;
   -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), border-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
@@ -375,10 +393,12 @@ body.story main {
     body.story main .grid .gutter {
       width: 20px; }
 body.story.looking #collection {
-  z-index: 40; }
-body.story.looking header .tools {
-  opacity: 1;
-  pointer-events: all; }
+  z-index: 50; }
+body.story.looking header {
+  height: 4em; }
+  body.story.looking header .tools {
+    opacity: 1;
+    pointer-events: all; }
 body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item.ui-sortable-helper, body.story #collection .item {
   font-family: 'Simplon BP Mono';
   -webkit-transition: color 300ms cubic-bezier(0.86, 0, 0.07, 1);
@@ -407,7 +427,7 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
       mix-blend-mode: lighten; }
   body.story .grid .item.ui-draggable-dragging, body.story .grid .item.ui-sortable-helper, body.story .item.ui-draggable-dragging.ui-draggable-dragging, body.story .item.ui-draggable-dragging.ui-sortable-helper, body.story .item.ui-sortable-helper.ui-draggable-dragging, body.story .item.ui-sortable-helper.ui-sortable-helper, body.story #collection .item.ui-draggable-dragging, body.story #collection .item.ui-sortable-helper {
     max-width: 300px;
-    height: calc(5em + 1px) !important;
+    height: calc(3.5em + 1px) !important;
     position: fixed;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -443,7 +463,7 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
 
 #collection {
   width: 100%;
-  height: 5em;
+  height: 3.5em;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -491,7 +511,7 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
       border-width: 0 1px; }
   #collection .item {
     max-width: 300px;
-    height: calc(5em + 2px);
+    height: calc(3.5em + 2px);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -540,10 +560,10 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
 
 #single {
   width: 100%;
-  height: calc(100% - 5em - 2.5em);
+  height: calc(100% - 3.5em - 4em);
   position: fixed;
   left: 0;
-  top: 2.5em;
+  top: 4em;
   z-index: 40;
   display: none;
   opacity: 0;

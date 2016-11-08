@@ -9,7 +9,7 @@ snippet('head');
 		  echo '</div>';
 		echo '</section>';
 		echo '<section class="stories">';
-			snippet( 'header', array( 'subtitle' => 'STORIES' ) );
+			snippet( 'header', array( 'pageTitle' => 'STORIES' ) );
 			echo '<div class="about">';
 				echo 'Mapping the Spirit documents the texture of spiritual life amongst people of African descent in America by amplifying these voices to create more nuanced history.';
 			echo '</div>';

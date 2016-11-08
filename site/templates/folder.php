@@ -1,13 +1,20 @@
 <?php
+$item = $page;
 if(!kirby()->request()->ajax()) {
-	$story = $page->parent();
-	snippet( 'head', array( 'bodyClass' => array ( 'looking', 'story' ), 'story' => $story ) );
+	$story = $item->parent();
+	snippet( 'head', array( 
+		'bodyClass' => array ( 'looking', 'story' ),
+		'story' => $story,
+		'item' => $item
+	) );
 	echo '<main>';
 	snippet( 'table', array( 'story' => $story ) );
 	snippet( 'footnotes' );
-	echo '<div id="single" class="show open folder" data-item="' . $page->slug() . '">';
+	echo '<div id="single" class="show open folder" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '">';
+} else {
+	echo '<div class="data" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '"></div>';
 }
-$images = $page->images();
+$images = $item->images();
 echo '<section id="left">';
 	echo '<div id="handle" class="ui-resizable-handle ui-resizable-e"><div class="line"></div></div>';
 	echo '<div class="scroll">';
@@ -33,7 +40,7 @@ echo '<section id="right">';
 	echo '<div class="scroll">';
 		echo '<div class="inner">';
 			echo '<div class="intro text">';
-				echo $page->text()->kirbytext();
+				echo $item->text()->kirbytext();
 			echo '</div>';
 		echo '</div>';
 	echo '</div>';

@@ -4,7 +4,8 @@ $ ->
 	$main = $('main')
 	$header = $('header')
 	$grid = $('.grid')
-	$subtitle = $('header .subtitle span')
+	$pageTitle = $header.find('.pageTitle span')
+	$secondary = $header.find('.secondary')
 	$table = $('#table')
 	$single = $('#single')
 	$collection = $('#collection')
@@ -71,6 +72,8 @@ $ ->
 	vertScroll = (self, event) ->
 		vertScrollTop = $main.scrollTop()
 		$section = $header.parents('section')
+		if !$section.length
+			return
 		sectionTop = $section.offset().top
 		if(sectionTop <= 0)
 			$header.addClass('fixed')
@@ -90,10 +93,10 @@ $ ->
 	tableScroll = (self) ->
 		scrollLeft = $(self).scrollLeft()
 		$bigTitle = $('#title')
-		titleRight = $subtitle.innerWidth() - scrollLeft
+		titleRight = $pageTitle.innerWidth() - scrollLeft
 		if(titleRight <= 0)
 			titleRight = 0
-		$subtitle.css
+		$pageTitle.css
 			x: titleRight+'px'
 
 	dragAndDrop = () ->
@@ -170,6 +173,7 @@ $ ->
 		type = $(self).data('type')
 		$item = $(self)
 		itemSlug = $item.data('slug')
+		itemUrl = $item.data('url')
 		storySlug = $item.data('story')
 		$collected = $('#collection .item[data-index="'+index+'"]')
 		$collected.addClass('selected')
@@ -178,17 +182,16 @@ $ ->
 		setTimeout () ->
 			$single.addClass('show')
 		, 10
-		url = '/stories/' + storySlug + '/' + itemSlug
 		$.ajax
-			url: url
+			url: itemUrl
 			dataType: 'html'
 			error: (jqXHR, status, err) ->
 				console.log(jqXHR)
 				console.log(status)
 				console.error(err)
 			success: (response, status, jqXHR) ->
-				history.pushState('data', '', url);
-				$subtitle.transition({x: 0}, 500, 'easeInOutCubic')
+				history.pushState('data', '', itemUrl);
+				$pageTitle.transition({x: 0}, 500, 'easeInOutCubic')
 				$single.addClass(type).attr('data-item', itemSlug)
 				if($single.html())
 					$single.on transEnd, () ->
@@ -200,13 +203,24 @@ $ ->
 
 	createSingle = (html) ->
 		$single.on transEnd, () ->
+			$data = $($(html)[0])
+			title = $data.data('title')
+			slug = $data.data('slug')
+			url = $data.data('url')
+			$single
+				.data('title', title)
+				.data('slug', slug)
+				.data('url', url)
+			$secondary.find('.title a')
+				.html(title)
+				.attr('href', url)
 			$single.off(transEnd)
 			$single.html(html)
 			loadSingle()
 			$single.removeClass('replacing')
 
 	loadSingle = () ->
-		$subtitle.css({x:0})
+		$pageTitle.css({x:0})
 		$single.find('section img').eq(0).imagesLoaded () ->
 			$single.addClass('loaded')
 			imagesLoaded($single).on 'progress', (inst, image) ->
@@ -224,11 +238,11 @@ $ ->
 		$collected = $('#collection .item.selected').removeClass('selected')
 		$body.removeClass('looking folder')
 		scrollLeft = $table.scrollLeft()
-		subtitleWidth = $subtitle.innerWidth()
-		subtitleRight = subtitleWidth - scrollLeft
-		if(subtitleRight <= 0)
-			subtitleRight = 0
-		$subtitle.transition({x: subtitleRight}, 500, 'easeInOutQuint')
+		pageTitleWidth = $pageTitle.innerWidth()
+		pageTitleRight = pageTitleWidth - scrollLeft
+		if(pageTitleRight <= 0)
+			pageTitleRight = 0
+		$pageTitle.transition({x: pageTitleRight}, 500, 'easeInOutQuint')
 		$single.on transEnd, () ->
 			$single.off(transEnd)
 			$single.removeClass('')

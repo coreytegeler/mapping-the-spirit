@@ -3,3 +3,6 @@ thumbs
 .sass-cache
 .htaccess
 node_modules
+site/accounts
+site/cache
+kirby
