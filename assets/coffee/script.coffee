@@ -169,12 +169,12 @@ $ ->
 		$collection.find('.items').append($item)
 
 	pickUp = (self) ->
-		index = $(self).data('index')
-		type = $(self).data('type')
 		$item = $(self)
-		itemSlug = $item.data('slug')
-		itemUrl = $item.data('url')
-		storySlug = $item.data('story')
+		index = $item.attr('data-index')
+		type = $item.attr('data-type')
+		slug = $item.attr('data-slug')
+		url = $item.attr('data-url')
+		storySlug = $item.attr('data-story')
 		$collected = $('#collection .item[data-index="'+index+'"]')
 		$collected.addClass('selected')
 		$body.addClass('looking')
@@ -183,16 +183,16 @@ $ ->
 			$single.addClass('show')
 		, 10
 		$.ajax
-			url: itemUrl
+			url: url
 			dataType: 'html'
 			error: (jqXHR, status, err) ->
 				console.log(jqXHR)
 				console.log(status)
 				console.error(err)
 			success: (response, status, jqXHR) ->
-				history.pushState('data', '', itemUrl);
+				history.pushState('data', '', url);
 				$pageTitle.transition({x: 0}, 500, 'easeInOutCubic')
-				$single.addClass(type).attr('data-item', itemSlug)
+				$single.addClass(type).attr('data-item', slug)
 				if($single.html())
 					$single.on transEnd, () ->
 						$single.off(transEnd)

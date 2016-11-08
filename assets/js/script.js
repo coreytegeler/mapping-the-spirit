@@ -211,13 +211,13 @@
       return $collection.find('.items').append($item);
     };
     pickUp = function(self) {
-      var $collected, $item, index, itemSlug, itemUrl, storySlug, type;
-      index = $(self).data('index');
-      type = $(self).data('type');
+      var $collected, $item, index, slug, storySlug, type, url;
       $item = $(self);
-      itemSlug = $item.data('slug');
-      itemUrl = $item.data('url');
-      storySlug = $item.data('story');
+      index = $item.attr('data-index');
+      type = $item.attr('data-type');
+      slug = $item.attr('data-slug');
+      url = $item.attr('data-url');
+      storySlug = $item.attr('data-story');
       $collected = $('#collection .item[data-index="' + index + '"]');
       $collected.addClass('selected');
       $body.addClass('looking');
@@ -226,7 +226,7 @@
         return $single.addClass('show');
       }, 10);
       return $.ajax({
-        url: itemUrl,
+        url: url,
         dataType: 'html',
         error: function(jqXHR, status, err) {
           console.log(jqXHR);
@@ -234,11 +234,11 @@
           return console.error(err);
         },
         success: function(response, status, jqXHR) {
-          history.pushState('data', '', itemUrl);
+          history.pushState('data', '', url);
           $pageTitle.transition({
             x: 0
           }, 500, 'easeInOutCubic');
-          $single.addClass(type).attr('data-item', itemSlug);
+          $single.addClass(type).attr('data-item', slug);
           if ($single.html()) {
             $single.on(transEnd, function() {
               $single.off(transEnd);
