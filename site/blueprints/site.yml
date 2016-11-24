@@ -1,5 +1,8 @@
 title: Site
-pages: default
+pages: 
+  - default
+  - aid
+  - stories
 fields:
   title:
     label: Title

@@ -93,11 +93,11 @@ $ ->
 	tableScroll = (self) ->
 		scrollLeft = $(self).scrollLeft()
 		$bigTitle = $('#title')
-		titleRight = $pageTitle.innerWidth() - scrollLeft
-		if(titleRight <= 0)
-			titleRight = 0
-		$pageTitle.css
-			x: titleRight+'px'
+		# titleRight = $pageTitle.innerWidth() - scrollLeft
+		# if(titleRight <= 0)
+		# 	titleRight = 0
+		# $pageTitle.css
+		# 	x: titleRight+'px'
 
 	dragAndDrop = () ->
 		gutter = $grid.find('.gutter').innerWidth()
@@ -191,7 +191,7 @@ $ ->
 				console.error(err)
 			success: (response, status, jqXHR) ->
 				history.pushState('data', '', url);
-				$pageTitle.transition({x: 0}, 500, 'easeInOutCubic')
+				# $pageTitle.transition({x: 0}, 500, 'easeInOutCubic')
 				$single.addClass(type).attr('data-item', slug)
 				if($single.html())
 					$single.on transEnd, () ->
@@ -211,7 +211,9 @@ $ ->
 				.data('title', title)
 				.data('slug', slug)
 				.data('url', url)
-			$secondary.find('.title a')
+			$header.find('.title.item')
+			.addClass('show')
+			.find('a')
 				.html(title)
 				.attr('href', url)
 			$single.off(transEnd)
@@ -220,7 +222,7 @@ $ ->
 			$single.removeClass('replacing')
 
 	loadSingle = () ->
-		$pageTitle.css({x:0})
+		# $pageTitle.css({x:0})
 		$single.find('section img').eq(0).imagesLoaded () ->
 			$single.addClass('loaded')
 			imagesLoaded($single).on 'progress', (inst, image) ->
@@ -238,11 +240,11 @@ $ ->
 		$collected = $('#collection .item.selected').removeClass('selected')
 		$body.removeClass('looking folder')
 		scrollLeft = $table.scrollLeft()
-		pageTitleWidth = $pageTitle.innerWidth()
-		pageTitleRight = pageTitleWidth - scrollLeft
+		# pageTitleWidth = $pageTitle.innerWidth()
+		# pageTitleRight = pageTitleWidth - scrollLeft
 		if(pageTitleRight <= 0)
 			pageTitleRight = 0
-		$pageTitle.transition({x: pageTitleRight}, 500, 'easeInOutQuint')
+		# $pageTitle.transition({x: pageTitleRight}, 500, 'easeInOutQuint')
 		$single.on transEnd, () ->
 			$single.off(transEnd)
 			$single.removeClass('')

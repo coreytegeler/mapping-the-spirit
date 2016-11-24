@@ -1,9 +1,9 @@
 #single {
 	width: 100%;
-	height: calc(100% - #{$smallItem} - #{$headerHeight*2});
+	height: calc(100% - #{$smallItem} - #{$headerHeight});
 	position: fixed;
 	left: 0;
-	top: #{$headerHeight*2};
+	top: $headerHeight;
 	z-index: 40;
 	display: none;
 	opacity: 0;
@@ -38,7 +38,7 @@
 		.inner {
 			opacity: 0;
 			.text {
-				line-height: 1.2em;
+				line-height: 1.3em;
 				p {
 					margin: 0 0 1em 0;
 				}

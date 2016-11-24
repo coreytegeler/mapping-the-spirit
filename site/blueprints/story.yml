@@ -25,3 +25,9 @@ fields:
     mode:  single
     types: image
     width: 1/2
+  color:
+    label: Color
+    type: text
+    placeholder: #
+    help: Must include #
+    width: 1/2

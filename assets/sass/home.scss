@@ -5,6 +5,8 @@ body.home {
 		// height: 100%;
 		display: table;
 		section.map {
+			width: 100%;
+			min-height: 100vh;
 			background-color: black;
 			color: white;
 			background-image: url(./../images/map.jpg);
@@ -31,6 +33,7 @@ body.home {
 			}
 		}
 		section.stories {
+			width: 100%;
 			border-top: 1px solid $medium;
 			.about {
 				@include mediumText;
@@ -42,40 +45,45 @@ body.home {
 				padding: 2em;
 			}
 			.story {
-				width: calc(100% - 1em);
-				padding: 2em 1em;
+				width: 100%;
 				border-top: 10px solid white;
 				a {
+					width: 100%;
+					padding: 2em;
 					color: black;
 					display: flex;
 					flex-direction: row;
 					align-items: center;
-					transition: color 100ms $fadeEase;
+					transition: color 30ms $fadeEase, background-color 30ms $fadeEase;
 					h1.title {
 						flex-grow: 1;
 					}
 					.image {
 						max-width: 30%;
 						background-color: black;
-						transition: background-color 100ms $fadeEase;
-						display: table;
+						transition: background-color 30ms $fadeEase;
+						display: table-cell;
 						vertical-align: middle;
 						img {
 							width: 100%;
 							display: table;
 							vertical-align: middle;
 							mix-blend-mode: lighten;
-							transition: filter 100ms $fadeEase;
+							transition: filter 30ms $fadeEase;
 						}
 					}
 					&:hover {
-						color: $red;
 						cursor: pointer;
 						.image {
-							background-color: $red;
 							img {
 								filter: grayscale(1) contrast(1);
 						  }
+						}
+					}
+					&:not(:hover) {
+						color: $dark !important;
+						.image {
+							background-color: $dark !important;
 						}
 					}
 				}

@@ -6,7 +6,7 @@ html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background-color: white;
+	background-color: $lightest;
 	font-family: $mono;
 	font-weight: normal;
 	color: black;
@@ -32,17 +32,19 @@ h1, h2, h3, h4 {
 }
 h1 {
 	font-family: $sans;
-	font-size: 5em;
-	line-height: 1.1em;
+	@include xLargeText;
+}
+h2 {
+	font-family: $sans;
+	@include largeText;
 }
 h4 {
 	font-family: $mono;
 	@include smallText;
 	text-align: center;
-	padding: 1em 0;
+	padding: 0;
 	display: table;
 	margin: auto;
-	text-decoration: underline;
 }
 .horz {
 	display: table;
@@ -51,6 +53,12 @@ h4 {
 .vert {
 	display: table-cell;
 	vertical-align: middle;
+}
+p {
+	margin: 0 0 1em 0;
+	&:last-child {
+		margin: 0;
+	}
 }
 header {
 	width: 100%;
@@ -62,6 +70,10 @@ header {
 	a {
 		color: black;
 		text-decoration: none;
+		transition: color 100ms $fadeEase;
+		&:hover {
+			color: $medium !important;
+		}
 	}
 	.inner {
 		width: 100%;
@@ -80,6 +92,11 @@ header {
 		display: flex;
 		align-items: center;
 		background-color: white;
+		overflow: hidden;
+		.trail {
+			padding: 0 .5em;
+			white-space: nowrap;
+		}
 		&.primary {
 			top: 0;
 			z-index: 20;
@@ -91,23 +108,48 @@ header {
 		}
 	}
 	.title {
-		padding: 0 0 0 .5em;
-	}
-	.pageTitle {
-		display: flex;
-		flex-grow: 1;
-    flex-direction: row-reverse;
-		transition: opacity 500ms $fadeEase;
-		span {
-			transform: translateX(100%);
-			padding: 0 .5em 0 0;
-			float: right;
-			text-align: right;
+		display: none;
+		&.show {
+			display: inline-table;	
 		}
-		&.hide {
-			opacity: 0;
+		&:not(:first-child):before {
+			content: '\00a0•\00a0';
 		}
 	}
+	.links {
+		height: 100%;
+		padding-right: .5em;
+		position: absolute;
+		background-color: $lightest;
+		right: 0;
+		top: 0;
+		z-index: 2;
+    display: flex;
+    align-items: center;
+    box-shadow: -5px 0 20px 10px white;
+		a {
+			margin: 0 .5em 0;
+			// color: $light;
+			&:last-child {
+				margin: 0;
+			}
+		}
+	}
+	// .pageTitle {
+	// 	display: flex;
+	// 	flex-grow: 1;
+ //    flex-direction: row-reverse;
+	// 	transition: opacity 500ms $fadeEase;
+	// 	span {
+	// 		transform: translateX(100%);
+	// 		padding: 0 .5em 0 0;
+	// 		float: right;
+	// 		text-align: right;
+	// 	}
+	// 	&.hide {
+	// 		opacity: 0;
+	// 	}
+	// }
 	.tools {
 		width: 1em;
 		text-align: center;
@@ -117,6 +159,7 @@ header {
 		.tool {
 			width: 1em;
 			height: 1em;
+			float: left;
 			&.close {
 
 			}
@@ -131,12 +174,8 @@ header {
 		position: fixed;
 	}
 }
-section {
-	width: 100%;
-	min-height: 100vh;
-}
 footer {
-	margin: 2em 0;
+	width: 100%;
 	padding: 2em 0;
 	border-top: 1px solid $medium;
 }
@@ -160,3 +199,4 @@ footer {
 @import 'story';
 @import 'collection';
 @import 'single';
+@import 'about';

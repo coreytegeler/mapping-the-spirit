@@ -113,16 +113,9 @@
       }
     };
     tableScroll = function(self) {
-      var $bigTitle, scrollLeft, titleRight;
+      var $bigTitle, scrollLeft;
       scrollLeft = $(self).scrollLeft();
-      $bigTitle = $('#title');
-      titleRight = $pageTitle.innerWidth() - scrollLeft;
-      if (titleRight <= 0) {
-        titleRight = 0;
-      }
-      return $pageTitle.css({
-        x: titleRight + 'px'
-      });
+      return $bigTitle = $('#title');
     };
     dragAndDrop = function() {
       var gutter;
@@ -235,9 +228,6 @@
         },
         success: function(response, status, jqXHR) {
           history.pushState('data', '', url);
-          $pageTitle.transition({
-            x: 0
-          }, 500, 'easeInOutCubic');
           $single.addClass(type).attr('data-item', slug);
           if ($single.html()) {
             $single.on(transEnd, function() {
@@ -259,7 +249,7 @@
         slug = $data.data('slug');
         url = $data.data('url');
         $single.data('title', title).data('slug', slug).data('url', url);
-        $secondary.find('.title a').html(title).attr('href', url);
+        $header.find('.title.item').addClass('show').find('a').html(title).attr('href', url);
         $single.off(transEnd);
         $single.html(html);
         loadSingle();
@@ -267,9 +257,6 @@
       });
     };
     loadSingle = function() {
-      $pageTitle.css({
-        x: 0
-      });
       return $single.find('section img').eq(0).imagesLoaded(function() {
         $single.addClass('loaded');
         imagesLoaded($single).on('progress', function(inst, image) {
@@ -286,21 +273,16 @@
       });
     };
     putDown = function() {
-      var $collected, itemSlug, pageTitleRight, pageTitleWidth, scrollLeft, url;
+      var $collected, itemSlug, pageTitleRight, scrollLeft, url;
       itemSlug = $single.attr('data-item');
       url = window.location.href.replace(itemSlug, '');
       history.replaceState({}, '', url);
       $collected = $('#collection .item.selected').removeClass('selected');
       $body.removeClass('looking folder');
       scrollLeft = $table.scrollLeft();
-      pageTitleWidth = $pageTitle.innerWidth();
-      pageTitleRight = pageTitleWidth - scrollLeft;
       if (pageTitleRight <= 0) {
         pageTitleRight = 0;
       }
-      $pageTitle.transition({
-        x: pageTitleRight
-      }, 500, 'easeInOutQuint');
       $single.on(transEnd, function() {
         $single.off(transEnd);
         $single.removeClass('');

@@ -22,7 +22,7 @@ body.story {
 	    display: flex;
 	    flex-direction: row;
 	    overflow-x: scroll;
-	    overflow-y: visible;
+	    overflow-y: hidden;
 	  }
 		.spacer {
 			&.full {
@@ -82,7 +82,12 @@ body.story {
 		  	display: block;
 		  	margin: 0 $gutter 0 0;
 		  	float: left;
-				cursor: pointer;
+		  	&:nth-child(odd) {
+					transform: rotateZ(1deg);
+				}
+				&:nth-child(even) {
+					transform: rotateZ(-1deg);
+				}
 				&.folder, &.object {
 					.inner {
 						height: 100%;
@@ -114,6 +119,9 @@ body.story {
 						@include smallText;
 					}
 				}
+				&:hover {
+					cursor: pointer;
+				}
 			}
 			&:after {
 			  content: '';
@@ -134,11 +142,11 @@ body.story {
 			z-index: 50;
 		}
 		header {
-			height: #{$headerHeight*2};
-			.tools {
-				opacity: 1;
-				pointer-events: all;
-			}
+			// height: #{$headerHeight*2};
+			// .tools {
+			// 	opacity: 1;
+			// 	pointer-events: all;
+			// }
 		}
 	}
 	.grid .item, .item.ui-draggable-dragging, .item.ui-sortable-helper, #collection .item {
@@ -149,12 +157,13 @@ body.story {
 	    filter: grayscale(100%);
 	    transition: filter 300ms $ease;
 		}
-		&.looking, &.selected {
-			cursor: pointer;
-			color: $red;
+		&:not(.looking):not(.selected) {
+			color: $dark !important;
 			.image.bw {
-				background-color: $red;
+				background-color: $dark !important;
 			}
+		}
+		&.looking, &.selected {
 			.image:not(.bw) {
 				img {
 			    filter: grayscale(0%) !important;
@@ -162,7 +171,6 @@ body.story {
 			}
 		}
 		.image.bw {
-  		background-color: black;
 	    transition: background-color 500ms $ease;
 	    img {
 		    mix-blend-mode: lighten;
@@ -179,6 +187,7 @@ body.story {
 			border: solid black;
 			border-width: 1px;
 			transform: translateY(1px);
+			overflow: hidden;
 			.inner {
 				height: 100%;
 				padding: .5em;
@@ -196,7 +205,17 @@ body.story {
 			}
 			&.paper {
 				.inner {
-					
+					align-items: flex-start;
+					position: relative;
+					&:after {
+						width: 100%;
+						height: 100%;
+				    position: absolute;
+				    left: 0;
+				    bottom: 0;
+				    content: '';
+				    box-shadow: inset white 0 -20px 25px;
+				  }
 				}
 			}
 			&.over {

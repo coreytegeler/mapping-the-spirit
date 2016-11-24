@@ -1,7 +1,14 @@
 title: Object
 pages: false
 files:
-  max: 1
+  sortable: true
+  fields:
+    title:
+      label: Title
+      type: text
+    caption:
+      label: Caption
+      type: textarea
 fields:
   title:
     label: Title

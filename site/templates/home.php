@@ -18,12 +18,13 @@ snippet('head');
 			foreach( $stories as $index => $story ) {
 				$url = $story->url();
 				$thumb = $story->images()->first();
-				$map = $story->image( $story->map() )->url();
 		  	echo '<div class="story">';
-			  	echo '<a href="' . $url . '">';
+			  	echo '<a href="' . $url . '" style="color:' . $story->color() . '">';
 			  		echo '<h1 class="title">' .  $story->title() . '</h1>';
-			  		echo '<div class="image">';
-					  	echo '<img src="' . $thumb->url() . '"/>';
+			  		echo '<div class="image" style="background-color:' . $story->color() . '">';
+			  			if( $thumb ) {
+						  	echo '<img src="' . $thumb->url() . '"/>';
+			  			}
 				  	echo '</div>';
 				  echo '</a>';
 		  	echo '</div>';
