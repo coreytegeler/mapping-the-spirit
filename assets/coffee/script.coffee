@@ -3,6 +3,7 @@ $ ->
 	$body = $('body')
 	$main = $('main')
 	$header = $('header')
+	$itemTitle = $header.find('.title.item')
 	$grid = $('.grid')
 	$pageTitle = $header.find('.pageTitle span')
 	$secondary = $header.find('.secondary')
@@ -25,7 +26,8 @@ $ ->
 			lookAt(this)
 		$body.on 'mouseleave', '.item.click', () ->
 			lookAway(this)
-		$body.on 'click', 'header .close', () ->
+		$body.on 'click', 'header .close', (e) ->
+			e.preventDefault()
 			putDown()
 
 		if($body.is('.looking'))
@@ -174,11 +176,20 @@ $ ->
 		type = $item.attr('data-type')
 		slug = $item.attr('data-slug')
 		url = $item.attr('data-url')
+		title = $item.attr('data-title')
 		storySlug = $item.attr('data-story')
 		$collected = $('#collection .item[data-index="'+index+'"]')
 		$collected.addClass('selected')
 		$body.addClass('looking')
 		$single.addClass('open')
+		$itemTitle
+			.addClass('ready')
+			.find('a')
+				.html(title)
+				.attr('href', url)
+		setTimeout () ->
+			$itemTitle.addClass('show')
+		, 1
 		setTimeout () ->
 			$single.addClass('show')
 		, 10
@@ -211,11 +222,6 @@ $ ->
 				.data('title', title)
 				.data('slug', slug)
 				.data('url', url)
-			$header.find('.title.item')
-			.addClass('show')
-			.find('a')
-				.html(title)
-				.attr('href', url)
 			$single.off(transEnd)
 			$single.html(html)
 			loadSingle()
@@ -251,6 +257,10 @@ $ ->
 			$single.attr('class', '')
 			$single.html('')
 		$single.removeClass('show')
+		$itemTitle.on transEnd, () ->
+			$itemTitle.off(transEnd)
+			$itemTitle.removeClass('ready')
+		$itemTitle.removeClass('show')
 
 	scrolls = { left: { top: 0, height: 0 }, right: { top: 0, height: 0 } }
 	resizeSects = () ->

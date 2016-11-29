@@ -70,9 +70,10 @@ header {
 	a {
 		color: black;
 		text-decoration: none;
-		transition: color 100ms $fadeEase;
+		transition: opacity 100ms $fadeEase;
+		background-color: white;
 		&:hover {
-			color: $medium !important;
+			opacity: .5;
 		}
 	}
 	.inner {
@@ -94,7 +95,6 @@ header {
 		background-color: white;
 		overflow: hidden;
 		.trail {
-			padding: 0 .5em;
 			white-space: nowrap;
 		}
 		&.primary {
@@ -109,11 +109,30 @@ header {
 	}
 	.title {
 		display: none;
-		&.show {
-			display: inline-table;	
+		transition: transform 500ms $ease;
+		float: right;
+		position: relative;
+		transform: translateX(-100vw);
+		background: white;
+		padding: .1em 0 .1em 1.5em;
+		box-shadow: 5px 0 10px 5px white;
+		a {
+			
 		}
-		&:not(:first-child):before {
-			content: '\00a0•\00a0';
+		&.ready {
+			display: inline-block;
+		}
+		&.show {
+			transform: translateX(0);
+		}
+		&:not(:last-child) {
+			background-size: .75em;
+			background-position: .4em .05em;
+			background-repeat: no-repeat;
+			background-image: url(../images/right.svg);
+		}
+		&:last-child {
+			padding-left: .5em;
 		}
 	}
 	.links {
@@ -134,6 +153,13 @@ header {
 				margin: 0;
 			}
 		}
+	}
+	.close {
+		padding-right: 1.5em;
+		background-size: .75em;
+		background-position: calc(100% - .2em) .08em;
+		background-repeat: no-repeat;
+		background-image: url(../images/x.svg);
 	}
 	// .pageTitle {
 	// 	display: flex;

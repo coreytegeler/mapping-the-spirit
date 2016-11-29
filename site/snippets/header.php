@@ -3,14 +3,14 @@
     <div class="row primary">
       <div class="trail">
         <?php
-        echo '<span class="site title show">';
-          echo '<a href="' . $site->url() . '">' . $site->title() . '</a>';
+        echo '<span class="item title ' . (isset( $item ) ? 'ready show':'') . '">';
+          echo '<a href="#" class="close">' . (isset( $item ) ? $item->title():'') . '</a>';
         echo '</span>';
-        echo '<span class="story title ' . (isset( $story ) ? 'show':'') . '">';
+        echo '<span class="story title ' . (isset( $story ) ? 'ready show':'') . '">';
           echo '<a href="' . (isset( $story ) ? $story->url():'') . '">' . (isset( $story ) ? $story->title():'') . '</a>';
         echo '</span>';
-        echo '<span class="item title ' . (isset( $item ) ? 'show':'') . '">';
-          echo '<a href="' . (isset( $item ) ? $item->url():'') . '">' . (isset( $item ) ? $item->title():'') . '</a>';
+        echo '<span class="site title show ready">';
+          echo '<a href="' . $site->url() . '">' . $site->title() . '</a>';
         echo '</span>';
         ?>
       </div>
