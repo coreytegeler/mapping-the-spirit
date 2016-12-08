@@ -31,3 +31,22 @@ fields:
     placeholder: #
     help: Must include #
     width: 1/2
+  creators:
+    label: Creators
+    type: wysiwyg
+    width: 1/2
+  abstract:
+    label: Abstract
+    type: wysiwyg
+  historical:
+    label: Historical Note
+    type: wysiwyg
+  scope:
+    label: Scope & Content
+    type: wysiwyg
+  access:
+    label: Access Restrictions
+    type: wysiwyg
+  use:
+    label: Use Restrictions
+    type: wysiwyg

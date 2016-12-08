@@ -5,27 +5,3 @@ fields:
   title:
     label: Title
     type:  text
-  creators:
-    label: Creators
-    type: wysiwyg
-  span:
-    label: Date Span
-    type: text
-  quantity:
-    label: Quantity
-    type: text
-  abstract:
-    label: Abstract
-    type: wysiwyg
-  historical:
-    label: Historical Note
-    type: wysiwyg
-  scope:
-    label: Scope & Content
-    type: wysiwyg
-  access:
-    label: Access Restrictions
-    type: wysiwyg
-  use:
-    label: Use Restrictions
-    type: wysiwyg

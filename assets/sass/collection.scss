@@ -1,6 +1,6 @@
 #collection {
 	width: 100%;
-	height: $smallItem;
+	height: calc(#{$smallItem} + 1px);
 	position: fixed;
 	left: 0;
 	bottom: 0;
@@ -8,7 +8,7 @@
 	display: flex;
 	border-top: 1px solid $medium;
 	overflow: visible;
-	background: white;
+	background: $lighter;
 	z-index: 20;
 	&.empty {
 		.instruct {
@@ -22,6 +22,7 @@
 		opacity: 0;
 	}
 	&.sorting {
+		z-index: 30;
 		.items .item .inner {
 			opacity: 1;
 		}
@@ -55,6 +56,10 @@
 			background: $lighter;
 			border: solid $medium;
 			border-width: 0 1px;
+			transition: opacity 100ms ease-in;
+			&.hide {
+				opacity: 0;
+			}
 		}
 	}
 	.item {
@@ -64,14 +69,19 @@
 		float: left;
 		border: solid $medium;
 		border-width: 0 1px;
-		background: white;
+		background: $lighter;
 		margin-left: -1px;
+		transition: opacity 100ms ease-in;
 		&:hover {
 			cursor: pointer;
 		}
 		&.ui-sortable-helper {
 			transform: none;
 			top: -2px;
+			background-color: transparent;
+			&.deleting .inner {
+				opacity: 0.5;
+			}
 		}
 		&.selected .inner {
 			opacity: 1;
@@ -87,7 +97,7 @@
 			    left: 0;
 			    bottom: 0;
 			    content: '';
-			    box-shadow: inset white 0 -20px 25px;
+			    box-shadow: inset $lighter 0 -20px 25px;
 			  }
 			}
 		}
@@ -118,5 +128,8 @@
 				margin-left: 1em;
 			}
 		}
+	}
+	@include phone {
+		display: none;
 	}
 }

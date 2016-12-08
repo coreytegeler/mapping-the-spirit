@@ -10,9 +10,9 @@ if(!kirby()->request()->ajax()) {
 	echo '<main>';
 	snippet( 'table', array( 'story' => $story ) );
 	snippet( 'footnotes' );
-	echo '<div id="single" class="show open folder" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '">';
+	echo '<div id="single" class="left show open folder" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="folder">';
 } else {
-	echo '<div class="data" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '"></div>';
+	echo '<div class="data" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="folder"></div>';
 }
 $images = $item->images();
 echo '<section id="left">';
@@ -24,10 +24,12 @@ echo '<section id="left">';
 					foreach( $images->filterBy( 'thumb', '!=', 'false' ) as $index => $image ) {
 						echo '<div class="item image" data-index="' . $index . '">';
 							echo '<div class="itemWrap">';
-								echo '<img src="' . $image->url() . '"/>';
-								echo '<div class="caption text">';
-									echo $image->caption()->kirbytext();
-								echo '</div>';
+								echo '<img src="' . $image->resize(1500, 1500, 100)->url() . '"/>';
+								if( !$image->caption()->empty() ) {
+									echo '<div class="caption text">';
+										echo $image->caption()->kirbytext();
+									echo '</div>';
+								}
 							echo '</div>';
 						echo '</div>';
 					}
@@ -39,7 +41,7 @@ echo '</section>';
 echo '<section id="right">';
 	echo '<div class="scroll">';
 		echo '<div class="inner">';
-			echo '<div class="intro text">';
+			echo '<div class="text textWrap">';
 				echo $item->text()->kirbytext();
 			echo '</div>';
 		echo '</div>';

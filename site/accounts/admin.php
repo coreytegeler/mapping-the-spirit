@@ -7,8 +7,9 @@ email: coreytegeler@gmail.com
 language: en
 role: admin
 history:
+  - >
+    stories/the-moorish-science-temple-of-america/remembrance-day-feast
+  - stories/the-moorish-science-temple-of-america
+  - stories/the-moorish-science-temple-of-america/moorish-and-american-flags
   - aid
   - stories/the-moorish-science-temple-of-america/remembrance-day-trek
-  - stories/the-moorish-science-temple-of-america/fbi-files
-  - stories/black-orthodox-judaism
-  - stories

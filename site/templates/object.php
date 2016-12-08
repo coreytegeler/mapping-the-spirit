@@ -10,16 +10,16 @@ if(!kirby()->request()->ajax()) {
 	echo '<main>';
 	snippet( 'table', array( 'story' => $story ) );
 	snippet( 'footnotes' );
-	echo '<div id="single" class="show open object" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '">';
+	echo '<div id="single" class="show open object" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="object">';
 } else {
-	echo '<div class="data" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '"></div>';
+	echo '<div class="data" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="object"></div>';
 }
 $image = $item->images()->first();
 echo '<section>';
 	echo '<div class="scroll">';
 		echo '<div class="inner">';
 			echo '<div class="vert">';
-				echo '<img src="' . $image->url() . '"/>';
+				echo '<img src="' . $image->resize(1500, 1500, 100)->url() . '"/>';
 				echo '<div class="caption text">';
 					echo $item->caption()->kirbytext();
 				echo '</div>';

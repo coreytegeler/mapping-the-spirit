@@ -4,25 +4,43 @@ body.aid, body.about {
 	}
 	main {
 		overflow-y: scroll;
-		height: 100%;
-		display: flex;
-		flex-wrap: wrap;
+		height: calc(100% - 2em);
+		position: relative;
 		section {
+			width: 100%;
+			min-height: 100%;
 			padding-top: 2em;
+			display: flex;
+			// flex-direction: column;
+			.inner {
+				max-width: $maxWidth;
+				// display: table;
+				// margin: auto;
+				padding: 0 2em;
+				flex: 4;
+			}
+			.margin {
+				flex: 1;
+				position: relative;
+				// pointer-events: none; 
+				img {
+					position: absolute;
+				}
+			}
 			.group {
 				width: 100%;
 				max-width: $maxWidth;
 				// display: table;
-				padding: 0 2em 2em 2em;
+				padding: 0 0 1em 0;
 			}
-			h2 {
-				text-align: center;
+			h3 {
+				text-align: left;
 			}
 			h2, h3, h4 {
 				margin: 0;
 				padding-bottom: .5em;
 			}
-			h3 {
+			h2 {
 				a:hover {
 					color: $dark !important;
 				}
@@ -32,31 +50,36 @@ body.aid, body.about {
 				text-decoration: none;
 			}
 		}
-		section#details {
-			width: calc(35% - 1px);
-			border-right: 1px solid black;
-			.text {
-				@include xSmallText;
+		.story {
+			h2.title {
+				font-family: $sans;
+				text-align: center;
 			}
-			.subgroup {
-				padding-bottom: .5em;
-				.subtitle {
-					color: $medium;
-					text-transform: uppercase;
-					&::after {
-						content: ': ';
+			.collapsable {
+				// height: 0;
+				overflow: hidden;
+			}
+			.details {
+				.text {
+					padding-left: 1em;
+					@include xSmallText;
+				}
+				.subgroup {
+					padding-bottom: .5em;
+					&:last-child {
+						padding: 0;
+					}
+					.subtitle {
+						color: $medium;
+						text-transform: uppercase;
+						&::after {
+							content: ': ';
+						}
+					}
+					p {
+						display: inline;
 					}
 				}
-				p {
-					display: inline;
-				}
-			}
-		}
-		section#list {
-			width: 65%;
-			.wrap {
-				width: 100%;
-				display: table;
 			}
 			.items {
 				padding: 0 0 1em 1em;
@@ -72,6 +95,8 @@ body.aid, body.about {
 					}
 				}
 				.wrap.item {
+					width: 100%;
+					display: table;
 					padding: 0 0 .25em 0;
 					.meta {
 						@include xSmallText;
@@ -97,6 +122,15 @@ body.aid, body.about {
 					}
 				}
 			}
+			.empty {
+				color: $medium;
+				font-family: $monoItalic;
+			}
+		}
+	}
+	@include phone {
+		.margin {
+			display: none;
 		}
 	}
 }

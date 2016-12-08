@@ -1,6 +1,6 @@
 <header>
   <div class="inner">
-    <div class="row primary">
+    <div class="row">
       <div class="trail">
         <?php
         echo '<span class="item title ' . (isset( $item ) ? 'ready show':'') . '">';
@@ -27,20 +27,5 @@
         ?>
       </div>
     </div>
-    <!-- <div class="row secondary">
-      <div class="title">
-        <span>
-          <?#php if( isset( $item ) ) {
-            #echo '<a href="' . $item->url() . '">' . $item->title() . '</a>';
-          # } else {
-            # echo '<a></a>';
-          #} ?>
-        </span>
-      </div>
-      <div class="tools">
-        <div class="tool close">×</div>
-        <div class="tool add">+</div>
-      </div>
-    </div> -->
   </div>
 </header>

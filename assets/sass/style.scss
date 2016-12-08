@@ -10,12 +10,13 @@ html, body {
 	font-family: $mono;
 	font-weight: normal;
 	color: black;
-	@include mediumText;
+	@include baseText;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-y: hidden;
   overflow-x: hidden;
+  content: 'desktop';
   * {
     -webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
@@ -32,7 +33,10 @@ h1, h2, h3, h4 {
 }
 h1 {
 	font-family: $sans;
-	@include xLargeText;
+	@include xxLargeText;
+	@include phone {
+		@include xLargeText;
+	}
 }
 h2 {
 	font-family: $sans;
@@ -64,14 +68,14 @@ header {
 	width: 100%;
 	height: $headerHeight;
 	color: black;
-	background-color: white;
+	background-color: $lighter;
 	display: flex;
-	transition: height 500ms $ease;
+	z-index: 20;
 	a {
 		color: black;
 		text-decoration: none;
 		transition: opacity 100ms $fadeEase;
-		background-color: white;
+		background-color: $lighter;
 		&:hover {
 			opacity: .5;
 		}
@@ -79,43 +83,36 @@ header {
 	.inner {
 		width: 100%;
 		position: relative;
+		@include smallText;
 		font-family: $sans;
 		font-weight: normal;
 		text-transform: uppercase;
-		line-height: .8em;
 	}
 	.row {
 		width: 100%;
-		height: calc(#{$headerHeight});
+		height: $headerHeight;
 		position: absolute;
 		left: 0;
-		border-bottom: 1px solid $medium;
+		top: 0;
+		z-index: 20;
+		border-bottom: 1px solid $dark;
 		display: flex;
 		align-items: center;
-		background-color: white;
+		background-color: $lighter;
 		overflow: hidden;
 		.trail {
-			white-space: nowrap;
-		}
-		&.primary {
-			top: 0;
-			z-index: 20;
-		}
-		&.secondary {
-			bottom: 0;
-			z-index: 10;
-			position: absolute;
-		}
+			$lightest-space: nowrap;
+		}	
 	}
 	.title {
 		display: none;
-		transition: transform 500ms $ease;
+		transition: transform 800ms $slideEase;
 		float: right;
 		position: relative;
 		transform: translateX(-100vw);
-		background: white;
+		background: $lighter;
 		padding: .1em 0 .1em 1.5em;
-		box-shadow: 5px 0 10px 5px white;
+		box-shadow: 5px 0 10px 5px $lighter;
 		a {
 			
 		}
@@ -127,7 +124,7 @@ header {
 		}
 		&:not(:last-child) {
 			background-size: .75em;
-			background-position: .4em .05em;
+			background-position: .4em .2em;
 			background-repeat: no-repeat;
 			background-image: url(../images/right.svg);
 		}
@@ -139,13 +136,13 @@ header {
 		height: 100%;
 		padding-right: .5em;
 		position: absolute;
-		background-color: $lightest;
+		background-color: $lighter;
 		right: 0;
 		top: 0;
 		z-index: 2;
     display: flex;
     align-items: center;
-    box-shadow: -5px 0 20px 10px white;
+    box-shadow: -5px 0 20px 10px $lighter;
 		a {
 			margin: 0 .5em 0;
 			// color: $light;
@@ -200,11 +197,6 @@ header {
 		position: fixed;
 	}
 }
-footer {
-	width: 100%;
-	padding: 2em 0;
-	border-top: 1px solid $medium;
-}
 .data {
 	display: none;
 }
@@ -221,8 +213,50 @@ footer {
 		height: .5em;
 	}
 }
+@include tablet {
+	body {
+		content: 'tablet';
+	}
+}
+@include phone {
+	body {
+		content: 'phone';
+		&:after {
+			font-size: 14px;
+		}
+	}
+	header {
+		height: $headerHeight*2;
+		@include baseText;
+		.inner {
+
+		}
+		.row {
+			height: $headerHeight*2;
+			display: block;
+			border-bottom: 0;
+			.title {
+				box-shadow: none;
+				&.item, &.story {
+					display: none;
+				}
+			}
+			.trail, .links {
+				width: 100%;
+				height: $headerHeight;
+				display: flex;
+				align-items: center;
+				position: relative;
+				border-bottom: 1px solid $dark;
+				box-shadow: none;
+			}
+		}
+	}
+}
+
 @import 'home';
 @import 'story';
 @import 'collection';
 @import 'single';
 @import 'about';
+@import 'footer';

@@ -1,17 +1,18 @@
 <?php
 snippet('head');
   echo '<main>';
-  	echo '<section class="map">';
-	  	echo '<div class="title">';
+  	echo '<section id="map">';
+	  	echo '<div class="map shift" data-shift="2"></div>';
+	  	echo '<div class="shift title" data-shift="-2">';
 		  	echo '<h1>';
 		  		echo $site->title();
 		  	echo '</h1>';
 		  echo '</div>';
 		echo '</section>';
-		echo '<section class="stories">';
+		echo '<section id="stories">';
 			snippet( 'header', array( 'pageTitle' => 'STORIES' ) );
 			echo '<div class="about">';
-				echo 'Mapping the Spirit documents the texture of spiritual life amongst people of African descent in America by amplifying these voices to create more nuanced history.';
+				echo $site->description();
 			echo '</div>';
 			echo '<div class="dash"></div>';
 			$stories = $pages->find('stories')->children()->visible();
@@ -28,8 +29,8 @@ snippet('head');
 				  	echo '</div>';
 				  echo '</a>';
 		  	echo '</div>';
-		  	#snippet( 'dashed' );
 		  }
+		  echo '<div class="dash"></div>';
 		echo '</section>';
   echo '</main>';
 snippet('footer')

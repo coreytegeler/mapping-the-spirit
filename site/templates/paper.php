@@ -10,14 +10,16 @@ if(!kirby()->request()->ajax()) {
 	echo '<main>';
 	snippet( 'table', array( 'story' => $story ) );
 	snippet( 'footnotes' );
-	echo '<div id="single" class="show paper open" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '">';
+	echo '<div id="single" class="show paper open" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="paper">';
 } else {
-	echo '<div class="data" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '"></div>';
+	echo '<div class="data" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="paper"></div>';
 }
 echo '<section>';
 	echo '<div class="scroll">';
 		echo '<div class="inner">';
-			echo $item->text()->kirbytext();
+			echo '<div class="text textWrap">';
+				echo $item->text()->kirbytext();
+			echo '</div>';		
 		echo '</div>';
 	echo '</div>';
 echo '</section>';

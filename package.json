@@ -6,7 +6,7 @@
     "sass": "sass -w assets/sass/style.scss:assets/css/prestyle.css",
     "prefix" : "postcss -w -u autoprefixer assets/css/prestyle.css -o assets/css/style.css",
     "coffee": "coffee -o assets/js/ -cw assets/coffee/",
-    "go": "npm run sass & npm run prefix & npm run coffee",
+    "go": "npm run sass & npm run prefix & npm run coffee & php -S localhost:8000",
     "ssh": "ssh root@162.243.9.116"
   },
   "repository": {
