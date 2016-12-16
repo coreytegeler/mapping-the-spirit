@@ -24,7 +24,7 @@ snippet('head');
 						}
 					}
 
-					$creators = $story->creators()->kirbytext();
+					$collaborators = $story->collaborators()->kirbytext();
 				  $span = $story->span()->kirbytext();
 				  $abstract = $story->abstract()->kirbytext();
 				  $history = $story->history()->kirbytext();
@@ -41,8 +41,8 @@ snippet('head');
 						  	echo '<h3 class="title">Overview</h3>';
 						  	echo '<div class="text">';
 						  		echo '<div class="subgroup">';
-						  			echo '<span class="subtitle">Creators</span>';
-								  	echo $creators;
+						  			echo '<span class="subtitle">Collaborators</span>';
+								  	echo $collaborators;
 								  echo '</div>';
 						  		echo '<div class="subgroup">';
 						  			echo '<span class="subtitle">Date Span</span>';

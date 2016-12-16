@@ -1,4 +1,5 @@
   <footer>
+  	<?php snippet( 'collection' ); ?>
   	<div class="inner">
 	  	<div class="group description">
 		  		<?php echo $site->description() ?>

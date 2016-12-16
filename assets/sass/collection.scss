@@ -6,7 +6,7 @@
 	bottom: 0;
 	float: left;
 	display: flex;
-	border-top: 1px solid $medium;
+	border-top: 1px solid $dark;
 	overflow: visible;
 	background: $lighter;
 	z-index: 20;
@@ -64,14 +64,15 @@
 	}
 	.item {
 		max-width: 300px;
-		height: calc(#{$smallItem} + 2px);
+		height: calc(#{$smallItem} + 1px);
 		display: flex;
 		float: left;
-		border: solid $medium;
+		border: solid $dark;
 		border-width: 0 1px;
 		background: $lighter;
 		margin-left: -1px;
 		transition: opacity 100ms ease-in;
+		overflow: hidden;
 		&:hover {
 			cursor: pointer;
 		}
@@ -86,7 +87,7 @@
 		&.selected .inner {
 			opacity: 1;
 		}
-		&.paper {
+		&.text {
 			.inner {
 				align-items: flex-start;
 				position: relative;
@@ -99,6 +100,9 @@
 			    content: '';
 			    box-shadow: inset $lighter 0 -20px 25px;
 			  }
+			}
+			&.quote {
+				font-family: $monoItal;
 			}
 		}
 		.inner {

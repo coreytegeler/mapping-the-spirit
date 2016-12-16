@@ -5,3 +5,12 @@ fields:
   title:
     label: Title
     type:  text
+  abstract:
+    label: Abstract
+    type: wysiwyg
+  access:
+    label: Access Restrictions
+    type: wysiwyg
+  use:
+    label: Use Restrictions
+    type: wysiwyg

@@ -4,17 +4,15 @@ pages:
     - folder
     - paper
     - object
+    - quote
 files:
   sortable: true
 fields:
   title:
     label: Title
     type:  text
-  text:
-    label: Text
-    type:  textarea
   thumb:
-    label: Thumb
+    label: Thumbnail
     type:  selector
     mode:  single
     types: image
@@ -31,8 +29,8 @@ fields:
     placeholder: #
     help: Must include #
     width: 1/2
-  creators:
-    label: Creators
+  collaborators:
+    label: Collaborators
     type: wysiwyg
     width: 1/2
   abstract:
@@ -43,10 +41,4 @@ fields:
     type: wysiwyg
   scope:
     label: Scope & Content
-    type: wysiwyg
-  access:
-    label: Access Restrictions
-    type: wysiwyg
-  use:
-    label: Use Restrictions
     type: wysiwyg

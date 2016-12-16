@@ -1,18 +1,16 @@
-title: Object
+title: Quote
 pages: false
-files:
-  sortable: true
-  fields:
-    title:
-      label: Title
-      type: text
-    caption:
-      label: Caption
-      type: textarea
+files: false
 fields:
   title:
     label: Title
     type:  text
+  text:
+    label: Text
+    type:  wysiwyg
+  attribution:
+    label: Attribution
+    type: text
   month:
     label: Month
     type:  text
@@ -28,22 +26,15 @@ fields:
   location:
     label: Location
     type:  text
-  caption:
-    label: Text
-    type:  wysiwyg 
+    width: 1/2
   size:
     label: Size
     type: select
-    default: small
-    width: 1/2
+    default: medium
     options:
       small: Small
+      medium: Medium
       large: Large
-  bw:
-    label: Black & White
-    type: toggle
-    default: false
-    text: yes/no
     width: 1/2
   tags:
     label: Tags

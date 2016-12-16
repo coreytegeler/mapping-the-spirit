@@ -31,6 +31,21 @@
 		min-width: 10em;
 		overflow: hidden;
 		transition: opacity 500ms $fadeEase;
+		.closeSingle {
+			width: 1.5em;
+			height: 1.5em;
+			position: absolute;
+			right: 0;
+			top: 0;
+			background-size: 1em;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-image: url(../images/x.svg);
+			&:hover {
+				cursor: pointer;
+				opacity: .5;
+			}
+		}
 		.scroll {
 			height: 100%;
 			overflow-y: auto;
@@ -42,12 +57,24 @@
 			.text {
 				@include smallText;
 			}
+			.caption {
+				@include xSmallText;	
+			}
 			.textWrap {
 				padding: .5em 1em;
 				line-height: 1.3em;
 				p {
 					margin: .5em 0;
 				}
+				a {
+					color: black;
+					text-decoration: none;
+					border-bottom: 1px solid;
+				}
+			}
+			.meta {
+				// padding: 1em 0;
+				font-family: $monoItal;
 			}
 		}
 	}
@@ -55,9 +82,39 @@
 		section {
 			width: 100%;
 			.inner {
-				max-width: 800px;
-				display: table;
-				margin: auto;
+				.blocks {
+					padding-top: 1em;
+					.block {
+						width: 100%;
+						display: table;
+						margin: auto;
+						margin-bottom: 2em;
+						&.small {max-width: 500px;}
+						&.medium {max-width: 800px;}
+						&.large {max-width: 1440px;}
+						.text {
+							@include mediumText();
+						}
+						&.image {
+							img {
+								max-width: 100%;
+								display: table;
+								margin: auto;
+							}
+						}
+						&.quote {
+							width: 100%;
+							font-family: $monoBoldItal;
+							color: $medium;
+							&.small {@include mediumText();}
+							&.medium {@include largeText();}
+							&.large {
+								max-width: 1000px;
+								@include xLargeText();
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -110,6 +167,66 @@
 			}
 		}
 	}
+	&.quote {
+		section {
+			width: 100%;
+			.inner {
+				max-width: 800px;
+				height: 100%;
+				padding: $gutter;
+				font-family: $monoBoldItal;
+				display: table;
+				margin: auto;
+				.text {
+					position: relative;
+					&::before, &::after {
+						width: 1em;
+						display: inline;
+						position: absolute;
+						@include xLargeText;
+						line-height: .5em;
+						color: $medium;
+					}
+					&::before {
+						content: '“';
+						left: 0;
+						top: 0;
+					}
+					&::after {
+						content: '”';
+					}
+					p {
+						display: inline;	
+						&:first-child {
+							margin-left: 2.5em;
+						}
+					}
+				}
+				.attribution {
+					font-family: $monoMed;
+					padding-top: $gutter;
+				}
+			}
+			&.small .inner {
+				max-width: 500px;
+				.text {
+					@include mediumText();
+				}
+			}
+			&.medium .inner {
+				max-width: 800px;
+				.text {
+					@include largeText();
+				}
+			}
+			&.large .inner {
+				max-width: 1000px;
+				.text {
+					@include xLargeText();
+				}
+			}
+		}
+	}
 	.items {
 		.itemsWrap {
 			padding: .5em 1em;
@@ -133,6 +250,7 @@
 					.caption {
 						margin: .5em 0 0 0;
 					}
+					margin-bottom: 1em;
 				}
 				&.readable {
 					width: 100%;

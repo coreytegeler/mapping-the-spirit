@@ -16,13 +16,13 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   overflow-y: hidden;
   overflow-x: hidden;
+  overflow: hidden;
+  position:relative;
   content: 'desktop';
   * {
-    -webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
 		box-sizing: border-box;
-		-webkit-backface-visibility: hidden;
    	backface-visibility: hidden;
+   	-webkit-overflow-scrolling: touch;
   }
 }
 h1, h2, h3, h4 {
@@ -151,45 +151,12 @@ header {
 			}
 		}
 	}
-	.close {
+	.closeSingle {
 		padding-right: 1.5em;
 		background-size: .75em;
 		background-position: calc(100% - .2em) .08em;
 		background-repeat: no-repeat;
 		background-image: url(../images/x.svg);
-	}
-	// .pageTitle {
-	// 	display: flex;
-	// 	flex-grow: 1;
- //    flex-direction: row-reverse;
-	// 	transition: opacity 500ms $fadeEase;
-	// 	span {
-	// 		transform: translateX(100%);
-	// 		padding: 0 .5em 0 0;
-	// 		float: right;
-	// 		text-align: right;
-	// 	}
-	// 	&.hide {
-	// 		opacity: 0;
-	// 	}
-	// }
-	.tools {
-		width: 1em;
-		text-align: center;
-		opacity: 0;
-		pointer-events: none;
-		transition: opacity 500ms $fadeEase;
-		.tool {
-			width: 1em;
-			height: 1em;
-			float: left;
-			&.close {
-
-			}
-			&:hover {
-				cursor: pointer;
-			}
-		}
 	}
 	&.fixed {
 		left: 0;

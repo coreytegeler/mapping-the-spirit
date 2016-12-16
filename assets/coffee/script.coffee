@@ -10,8 +10,11 @@ $ ->
 	$table = $('#table')
 	$single = $('#single')
 	$collection = $('#collection')
+	$collectionItems = $collection.find('.items')
 	transEnd = 'transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd'
 	loadedSlug = $single.attr('data-item')
+	scrollInterval = null
+	scrollShift = 0
 
 	init = () ->
 		dragAndDrop()
@@ -21,12 +24,13 @@ $ ->
 			horzScroll(this, event)
 		$body.scroll (event) ->
 			vertScroll(this, event)
-		$body.on 'click', 'header .close', (e) ->
+		$body.on 'click', '.closeSingle', (e) ->
 			e.preventDefault()
 			putDown(true)
 		$body.on 'mousemove', (e) ->
 			$(this).find('.shift').each () ->
 				shiftAndRotate(this, e)
+		$body.on 'mousemove', '#collection', browseCollection
 		$(window).on 'popstate', (e) ->
 			browserNav(e)
 		$body.on 'click', '.item.click', () ->
@@ -51,14 +55,15 @@ $ ->
 
 		if($body.is('.looking'))
 			if !history.state
+				slug = $single.attr('data-item')
 				data = {action: 'up', slug: slug}
 				history.replaceState(data, document.title, window.location.href)
 			loadSingle(loadedSlug)
 
 		$grid.imagesLoaded () ->
-			resizeGrid()
+			buildGrid()
 			checkSize
-			resizeSects()
+			resizeFolder()
 			resizeGrid()
 			vertScroll()
 
@@ -72,11 +77,11 @@ $ ->
 					$(this).attr('style', '')
 			else
 				$('.resizable').resizable('enable')
-			resizeSects()
+				resizeGrid()
+			resizeFolder()
 		.resize()
 
-
-	resizeGrid = () ->
+	buildGrid = () ->
 		gutter = $grid.find('.gutter').innerWidth()
 		if !checkSize('phone')
 			$grid.isotope
@@ -94,9 +99,16 @@ $ ->
 				animationOptions: {
 					duration: 0
 				}
+			# resizeGrid()
+		$grid.addClass('loaded')
+
+	resizeGrid = () ->
+		buildGrid()
+		if !checkSize('phone')
+			gutter = $grid.find('.gutter').innerWidth()
 			$grid.find('.item').each () ->
 				$item = $(this)
-				if($item.is('.large'))
+				if($item.is('.large.image'))
 					height = $table.innerHeight() - gutter*2
 				else
 					height = $table.innerHeight()/2 - gutter*1.5
@@ -104,8 +116,8 @@ $ ->
 					height: height
 				$item.find('img').css
 					height: height
-		$grid.isotope()
-		$grid.addClass('loaded')
+			$grid.isotope()
+			$grid.addClass('loaded')
 
 	vertScroll = (self, event) ->
 		vertScrollTop = $main.scrollTop()
@@ -151,7 +163,7 @@ $ ->
 				$helper = $(ui.helper)
 				$helper.css 'transform', ''
 				itemTop = ui.offset.top
-				collectionTop = $collection.find('.items').offset().top
+				collectionTop = $collectionItems.offset().top
 				if(itemTop >= collectionTop - 1)
 					$helper.addClass('over')
 				else
@@ -166,7 +178,7 @@ $ ->
 			drop: (event, ui) ->
 				$(this).removeClass('over')
 				$item = $(ui.draggable[0]).clone()
-				holdOn($item)
+				holdOn($item, true)
 			over: (event, ui) ->
 				$collection.addClass('over')
 			out: (event, ui) ->
@@ -178,6 +190,8 @@ $ ->
 				$helper = ui.helper
 				if $helper.is('.deletable')
 					$(ui.draggable).remove()
+					if(!$collection.find('.item').length)
+						$collection.addClass('empty')
 			over: (event, ui) ->
 				$helper = ui.helper
 				$helper.addClass('deleting')
@@ -187,7 +201,7 @@ $ ->
 				$helper.removeClass('deleting')
 				$('#collection .placeholder').removeClass('hide')
 
-		$collection.find('.items').sortable
+		$collectionItems.sortable
 			items: '> .item',
 			containment: 'body',
 			helper: 'clone',
@@ -207,7 +221,8 @@ $ ->
 				$collection.addClass('sorting')
 			stop: (event, ui) ->
 				$collection.removeClass('sorting')
-				saveCollection()
+				storySlug = $(ui.helper).attr('data-story')
+				saveCollection(storySlug)
 
 
 	holdOn = (item) ->
@@ -216,12 +231,13 @@ $ ->
 		$item.addClass('collected')
 		$item.attr('style', '')
 		$item.find('img').attr('style', '')
-		slug = $item.data('slug')
+		slug = $item.attr('data-slug')
+		storySlug = $item.attr('data-story')
 		if $collection.find('[data-slug="'+slug+'"]').length
 			return
 		$collection.removeClass('empty')
-		$collection.find('.items').append($item)
-		saveCollection()
+		$collectionItems.append($item)
+		saveCollection(storySlug)
 
 
 	openDur = 800
@@ -319,7 +335,7 @@ $ ->
 		$single.removeClass('show')
 		$itemTitle.removeClass('show')
 
-	resizeSects = () ->
+	resizeFolder = () ->
 		$leftSect = $single.find('section#left')
 		$rightSect = $single.find('section#right')
 		windowWidth = $window.innerWidth()
@@ -344,7 +360,7 @@ $ ->
 			create: (e, ui) ->
 				$(e.target).addClass('resizable')
 			resize: (e, ui) ->
-				resizeSects()
+				resizeFolder()
 
 	toggleFolder = (section) ->
 		if !checkSize('phone')
@@ -411,23 +427,79 @@ $ ->
 
 	loadCollection = () ->
 		storySlug = $table.data('story')
-		collection = localStorage.getItem(storySlug)
-		if !collection
+		collections = localStorage.getItem('mapping-the-spirit')
+		if !collections
 			return
-		collection = JSON.parse(collection)
+		collections = JSON.parse(collections)
+		if(storySlug)
+			collection = collections[storySlug]
+			insertCollection(collection)
+		else
+			$.each collections, (storySlug, collection) ->
+				insertCollection(collection, storySlug)
+
+	insertCollection = (collection, story) ->
 		$.each collection, (i, slug) ->
 			$item = $table.find('[data-slug="' + slug + '"]')
-			if $item
-				holdOn($item.clone())
+			if $item.length
+				holdOn($item.clone(), false)
+			else
+				createCollectionItem(slug, story)
+
+	createCollectionItem = (item, story) ->
+		$collection.removeClass('empty');
+		$.ajax
+			url: '/api?item='+item+'&story='+story
+			dataType: 'html'
+			error: (jqXHR, status, err) ->
+				console.log(jqXHR)
+				console.log(status)
+				console.error(err)
+			success: (item, status, jqXHR) ->
+				if !item
+					return
+				item = JSON.parse(item)
+				$item = $('<div></div>')
+				$item.addClass('click item collected')
+				$item.addClass(item.type)
+				$item.addClass(item.display)
+				$item.attr('data-story', story)
+				$item.attr('data-type', item.type)
+				$item.attr('data-url', item.url)
+				$item.attr('data-slug', item.slug)
+				if item.display == 'text'
+					$item.append('<div class="inner"><div class="text">'+item.content+'</div></div>')
+				else
+					$item.append('<div class="inner"><div class="image"><img src="'+item.content+'"/></div></div>')
+				$collectionItems.append($item)
+				
 
 	saveCollection = () ->
-		storySlug = $table.data('story')
-		newCollection = []
+		newCollection = {}
+		width = 0;
 		$collection.find('.item').each (i, item) ->
 			itemSlug = $(item).data('slug')
-			newCollection.push(itemSlug)
+			storySlug = $(item).attr('data-story')
+			width += $(item).outerWidth()
+			if(!newCollection[storySlug])
+				newCollection[storySlug] = []
+			newCollection[storySlug].push(itemSlug)
 		newCollection = JSON.stringify(newCollection)
-		localStorage.setItem(storySlug, newCollection)
+		localStorage.setItem('mapping-the-spirit', newCollection)
+		$collectionItems.css
+			width: width
+
+	browseCollection = (e) ->
+		mouse = e.clientX
+		winWidth = $window.width()
+		colWidth = $collectionItems.width()
+		mouse = event.pageX
+		mouseShift = colWidth * ((winWidth/2 - mouse)/winWidth)
+		offset = $(window).width()/2
+		marginLeft = -colWidth/2 + offset + mouseShift + mouse - winWidth/2
+		$collectionItems.css
+			marginLeft: marginLeft + 'px'
+		console.log('winWidth: ' + winWidth + ' colWidth: ' + colWidth + ' mouseShift: ' + mouseShift + ' marginLeft: ' + marginLeft)
 
 	doodle = () ->
 		return

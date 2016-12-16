@@ -8,7 +8,7 @@
   <title><?php echo $site->title()->html() ?> &mdash; <?php echo $page->title()->html() ?></title>
   <meta name="description" content="<?php echo $site->description()->html() ?>">
   <meta name="keywords" content="<?php echo $site->keywords()->html() ?>">
-
+  <meta name="viewport" content="width=device-width, height=device-height">
   <?php
   echo js(array(
     'assets/js/jquery.js',

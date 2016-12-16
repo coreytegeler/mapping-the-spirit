@@ -4,7 +4,7 @@
       <div class="trail">
         <?php
         echo '<span class="item title ' . (isset( $item ) ? 'ready show':'') . '">';
-          echo '<a href="#" class="close">' . (isset( $item ) ? $item->title():'') . '</a>';
+          echo '<a href="#" class="closeSingle">' . (isset( $item ) ? $item->title():'') . '</a>';
         echo '</span>';
         echo '<span class="story title ' . (isset( $story ) ? 'ready show':'') . '">';
           echo '<a href="' . (isset( $story ) ? $story->url():'') . '">' . (isset( $story ) ? $story->title():'') . '</a>';

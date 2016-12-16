@@ -1,23 +1,99 @@
 title: Paper
 pages: false
-files: false
+files:
+  sortable: true
+  fields:
+    title:
+      label: Title
+      type: text
+    caption:
+      label: Caption
+      type: textarea
 fields:
   title:
     label: Title
     type:  text
+  blocks:
+    label: Blocks
+    type: builder
+    fieldsets:
+      text:
+        label: Text
+        snippet: builder/text
+        fields:
+          text:
+            label: Text
+            type: wysiwyg
+      quote:
+        label: Quote
+        snippet: builder/quote
+        fields:
+          text:
+            label: Text
+            type: wysiwyg
+          size:
+            label: Size
+            type: select
+            default: medium
+            options:
+              small: Small
+              medium: Medium
+              large: Large
+      image:
+        label: Image
+        snippet: builder/image
+        fields:
+          image:
+            label: Image
+            type: image
+          size:
+            label: Size
+            type: select
+            default: medium
+            options:
+              small: Small
+              medium: Medium
+              large: Large
   excerpt:
     label: Excerpt
-    type:  wysiwyg 
-  text:
-    label: Text
     type:  wysiwyg
+  month:
+    label: Month
+    type:  text
+    width: 1/3
+  day:
+    label: Day
+    type:  text
+    width: 1/3
+  year:
+    label: Year
+    type:  text
+    width: 1/3
+  location:
+    label: Location
+    type:  text
   size:
     label: Size
     type: select
     default: small
+    width: 1/4
     options:
       small: Small
       large: Large
+  display:
+    label: Display
+    type: select
+    default: text
+    width: 1/4
+    options:
+      image: Image
+      text: Text
+  bw:
+    label: Black & White
+    type: toggle
+    default: false
+    text: yes/no
+    width: 1/2
   tags:
     label: Tags
     type:  tags

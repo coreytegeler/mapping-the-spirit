@@ -22,14 +22,40 @@ fields:
     mode:  single
     types:
       - image
+  excerpt:
+    label: Excerpt
+    type:  wysiwyg
+  month:
+    label: Month
+    type:  text
+    width: 1/3
+  day:
+    label: Day
+    type:  text
+    width: 1/3
+  year:
+    label: Year
+    type:  text
+    width: 1/3
+  location:
+    label: Location
+    type:  text
   size:
     label: Size
     type: select
     default: small
-    width: 1/2
+    width: 1/4
     options:
       small: Small
       large: Large
+  display:
+    label: Display
+    type: select
+    default: image
+    width: 1/4
+    options:
+      image: Image
+      text: Text
   bw:
     label: Black & White
     type: toggle

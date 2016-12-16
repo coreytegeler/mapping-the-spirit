@@ -3,6 +3,21 @@ footer {
 	border-top: 1px solid $dark;
 	background-color: $lighter;
 	display: table;
+	#collection {
+		position: relative;
+		border-top: none;
+		border-bottom: 1px solid $dark;
+		&.empty {
+			display: none;
+		}
+		.item {
+			border-bottom: 1px solid $dark;
+			&.ui-sortable-helper {
+				background: $lighter;
+				border-top: 1px solid $dark;
+			}
+		}
+	}
 	.inner {
 		width: 100%;
 		padding: 2em;

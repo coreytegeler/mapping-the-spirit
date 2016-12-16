@@ -7,9 +7,11 @@ $medium: #a5a6a6;
 $dark: #000000;
 
 $mono: 'Office', monospace;
-$monoItalic: 'Office Italic', monospace;
+$monoItal: 'Office Italic', monospace;
+$monoMed: 'Office Medium', monospace;
+$monoMedItal: 'Office Medium Italic', monospace;
 $monoBold: 'Office Bold', monospace;
-$monoBoldItalic: 'Office Bold Italic', monospace;
+$monoBoldItal: 'Office Bold Italic', monospace;
 $sans: 'Reglo', Helvetica, Arial, sans-serif;
 
 $phoneWidth: 667px;
@@ -18,7 +20,9 @@ $desktopWidth: 1024px;
 $maxWidth: 800px;
 
 $gutter: 20px;
+
 $headerHeight: 2em;
+$minItem: 10em;
 $smallItem: 60px;
 $medItem: calc(50% - 1em);
 $largeItem: 100%;
@@ -57,7 +61,7 @@ $slideBackEase: cubic-bezier(0.39, 0.575, 0.565, 1);
 	font-weight: normal;
 }
 @mixin xLargeText {
-	font-size: 3.5em;
+	font-size: 3em;
 	line-height: 1.2em;
 	font-weight: normal;
 }

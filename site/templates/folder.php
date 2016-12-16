@@ -26,8 +26,10 @@ echo '<section id="left">';
 							echo '<div class="itemWrap">';
 								echo '<img src="' . $image->resize(1500, 1500, 100)->url() . '"/>';
 								if( !$image->caption()->empty() ) {
-									echo '<div class="caption text">';
-										echo $image->caption()->kirbytext();
+									echo '<div class="text">';
+										echo '<div class="caption">';
+											echo $image->caption()->kirbytext();
+										echo '</div>';
 									echo '</div>';
 								}
 							echo '</div>';
@@ -39,9 +41,11 @@ echo '<section id="left">';
 	echo '</div>';
 echo '</section>';
 echo '<section id="right">';
+	echo '<div class="closeSingle"></div>';
 	echo '<div class="scroll">';
 		echo '<div class="inner">';
 			echo '<div class="text textWrap">';
+				snippet( 'meta', array( 'item' => $item ) );
 				echo $item->text()->kirbytext();
 			echo '</div>';
 		echo '</div>';

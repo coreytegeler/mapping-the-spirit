@@ -4,6 +4,7 @@ body.aid, body.about {
 	}
 	main {
 		overflow-y: scroll;
+		overflow-x: hidden;
 		height: calc(100% - 2em);
 		position: relative;
 		section {
@@ -115,7 +116,7 @@ body.aid, body.about {
 						li {
 							@include xSmallText;
 							em {
-								font-family: $monoItalic;
+								font-family: $monoItal;
 								font-style: normal;
 							}
 						}
@@ -124,7 +125,7 @@ body.aid, body.about {
 			}
 			.empty {
 				color: $medium;
-				font-family: $monoItalic;
+				font-family: $monoItal;
 			}
 		}
 	}
