@@ -91,13 +91,13 @@ h1 {
   font-weight: normal; }
   @media (max-width: 667px) {
     h1 {
-      font-size: 3em;
+      font-size: 2.8em;
       line-height: 1.2em;
       font-weight: normal; } }
 
 h2 {
   font-family: "Reglo", Helvetica, Arial, sans-serif;
-  font-size: 2em;
+  font-size: 1.7em;
   line-height: 1.2em;
   font-weight: normal; }
 
@@ -141,9 +141,6 @@ header {
   header .inner {
     width: 100%;
     position: relative;
-    font-size: 1em;
-    line-height: 1.2em;
-    font-weight: normal;
     font-family: "Reglo", Helvetica, Arial, sans-serif;
     font-weight: normal;
     text-transform: uppercase; }
@@ -159,6 +156,10 @@ header {
     align-items: center;
     background-color: #f4f6fa;
     overflow: hidden; }
+  header .trail a {
+    font-size: 1em;
+    line-height: 1.2em;
+    font-weight: normal; }
   header .title {
     display: none;
     transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -191,6 +192,9 @@ header {
     align-items: center;
     box-shadow: -5px 0 20px 10px #f4f6fa; }
     header .links a {
+      font-size: 1em;
+      line-height: 1.2em;
+      font-weight: normal;
       margin: 0 .5em 0; }
       header .links a:last-child {
         margin: 0; }
@@ -229,26 +233,33 @@ header {
       font-size: 14px; }
 
   header {
-    height: 4em;
+    height: calc(2em*1.75);
     font-size: 19px;
     line-height: 1.3em;
     font-weight: normal; }
     header .row {
-      height: 4em;
+      height: calc(2em*1.75);
       display: block;
-      border-bottom: 0; }
+      border-bottom: 0;
+      border-bottom: 1px solid #000000; }
       header .row .title {
         box-shadow: none; }
         header .row .title.item, header .row .title.story {
           display: none; }
       header .row .trail, header .row .links {
         width: 100%;
-        height: 2em;
         display: flex;
         align-items: center;
         position: relative;
-        border-bottom: 1px solid #000000;
-        box-shadow: none; } }
+        box-shadow: none; }
+      header .row .trail {
+        height: 2em; }
+      header .row .links {
+        height: calc(2em/2); }
+        header .row .links a {
+          font-size: .75em;
+          line-height: 1.3em;
+          font-weight: normal; } }
 body.home {
   overflow-y: auto; }
   body.home main {
@@ -397,7 +408,7 @@ body.story main {
     body.story main .title h1 {
       max-width: 1000px;
       text-align: left;
-      margin: auto;
+      margin: 0 auto .2em auto;
       padding: 0;
       text-decoration: underline; }
     body.story main .title .columns {
@@ -449,7 +460,9 @@ body.story main {
       display: block;
       margin: 0 20px 0 0;
       float: left;
-      min-height: 10em; }
+      min-height: 10em;
+      text-decoration: none;
+      overflow: hidden; }
       body.story main .grid .item.image .inner {
         height: 100%; }
         body.story main .grid .item.image .inner .image {
@@ -458,20 +471,43 @@ body.story main {
             max-height: 100%;
             min-height: 10em;
             display: table;
-            margin: 0; }
+            margin: 0;
+            border: 1px solid #fafcfc; }
       body.story main .grid .item.text {
-        width: 300px;
-        display: table; }
+        width: 300px; }
         body.story main .grid .item.text .inner {
-          display: table-cell;
-          vertical-align: middle;
+          display: block;
+          height: 100%;
+          background: #f4f6fa;
+          padding: 1em;
+          font-size: 1em;
+          line-height: 1.2em;
+          font-weight: normal;
+          position: relative; }
+          body.story main .grid .item.text .inner:after {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: 1000;
+            content: ''; }
+        body.story main .grid .item.text:not(:hover) .inner {
+          color: black !important; }
+        body.story main .grid .item.text.smallText .text {
           font-size: 1em;
           line-height: 1.2em;
           font-weight: normal; }
-        body.story main .grid .item.text.large {
+        body.story main .grid .item.text.mediumText {
           width: 450px; }
-          body.story main .grid .item.text.large .text {
-            font-size: 2em;
+          body.story main .grid .item.text.mediumText .text {
+            font-size: 1.3em;
+            line-height: 1.3em;
+            font-weight: normal; }
+        body.story main .grid .item.text.largeText {
+          width: 550px; }
+          body.story main .grid .item.text.largeText .text {
+            font-size: 1.7em;
             line-height: 1.2em;
             font-weight: normal; }
         body.story main .grid .item.text.quote {
@@ -498,7 +534,8 @@ body.story.looking main {
   overflow-y: hidden; }
 body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item.ui-sortable-helper, body.story #collection .item {
   font-family: "Office", monospace;
-  transition: color 300ms cubic-bezier(0.86, 0, 0.07, 1); }
+  transition: color 300ms cubic-bezier(0.86, 0, 0.07, 1);
+  text-decoration: none; }
   body.story .grid .item img, body.story .item.ui-draggable-dragging img, body.story .item.ui-sortable-helper img, body.story #collection .item img {
     display: table;
     filter: grayscale(100%);
@@ -509,10 +546,8 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
       background-color: #000000 !important; }
   body.story .grid .item.looking .image:not(.bw) img, body.story .grid .item.selected .image:not(.bw) img, body.story .item.ui-draggable-dragging.looking .image:not(.bw) img, body.story .item.ui-draggable-dragging.selected .image:not(.bw) img, body.story .item.ui-sortable-helper.looking .image:not(.bw) img, body.story .item.ui-sortable-helper.selected .image:not(.bw) img, body.story #collection .item.looking .image:not(.bw) img, body.story #collection .item.selected .image:not(.bw) img {
     filter: grayscale(0%) !important; }
-  body.story .grid .item .image.bw, body.story .item.ui-draggable-dragging .image.bw, body.story .item.ui-sortable-helper .image.bw, body.story #collection .item .image.bw {
-    transition: background-color 500ms cubic-bezier(0.86, 0, 0.07, 1); }
-    body.story .grid .item .image.bw img, body.story .item.ui-draggable-dragging .image.bw img, body.story .item.ui-sortable-helper .image.bw img, body.story #collection .item .image.bw img {
-      mix-blend-mode: lighten; }
+  body.story .grid .item .image.bw img, body.story .item.ui-draggable-dragging .image.bw img, body.story .item.ui-sortable-helper .image.bw img, body.story #collection .item .image.bw img {
+    mix-blend-mode: lighten; }
   body.story .grid .item.ui-draggable-dragging, body.story .grid .item.ui-sortable-helper, body.story .item.ui-draggable-dragging.ui-draggable-dragging, body.story .item.ui-draggable-dragging.ui-sortable-helper, body.story .item.ui-sortable-helper.ui-draggable-dragging, body.story .item.ui-sortable-helper.ui-sortable-helper, body.story #collection .item.ui-draggable-dragging, body.story #collection .item.ui-sortable-helper {
     max-width: 300px;
     height: calc(60px + 1px) !important;
@@ -524,8 +559,6 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
     border: solid black;
     border-width: 1px;
     transform: translateY(1px); }
-    body.story .grid .item.ui-draggable-dragging.paper, body.story .grid .item.ui-sortable-helper.paper, body.story .item.ui-draggable-dragging.ui-draggable-dragging.paper, body.story .item.ui-draggable-dragging.ui-sortable-helper.paper, body.story .item.ui-sortable-helper.ui-draggable-dragging.paper, body.story .item.ui-sortable-helper.ui-sortable-helper.paper, body.story #collection .item.ui-draggable-dragging.paper, body.story #collection .item.ui-sortable-helper.paper {
-      transform: translateY(4px); }
     body.story .grid .item.ui-draggable-dragging .inner, body.story .grid .item.ui-sortable-helper .inner, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner, body.story .item.ui-sortable-helper.ui-sortable-helper .inner, body.story #collection .item.ui-draggable-dragging .inner, body.story #collection .item.ui-sortable-helper .inner {
       height: 100%;
       padding: .5em;
@@ -541,10 +574,10 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
         body.story .grid .item.ui-draggable-dragging .inner .image img, body.story .grid .item.ui-sortable-helper .inner .image img, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner .image img, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner .image img, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner .image img, body.story .item.ui-sortable-helper.ui-sortable-helper .inner .image img, body.story #collection .item.ui-draggable-dragging .inner .image img, body.story #collection .item.ui-sortable-helper .inner .image img {
           height: 100% !important;
           vertical-align: middle; }
-    body.story .grid .item.ui-draggable-dragging.paper .inner, body.story .grid .item.ui-sortable-helper.paper .inner, body.story .item.ui-draggable-dragging.ui-draggable-dragging.paper .inner, body.story .item.ui-draggable-dragging.ui-sortable-helper.paper .inner, body.story .item.ui-sortable-helper.ui-draggable-dragging.paper .inner, body.story .item.ui-sortable-helper.ui-sortable-helper.paper .inner, body.story #collection .item.ui-draggable-dragging.paper .inner, body.story #collection .item.ui-sortable-helper.paper .inner {
+    body.story .grid .item.ui-draggable-dragging.text .inner, body.story .grid .item.ui-sortable-helper.text .inner, body.story .item.ui-draggable-dragging.ui-draggable-dragging.text .inner, body.story .item.ui-draggable-dragging.ui-sortable-helper.text .inner, body.story .item.ui-sortable-helper.ui-draggable-dragging.text .inner, body.story .item.ui-sortable-helper.ui-sortable-helper.text .inner, body.story #collection .item.ui-draggable-dragging.text .inner, body.story #collection .item.ui-sortable-helper.text .inner {
       align-items: flex-start;
       position: relative; }
-      body.story .grid .item.ui-draggable-dragging.paper .inner:after, body.story .grid .item.ui-sortable-helper.paper .inner:after, body.story .item.ui-draggable-dragging.ui-draggable-dragging.paper .inner:after, body.story .item.ui-draggable-dragging.ui-sortable-helper.paper .inner:after, body.story .item.ui-sortable-helper.ui-draggable-dragging.paper .inner:after, body.story .item.ui-sortable-helper.ui-sortable-helper.paper .inner:after, body.story #collection .item.ui-draggable-dragging.paper .inner:after, body.story #collection .item.ui-sortable-helper.paper .inner:after {
+      body.story .grid .item.ui-draggable-dragging.text .inner:after, body.story .grid .item.ui-sortable-helper.text .inner:after, body.story .item.ui-draggable-dragging.ui-draggable-dragging.text .inner:after, body.story .item.ui-draggable-dragging.ui-sortable-helper.text .inner:after, body.story .item.ui-sortable-helper.ui-draggable-dragging.text .inner:after, body.story .item.ui-sortable-helper.ui-sortable-helper.text .inner:after, body.story #collection .item.ui-draggable-dragging.text .inner:after, body.story #collection .item.ui-sortable-helper.text .inner:after {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -555,6 +588,8 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
     body.story .grid .item.ui-draggable-dragging.over, body.story .grid .item.ui-sortable-helper.over, body.story .item.ui-draggable-dragging.ui-draggable-dragging.over, body.story .item.ui-draggable-dragging.ui-sortable-helper.over, body.story .item.ui-sortable-helper.ui-draggable-dragging.over, body.story .item.ui-sortable-helper.ui-sortable-helper.over, body.story #collection .item.ui-draggable-dragging.over, body.story #collection .item.ui-sortable-helper.over {
       background-color: #fafcfc;
       border-color: rgba(165, 166, 166, 0.5); }
+  body.story .grid .item.ui-draggable-dragging.text, body.story .item.ui-draggable-dragging.ui-draggable-dragging.text, body.story .item.ui-sortable-helper.ui-draggable-dragging.text, body.story #collection .item.ui-draggable-dragging.text {
+    transform: translateY(0px) !important; }
 @media (max-width: 667px) {
   body.story main {
     height: calc(100% - 4em); }
@@ -603,6 +638,8 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
     opacity: .5; }
   #collection.empty .items {
     opacity: 0; }
+  #collection:not(.empty) .instruct {
+    pointer-events: none; }
   #collection.over.empty .instruct {
     opacity: 0; }
   #collection.sorting {
@@ -646,9 +683,12 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
     background: #f4f6fa;
     margin-left: -1px;
     transition: opacity 100ms ease-in;
-    overflow: hidden; }
+    overflow: hidden;
+    text-decoration: none; }
     #collection .item:hover {
       cursor: pointer; }
+    #collection .item:not(:hover):not(.looking):not(.selected) .inner {
+      color: black !important; }
     #collection .item.ui-sortable-helper {
       transform: none;
       top: -2px;
@@ -670,6 +710,8 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
         box-shadow: inset #f4f6fa 0 -20px 25px; }
     #collection .item.text.quote {
       font-family: "Office Italic", monospace; }
+    #collection .item.looking .image:not(.bw) img, #collection .item.selected .image:not(.bw) img {
+      filter: grayscale(0%) !important; }
     #collection .item .inner {
       height: 100%;
       padding: .5em;
@@ -689,6 +731,10 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
           vertical-align: middle;
           -webkit-filter: grayscale(100%);
           filter: grayscale(100%); }
+        #collection .item .inner .image.bw img {
+          mix-blend-mode: lighten; }
+        #collection .item .inner .image.bw:not(:hover) {
+          background: black !important; }
       #collection .item .inner .caption {
         float: left;
         display: inline-block;
@@ -706,14 +752,14 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
   z-index: 40;
   display: none;
   transform: translateX(-100%);
-  transition: transform 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: transform 350ms cubic-bezier(0.39, 0.575, 0.565, 1);
   background-color: #fafcfc;
   border-right: 1px solid black;
   box-shadow: 40px 0px 50px -60px black; }
   #single.open {
     display: flex; }
   #single.show {
-    transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: transform 500ms cubic-bezier(0.215, 0.61, 0.355, 1);
     transform: translateX(0); }
   #single.loaded .inner {
     opacity: 1; }
@@ -722,7 +768,8 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
     min-height: auto;
     position: relative;
     min-width: 10em;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: visible;
     transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
     #single section .closeSingle {
       width: 1.5em;
@@ -752,59 +799,89 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
         font-size: .75em;
         line-height: 1.3em;
         font-weight: normal; }
-      #single section .inner .textWrap {
-        padding: .5em 1em;
-        line-height: 1.3em; }
-        #single section .inner .textWrap p {
-          margin: .5em 0; }
-        #single section .inner .textWrap a {
-          color: black;
-          text-decoration: none;
-          border-bottom: 1px solid; }
       #single section .inner .meta {
         font-family: "Office Italic", monospace; }
-  #single.paper section {
-    width: 100%; }
-    #single.paper section .inner .blocks {
-      padding-top: 1em; }
-      #single.paper section .inner .blocks .block {
+      #single section .inner .blocks {
+        padding-top: 1em; }
+      #single section .inner .block {
         width: 100%;
         display: table;
         margin: auto;
-        margin-bottom: 2em; }
-        #single.paper section .inner .blocks .block.small {
-          max-width: 500px; }
-        #single.paper section .inner .blocks .block.medium {
-          max-width: 800px; }
-        #single.paper section .inner .blocks .block.large {
-          max-width: 1440px; }
-        #single.paper section .inner .blocks .block .text {
+        margin-bottom: 2em;
+        line-height: 1.2em;
+        padding: .5em 1em;
+        line-height: 1.3em; }
+        #single section .inner .block p {
+          margin: .5em 0; }
+        #single section .inner .block a {
+          color: black;
+          text-decoration: none;
+          border-bottom: 1px solid; }
+        #single section .inner .block .text {
           font-size: 1.3em;
           line-height: 1.3em;
           font-weight: normal; }
-        #single.paper section .inner .blocks .block.image img {
+        #single section .inner .block.small {
+          max-width: 500px; }
+        #single section .inner .block.medium {
+          max-width: 800px; }
+        #single section .inner .block.large {
+          max-width: 1440px; }
+        #single section .inner .block.image img {
           max-width: 100%;
           display: table;
           margin: auto; }
-        #single.paper section .inner .blocks .block.quote {
-          width: 100%;
+        #single section .inner .block.quote {
+          width: auto !important;
+          display: table;
+          margin-left: auto;
+          margin-right: auto;
           font-family: "Office Bold Italic", monospace;
           color: #a5a6a6; }
-          #single.paper section .inner .blocks .block.quote.small {
+          #single section .inner .block.quote .text {
+            font-family: "Office Bold Italic", monospace;
+            position: relative; }
+            #single section .inner .block.quote .text::before, #single section .inner .block.quote .text::after {
+              width: 1em;
+              display: inline;
+              position: absolute;
+              font-size: 1.7em;
+              line-height: 1.2em;
+              font-weight: normal;
+              line-height: .5em;
+              color: #a5a6a6; }
+            #single section .inner .block.quote .text::before {
+              content: '“';
+              left: 0;
+              top: 0; }
+            #single section .inner .block.quote .text::after {
+              content: '”'; }
+            #single section .inner .block.quote .text p {
+              display: inline; }
+              #single section .inner .block.quote .text p:first-child {
+                margin-left: 1.3em; }
+          #single section .inner .block.quote .attribution {
+            font-family: "Office Medium", monospace;
+            padding-top: 20px; }
+          #single section .inner .block.quote.small .text {
             font-size: 1.3em;
             line-height: 1.3em;
             font-weight: normal; }
-          #single.paper section .inner .blocks .block.quote.medium {
-            font-size: 2em;
+          #single section .inner .block.quote.medium .text {
+            font-size: 1.7em;
             line-height: 1.2em;
             font-weight: normal; }
-          #single.paper section .inner .blocks .block.quote.large {
-            max-width: 1000px;
-            font-size: 3em;
-            line-height: 1.2em;
-            font-weight: normal; }
-  #single.folder section {
-    width: 50%; }
+          #single section .inner .block.quote.large {
+            max-width: 1000px; }
+            #single section .inner .block.quote.large .text {
+              font-size: 2.8em;
+              line-height: 1.2em;
+              font-weight: normal; }
+  #single.paper section {
+    width: 100%; }
+  #single.folder section#left {
+    width: calc(50% + 6px);
+    padding-right: 6px; }
     #single.folder section#left .ui-resizable-handle {
       height: 100%;
       position: absolute;
@@ -813,13 +890,16 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
       padding: 0 6px;
       z-index: 100; }
       #single.folder section#left .ui-resizable-handle .line {
-        width: 4px;
+        width: 10px;
         height: 100%;
         border: solid black;
         border-width: 0 1px; }
       #single.folder section#left .ui-resizable-handle:hover {
         cursor: col-resize; }
+  #single.folder section#right {
+    width: calc(50% - 6px); }
     #single.folder section#right .inner {
+      width: 100%;
       max-width: 800px;
       display: table;
       margin: auto; }
@@ -841,33 +921,8 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
       max-width: 800px;
       height: 100%;
       padding: 20px;
-      font-family: "Office Bold Italic", monospace;
       display: table;
       margin: auto; }
-      #single.quote section .inner .text {
-        position: relative; }
-        #single.quote section .inner .text::before, #single.quote section .inner .text::after {
-          width: 1em;
-          display: inline;
-          position: absolute;
-          font-size: 3em;
-          line-height: 1.2em;
-          font-weight: normal;
-          line-height: .5em;
-          color: #a5a6a6; }
-        #single.quote section .inner .text::before {
-          content: '“';
-          left: 0;
-          top: 0; }
-        #single.quote section .inner .text::after {
-          content: '”'; }
-        #single.quote section .inner .text p {
-          display: inline; }
-          #single.quote section .inner .text p:first-child {
-            margin-left: 2.5em; }
-      #single.quote section .inner .attribution {
-        font-family: "Office Medium", monospace;
-        padding-top: 20px; }
     #single.quote section.small .inner {
       max-width: 500px; }
       #single.quote section.small .inner .text {
@@ -877,39 +932,15 @@ body.story .grid .item, body.story .item.ui-draggable-dragging, body.story .item
     #single.quote section.medium .inner {
       max-width: 800px; }
       #single.quote section.medium .inner .text {
-        font-size: 2em;
+        font-size: 1.7em;
         line-height: 1.2em;
         font-weight: normal; }
     #single.quote section.large .inner {
       max-width: 1000px; }
       #single.quote section.large .inner .text {
-        font-size: 3em;
+        font-size: 2.8em;
         line-height: 1.2em;
         font-weight: normal; }
-  #single .items .itemsWrap {
-    padding: .5em 1em; }
-    #single .items .itemsWrap .item {
-      padding: .5em 0;
-      transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-      #single .items .itemsWrap .item.image {
-        opacity: 0; }
-        #single .items .itemsWrap .item.image.loaded {
-          opacity: 1; }
-      #single .items .itemsWrap .item .itemWrap {
-        margin-bottom: 1em; }
-        #single .items .itemsWrap .item .itemWrap img {
-          max-width: 100%;
-          display: table;
-          margin: auto;
-          vertical-align: middle; }
-        #single .items .itemsWrap .item .itemWrap .caption {
-          margin: .5em 0 0 0; }
-      #single .items .itemsWrap .item.readable {
-        width: 100%; }
-        #single .items .itemsWrap .item.readable img {
-          width: auto;
-          max-width: 100%;
-          max-height: 100%; }
   @media (max-width: 667px) {
     #single {
       height: calc(100% - 4em);
@@ -948,77 +979,92 @@ body.aid main, body.about main {
       position: relative; }
       body.aid main section .margin img, body.about main section .margin img {
         position: absolute; }
+    body.aid main section h3, body.about main section h3 {
+      text-align: center;
+      display: table;
+      pointer-events: none; }
+    body.aid main section h2, body.aid main section h3, body.aid main section h4, body.about main section h2, body.about main section h3, body.about main section h4 {
+      margin: 0 auto .5em auto; }
+    body.aid main section h2, body.about main section h2 {
+      font-family: "Reglo", Helvetica, Arial, sans-serif;
+      text-align: center; }
+      body.aid main section h2 a:hover, body.about main section h2 a:hover {
+        color: #000000 !important; }
+      body.aid main section h2.title, body.about main section h2.title {
+        width: 100%;
+        text-align: left;
+        border-bottom: .2em solid;
+        pointer-events: none; }
+    body.aid main section a, body.about main section a {
+      color: black;
+      text-decoration: none; }
     body.aid main section .group, body.about main section .group {
       width: 100%;
       max-width: 800px;
       padding: 0 0 1em 0; }
-    body.aid main section h3, body.about main section h3 {
-      text-align: left; }
-    body.aid main section h2, body.aid main section h3, body.aid main section h4, body.about main section h2, body.about main section h3, body.about main section h4 {
-      margin: 0;
+    body.aid main section .details .text, body.about main section .details .text {
+      padding: 0 1em;
+      font-size: .75em;
+      line-height: 1.3em;
+      font-weight: normal; }
+    body.aid main section .details .subgroup, body.about main section .details .subgroup {
       padding-bottom: .5em; }
-    body.aid main section h2 a:hover, body.about main section h2 a:hover {
-      color: #000000 !important; }
-    body.aid main section a, body.about main section a {
-      color: black;
-      text-decoration: none; }
-  body.aid main .story h2.title, body.about main .story h2.title {
-    font-family: "Reglo", Helvetica, Arial, sans-serif;
-    text-align: center; }
-  body.aid main .story .collapsable, body.about main .story .collapsable {
-    overflow: hidden; }
-  body.aid main .story .details .text, body.about main .story .details .text {
-    padding-left: 1em;
-    font-size: .75em;
-    line-height: 1.3em;
-    font-weight: normal; }
-  body.aid main .story .details .subgroup, body.about main .story .details .subgroup {
-    padding-bottom: .5em; }
-    body.aid main .story .details .subgroup:last-child, body.about main .story .details .subgroup:last-child {
-      padding: 0; }
-    body.aid main .story .details .subgroup .subtitle, body.about main .story .details .subgroup .subtitle {
-      color: #a5a6a6;
-      text-transform: uppercase; }
-      body.aid main .story .details .subgroup .subtitle::after, body.about main .story .details .subgroup .subtitle::after {
-        content: ': '; }
-    body.aid main .story .details .subgroup p, body.about main .story .details .subgroup p {
-      display: inline; }
-  body.aid main .story .items, body.about main .story .items {
-    padding: 0 0 1em 1em; }
-    body.aid main .story .items a:not(:hover), body.about main .story .items a:not(:hover) {
-      color: #000000 !important; }
-      body.aid main .story .items a:not(:hover) .meta, body.about main .story .items a:not(:hover) .meta {
-        color: #b3b4b7 !important; }
-    body.aid main .story .items a:hover .meta, body.about main .story .items a:hover .meta {
-      opacity: 0.6; }
-    body.aid main .story .items .wrap.item, body.about main .story .items .wrap.item {
-      width: 100%;
-      display: table;
-      padding: 0 0 .25em 0; }
-      body.aid main .story .items .wrap.item .meta, body.about main .story .items .wrap.item .meta {
-        font-size: .75em;
-        line-height: 1.3em;
-        font-weight: normal; }
-        body.aid main .story .items .wrap.item .meta span, body.about main .story .items .wrap.item .meta span {
-          display: inline-table;
-          text-transform: uppercase; }
-          body.aid main .story .items .wrap.item .meta span:not(:first-child):before, body.about main .story .items .wrap.item .meta span:not(:first-child):before {
-            content: '\00a0•\00a0'; }
-      body.aid main .story .items .wrap.item ul, body.about main .story .items .wrap.item ul {
-        margin: 0;
-        padding: .25em 0 0 1em;
-        list-style: none; }
-        body.aid main .story .items .wrap.item ul li, body.about main .story .items .wrap.item ul li {
+      body.aid main section .details .subgroup:last-child, body.about main section .details .subgroup:last-child {
+        padding: 0; }
+      body.aid main section .details .subgroup .subtitle, body.about main section .details .subgroup .subtitle {
+        color: #a5a6a6;
+        text-transform: uppercase;
+        pointer-events: none; }
+        body.aid main section .details .subgroup .subtitle::after, body.about main section .details .subgroup .subtitle::after {
+          content: ': '; }
+      body.aid main section .details .subgroup p, body.about main section .details .subgroup p {
+        display: inline; }
+  body.aid main .story, body.about main .story {
+    margin-top: 2em; }
+    body.aid main .story .collapsable, body.about main .story .collapsable {
+      overflow: hidden; }
+    body.aid main .story .items, body.about main .story .items {
+      padding: 0 0 1em 1em; }
+      body.aid main .story .items a:not(:hover), body.about main .story .items a:not(:hover) {
+        color: #000000 !important; }
+        body.aid main .story .items a:not(:hover) .meta, body.about main .story .items a:not(:hover) .meta {
+          color: #b3b4b7 !important; }
+      body.aid main .story .items a:hover .meta, body.about main .story .items a:hover .meta {
+        opacity: 0.6; }
+      body.aid main .story .items .wrap.item, body.about main .story .items .wrap.item {
+        width: 100%;
+        display: table;
+        padding: 0 0 .25em 0; }
+        body.aid main .story .items .wrap.item .meta, body.about main .story .items .wrap.item .meta {
           font-size: .75em;
           line-height: 1.3em;
           font-weight: normal; }
-          body.aid main .story .items .wrap.item ul li em, body.about main .story .items .wrap.item ul li em {
-            font-family: "Office Italic", monospace;
-            font-style: normal; }
-  body.aid main .story .empty, body.about main .story .empty {
-    color: #a5a6a6;
-    font-family: "Office Italic", monospace; }
+          body.aid main .story .items .wrap.item .meta span, body.about main .story .items .wrap.item .meta span {
+            display: inline-table;
+            text-transform: uppercase; }
+            body.aid main .story .items .wrap.item .meta span:not(:first-child):before, body.about main .story .items .wrap.item .meta span:not(:first-child):before {
+              content: '\00a0•\00a0'; }
+        body.aid main .story .items .wrap.item ul, body.about main .story .items .wrap.item ul {
+          margin: 0;
+          padding: .25em 0 0 1em;
+          list-style: none; }
+          body.aid main .story .items .wrap.item ul li, body.about main .story .items .wrap.item ul li {
+            font-size: .75em;
+            line-height: 1.3em;
+            font-weight: normal; }
+            body.aid main .story .items .wrap.item ul li em, body.about main .story .items .wrap.item ul li em {
+              font-family: "Office Italic", monospace;
+              font-style: normal; }
+    body.aid main .story .empty, body.about main .story .empty {
+      color: #a5a6a6;
+      font-family: "Office Italic", monospace; }
 @media (max-width: 667px) {
+  body.aid main, body.about main {
+    height: calc(100% - (2em*1.75)) !important; }
+    body.aid main section .inner, body.about main section .inner {
+      padding: 0 .75em; }
+    body.aid main section .details .text, body.about main section .details .text {
+      padding: 0; }
   body.aid .margin, body.about .margin {
     display: none; } }
 
@@ -1059,5 +1105,13 @@ footer {
       font-size: .75em;
       line-height: 1.3em;
       font-weight: normal; }
+
+@media (max-width: 667px) {
+  footer .inner {
+    padding: .75em;
+    display: table; }
+    footer .inner .group {
+      padding-right: 0;
+      padding-bottom: .75em; } }
 
 /*# sourceMappingURL=prestyle.css.map */

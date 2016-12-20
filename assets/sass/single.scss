@@ -8,7 +8,7 @@
 	display: none;
 	// opacity: 0;
 	transform: translateX(-100%);
-	transition: transform 500ms $slideBackEase;
+	transition: transform 350ms $slideBackEase;
 	background-color: $lightest;
 	border-right: 1px solid black;
 	box-shadow: 40px 0px 50px -60px black;
@@ -16,7 +16,7 @@
 		display: flex;
 	}
 	&.show {
-		transition: transform 800ms $slideEase;
+		transition: transform 500ms $slideEase;
 		transform: translateX(0);
 	}
 	&.loaded {
@@ -29,7 +29,8 @@
 		min-height: auto;
 		position: relative;
 		min-width: 10em;
-		overflow: hidden;
+		overflow-y: hidden;
+		overflow-x: visible;
 		transition: opacity 500ms $fadeEase;
 		.closeSingle {
 			width: 1.5em;
@@ -60,7 +61,19 @@
 			.caption {
 				@include xSmallText;	
 			}
-			.textWrap {
+			.meta {
+				// padding: 1em 0;
+				font-family: $monoItal;
+			}
+			.blocks {
+				padding-top: 1em;
+			}
+			.block {
+				width: 100%;
+				display: table;
+				margin: auto;
+				margin-bottom: 2em;
+				line-height: 1.2em;
 				padding: .5em 1em;
 				line-height: 1.3em;
 				p {
@@ -71,10 +84,72 @@
 					text-decoration: none;
 					border-bottom: 1px solid;
 				}
-			}
-			.meta {
-				// padding: 1em 0;
-				font-family: $monoItal;
+				.text {
+					@include mediumText();
+				}
+				&.small {max-width: 500px;}
+				&.medium {max-width: 800px;}
+				&.large {max-width: 1440px;}
+				&.image {
+					img {
+						max-width: 100%;
+						display: table;
+						margin: auto;
+					}
+				}
+				&:last-child {
+					// margin-bottom: 0;
+				}
+				&.quote {
+					width: auto !important;
+					display: table;
+					margin-left: auto;
+					margin-right: auto;
+					font-family: $monoBoldItal;
+					color: $medium;
+					.text {
+						font-family: $monoBoldItal;
+						position: relative;
+						&::before, &::after {
+							width: 1em;
+							display: inline;
+							position: absolute;
+							@include largeText;
+							line-height: .5em;
+							color: $medium;
+						}
+						&::before {
+							content: '“';
+							left: 0;
+							top: 0;
+						}
+						&::after {
+							content: '”';
+						}
+						p {
+							display: inline;	
+							&:first-child {
+								margin-left: 1.3em;
+							}
+						}
+					}
+					.attribution {
+						font-family: $monoMed;
+						padding-top: $gutter;
+					}
+					&.small .text {
+						@include mediumText();
+					}
+					&.medium .text {
+						@include largeText();
+					}
+					&.large {
+						max-width: 1000px;
+						.text {
+							@include xLargeText();
+						}
+					}
+				}
 			}
 		}
 	}
@@ -82,46 +157,15 @@
 		section {
 			width: 100%;
 			.inner {
-				.blocks {
-					padding-top: 1em;
-					.block {
-						width: 100%;
-						display: table;
-						margin: auto;
-						margin-bottom: 2em;
-						&.small {max-width: 500px;}
-						&.medium {max-width: 800px;}
-						&.large {max-width: 1440px;}
-						.text {
-							@include mediumText();
-						}
-						&.image {
-							img {
-								max-width: 100%;
-								display: table;
-								margin: auto;
-							}
-						}
-						&.quote {
-							width: 100%;
-							font-family: $monoBoldItal;
-							color: $medium;
-							&.small {@include mediumText();}
-							&.medium {@include largeText();}
-							&.large {
-								max-width: 1000px;
-								@include xLargeText();
-							}
-						}
-					}
-				}
+				
 			}
 		}
 	}
 	&.folder {
 		section {
-			width: 50%;
 			&#left {
+				width: calc(50% + 6px);
+				padding-right: 6px;
 				.ui-resizable-handle {
 					height: 100%;
 					position: absolute;
@@ -130,7 +174,7 @@
 					padding: 0 6px;
 					z-index: 100;
 					.line {
-						width: 4px;
+						width: 10px;
 						height: 100%;
 						border: solid black;
 						border-width: 0 1px;
@@ -141,7 +185,9 @@
 				}
 			}
 			&#right {
+				width: calc(50% - 6px);
 				.inner {
+					width: 100%;
 					max-width: 800px;
 					display: table;
 					margin: auto;
@@ -174,38 +220,8 @@
 				max-width: 800px;
 				height: 100%;
 				padding: $gutter;
-				font-family: $monoBoldItal;
 				display: table;
 				margin: auto;
-				.text {
-					position: relative;
-					&::before, &::after {
-						width: 1em;
-						display: inline;
-						position: absolute;
-						@include xLargeText;
-						line-height: .5em;
-						color: $medium;
-					}
-					&::before {
-						content: '“';
-						left: 0;
-						top: 0;
-					}
-					&::after {
-						content: '”';
-					}
-					p {
-						display: inline;	
-						&:first-child {
-							margin-left: 2.5em;
-						}
-					}
-				}
-				.attribution {
-					font-family: $monoMed;
-					padding-top: $gutter;
-				}
 			}
 			&.small .inner {
 				max-width: 500px;
@@ -227,42 +243,42 @@
 			}
 		}
 	}
-	.items {
-		.itemsWrap {
-			padding: .5em 1em;
-			.item {
-				padding: .5em 0;
-				transition: opacity 500ms $fadeEase;
-				&.image {
-					opacity: 0;	
-					&.loaded {
-						opacity: 1;
-					}
-				}
-				.itemWrap {
-					img {
-						max-width: 100%;
-						// max-height: calc(100vh - #{$headerHeight} - #{$smallItem});
-						display: table;
-						margin: auto;
-						vertical-align: middle;
-					}
-					.caption {
-						margin: .5em 0 0 0;
-					}
-					margin-bottom: 1em;
-				}
-				&.readable {
-					width: 100%;
-					img {
-						width: auto;
-						max-width: 100%;
-						max-height: 100%;
-					}
-				}
-			}
-		}
-	}
+	// .items {
+	// 	.itemsWrap {
+	// 		padding: .5em 1em;
+	// 		.item {
+	// 			padding: .5em 0;
+	// 			transition: opacity 500ms $fadeEase;
+	// 			&.image {
+	// 				opacity: 0;	
+	// 				&.loaded {
+	// 					opacity: 1;
+	// 				}
+	// 			}
+	// 			.itemWrap {
+	// 				img {
+	// 					max-width: 100%;
+	// 					// max-height: calc(100vh - #{$headerHeight} - #{$smallItem});
+	// 					display: table;
+	// 					margin: auto;
+	// 					vertical-align: middle;
+	// 				}
+	// 				.caption {
+	// 					margin: .5em 0 0 0;
+	// 				}
+	// 				margin-bottom: 1em;
+	// 			}
+	// 			&.readable {
+	// 				width: 100%;
+	// 				img {
+	// 					width: auto;
+	// 					max-width: 100%;
+	// 					max-height: 100%;
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 	@include phone {
 		height: calc(100% - #{$headerHeight*2});
 		top: $headerHeight*2;

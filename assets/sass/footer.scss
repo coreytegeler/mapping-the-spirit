@@ -44,3 +44,17 @@ footer {
 		}
 	}
 }
+@include phone {
+	footer {
+		.inner {
+			padding: .75em;
+			display: table;
+			.group {
+				padding-right: 0;
+				padding-bottom: .75em;
+			}
+		}
+	}
+
+
+}

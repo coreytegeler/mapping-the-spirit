@@ -13,6 +13,14 @@ fields:
   title:
     label: Title
     type:  text
+  location:
+    label: Location
+    type:  text
+    width: 1/2
+  attribution:
+    label: Attribution
+    type: text
+    width: 1/2
   month:
     label: Month
     type:  text
@@ -25,26 +33,40 @@ fields:
     label: Year
     type:  text
     width: 1/3
-  location:
-    label: Location
-    type:  text
   caption:
     label: Text
     type:  wysiwyg 
+  excerpt:
+    label: Excerpt
+    type:  wysiwyg
   size:
     label: Size
     type: select
     default: small
-    width: 1/2
+    width: 1/4
     options:
       small: Small
       large: Large
+  textSize:
+    label: Text Size
+    type: select
+    default: smallText
+    width: 1/4
+    options:
+      smallText: Small
+      mediumText: Medium
+      largeText: Large
+  display:
+    label: Display
+    type: select
+    default: image
+    width: 1/4
+    options:
+      image: Image
+      text: Text
   bw:
     label: Black & White
     type: toggle
     default: false
     text: yes/no
-    width: 1/2
-  tags:
-    label: Tags
-    type:  tags
+    width: 1/4

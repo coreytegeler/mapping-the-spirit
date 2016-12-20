@@ -83,7 +83,6 @@ header {
 	.inner {
 		width: 100%;
 		position: relative;
-		@include smallText;
 		font-family: $sans;
 		font-weight: normal;
 		text-transform: uppercase;
@@ -104,6 +103,11 @@ header {
 			$lightest-space: nowrap;
 		}	
 	}
+	.trail {
+		a {
+			@include smallText;
+		}
+	}
 	.title {
 		display: none;
 		transition: transform 800ms $slideEase;
@@ -113,6 +117,7 @@ header {
 		background: $lighter;
 		padding: .1em 0 .1em 1.5em;
 		box-shadow: 5px 0 10px 5px $lighter;
+
 		a {
 			
 		}
@@ -144,6 +149,7 @@ header {
     align-items: center;
     box-shadow: -5px 0 20px 10px $lighter;
 		a {
+			@include smallText;
 			margin: 0 .5em 0;
 			// color: $light;
 			&:last-child {
@@ -193,15 +199,13 @@ header {
 		}
 	}
 	header {
-		height: $headerHeight*2;
+		height: calc(#{$headerHeight}*1.75);
 		@include baseText;
-		.inner {
-
-		}
 		.row {
-			height: $headerHeight*2;
+			height: calc(#{$headerHeight}*1.75);
 			display: block;
 			border-bottom: 0;
+			border-bottom: 1px solid $dark;
 			.title {
 				box-shadow: none;
 				&.item, &.story {
@@ -210,12 +214,19 @@ header {
 			}
 			.trail, .links {
 				width: 100%;
-				height: $headerHeight;
 				display: flex;
 				align-items: center;
 				position: relative;
-				border-bottom: 1px solid $dark;
 				box-shadow: none;
+			}
+			.trail {
+				height: $headerHeight;
+			}
+			.links {
+				height: calc(#{$headerHeight}/2);
+				a {
+					@include xSmallText();
+				}
 			}
 		}
 	}

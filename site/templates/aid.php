@@ -1,10 +1,30 @@
 <?php
 $stories = $pages->find('stories')->children()->visible();
+$abstract = $page->abstract()->kirbytext();
+$access = $page->access()->kirbytext();
+$use = $page->use()->kirbytext();
 snippet('head');
   echo '<main>';
 		echo '<section id="aid">';
 			echo '<div class="margin"></div>';
 			echo '<div class="inner">';
+				echo '<h2 class="title">Finding Aid</h2>';
+				echo '<div class="group details overview">';
+			  	echo '<div class="text">';
+			  		echo '<div class="subgroup">';
+			  			echo '<span class="subtitle">Abstract</span>';
+					  	echo $abstract;
+					  echo '</div>';
+			  		echo '<div class="subgroup">';
+			  			echo '<span class="subtitle">Access</span>';
+					  	echo $access;
+					  echo '</div>';
+				  	echo '<div class="subgroup">';
+				  		echo '<span class="subtitle">Use</span>';
+					  	echo $use;
+					  echo '</div>';
+					echo '</div>';
+			  echo '</div>';
 		  	$storyInt = 1;
 				foreach( $stories as $storySlug => $story ) {
 					$url = $story->url();
@@ -23,22 +43,19 @@ snippet('head');
 							$quantity++;
 						}
 					}
-
 					$collaborators = $story->collaborators()->kirbytext();
-				  $span = $story->span()->kirbytext();
+				  $span = $story->getSpan();
 				  $abstract = $story->abstract()->kirbytext();
 				  $history = $story->history()->kirbytext();
 				  $scope = $story->scope()->kirbytext();
-				  $access = $story->access()->kirbytext();
-				  $use = $story->use()->kirbytext();
 
 				  echo '<div class="story">';
-					  echo '<h2 class="title">';
+					  echo '<h2>';
 				  		echo '<a href="' . $url . '" style="color:' . $color . '">' .  $story->title() . '</a>';
 				  	echo '</h2>';
 				  	echo '<div class="collapsable">';
 							echo '<div class="group details overview">';
-						  	echo '<h3 class="title">Overview</h3>';
+						  	echo '<h3>Overview</h3>';
 						  	echo '<div class="text">';
 						  		echo '<div class="subgroup">';
 						  			echo '<span class="subtitle">Collaborators</span>';
@@ -59,33 +76,20 @@ snippet('head');
 						  	echo '</div>';
 						  echo '</div>';
 						  echo '<div class="group details history">';
-						  	echo '<h3 class="title">Historical Note</h3>';
+						  	echo '<h3>Historical Note</h3>';
 						  	echo '<div class="text">';
 						  		echo $history;
 						  	echo '</div>';
 						  echo '</div>';
 							echo '<div class="group details scope">';
-						  	echo '<h3 class="title">Scope & Content</h3>';
+						  	echo '<h3>Scope & Content</h3>';
 						  	echo '<div class="text">';
 						  		echo $scope;
 						  	echo '</div>';
 						  echo '</div>';
-						  echo '<div class="group details scope">';
-							  echo '<h3 class="title">Restrictions</h3>';
-						  	echo '<div class="text">';
-						  		echo '<div class="subgroup">';
-						  			echo '<span class="subtitle">Access</span>';
-								  	echo $access;
-								  echo '</div>';
-							  	echo '<div class="subgroup">';
-							  		echo '<span class="subtitle">Use</span>';
-								  	echo $use;
-								  echo '</div>';
-								echo '</div>';
-						  echo '</div>';
 
 					  	echo '<div class="group list">';
-					  		echo '<h3 class="title">Items</h3>';
+					  		echo '<h3>Items</h3>';
 					  		echo '<div class="wrap items">';
 					  			$itemInt = 0;
 					  			if( !$quantity ) {

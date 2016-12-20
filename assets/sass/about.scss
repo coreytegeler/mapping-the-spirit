@@ -28,41 +28,40 @@ body.aid, body.about {
 					position: absolute;
 				}
 			}
-			.group {
-				width: 100%;
-				max-width: $maxWidth;
-				// display: table;
-				padding: 0 0 1em 0;
-			}
 			h3 {
-				text-align: left;
+				text-align: center;
+				display: table;
+				pointer-events: none;
 			}
 			h2, h3, h4 {
-				margin: 0;
-				padding-bottom: .5em;
+				margin: 0 auto .5em auto;
 			}
 			h2 {
+				font-family: $sans;
+				text-align: center;
 				a:hover {
 					color: $dark !important;
+				}
+				&.title {
+					width: 100%;
+					text-align: left;
+					border-bottom: .2em solid;
+					pointer-events: none;
 				}
 			}
 			a {
 				color: black;
 				text-decoration: none;
 			}
-		}
-		.story {
-			h2.title {
-				font-family: $sans;
-				text-align: center;
-			}
-			.collapsable {
-				// height: 0;
-				overflow: hidden;
+			.group {
+				width: 100%;
+				max-width: $maxWidth;
+				// display: table;
+				padding: 0 0 1em 0;
 			}
 			.details {
 				.text {
-					padding-left: 1em;
+					padding: 0 1em;
 					@include xSmallText;
 				}
 				.subgroup {
@@ -73,6 +72,7 @@ body.aid, body.about {
 					.subtitle {
 						color: $medium;
 						text-transform: uppercase;
+						pointer-events: none;
 						&::after {
 							content: ': ';
 						}
@@ -82,6 +82,14 @@ body.aid, body.about {
 					}
 				}
 			}
+		}
+		.story {
+			margin-top: 2em;
+			.collapsable {
+				// height: 0;
+				overflow: hidden;
+			}
+			
 			.items {
 				padding: 0 0 1em 1em;
 				a:not(:hover) {
@@ -130,6 +138,17 @@ body.aid, body.about {
 		}
 	}
 	@include phone {
+		main {
+			height: calc(100% - (#{$headerHeight}*1.75)) !important;
+			section {
+				.inner {
+					padding: 0 .75em;
+				}
+				.details .text {
+					padding: 0;
+				}
+			}
+		}
 		.margin {
 			display: none;
 		}
