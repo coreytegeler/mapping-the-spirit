@@ -2,7 +2,7 @@ title: Story
 pages:
   template:
     - folder
-    - paper
+    - stack
     - object
     - quote
 files:
@@ -31,14 +31,24 @@ fields:
     width: 1/2
   collaborators:
     label: Collaborators
-    type: wysiwyg
+    type: text
     width: 1/2
-  abstract:
-    label: Abstract
-    type: wysiwyg
   historical:
     label: Historical Note
     type: wysiwyg
   scope:
     label: Scope & Content
     type: wysiwyg
+  links:
+    label: Links
+    type: structure
+    entry: >
+      <strong>{{title}}</strong><br />
+      {{url}}
+    fields:
+      title:
+        label: Title
+        type: text
+      url:
+        label: URL
+        type: text

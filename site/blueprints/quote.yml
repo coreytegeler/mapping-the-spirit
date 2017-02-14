@@ -11,11 +11,9 @@ fields:
   location:
     label: Location
     type:  text
-    width: 1/2
   attribution:
     label: Attribution
-    type: text
-    width: 1/2
+    type: wysiwyg
   month:
     label: Month
     type:  text

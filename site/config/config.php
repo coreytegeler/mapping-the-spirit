@@ -20,14 +20,20 @@ c::set('autopublish.templates', array('book', 'category'));
 c::set('scssNestedCheck', true);
 c::set('panel.install', true);
 
-/*
-
----------------------------------------
-Kirby Configuration
----------------------------------------
-
-By default you don't have to configure anything to
-make Kirby work. For more fine-grained configuration
-of the system, please check out http://getkirby.com/docs/advanced/options
-
-*/
+c::set('routes', array(
+  array(
+    'pattern' => 'story',
+    'action' => function() {
+      return go( page( 'home' )->url() . '/#stories' );
+    }
+  ),
+  array(
+    'pattern' => 'story/(:any)/(:any)',
+    'action'  => function( $story, $item ) {
+      $page = page( 'story' )->children()->find( $story )->children()->find( $item );
+      if( !$page ) $page = page( 'story' )->children()->find( $story );
+      if( !$page ) $page = site()->errorPage();
+      return site()->visit( $page );
+    }
+  )
+));

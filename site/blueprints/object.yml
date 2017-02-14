@@ -6,21 +6,24 @@ files:
     title:
       label: Title
       type: text
-    caption:
-      label: Caption
-      type: textarea
+    detail:
+      label: Detail
+      type:  selector
+      mode:  single
+      types:
+        - image
 fields:
   title:
     label: Title
     type:  text
-  location:
-    label: Location
-    type:  text
-    width: 1/2
-  attribution:
-    label: Attribution
-    type: text
-    width: 1/2
+  type:
+    label: Object Type
+    type:  select
+    default: image
+    required: true
+    options:
+      image: Image
+      video: Video
   month:
     label: Month
     type:  text
@@ -33,40 +36,46 @@ fields:
     label: Year
     type:  text
     width: 1/3
+  location:
+    label: Location
+    type:  text
+  attribution:
+    label: Attribution
+    type: wysiwyg
   caption:
-    label: Text
-    type:  wysiwyg 
-  excerpt:
-    label: Excerpt
+    label: Caption
     type:  wysiwyg
+  thumb:
+    label: Image
+    type:  selector
+    mode:  single
+    types:
+      - image
+  videoid:
+    label: Video ID
+    type: text
+    width: 1/2
+    instruct: If object is a video
+  source:
+    label: Source
+    type: select
+    default: null
+    width: 1/2
+    instruct: If object is a video
+    options:
+      youtube: YouTube
+      vimeo: Vimeo
   size:
     label: Size
     type: select
     default: small
-    width: 1/4
+    width: 1/2
     options:
       small: Small
       large: Large
-  textSize:
-    label: Text Size
-    type: select
-    default: smallText
-    width: 1/4
-    options:
-      smallText: Small
-      mediumText: Medium
-      largeText: Large
-  display:
-    label: Display
-    type: select
-    default: image
-    width: 1/4
-    options:
-      image: Image
-      text: Text
   bw:
     label: Black & White
     type: toggle
     default: false
     text: yes/no
-    width: 1/4
+    width: 1/2

@@ -2,7 +2,6 @@ body.home {
 	overflow-y: auto; 
 	main {
 		width: 100%;
-		// height: 100%;
 		display: block;
 		section#map {
 			width: 100%;
@@ -21,7 +20,6 @@ body.home {
 				height: calc(100% + 10em);
 				left: -5em;
 				top: -5em;
-				background-image: url(./../images/map.jpg);
 				background-position: center;
 				background-size: cover;
 			}
@@ -34,22 +32,15 @@ body.home {
 				pointer-events: none;
 				h1 {
 					width: 100%;
+					padding: 1em;
 					align-self: center;
 					text-align: center;
 				}
 			}
 		}
-		header {
-			.pageTitle {
-				span {
-					transform: none;
-				}
-			}
-		}
 		section#stories {
-			width: 100%;
 			border-top: 1px solid $dark;
-			padding-bottom: 2.75em;
+			margin-bottom: 3em;
 			.about {
 				width: calc(80% - 4em);
 				min-width: 20em;
@@ -58,47 +49,30 @@ body.home {
 				margin: auto;
 				padding: 2em;
 			}
-			.story {
-				width: 100%;
-				a {
+		}
+		section#field-notes {
+			border-top: 1px solid #000000;
+			color: $dark;
+			background-color: $lighter;
+			padding-top: 3em;
+			padding-bottom: 3em;
+		}
+		header {
+			.trail {
+				.title {
+					float: left;
+					padding-top: 0;
+				}
+			}
+		}
+	}
+	@include tablet {
+		main {
+			section#stories {
+				.about {
 					width: 100%;
-					padding: 2em;
-					color: black;
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-					transition: color 30ms $fadeEase, background-color 30ms $fadeEase;
-					h1.title {
-						flex-grow: 1;
-					}
-					.image {
-						max-width: 30%;
-						background-color: black;
-						transition: background-color 30ms $fadeEase;
-						display: table-cell;
-						vertical-align: middle;
-						img {
-							width: 100%;
-							display: table;
-							vertical-align: middle;
-							mix-blend-mode: lighten;
-							transition: filter 30ms $fadeEase;
-						}
-					}
-					&:hover {
-						cursor: pointer;
-						.image {
-							img {
-								filter: grayscale(1) contrast(1);
-						  }
-						}
-					}
-					&:not(:hover) {
-						color: $dark !important;
-						.image {
-							background-color: $dark !important;
-						}
-					}
+					padding: 1em;
+					min-width: 0;
 				}
 			}
 		}
@@ -112,38 +86,6 @@ body.home {
 					transform: none !important;
 					left: 0;
 					top: 0;
-				}
-			}
-			section#stories {
-				.about {
-					width: 100%;
-					padding: 1em;
-					min-width: 0;
-				}
-				.story {
-					a {
-						position: relative;
-						padding: 1em;
-						h1 {
-							width: 100%;
-							display: table;
-							z-index: 2;
-						}
-						.image {
-							width: calc(90% - 4em);
-							max-width: none;
-							position: absolute;
-							left: calc(5% + 2em);
-							z-index: 1;
-							img {
-								filter: grayscale(1) contrast(1);
-								opacity: 0.5;
-							}
-							&:not(:hover) {
-								background-color: inherit !important;
-							}
-						}
-					}
 				}
 			}
 		}

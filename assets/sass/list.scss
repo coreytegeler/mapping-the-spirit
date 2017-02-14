@@ -1,0 +1,73 @@
+section.list {
+	.story {
+		padding-top: 2em;
+		&.hide {
+			display: none;
+		}
+		.collapsable {
+			// height: 0;
+			overflow: hidden;
+		}
+		.items {
+			padding: 0 0 1em 1em;
+			a:not(:hover) {
+				color: $dark !important;
+				.meta {
+					color: $light !important;
+				}
+			}
+			a {
+				display: table;
+				&:hover {
+					.meta {
+						opacity: 0.6;
+					}
+				}
+			}
+			.wrap.item {
+				width: 100%;
+				display: table;
+				padding: 0 0 .25em 0;
+				.meta {
+					@include xSmallText;
+					span {
+						display: inline-table;
+						text-transform: uppercase;
+						&:not(:first-child):before {
+							content: '\00a0•\00a0';
+						}
+					}
+				}
+				ul {
+					margin: 0;
+					padding: .25em 0 0 1em;
+					list-style: none;
+					li {
+						@include xSmallText;
+						em {
+							font-family: $sansItalic;
+							font-style: normal;
+						}
+					}
+				}
+			}
+		}
+		.empty {
+			color: $medium;
+			font-family: $sansItalic;
+			text-align: center;
+			&.hide {
+				display: none;
+			}
+		}
+	}
+}
+@include phone {
+	main {
+		section {
+			.details .text {
+				padding: 0;
+			}
+		}
+	}
+}

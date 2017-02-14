@@ -2,7 +2,8 @@ title: Site
 pages: 
   - default
   - aid
-  - stories
+  - story
+  - field-notes
 fields:
   title:
     label: Title
@@ -13,6 +14,3 @@ fields:
   keywords:
     label: Keywords
     type:  tags
-  copyright:
-    label: Copyright
-    type:  textarea

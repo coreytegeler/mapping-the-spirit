@@ -1,22 +1,22 @@
 <?php
 $item = $page;
-if(!kirby()->request()->ajax()) {
+if( !kirby()->request()->ajax() ) {
 	$story = $item->parent();
 	snippet( 'head', array( 
 		'bodyClass' => array ( 'looking', 'story' ),
 		'story' => $story,
 		'item' => $item
 	) );
-	echo '<main>';
+	echo '<main data-title="' . $story->title() . '">';
 	snippet( 'table', array( 'story' => $story ) );
 	snippet( 'footnotes' );
-	echo '<div id="single" class="show open quote" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="quote">';
+	echo '<div class="single open quote" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="quote">';
 } else {
-	echo '<div class="data" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="quote"></div>';
+	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="quote"></div>';
 }
 $size = $item->size();
 echo '<section class="' . $item->size() . '">';
-	echo '<div class="closeSingle"></div>';
+	snippet( 'buttons' );
 	echo '<div class="scroll">';
 		echo '<div class="inner">';
 			echo '<div class="vert">';
@@ -33,9 +33,11 @@ echo '<section class="' . $item->size() . '">';
 		echo '</div>';
 	echo '</div>';
 echo '</section>';
-if(!kirby()->request()->ajax()) {
+snippet( 'pagination', array( 'item' => $item ) );
+if( !kirby()->request()->ajax() ) {
 	echo '</div>';
 	echo '</main>';
-	snippet('footer');
+	echo '</body>';
+	echo '</html>';
 }
 ?>

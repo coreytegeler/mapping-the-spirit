@@ -18,8 +18,10 @@
     'assets/js/masonry-horizontal.js',
     'assets/js/mousewheel.js',
     'assets/js/transit.js',
-    'assets/js/script.js',
+    'assets/js/leaflet.js',
+    'assets/js/script.js'
   ));
+  echo css( '/assets/css/leaflet.css' );
   echo css( '/assets/css/style.css' );
 
   if( !isset( $bodyClass ) ) {

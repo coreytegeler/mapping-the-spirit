@@ -1,30 +1,116 @@
-#single {
+.single {
 	width: calc(100% + 1px);
 	height: calc(100% - #{$smallItem} - #{$headerHeight});
 	position: fixed;
 	left: 0;
 	top: $headerHeight;
 	z-index: 40;
-	display: none;
-	// opacity: 0;
+	display: flex;
 	transform: translateX(-100%);
 	transition: transform 350ms $slideBackEase;
 	background-color: $lightest;
 	border-right: 1px solid black;
 	box-shadow: 40px 0px 50px -60px black;
 	&.open {
-		display: flex;
-	}
-	&.show {
 		transition: transform 500ms $slideEase;
 		transform: translateX(0);
+	}
+	&.swap {
+		transition: transform 0ms;
+		transform: translateX(-100%);	
 	}
 	&.loaded {
 		.inner {
 			opacity: 1;
 		}
 	}
+	.arrow {
+		width: 1.5em;
+		height: 1.5em;
+		top: calc(50% - .75em);
+		position: absolute;
+		background-size: 1.25em;
+		background-position: center;
+		background-repeat: no-repeat;
+		z-index: 400;
+		opacity: .25;
+		transition: opacity 100ms $fadeEase;
+		&:hover {
+			opacity: 1;
+			cursor: pointer;
+		}
+		&.prev {
+			left: 0;
+			background-image: url(../images/prev.svg);
+		}
+		&.next {
+			right: 0;
+			background-image: url(../images/next.svg);
+		}
+	}
+	.button {
+		width: 1.5em;
+		height: 1.5em;
+		position: absolute;
+		z-index: 100;
+		background-size: 1.5em;
+		background-repeat: no-repeat;
+		opacity: .25;
+		transition: opacity 100ms $fadeEase;
+		&:hover {
+			cursor: pointer;
+			opacity: 1;
+		}
+		&.close-single {
+			background-image: url(../images/x.svg);
+			background-position: center;
+			right: 0;
+			top: 0;
+		}
+		&.collect {
+			background-image: url(../images/collect.svg);
+			left: 0;
+			top: 0;
+			.tooltip {
+				height: 1.5em;
+				position: absolute;
+				left: 0em;
+				top: 0;
+				padding-left: 1.5em;
+				display: none;
+				color: $medium;
+				// border: solid $medium;
+				// border-width: 0 1px 1px 0;
+				div {
+					display: none;
+					padding: .125em .5em;
+					background-color: $lightest;
+					vertical-align: middle;
+					white-space: nowrap;
+				}
+			}
+			&:hover {
+				background-color: $lightest;
+				.tooltip {
+					display: table;
+				}
+			}
+			&.add {
+				background-position: center top;
+				&:hover .tooltip .add {
+					display: table-cell;
+				}
+			}
+			&.remove {
+				background-position: center bottom;
+				&:hover .tooltip .remove {
+					display: table-cell;
+				}
+			}
+		}
+	}
 	section {
+		width: 100%;
 		height: 100%;
 		min-height: auto;
 		position: relative;
@@ -32,128 +118,40 @@
 		overflow-y: hidden;
 		overflow-x: visible;
 		transition: opacity 500ms $fadeEase;
-		.closeSingle {
-			width: 1.5em;
-			height: 1.5em;
-			position: absolute;
-			right: 0;
-			top: 0;
-			background-size: 1em;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-image: url(../images/x.svg);
-			&:hover {
-				cursor: pointer;
-				opacity: .5;
-			}
-		}
 		.scroll {
 			height: 100%;
 			overflow-y: auto;
 			overflow-x: hidden;
 		}
 		.inner {
-			opacity: 0;
+			height: 100%;
+			padding: 3em 1.5em 6em 1.5em;
+			display: table;
+			margin: auto;
 			transition: opacity 500ms $fadeEase;
 			.text {
 				@include smallText;
 			}
-			.caption {
-				@include xSmallText;	
+			.title {
+				font-family: $sansBlack;
+				// @include xSmallText;
+				@include smallText;
 			}
 			.meta {
-				// padding: 1em 0;
-				font-family: $monoItal;
-			}
-			.blocks {
-				padding-top: 1em;
-			}
-			.block {
-				width: 100%;
+				font-family: $sansItalic;
+				@include xSmallText;
+				color: $medium;
+				clear: both;
 				display: table;
-				margin: auto;
-				margin-bottom: 2em;
-				line-height: 1.2em;
-				padding: .5em 1em;
-				line-height: 1.3em;
-				p {
-					margin: .5em 0;
-				}
-				a {
-					color: black;
-					text-decoration: none;
-					border-bottom: 1px solid;
-				}
-				.text {
-					@include mediumText();
-				}
-				&.small {max-width: 500px;}
-				&.medium {max-width: 800px;}
-				&.large {max-width: 1440px;}
-				&.image {
-					img {
-						max-width: 100%;
-						display: table;
-						margin: auto;
-					}
-				}
-				&:last-child {
-					// margin-bottom: 0;
-				}
-				&.quote {
-					width: auto !important;
-					display: table;
-					margin-left: auto;
-					margin-right: auto;
-					font-family: $monoBoldItal;
-					color: $medium;
-					.text {
-						font-family: $monoBoldItal;
-						position: relative;
-						&::before, &::after {
-							width: 1em;
-							display: inline;
-							position: absolute;
-							@include largeText;
-							line-height: .5em;
-							color: $medium;
-						}
-						&::before {
-							content: '“';
-							left: 0;
-							top: 0;
-						}
-						&::after {
-							content: '”';
-						}
-						p {
-							display: inline;	
-							&:first-child {
-								margin-left: 1.3em;
-							}
-						}
-					}
-					.attribution {
-						font-family: $monoMed;
-						padding-top: $gutter;
-					}
-					&.small .text {
-						@include mediumText();
-					}
-					&.medium .text {
-						@include largeText();
-					}
-					&.large {
-						max-width: 1000px;
-						.text {
-							@include xLargeText();
-						}
-					}
+				margin-top: .25em;
+				.cell {
+					float: left;
+	  			padding-right: 1em;
 				}
 			}
 		}
 	}
-	&.paper {
+	&.stack {
 		section {
 			width: 100%;
 			.inner {
@@ -162,16 +160,24 @@
 		}
 	}
 	&.folder {
+		.sections {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
 		section {
-			&#left {
+			&.left {
 				width: calc(50% + 6px);
 				padding-right: 6px;
-				.ui-resizable-handle {
+				.handle {
 					height: 100%;
 					position: absolute;
-					right: -6px;
+					right: 0;
 					top: 0;
 					padding: 0 6px;
+					margin-left: -6px;
 					z-index: 100;
 					.line {
 						width: 10px;
@@ -184,11 +190,11 @@
 					}
 				}
 			}
-			&#right {
+			&.right {
 				width: calc(50% - 6px);
 				.inner {
 					width: 100%;
-					max-width: 800px;
+					max-width: $laptopWidth;
 					display: table;
 					margin: auto;
 					.intro {
@@ -200,28 +206,30 @@
 	}
 	&.object {
 		section {
-			width: 100%;
 			.inner {
-				max-width: 800px;
-				height: 100%;
-				padding: $gutter;
-				display: table;
-				margin: auto;
-				img {
-					width: 100%;
+				.block {
+					margin-bottom: 0;
+					&.image {
+						img {
+							width: 100%;
+						}
+					}
+					&.video {
+						width: calc(100vw - 3em);
+					}
 				}
 			}
 		}
 	}
 	&.quote {
 		section {
-			width: 100%;
 			.inner {
-				max-width: 800px;
-				height: 100%;
-				padding: $gutter;
-				display: table;
-				margin: auto;
+				.block {
+					color: $dark;
+					&.quote .text::before, &.quote .text::after {
+						color: $dark !important;
+					}
+				}
 			}
 			&.small .inner {
 				max-width: 500px;
@@ -243,64 +251,386 @@
 			}
 		}
 	}
-	// .items {
-	// 	.itemsWrap {
-	// 		padding: .5em 1em;
-	// 		.item {
-	// 			padding: .5em 0;
-	// 			transition: opacity 500ms $fadeEase;
-	// 			&.image {
-	// 				opacity: 0;	
-	// 				&.loaded {
-	// 					opacity: 1;
-	// 				}
-	// 			}
-	// 			.itemWrap {
-	// 				img {
-	// 					max-width: 100%;
-	// 					// max-height: calc(100vh - #{$headerHeight} - #{$smallItem});
-	// 					display: table;
-	// 					margin: auto;
-	// 					vertical-align: middle;
-	// 				}
-	// 				.caption {
-	// 					margin: .5em 0 0 0;
-	// 				}
-	// 				margin-bottom: 1em;
-	// 			}
-	// 			&.readable {
-	// 				width: 100%;
-	// 				img {
-	// 					width: auto;
-	// 					max-width: 100%;
-	// 					max-height: 100%;
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
-	@include phone {
-		height: calc(100% - #{$headerHeight*2});
-		top: $headerHeight*2;
+}
+main .block {
+	width: 100%;
+	max-width: $laptopWidth;
+	display: table;
+	margin: auto;
+	// margin-bottom: 2em;
+	line-height: 1.2em;
+	padding: 0 0 3em 0;
+	line-height: 1.3em;
+	p {
+		margin: 0;
+		padding: 0 0 .5em 0;
+		&:last-child {
+			padding: 0;
+		}
+		b, strong {
+			font-family: $sansBlack;
+			font-weight: normal;
+		}
+		i, em {
+			font-family: $sansItalic;
+			font-style: none;	
+		}
+	}
+	a {
+		color: black;
+		text-decoration: none;
+		border-bottom: 1px solid;
+		transition: all 100ms $fadeEase;
+	}
+	.text {
+		@include mediumText();
+	}
+	&.small {max-width: 500px;}
+	&.medium {max-width: 800px;}
+	&.large {max-width: 1440px;}
+	&.header {
+		padding-bottom: 1em;
+		.title {
+			font-family: $title;
+			@include largeText;
+			padding: 0;
+		}
+	}
+	&.text {
+		iframe, object, embed {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	&.image, &.video {
+		.text-wrap {
+			max-width: $maxWidth;
+			display: table;
+			margin: .5em 0 0 0;
+		}
+		.caption {
+			@include smallText;
+			clear: both;
+			margin-top: .25em;
+		}
+		.attribution {
+			@include xSmallText;
+			font-family: $sans;
+			color: $medium;
+			margin-top: .15em;
+			* {
+				color: $medium !important;
+			}
+		}
+	}
+	&.image {
+		img {
+			max-width: 100%;
+			display: table;
+			margin: auto;
+		}
+		&:not(.noZoom) {
+			img {
+				&:hover {
+					cursor: zoom-in;
+				}
+			}
+		}
+	}
+	&.video {
+		.videoWrap {
+			position: relative;
+			padding-bottom: 56.25%; /* 16:9 */
+			padding-top: 25px;
+			height: 0;
+			iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+		}
+		&.noCursor {
+			pointer-events: none;
+		}
+	}
+	&.quote {
+		width: auto !important;
+		display: table;
+		margin-left: auto;
+		margin-right: auto;
+		font-family: $sansItalic;
+		.text {
+			position: relative;
+			&::before, &::after {
+				width: 1em;
+				display: inline;
+				position: absolute;
+				@include largeText;
+				font-family: $sansBlackItalic;
+				line-height: 1em;
+				color: $light;
+			}
+			&::before {
+				content: '“';
+				left: 0;
+				top: 0;
+			}
+			&::after {
+				content: '”';
+			}
+			p {
+				display: inline;	
+				&:first-child {
+					margin-left: 1.3em;
+				}
+			}
+		}
+		.attribution {
+			font-family: $sansBlack;
+			padding-top: 1em;
+		}
+		&.small .text {
+			@include smallText();
+		}
+		&.medium .text {
+			@include smallText();
+		}
+		&.large {
+			max-width: 1000px;
+			.text {
+				@include largeText();
+			}
+		}
+	}
+	&:last-child {
+		padding-bottom: 0;
+	}
+}
+#frame {
+	width: 100%;
+	height: calc(100% - #{$headerHeight*2});
+	position: fixed;
+	left: 0;
+	top: #{$headerHeight};
+	background: $lightest;
+	z-index: 200;
+	@include baseText;
+	opacity: 0;
+	transition: opacity 300ms $fadeEase;
+	#frame-inner {
+		width: 100%;
+		height: 100%;
+		background: $lightest;
+		img {
+			opacity: 1 !important;
+		}
+	}
+	&.show {
+		opacity: 1;
+	}
+	.loader {
+		z-index: 1000;
+		background: $lightest;
+	}
+	&.loaded .loader {
+		opacity: 0;
+		pointer-events: none;
+	}
+	img.preload {
+		display: none;
+	}
+	.close-frame, .leaflet-bar a {
+		width: 1.5em;
+		height: 1.5em;
+		background-size: 1em;
+		background-position: center;
+		background-repeat: no-repeat;
+		display: block;
+		&:hover {
+			cursor: pointer;
+			opacity: .5;
+		}
+	}
+	.close-frame {
+		position: absolute;
+		right: 0;
+		top: 0;
+		background-image: url(../images/x.svg);
+		z-index: 1000;
+	}
+	.leaflet-left {
+		display: none;
+	}
+	.leaflet-top.leaflet-right {
+		position: absolute;
+    right: 0em;
+    top: 1.5em;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+    .leaflet-bar {
+    	padding: 0;
+    	margin: 0;
+    	border: 0;
+    }
+	}
+}
+#frame-bar {
+	width: 100%;
+	height: $headerHeight;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	z-index: 999999;
+	opacity: 0;
+	background-color: $lighter;
+	border-top: 1px solid $dark;
+	transition: opacity 300ms $fadeEase, height 150ms $slideBackEase;
+	overflow: hidden;
+	&.show {
+		opacity: 1;
+	}
+	.text-wrap {
+		width: calc(100% - 7em);
+		padding-left: 1em;
+		padding-bottom: 1em;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		.title {
+			height: $headerHeight;
+			padding-right: 1em;
+	    float: left;
+	    white-space: nowrap;
+	    display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+	    span {
+	    	font-family: $sansBlack;
+				@include xSmallText;
+	    }
+		}
+		.meta {
+			height: $headerHeight;
+			float: left;
+			white-space: nowrap;
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			.cell {
+				font-family: $sansItalic;
+				@include xSmallText;
+				color: $medium;
+				padding-right: 1em;
+				float: left;
+				white-space: nowrap;
+			}
+		}
+		.caption {
+			display: block;
+		}
+	}
+	.tools {
+		height: 100%;
+		position: absolute;
+		right: 0;
+		top: 0;
+		background-color: $lighter;
+		box-shadow: -5px 0 20px 10px $lighter;
+		div {
+			width: 1.5em;
+			height: 1.5em;
+			float: left;
+			@include baseText;
+			background-size: 1em;
+			background-position: center;
+			background-repeat: no-repeat;
+			margin-top: calc(.25em - 1px);
+			&:first-child {
+				margin-left: .25em;
+			}
+			&:last-child {
+				margin-right: .25em;
+			}
+			&:hover {
+				cursor: pointer;
+				opacity: .5;
+			}
+			&.expand {
+				background-image: url(../images/up.svg);
+			}
+			&.in {
+				background-image: url(../images/in.svg);
+			}
+			&.out {
+				background-image: url(../images/out.svg);
+			}
+			&.close {
+				background-image: url(../images/x.svg);
+			}
+		}
+	}
+	&.toggled {
+		transition: opacity 300ms $fadeEase, height 150ms $slideEase;
+		.title, .meta, .caption {
+			height: auto;
+			white-space: pre-line;
+			padding-top: .5em
+		}
+		.tools .expand {
+			background-image: url(../images/down.svg) !important;
+		}
+	}
+	&.noCaption {
+		.expand {
+			display: none !important;
+		}
+	}
+}
+
+
+@include phone {
+	.single {
+		height: calc(100% - #{$headerHeight});
+		top: $headerHeight;
 		&.folder {
-			width: calc(200% - #{$gutter*2});
-			section {
-				width: 50% !important;
-				min-width: auto;
+			.sections {
+				width: 200vw;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
 				transition: transform 300ms $slideEase;
+				section {
+					width: 50% !important;
+					min-width: auto;
+					.inner {
+						max-width: 100% !important;
+						margin-left: 0 !important;
+						margin-right: 0 !important;
+					}
+					&.right .inner {
+						width: calc(100% - 1em + 6px);
+					}
+				}
 			}
-			&.left {
+			&.open.left .sections {
 				transform: translateX(0);
-				#right .inner {
+				.right .inner {
 					opacity: 0;
 				}
 			}
-			&.right {
-				transform: translateX(calc(-50% + #{$gutter} + 1px));	
-				#left .inner {
+			&.open.right .sections {
+				transform: translateX(calc(-50% + 10px));	
+				.left .inner {
 					opacity: 0;
 				}
 			}
+		}
+		.arrow {
+			display: none !important;
 		}
 	}
 }

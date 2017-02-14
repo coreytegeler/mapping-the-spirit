@@ -4,6 +4,11 @@ fields:
   title:
     label: Title
     type:  text
-  text:
-    label: Text
+  map:
+    label: Map
+    type:  selector
+    mode:  single
+    types: image
+  brief:
+    label: Brief
     type:  textarea

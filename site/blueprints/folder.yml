@@ -6,12 +6,42 @@ files:
     title:
       label: Title
       type: text
+      required: false
+    right:
+      label: Show in right column?
+      type: toggle
+      default: true
+      text: yes/no
+    month:
+      label: Month
+      type:  text
+      width: 1/3
+    day:
+      label: Day
+      type:  text
+      width: 1/3
+    year:
+      label: Year
+      type:  text
+      width: 1/3
+    location:
+      label: Location
+      type:  text
+    attribution:
+      label: Attribution
+      type: wysiwyg
     caption:
       label: Caption
-      type: textarea
+      type: wysiwyg
+    detail:
+      label: Detail
+      type:  selector
+      mode:  single
+      types:
+        - image
 fields:
-  location:
-    label: Location
+  title:
+    label: Title
     type:  text
   month:
     label: Month
@@ -25,6 +55,9 @@ fields:
     label: Year
     type:  text
     width: 1/3
+  location:
+    label: Location
+    type:  text
   blocks:
     label: Blocks
     type: builder
@@ -43,14 +76,6 @@ fields:
           text:
             label: Text
             type: wysiwyg
-          location:
-            label: Location
-            type:  text
-            width: 1/2
-          attribution:
-            label: Attribution
-            type: text
-            width: 1/2
           month:
             label: Month
             type:  text
@@ -63,11 +88,16 @@ fields:
             label: Year
             type:  text
             width: 1/3
+          location:
+            label: Location
+            type:  text
+          attribution:
+            label: Attribution
+            type: wysiwyg
           size:
             label: Size
             type: select
             default: medium
-            width: 1/2
             options:
               small: Small
               medium: Medium
@@ -87,6 +117,47 @@ fields:
               small: Small
               medium: Medium
               large: Large
+      video:
+        label: Video
+        snippet: builder/video
+        fields:
+          videoid:
+            label: Video ID
+            type: text
+          source:
+            label: Source
+            type: select
+            default: null
+            options:
+              youtube: YouTube
+              vimeo: Vimeo
+          title:
+            label: Title
+            type:  text
+            required: false
+          month:
+            label: Month
+            type:  text
+            width: 1/3
+          day:
+            label: Day
+            type:  text
+            width: 1/3
+          year:
+            label: Year
+            type:  text
+            width: 1/3
+          location:
+            label: Location
+            type:  text
+            width: 1/2
+          attribution:
+            label: Attribution
+            type: text
+            width: 1/2
+          caption:
+            label: Caption
+            type:  wysiwyg
   thumb:
     label: Thumbnail
     type:  selector

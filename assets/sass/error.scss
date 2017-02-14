@@ -1,0 +1,91 @@
+body.error {	
+	background-color: $dark;
+	color: $lightest;
+	header {
+		.row {
+			background-color: $dark;
+			border-color: $lightest;
+			a {
+				background-color: $dark;
+			}
+			span {
+				background-color: $dark;
+				&.title {
+					box-shadow: 5px 0 10px 5px $dark;
+				}
+			}
+			.links {
+				background-color: $dark;
+				box-shadow: -5px 0 20px 10px $dark;
+			}
+		}
+		a {
+			color: $lightest;
+		}
+	}
+	main {
+		width: 100%;
+		display: block;
+		section#error {
+			width: 100%;
+			height: 100vh;
+			background-color: black;
+			color: $lightest;
+			position: relative;
+			overflow: hidden;
+			.shift {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			.map {
+				width: calc(100% + 10em);
+				height: calc(100% + 10em);
+				left: -5em;
+				top: -5em;
+				background-position: center;
+				background-size: cover;
+			}
+			.title {
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: 0;
+				display: flex;
+				.text {
+					width: 100%;
+					align-self: center;
+					text-align: center;
+					h1 {
+						pointer-events: none;
+					}
+					a {
+						color: $lightest;
+						transition: color 300ms $fadeEase;
+						&:hover {
+							color: $medium;
+						}
+					}
+				}
+			}
+		}
+	}
+	footer {
+		background-color: $dark;
+		border-color: $lightest;
+		#collection {
+			background-color: $dark;
+			border-color: $lightest;
+			.item {
+				background-color: $dark;
+				border-color: $lightest;
+				&:not(:hover):not(.looking):not(.selected) .inner {
+					color: $lightest !important;
+				}
+				&.text .inner .shadow {
+					box-shadow: inset $dark 0 -20px 25px;
+				}
+			}
+		}
+	}
+}

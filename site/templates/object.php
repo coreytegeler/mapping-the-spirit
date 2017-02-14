@@ -1,39 +1,52 @@
 <?php
 $item = $page;
-if(!kirby()->request()->ajax()) {
+if( !kirby()->request()->ajax() ) {
 	$story = $item->parent();
 	snippet( 'head', array( 
 		'bodyClass' => array ( 'looking', 'story' ),
 		'story' => $story,
 		'item' => $item
 	) );
-	echo '<main>';
+	echo '<main data-title="' . $story->title() . '">';
 	snippet( 'table', array( 'story' => $story ) );
 	snippet( 'footnotes' );
-	echo '<div id="single" class="show open object" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="object">';
+	echo '<div class="single open object" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="object">';
 } else {
-	echo '<div class="data" data-item="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="object"></div>';
+	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="object"></div>';
 }
-$image = $item->images()->first();
+$image = $item->thumb();
+$type = $item->type();
 echo '<section>';
-	echo '<div class="closeSingle"></div>';
+	snippet( 'buttons' );
 	echo '<div class="scroll">';
 		echo '<div class="inner">';
 			echo '<div class="vert">';
-				echo '<div class="block">';
-					echo '<img src="' . $image->resize(1500, 1500, 100)->url() . '"/>';
-					echo '<div class="caption text">';
-						echo $item->caption()->kirbytext();
+				if( $type == 'video' ) {
+					echo '<div class="block video">';
+					  snippet( 'blocks/video', array( 'block' => $item ) );
 					echo '</div>';
-					snippet( 'meta', array( 'item' => $item ) );
-				echo '</div>';
+				} else {
+					if( !$image->empty() ) {
+						$image = $item->image( $image );
+					} else {
+						$image = $item->image();
+					}
+					echo '<div class="block image">';
+						snippet( 'image', array( 'item' => $item, 'image' => $image ) );
+					echo '</div>';
+				}
 			echo '</div>';
 		echo '</div>';
 	echo '</div>';
 echo '</section>';
-if(!kirby()->request()->ajax()) {
+snippet( 'pagination', array( 'item' => $item ) );
+if( !kirby()->request()->ajax() ) {
 	echo '</div>';
 	echo '</main>';
-	snippet('footer');
+	echo '<footer>';
+		snippet('collection');
+	echo '</footer>';
+	echo '</body>';
+	echo '</html>';
 }
 ?>

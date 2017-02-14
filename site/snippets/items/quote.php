@@ -1,6 +1,7 @@
 <?php
 $text = $item->text();
 echo '<div class="text">';
-	echo strip_tags( $text );
+	echo '<p>' . strip_tags( $text ) . '</p>';
 echo '</div>';
+echo '<div class="shadow"></div>';
 ?>

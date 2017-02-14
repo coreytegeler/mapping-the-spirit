@@ -1,0 +1,49 @@
+body.aid {
+	header {
+
+	}
+	main {	
+		section {
+			.details {
+				.text {
+					@include xSmallText;
+				}
+				.subgroup {
+					padding-bottom: .5em;
+					&:last-child {
+						padding: 0;
+					}
+					.subtitle {
+						color: $medium;
+						text-transform: uppercase;
+						pointer-events: none;
+						&::after {
+							content: ': ';
+						}
+					}
+					p {
+						display: inline;
+					}
+				}
+			}
+			.wrap.item {
+				&.collected {
+					.title {
+						&::after {
+							content: ' ✔';
+						}
+					}
+				}
+			}
+		}
+	}
+	@include phone {
+		main {
+			section {
+				.details .text {
+					padding: 0;
+				}
+			}
+		}
+	}
+}

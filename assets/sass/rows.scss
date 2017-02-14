@@ -1,0 +1,166 @@
+section.rows {
+	width: 100%;
+	.rowrap {
+		width: 100%;
+		display: table;
+		padding: 2em 0;
+		.row {
+			width: 100%;
+			display: table;
+			margin: 0 auto;
+			z-index: 2;
+			overflow: hidden;
+			.wrap {
+				width: 150%;
+				color: black;
+				display: flex;
+				align-items: center;
+				position: relative;
+				transition: color 100ms $fadeEase;
+				a.title {
+					width: 50%;
+					z-index: 10;
+				}
+				.image {
+					width: 50%;
+					max-width: none;
+					opacity: .6;
+					.img {
+						display: table;
+				    img {
+				    	width: 100%;
+				    	display: table;
+				    	filter: grayscale(1);
+				    }
+					}
+				}
+			}
+			&.odd {
+				.wrap {
+					flex-direction: row-reverse;
+				}
+				.title {
+					float: left;
+					transform: translateX(7%);
+					* {
+						text-align: left;
+					}
+				}
+				.image {
+					float: left;
+					transform: translateX(-75%);
+					.img {
+						float: right;
+					}
+				}
+			}
+			&.even {
+				.wrap {
+					flex-direction: row;
+				}
+				.title {
+					float: right;
+					transform: translateX(-75%);
+					* {
+						text-align: right;
+					}
+				}
+				.image {
+					float: right;
+					transform: translateX(7%);
+				}
+			}
+			&.no-thumb {
+				.wrap {
+					width: 80%;
+					margin: auto;
+					.title {
+						transform: none;
+						left: 0;
+						width: 100%;
+					}
+				}
+			}
+			&:last-child {
+				margin-bottom: 0 !important;
+			}
+		}
+	}
+	&#stories {
+		.story {
+			max-width: $desktopWidth;
+			margin-bottom: 8em;
+			.image {
+				transition: background-color 50ms $fadeEase;
+				.img {
+					background-color: $lightest;
+			    transition: background-color 100ms $fadeEase;
+					img {
+						mix-blend-mode: screen;
+					}
+				}
+			}
+			&:not(.hover) {
+				.title {
+					color: $dark !important;
+				}
+				.image {
+					.img {
+						background-color: $dark !important;
+					}
+				}
+			}
+		}
+	}
+	&#field-notes {
+		.field-note {
+			max-width: $laptopWidth;
+			margin-bottom: 4em;
+			.wrap {
+				color: $dark;
+				.title {
+					h2 {
+						@include xLargeText;
+						@include laptop {
+							@include largeText;
+						}
+					}
+				}
+				.image {
+					opacity: 1;					
+					.img {
+						max-width: 15em;
+						img {
+							filter: grayscale(0);
+							transition: filter 100ms $fadeEase;
+						}
+					}
+				}
+			}
+			&.hover .wrap {
+				.title {
+					color: $medium !important;
+				}
+				.image {
+					opacity: 1 !important;
+					img {
+						filter: grayscale(1) !important;
+					}
+				}
+			}
+		}
+	}
+}
+@include phone {
+	.rows {
+		&.story {
+			margin-bottom: 5em;
+		}
+		&.field-note {
+
+		}
+		.row {
+
+		}
+	}
+}

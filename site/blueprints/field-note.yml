@@ -1,0 +1,117 @@
+title: Field Note
+pages: false
+files:
+  sortable: true
+  fields:
+    title:
+      label: Title
+      type: text
+    caption:
+      label: Caption
+      type: wysiwyg
+    location:
+      label: Location
+      type:  text
+    attribution:
+      label: Attribution
+      type: wysiwyg
+    month:
+      label: Month
+      type:  text
+      width: 1/3
+    day:
+      label: Day
+      type:  text
+      width: 1/3
+    year:
+      label: Year
+      type:  text
+      width: 1/3
+    detail:
+      label: Detail
+      type:  selector
+      mode:  single
+      types:
+        - image
+fields:
+  title:
+    label: Title
+    type:  text
+  month:
+    label: Month
+    type:  text
+    width: 1/3
+  day:
+    label: Day
+    type:  text
+    width: 1/3
+  year:
+    label: Year
+    type:  text
+    width: 1/3
+  blocks:
+    label: Blocks
+    type: builder
+    fieldsets:
+      text:
+        label: Text
+        snippet: builder/text
+        fields:
+          text:
+            label: Text
+            type: wysiwyg
+      quote:
+        label: Quote
+        snippet: builder/quote
+        fields:
+          text:
+            label: Text
+            type: wysiwyg
+          location:
+            label: Location
+            type:  text
+            width: 1/2
+          attribution:
+            label: Attribution
+            type: text
+            width: 1/2
+          month:
+            label: Month
+            type:  text
+            width: 1/3
+          day:
+            label: Day
+            type:  text
+            width: 1/3
+          year:
+            label: Year
+            type:  text
+            width: 1/3
+          size:
+            label: Size
+            type: select
+            default: medium
+            options:
+              small: Small
+              medium: Medium
+              large: Large
+      image:
+        label: Image
+        snippet: builder/image
+        fields:
+          image:
+            label: Image
+            type: image
+          size:
+            label: Size
+            type: select
+            default: medium
+            options:
+              small: Small
+              medium: Medium
+              large: Large
+  thumb:
+    label: Thumbnail
+    type:  selector
+    mode:  single
+    types: image

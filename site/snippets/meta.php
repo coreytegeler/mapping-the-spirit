@@ -1,4 +1,8 @@
 <?php
+$type = $item->_fieldset();
+$title = $item->title();
+$caption = $item->caption()->kirbytext();
+$attribution = $item->attribution()->kirbytext();
 $location = $item->location();
 $month = $item->month();
 $day = $item->day();
@@ -6,24 +10,29 @@ $year = $item->year();
 $date = '';
 if( !$month->empty() ) {
 	$date = $month;
-	if( !$day->empty() ) { $date .= ', ' . $day; }
+	if( !$day->empty() ) { $date .= ' ' . $day; }
 	if( !$year->empty() ) { $date .= ' ' . $year; }
 } else if ( !$year->empty() ) { $date - $year; }
-
-echo '<div class="meta">';
-	echo '<div class="row">';
-	  if( !$date ) {
-	  	echo 'Unknown date';
-	  } else {
-	  	echo $date;
+if( $date || !$location->empty() ) {
+	echo '<div class="meta">';
+		if( $date ) {
+			echo '<div class="cell">';
+		  	echo $date;
+		  echo '</div>';
 	  }
-	echo '</div>';
-	echo '<div class="row">';
-	  if( $location->empty() ) {
-	  	echo 'Unknown location';
-	  } else {
-	  	echo $location;
+		if( !$location->empty() ) {
+			echo '<div class="cell">';
+		  	echo $location;
+	  	echo '</div>';
 	  }
+	  if( !$attribution->empty() && $type != 'quote' ) {
+			echo '<div class="cell">';
+		  	echo $attribution;
+			echo '</div>';
+		}
 	echo '</div>';
-echo '</div>';
+}
+if( !$caption->empty() ) {
+	echo '<div class="caption">' . $caption . '</div>';
+}
 ?>

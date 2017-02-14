@@ -1,4 +1,4 @@
-title: Paper
+title: Stack
 pages: false
 files:
   sortable: true
@@ -6,21 +6,38 @@ files:
     title:
       label: Title
       type: text
+      required: false
+    month:
+      label: Month
+      type:  text
+      width: 1/3
+    day:
+      label: Day
+      type:  text
+      width: 1/3
+    year:
+      label: Year
+      type:  text
+      width: 1/3
+    location:
+      label: Location
+      type:  text
+    attribution:
+      label: Attribution
+      type: wysiwyg
     caption:
       label: Caption
-      type: textarea
+      type: wysiwyg
+    detail:
+      label: Detail
+      type:  selector
+      mode:  single
+      types:
+        - image
 fields:
   title:
     label: Title
     type:  text
-  location:
-    label: Location
-    type:  text
-    width: 1/2
-  attribution:
-    label: Attribution
-    type: text
-    width: 1/2
   month:
     label: Month
     type:  text
@@ -33,6 +50,9 @@ fields:
     label: Year
     type:  text
     width: 1/3
+  location:
+    label: Location
+    type:  text
   blocks:
     label: Blocks
     type: builder
@@ -51,14 +71,6 @@ fields:
           text:
             label: Text
             type: wysiwyg
-          location:
-            label: Location
-            type:  text
-            width: 1/2
-          attribution:
-            label: Attribution
-            type: text
-            width: 1/2
           month:
             label: Month
             type:  text
@@ -71,6 +83,12 @@ fields:
             label: Year
             type:  text
             width: 1/3
+          location:
+            label: Location
+            type:  text
+          attribution:
+            label: Attribution
+            type: wysiwyg
           size:
             label: Size
             type: select
@@ -94,6 +112,45 @@ fields:
               small: Small
               medium: Medium
               large: Large
+      video:
+        label: Video
+        snippet: builder/video
+        fields:
+          videoid:
+            label: Video ID
+            type: text
+          source:
+            label: Source
+            type: select
+            default: null
+            options:
+              youtube: YouTube
+              vimeo: Vimeo
+          title:
+            label: Title
+            type:  text
+            required: false
+          month:
+            label: Month
+            type:  text
+            width: 1/3
+          day:
+            label: Day
+            type:  text
+            width: 1/3
+          year:
+            label: Year
+            type:  text
+            width: 1/3
+          location:
+            label: Location
+            type:  text
+          attribution:
+            label: Attribution
+            type: wysiwyg
+          caption:
+            label: Caption
+            type:  wysiwyg
   thumb:
     label: Thumbnail
     type:  selector
@@ -123,7 +180,7 @@ fields:
   display:
     label: Display
     type: select
-    default: text
+    default: image
     width: 1/4
     options:
       image: Image

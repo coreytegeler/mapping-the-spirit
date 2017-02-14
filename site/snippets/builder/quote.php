@@ -1,1 +1,3 @@
-<?= $data->text() ?>
+<?php
+echo $data->text()->kirbytext()
+?>

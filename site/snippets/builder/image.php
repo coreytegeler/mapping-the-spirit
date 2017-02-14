@@ -1,5 +1,9 @@
 <?php
-if ( !$data->image()->empty() ) {
-	echo '<img style="max-width:100%;display:table;margin:auto;" src="' . $page->image( $data->image() )->url() . '"/>';
+$image = $data->image();
+if ( !$image->empty() ) {
+	$image = $page->image( $image );
+	if( $image ) {
+		echo '<img style="max-width:100%;display:table;margin:auto;" src="' . $image->url() . '"/>';
+	}
 }
 ?>

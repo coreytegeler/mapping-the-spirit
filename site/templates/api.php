@@ -3,9 +3,10 @@ if(!r::ajax()) go(url('error'));
 header('Content-type: application/json; charset=utf-8');
 $itemSlug = $_GET['item'];
 $storySlug = $_GET['story'];
+$footer = $_GET['footer'];
 $story = $pages->find( 'stories' )->children()->find( $storySlug );
-$color = $story->color();
 if( !$story ) {return;}
+$color = $story->color();
 $item = $story->children()->find( $itemSlug );
 if( $item ) {
 	$type = $item->intendedTemplate();
@@ -16,8 +17,14 @@ if( $item ) {
 	}
 
 	if( $display == 'image' ) {
-		$thumb = $item->getThumb( true );
-		$content = $thumb;
+		if( $footer == 'true' ) {
+			$thumb = $item->getThumb( 'small' );
+		} else {
+			$thumb = $item->getThumb( 'medium' );
+		}
+		if( $thumb ) {
+			$content = $thumb->url();
+		}
 	} else {
 		if( $type == 'quote' ) {
 			$content = strip_tags( $item->text() );

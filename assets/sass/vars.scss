@@ -1,22 +1,20 @@
 $lightest: #fafcfc;
-// $lighter: #f2f2f9;
 $lighter: #f4f6fa;
 $light: #b3b4b7;
-$medium: #414444;
-$medium: #a5a6a6;
+$medium: #878a8e;
+$darkish: #434444;
 $dark: #000000;
 
-$mono: 'Office', monospace;
-$monoItal: 'Office Italic', monospace;
-$monoMed: 'Office Medium', monospace;
-$monoMedItal: 'Office Medium Italic', monospace;
-$monoBold: 'Office Bold', monospace;
-$monoBoldItal: 'Office Bold Italic', monospace;
-$sans: 'Reglo', Helvetica, Arial, sans-serif;
+$sans: 'Chivo', Helvetica, Arial, sans-serif;
+$sansItalic: 'Chivo Italic', Helvetica, Arial, sans-serif;
+$sansBlack: 'Chivo Black', Helvetica, Arial, sans-serif;
+$sansBlackItalic: 'Chivo Black Italic', Helvetica, Arial, sans-serif;
+$title: 'Reglo', Helvetica, Arial, sans-serif;
 
-$phoneWidth: 667px;
+$phoneWidth: 480px;
 $tabletWidth: 768px;
-$desktopWidth: 1024px;
+$laptopWidth: 1024px;
+$desktopWidth: 1440px;
 $maxWidth: 800px;
 
 $gutter: 20px;
@@ -39,6 +37,9 @@ $slideBackEase: cubic-bezier(0.39, 0.575, 0.565, 1);
 	font-size: 19px;
 	line-height: 1.3em;
 	font-weight: normal;
+	@include tablet {
+		font-size: 15px;
+	}
 }
 @mixin xSmallText {
 	font-size: .75em;
@@ -56,12 +57,12 @@ $slideBackEase: cubic-bezier(0.39, 0.575, 0.565, 1);
 	font-weight: normal;
 }
 @mixin largeText {
-	font-size: 1.7em;
+	font-size: 2em;
 	line-height: 1.2em;
 	font-weight: normal;
 }
 @mixin xLargeText {
-	font-size: 2.8em;
+	font-size: 3.8em;
 	line-height: 1.2em;
 	font-weight: normal;
 }
@@ -79,6 +80,12 @@ $slideBackEase: cubic-bezier(0.39, 0.575, 0.565, 1);
 
 @mixin tablet {
   @media (max-width: #{$tabletWidth}) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (max-width: #{$laptopWidth}) {
     @content;
   }
 }

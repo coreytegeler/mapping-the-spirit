@@ -1,37 +1,93 @@
 <?php
 snippet('head');
   echo '<main>';
+	  $stories = page( 'stories' )->children()->visible();
   	echo '<section id="map">';
-	  	echo '<div class="map shift" data-shift="2"></div>';
+  		if( $map = $page->map() ) {
+					$map = $page->image( $map )->resize( 1700, 1700, 100 )->url();
+		  	echo '<div class="map shift" style="background-image:url(' . $map . ')" data-shift="2"></div>';
+		  }
 	  	echo '<div class="shift title" data-shift="-2">';
 		  	echo '<h1>';
 		  		echo $site->title();
 		  	echo '</h1>';
 		  echo '</div>';
 		echo '</section>';
-		echo '<section id="stories">';
+		echo '<section id="stories" class="rows">';
 			snippet( 'header', array( 'pageTitle' => 'STORIES' ) );
 			echo '<div class="about">';
-				echo $site->description();
+				echo $page->brief()->kirbytext();
 			echo '</div>';
-			echo '<div class="dash"></div>';
-			$stories = $pages->find('stories')->children()->visible();
-			foreach( $stories as $index => $story ) {
-				$url = $story->url();
-				$thumb = $story->images()->first();
-		  	echo '<div class="story">';
-			  	echo '<a href="' . $url . '" style="color:' . $story->color() . '">';
-			  		echo '<h1 class="title">' .  $story->title() . '</h1>';
-			  		echo '<div class="image" style="background-color:' . $story->color() . '">';
-			  			if( $thumb ) {
-						  	echo '<img src="' . $thumb->url() . '"/>';
-			  			}
-				  	echo '</div>';
-				  echo '</a>';
-		  	echo '</div>';
-		  }
-		  echo '<div class="dash"></div>';
+			// echo '<div class="dash"></div>';
+			echo '<div class="rowrap">';
+				$index = 0;
+				foreach( $stories as $story ) {
+					$index++;
+					$url = $story->url();
+					$thumb = $story->getThumb( 'large' );
+					$rotate = mt_rand( -25, 10 )/100;
+					$shift = mt_rand( -300, -200 )/100;
+			  	echo '<div class="row story ' . ( $index % 2 == 0 ? 'even' : 'odd' ) . '">';
+				  	echo '<div class="wrap">';
+				  		echo '<div class="image">';
+				  			echo '<a href="' . $url . '" class="img rotate shift" style="background-color:' . $story->color() . '" data-rotate="' . $rotate . '" data-shift="' . $shift . '">';
+				  				if( $thumb ) {
+								  	echo '<img src="' . $thumb->url() . '"/>';
+								  }
+							  echo '</a>';
+						  echo '</div>';
+						  echo '<a href="' . $url . '"  class="title" style="color:' . $story->color() . '">';
+						  	$rotate = mt_rand( -25, 10 )/100;
+								$shift = mt_rand( -100, -50 )/100;
+				  			echo '<h1 class="shift rotate" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index/2 . '">' .  $story->title() . '</h1>';
+				  		echo '</a>';
+					  echo '</div>';
+			  	echo '</div>';
+			  }
+			 echo '</div>';
 		echo '</section>';
+		if( $field_notes = page( 'field-notes' ) ) {
+			$field_notes = $field_notes->children()->visible();
+			if( sizeof( $field_notes ) ) {
+				echo '<section id="field-notes" class="rows">';
+					// echo '<div class="dash"></div>';
+				echo '<h4>Field Notes</h4>';
+					echo '<div class="rowrap">';
+						$index = 0;
+						foreach( $field_notes as $field_note ) {
+							$index++;
+							if( $index % 2 == 0 ) {
+								$sign = -1;
+							} else {
+								$sign = 1;
+							}
+							$url = $field_note->url();
+							$thumb = $field_note->getThumb( 'large' );
+							$rotate = mt_rand( -25, 10 )/100;
+							$shift = mt_rand( -50, -25 )/100 * $sign;
+					  	echo '<div class="row field-note ' . ( $index % 2 == 0 ? 'odd ' : 'even ' ) . ( !$thumb ? ' no-thumb' : '' ) . '">';
+						  	echo '<div class="wrap">';
+						  	 if( $thumb ) {
+							  		echo '<div class="image">';
+							  			echo '<a href="' . $url . '" class="img rotate shift" style="background-color:' . $field_note->color() . '" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index . '">';
+							  				if( $thumb ) {
+											  	echo '<img src="' . $thumb->url() . '"/>';
+											  }
+										  echo '</a>';
+									  echo '</div>';
+									}
+								  $rotate = mt_rand( -25, 10 )/100;
+									$shift = mt_rand( -50, -25 )/100 * $sign;
+					  			echo '<a href="' . $url . '" class="title">';
+					  				echo '<h2 class="shift rotate" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index/2 . '">' .  $field_note->title() . '</h2>';
+					  			echo '</a>';
+							  echo '</div>';
+					  	echo '</div>';
+					  }
+					 echo '</div>';
+				echo '</section>';
+			}
+		}
   echo '</main>';
 snippet('footer')
 ?>

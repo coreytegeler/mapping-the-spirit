@@ -1,0 +1,10 @@
+title: Field Notes
+pages: field-note
+files: false
+fields:
+  title:
+    label: Title
+    type:  text
+  text:
+    label: Text
+    type:  textarea

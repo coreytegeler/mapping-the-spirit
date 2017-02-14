@@ -1,0 +1,14 @@
+body.field-note {
+	main {
+		background-color: $lighter;
+		section {
+			.inner {
+				.block {
+					&:first-child {
+						padding-bottom: 2em;
+					}
+				}
+			}
+		}
+	}
+}

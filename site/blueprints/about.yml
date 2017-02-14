@@ -1,0 +1,55 @@
+title: About
+pages: false
+files: true
+fields:
+  title:
+    label: Title
+    type:  text
+  statement:
+    label: Statement
+    type:  textarea
+  lead:
+    label: Lead Image
+    type:  selector
+    mode:  single
+    types: image
+  credits:
+    label: Credits
+    type: builder
+    fieldsets:
+      credit:
+        label: Credit
+        snippet: builder/credit
+        fields:
+          label:
+            label: Label
+            type: text
+            required: true
+          name:
+            label: Name
+            type: text
+            required: true
+          link:
+            label: Link
+            type: text
+  press:
+    label: Press
+    type: builder
+    fieldsets:
+      item:
+        label: Press
+        snippet: builder/press
+        fields:
+          title:
+            label: Title
+            type: text
+            required: true
+          source:
+            label: Source
+            type: text
+            required: true
+          link:
+            label: Link
+            type: text
+            required: true
+    
