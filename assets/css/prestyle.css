@@ -1,32 +1,32 @@
 @charset "UTF-8";
 @font-face {
   font-family: 'Reglo';
-  src: url("./../fonts/Reglo/Reglo-Bold.eot");
-  src: url("./../fonts/Reglo/Reglo-Bold.eot?#iefix") format("embedded-opentype"), url("./../fonts/Reglo/Reglo-Bold.woff2") format("woff2"), url("./../fonts/Reglo/Reglo-Bold.woff") format("woff"), url("./../fonts/Reglo/Reglo-Bold.ttf") format("truetype"), url("./../fonts/Reglo/Reglo-Bold.svg#Reglo-Bold") format("svg");
-  font-weight: 500;
-  font-style: italic; }
+  src: url("./../fonts/reglo/reglo-bold.eot");
+  src: url("./../fonts/reglo/reglo-bold.eot?#iefix") format("embedded-opentype"), url("./../fonts/reglo/reglo-bold.woff") format("woff"), url("./../fonts/reglo/reglo-bold.ttf") format("truetype"), url("./../fonts/reglo/reglo-bold.svg#reglo-bold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 @font-face {
   font-family: 'Chivo';
-  src: url("./../fonts/Chivo/Chivo-Regular.eot");
-  src: url("./../fonts/Chivo/Chivo-Regular.eot?#iefix") format("embedded-opentype"), url("./../fonts/Chivo/Chivo-Regular.woff") format("woff"), url("./../fonts/Chivo/Chivo-Regular.ttf") format("truetype"), url("./../fonts/Chivo/Chivo-Regular.svg#Chivo-Regular") format("svg");
+  src: url("./../fonts/chivo/chivo-regular.eot");
+  src: url("./../fonts/chivo/chivo-regular.eot?#iefix") format("embedded-opentype"), url("./../fonts/chivo/chivo-regular.woff") format("woff"), url("./../fonts/chivo/chivo-regular.ttf") format("truetype"), url("./../fonts/chivo/chivo-regular.svg#chivo-regular") format("svg");
   font-weight: 300;
   font-style: normal; }
 @font-face {
   font-family: 'Chivo Italic';
-  src: url("./../fonts/Chivo/Chivo-Italic.eot");
-  src: url("./../fonts/Chivo/Chivo-Italic.eot?#iefix") format("embedded-opentype"), url("./../fonts/Chivo/Chivo-Italic.woff") format("woff"), url("./../fonts/Chivo/Chivo-Italic.ttf") format("truetype"), url("./../fonts/Chivo/Chivo-Italic.svg#Chivo-Italic") format("svg");
+  src: url("./../fonts/chivo/chivo-italic.eot");
+  src: url("./../fonts/chivo/chivo-italic.eot?#iefix") format("embedded-opentype"), url("./../fonts/chivo/chivo-italic.woff") format("woff"), url("./../fonts/chivo/chivo-italic.ttf") format("truetype"), url("./../fonts/chivo/chivo-italic.svg#chivo-italic") format("svg");
   font-weight: 300;
   font-style: normal; }
 @font-face {
   font-family: 'Chivo Black';
-  src: url("./../fonts/Chivo/Chivo-Black.eot");
-  src: url("./../fonts/Chivo/Chivo-Black.eot?#iefix") format("embedded-opentype"), url("./../fonts/Chivo/Chivo-Black.woff") format("woff"), url("./../fonts/Chivo/Chivo-Black.ttf") format("truetype"), url("./../fonts/Chivo/Chivo-Black.svg#Chivo-Black") format("svg");
+  src: url("./../fonts/chivo/chivo-black.eot");
+  src: url("./../fonts/chivo/chivo-black.eot?#iefix") format("embedded-opentype"), url("./../fonts/chivo/chivo-black.woff") format("woff"), url("./../fonts/chivo/chivo-black.ttf") format("truetype"), url("./../fonts/chivo/chivo-black.svg#chivo-black") format("svg");
   font-weight: 300;
   font-style: normal; }
 @font-face {
   font-family: 'Chivo Black Italic';
-  src: url("./../fonts/Chivo/Chivo-BlackItalic.eot");
-  src: url("./../fonts/Chivo/Chivo-BlackItalic.eot?#iefix") format("embedded-opentype"), url("./../fonts/Chivo/Chivo-BlackItalic.woff") format("woff"), url("./../fonts/Chivo/Chivo-BlackItalic.ttf") format("truetype"), url("./../fonts/Chivo/Chivo-BlackItalic.svg#Chivo-BlackItalic") format("svg");
+  src: url("./../fonts/chivo/chivo-black-italic.eot");
+  src: url("./../fonts/chivo/chivo-black-italic.eot?#iefix") format("embedded-opentype"), url("./../fonts/chivo/chivo-black-italic.woff") format("woff"), url("./../fonts/chivo/chivo-black-italic.ttf") format("truetype"), url("./../fonts/chivo/chivo-black-italic.svg#chivo-black-italic") format("svg");
   font-weight: 300;
   font-style: normal; }
 html, body {
@@ -54,8 +54,7 @@ html, body {
       font-size: 15px; } }
   html *, body * {
     box-sizing: border-box;
-    backface-visibility: hidden;
-    -webkit-overflow-scrolling: touch; }
+    backface-visibility: hidden; }
 
 body {
   opacity: 0;
@@ -133,8 +132,10 @@ header {
   color: black;
   background-color: #f4f6fa;
   display: flex;
-  z-index: 20;
-  position: relative; }
+  z-index: 2000;
+  position: fixed;
+  left: 0;
+  top: 0; }
   header a {
     color: black;
     text-decoration: none;
@@ -220,13 +221,22 @@ header {
       margin: .15em .5em 0 0; }
       header .links a:last-child {
         margin-right: 0; }
-  header.fixed {
-    left: 0;
-    top: 0;
-    position: fixed; }
+  header .open-links {
+    width: 1em;
+    height: 1em;
+    position: absolute;
+    right: .5em;
+    top: .375em;
+    z-index: 100;
+    background-size: 1em;
+    background-repeat: no-repeat;
+    background-image: url(../images/up.svg);
+    background-image: url(../images/down.svg);
+    display: none; }
 
 main {
-  background-color: #fafcfc; }
+  background-color: #fafcfc;
+  margin-top: 2em; }
 
 .data {
   display: none; }
@@ -316,7 +326,8 @@ main {
       display: flex;
       border-bottom: 0;
       border-bottom: 1px solid #000000;
-      position: relative; }
+      position: relative;
+      overflow: visible; }
       header .row a {
         font-size: .75em;
         line-height: 1.3em;
@@ -335,8 +346,20 @@ main {
       header .row .trail {
         width: 100%; }
       header .row .links {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 2em;
+        border-bottom: 1px solid #000000;
         padding-left: .5em;
-        white-space: pre; } }
+        white-space: pre;
+        display: none; }
+    header .open-links {
+      display: block; }
+    header.toggled .links {
+      display: flex; }
+    header.toggled .open-links {
+      background-image: url(../images/up.svg); } }
 @media (max-width: 768px) {
   html, body {
     font-size: 19px;
@@ -348,8 +371,15 @@ main {
 
 body.home {
   overflow-y: auto; }
+  body.home header {
+    position: relative; }
+    body.home header.fixed {
+      left: 0;
+      top: 0;
+      position: fixed; }
   body.home main {
     width: 100%;
+    margin: 0;
     display: block; }
     body.home main section#map {
       width: 100%;
@@ -415,9 +445,10 @@ body.home {
 
 body.story main, body.collection main {
   width: 100%;
-  height: calc(100% - 2em - 60px - 1px);
+  height: 100%;
   position: relative;
   overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
   transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), border-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
   body.story main.hide, body.collection main.hide {
     opacity: 0;
@@ -425,7 +456,7 @@ body.story main, body.collection main {
   body.story main .left, body.collection main .left {
     float: left; }
   body.story main #table, body.collection main #table {
-    height: 100%;
+    height: calc(100% - 60px - 2em - 1px);
     width: 100%;
     position: absolute;
     left: 0;
@@ -442,13 +473,22 @@ body.story main, body.collection main {
   body.story main .card, body.collection main .card {
     height: 100%;
     background: #fafcfc;
-    display: table;
-    float: left; }
+    display: flex;
+    align-items: center;
+    float: left;
+    overflow-y: scroll; }
     body.story main .card h3, body.collection main .card h3 {
       text-align: center;
       display: table;
       margin: 0 auto .5em auto;
       text-decoration: underline; }
+    body.story main .card .inner, body.collection main .card .inner {
+      width: 100%;
+      max-width: 800px;
+      max-height: 100%;
+      padding: 2em 0;
+      display: table;
+      margin: auto; }
     body.story main .card .horz, body.collection main .card .horz {
       max-width: 800px;
       height: 100%;
@@ -460,14 +500,19 @@ body.story main, body.collection main {
       font-weight: normal; }
     body.story main .card.full, body.collection main .card.full {
       min-width: 100vw; }
+      body.story main .card.full .inner, body.collection main .card.full .inner {
+        padding-left: 5em;
+        padding-right: 5em; }
     body.story main .card.half, body.collection main .card.half {
-      width: 50vw; }
-      body.story main .card.half .vert, body.collection main .card.half .vert {
+      min-width: 50vw;
+      max-width: 50vw; }
+      body.story main .card.half .inner, body.collection main .card.half .inner {
         width: calc(100% - 2em);
-        padding: 0 1em; }
-        body.story main .card.half .vert h1, body.collection main .card.half .vert h1 {
+        padding-left: 1em;
+        padding-right: 1em; }
+        body.story main .card.half .inner h1, body.collection main .card.half .inner h1 {
           width: 100%; }
-        body.story main .card.half .vert .text, body.collection main .card.half .vert .text {
+        body.story main .card.half .inner .text, body.collection main .card.half .inner .text {
           max-width: 480px; }
   body.story main #title, body.collection main #title {
     height: 100%;
@@ -490,6 +535,8 @@ body.story main, body.collection main {
       align-items: center;
       position: relative;
       transition: color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+    body.story main #title a, body.collection main #title a {
+      text-decoration: none; }
     body.story main #title h1.title, body.collection main #title h1.title {
       width: 50%;
       z-index: 10;
@@ -529,8 +576,7 @@ body.story main, body.collection main {
       float: right;
       transform: translateX(7%); }
   body.story main #info, body.collection main #info {
-    min-width: 45em;
-    max-width: 800px; }
+    min-width: 45em; }
     body.story main #info .details, body.story main #info .historical, body.story main #info .aid, body.collection main #info .details, body.collection main #info .historical, body.collection main #info .aid {
       font-size: .75em;
       line-height: 1.3em;
@@ -547,8 +593,6 @@ body.story main, body.collection main {
         body.story main #info .details .row p, body.collection main #info .details .row p {
           display: inline;
           margin: 0; }
-    body.story main #info .vert, body.collection main #info .vert {
-      padding: 0 6em 0 3em; }
     body.story main #info .aid, body.collection main #info .aid {
       padding-top: .5em;
       color: #878a8e !important; }
@@ -587,6 +631,8 @@ body.story main, body.collection main {
       transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
       body.story main #grid .item.show, body.collection main #grid .item.show {
         display: block; }
+      body.story main #grid .item.hide, body.collection main #grid .item.hide {
+        display: none !important; }
       body.story main #grid .item.image, body.collection main #grid .item.image {
         display: none; }
         body.story main #grid .item.image.show, body.collection main #grid .item.image.show {
@@ -754,8 +800,6 @@ body.story .end .inner, body.collection .end .inner {
     min-width: 20em;
     padding-right: 1em;
     padding-bottom: 1em; }
-    body.story .end .inner .column:last-child, body.collection .end .inner .column:last-child {
-      padding: 0; }
   body.story .end .inner ul, body.collection .end .inner ul {
     max-width: 15em;
     margin: 0;
@@ -788,58 +832,52 @@ body.story .end .inner, body.collection .end .inner {
         body.story .end .inner ul li a.story:not(:hover), body.collection .end .inner ul li a.story:not(:hover) {
           color: #000000 !important; }
 @media (max-width: 480px) {
-  body.story main, body.collection main {
-    height: calc(100% - 2em); }
-    body.story main #table, body.collection main #table {
-      display: block;
-      overflow-x: hidden;
-      overflow-y: scroll;
-      padding: 0 1em; }
-      body.story main #table .full, body.collection main #table .full {
-        width: 100% !important; }
-        body.story main #table .full .vert, body.collection main #table .full .vert {
-          padding: 0 !important; }
-      body.story main #table #title, body.collection main #table #title {
-        height: auto;
-        padding-top: 5em; }
-        body.story main #table #title .mask, body.collection main #table #title .mask {
-          width: calc(100vw - 2em); }
-        body.story main #table #title .image, body.collection main #table #title .image {
-          transform: 0; }
-        body.story main #table #title.odd h1.title, body.collection main #table #title.odd h1.title {
-          transform: translateX(0); }
-      body.story main #table #info, body.collection main #table #info {
-        height: auto;
-        padding-top: 5em; }
-      body.story main #table #map, body.collection main #table #map {
-        height: auto;
-        padding: 0; }
-        body.story main #table #map img, body.collection main #table #map img {
-          width: 100%;
-          height: auto; }
-      body.story main #table #grid, body.collection main #table #grid {
-        width: 100%;
-        padding-top: 5em; }
-        body.story main #table #grid .item, body.collection main #table #grid .item {
-          width: 100%;
-          margin-right: 0;
-          margin-bottom: 20px; }
-          body.story main #table #grid .item .image, body.collection main #table #grid .item .image {
-            background-color: transparent !important; }
-            body.story main #table #grid .item .image img, body.collection main #table #grid .item .image img {
-              max-width: 100%;
-              height: auto !important; }
-        body.story main #table #grid .sizer, body.collection main #table #grid .sizer {
-          display: none; }
-  body.story footer, body.collection footer {
-    display: none; } }
+  body.story main #table .card, body.collection main #table .card {
+    height: 100%;
+    padding: 1em 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; }
+    body.story main #table .card.full, body.collection main #table .card.full {
+      width: 100vw !important; }
+    body.story main #table .card .inner, body.collection main #table .card .inner {
+      column-count: 1;
+      padding-left: 1em;
+      padding-right: 1em; }
+      body.story main #table .card .inner ul, body.collection main #table .card .inner ul {
+        margin: auto; }
+    body.story main #table .card#title, body.collection main #table .card#title {
+      height: 100%; }
+      body.story main #table .card#title .mask, body.collection main #table .card#title .mask {
+        width: calc(100vw - 2em); }
+      body.story main #table .card#title .image, body.collection main #table .card#title .image {
+        transform: 0; }
+      body.story main #table .card#title.odd h1.title, body.collection main #table .card#title.odd h1.title {
+        transform: translateX(0); }
+    body.story main #table .card#info, body.collection main #table .card#info {
+      width: 100%;
+      min-width: 100%;
+      height: auto; }
+    body.story main #table .card.half, body.collection main #table .card.half {
+      max-width: 100%;
+      min-width: 100%; }
+  body.story main #table #map, body.collection main #table #map {
+    height: auto;
+    padding: 0; }
+    body.story main #table #map img, body.collection main #table #map img {
+      width: 100%;
+      height: auto; } }
 
 body.collection main {
-  height: calc(100% - 2em) !important; }
+  height: calc(100% - 20px) !important; }
+  body.collection main #table {
+    height: calc(100% - 20px); }
   body.collection main #grid {
     min-width: 50vw; }
 body.collection .single {
   height: calc(100% - 2em) !important; }
+body.collection #collection {
+  display: none; }
 
 .single {
   width: calc(100% + 1px);
@@ -886,6 +924,7 @@ body.collection .single {
     width: 1.5em;
     height: 1.5em;
     position: absolute;
+    top: .25em;
     z-index: 100;
     background-size: 1.5em;
     background-repeat: no-repeat;
@@ -897,16 +936,14 @@ body.collection .single {
     .single .button.close-single {
       background-image: url(../images/x.svg);
       background-position: center;
-      right: 0;
-      top: 0; }
+      right: .25em; }
     .single .button.collect {
-      background-image: url(../images/collect.svg);
-      left: 0;
-      top: 0; }
+      background-image: url(../images/math.svg);
+      right: 1.75em; }
       .single .button.collect .tooltip {
         height: 1.5em;
         position: absolute;
-        left: 0em;
+        right: 1.5em;
         top: 0;
         padding-left: 1.5em;
         display: none;
@@ -914,13 +951,11 @@ body.collection .single {
         .single .button.collect .tooltip div {
           display: none;
           padding: .125em .5em;
-          background-color: #fafcfc;
           vertical-align: middle;
-          white-space: nowrap; }
-      .single .button.collect:hover {
-        background-color: #fafcfc; }
-        .single .button.collect:hover .tooltip {
-          display: table; }
+          white-space: nowrap;
+          text-shadow: -1px -1px 0px #fafcfc, 1px -1px 0px #fafcfc, -1px 1px 0px #fafcfc, 1px 1px 0px #fafcfc; }
+      .single .button.collect:hover .tooltip {
+        display: table; }
       .single .button.collect.add {
         background-position: center top; }
         .single .button.collect.add:hover .tooltip .add {
@@ -941,7 +976,8 @@ body.collection .single {
     .single section .scroll {
       height: 100%;
       overflow-y: auto;
-      overflow-x: hidden; }
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch; }
     .single section .inner {
       height: 100%;
       padding: 3em 1.5em 6em 1.5em;
@@ -1122,29 +1158,30 @@ main .block {
     display: table;
     margin-left: auto;
     margin-right: auto;
-    font-family: "Chivo Italic", Helvetica, Arial, sans-serif; }
+    font-family: "Chivo", Helvetica, Arial, sans-serif; }
     main .block.quote .text {
-      position: relative; }
-      main .block.quote .text::before, main .block.quote .text::after {
-        width: 1em;
-        display: inline;
-        position: absolute;
-        font-size: 2em;
-        line-height: 1.2em;
-        font-weight: normal;
-        font-family: "Chivo Black Italic", Helvetica, Arial, sans-serif;
-        line-height: 1em;
-        color: #b3b4b7; }
-      main .block.quote .text::before {
-        content: '“';
-        left: 0;
-        top: 0; }
-      main .block.quote .text::after {
-        content: '”'; }
+      position: relative;
+      color: rgba(0, 0, 0, 0.6); }
       main .block.quote .text p {
-        display: inline; }
-        main .block.quote .text p:first-child {
-          margin-left: 1.3em; }
+        width: 100%;
+        padding: 0 2em .5em 2em;
+        display: inline-block; }
+        main .block.quote .text p::before, main .block.quote .text p::after {
+          width: auto;
+          display: inline;
+          position: absolute;
+          font-family: "Chivo Black Italic", Helvetica, Arial, sans-serif;
+          font-size: 4em;
+          line-height: .5em;
+          color: #b3b4b7; }
+        main .block.quote .text p:first-child::before {
+          content: '“';
+          left: -.1em;
+          top: 0; }
+        main .block.quote .text p:last-child::after {
+          content: '”';
+          right: -.1em;
+          bottom: 0; }
     main .block.quote .attribution {
       font-family: "Chivo Black", Helvetica, Arial, sans-serif;
       padding-top: 1em; }
@@ -1159,6 +1196,7 @@ main .block {
     main .block.quote.large {
       max-width: 1000px; }
       main .block.quote.large .text {
+        font-family: "Chivo Black", Helvetica, Arial, sans-serif;
         font-size: 2em;
         line-height: 1.2em;
         font-weight: normal; }
@@ -1213,6 +1251,37 @@ main .block {
     top: 0;
     background-image: url(../images/x.svg);
     z-index: 1000; }
+  #frame .buttons {
+    height: 100%;
+    position: absolute;
+    right: .25em;
+    top: .25em;
+    z-index: 1000; }
+    #frame .buttons .button {
+      float: left; }
+  #frame .button {
+    width: 1.5em;
+    height: 1.5em;
+    font-size: 19px;
+    line-height: 1.3em;
+    font-weight: normal;
+    background-size: 1.5em;
+    background-position: center;
+    background-repeat: no-repeat; }
+    @media (max-width: 768px) {
+      #frame .button {
+        font-size: 15px; } }
+    #frame .button:hover {
+      cursor: pointer;
+      opacity: .5; }
+    #frame .button.in {
+      background-position: center top;
+      background-image: url(../images/math.svg); }
+    #frame .button.out {
+      background-position: center bottom;
+      background-image: url(../images/math.svg); }
+    #frame .button.close {
+      background-image: url(../images/x.svg); }
   #frame .leaflet-left {
     display: none; }
   #frame .leaflet-top.leaflet-right {
@@ -1279,49 +1348,20 @@ main .block {
         white-space: nowrap; }
     #frame-bar .text-wrap .caption {
       display: block; }
-  #frame-bar .tools {
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: #f4f6fa;
-    box-shadow: -5px 0 20px 10px #f4f6fa; }
-    #frame-bar .tools div {
-      width: 1.5em;
-      height: 1.5em;
-      float: left;
-      font-size: 19px;
-      line-height: 1.3em;
-      font-weight: normal;
-      background-size: 1em;
-      background-position: center;
-      background-repeat: no-repeat;
-      margin-top: calc(.25em - 1px); }
-      @media (max-width: 768px) {
-        #frame-bar .tools div {
-          font-size: 15px; } }
-      #frame-bar .tools div:first-child {
-        margin-left: .25em; }
-      #frame-bar .tools div:last-child {
-        margin-right: .25em; }
-      #frame-bar .tools div:hover {
-        cursor: pointer;
-        opacity: .5; }
-      #frame-bar .tools div.expand {
-        background-image: url(../images/up.svg); }
-      #frame-bar .tools div.in {
-        background-image: url(../images/in.svg); }
-      #frame-bar .tools div.out {
-        background-image: url(../images/out.svg); }
-      #frame-bar .tools div.close {
-        background-image: url(../images/x.svg); }
+    #frame-bar .text-wrap .expand {
+      background-image: url(../images/up.svg);
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: #f4f6fa;
+      box-shadow: -5px 0 20px 10px #f4f6fa; }
   #frame-bar.toggled {
     transition: opacity 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95), height 150ms cubic-bezier(0.215, 0.61, 0.355, 1); }
     #frame-bar.toggled .title, #frame-bar.toggled .meta, #frame-bar.toggled .caption {
       height: auto;
       white-space: pre-line;
       padding-top: 0.5em; }
-    #frame-bar.toggled .tools .expand {
+    #frame-bar.toggled .expand {
       background-image: url(../images/down.svg) !important; }
   #frame-bar.noCaption .expand {
     display: none !important; }
@@ -1330,35 +1370,20 @@ main .block {
   .single {
     height: calc(100% - 2em);
     top: 2em; }
+    .single.folder .handle {
+      display: none !important; }
     .single.folder .sections {
-      width: 200vw;
-      height: 100%;
-      position: absolute;
-      left: 0;
-      top: 0;
-      transition: transform 300ms cubic-bezier(0.215, 0.61, 0.355, 1); }
+      overflow-y: auto; }
       .single.folder .sections section {
-        width: 50% !important;
-        min-width: auto; }
-        .single.folder .sections section .inner {
-          max-width: 100% !important;
-          margin-left: 0 !important;
-          margin-right: 0 !important; }
-        .single.folder .sections section.right .inner {
-          width: calc(100% - 1em + 6px); }
-    .single.folder.open.left .sections {
-      transform: translateX(0); }
-      .single.folder.open.left .sections .right .inner {
-        opacity: 0; }
-    .single.folder.open.right .sections {
-      transform: translateX(calc(-50% + 10px)); }
-      .single.folder.open.right .sections .left .inner {
-        opacity: 0; }
-    .single .arrow {
-      display: none !important; } }
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important; }
+        .single.folder .sections section:first-child .inner {
+          padding-bottom: 0; } }
 body.aid main, body.about main, body.error main, body.field-note main, body.field-notes main, body.stories main {
   overflow-y: scroll;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   height: calc(100% - 2em);
   position: relative; }
   body.aid main section, body.about main section, body.error main section, body.field-note main section, body.field-notes main section, body.stories main section {
@@ -1483,7 +1508,10 @@ section.rows {
         transition: color 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
         section.rows .rowrap .row .wrap a.title {
           width: 50%;
-          z-index: 10; }
+          z-index: 10;
+          text-decoration: none; }
+          section.rows .rowrap .row .wrap a.title h1 {
+            text-decoration: underline; }
         section.rows .rowrap .row .wrap .image {
           width: 50%;
           max-width: none;
@@ -1807,9 +1835,6 @@ body.error {
         float: left;
         display: inline-block;
         margin-left: 1em; }
-  @media (max-width: 480px) {
-    #collection {
-      display: none; } }
 
 footer {
   width: 100%;
@@ -1868,5 +1893,17 @@ footer {
               color: #000000 !important; }
         footer .inner .column ul.stories, footer .inner .column ul.field-notes {
           max-width: 11em; }
+
+@media (max-width: 480px) {
+  footer .inner {
+    width: 100%;
+    display: table; }
+    footer .inner .column {
+      width: 100%;
+      margin-bottom: 1em; }
+      footer .inner .column ul {
+        max-width: 100%; }
+      footer .inner .column:last-child {
+        margin-bottom: 0; } }
 
 /*# sourceMappingURL=prestyle.css.map */

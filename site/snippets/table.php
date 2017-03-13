@@ -58,7 +58,7 @@ echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . 
 			echo '</div>';
 		echo '</div>';
 		echo '<div id="info" class="card full">';
-	 		echo '<div class="vert">';
+	 		echo '<div class="inner">';
 	 			echo '<h3>Overview</h3>';
 	 			echo '<div class="details">';
 			  	echo '<div class="row"><label>Collaborators</label>' . $collaborators . '</div>';
@@ -72,14 +72,12 @@ echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . 
 		echo '</div>';
 	} else {
 		echo '<div class="card half">';
-			echo '<div class="horz">';
-				echo '<div class="vert">';
-					$rotate = mt_rand( -25, 0 )/100;
-					$shift = mt_rand( -100, -50 )/100;
-					echo '<h1 class="title"><div class="rotate shift" data-rotate="' . $rotate . '" data-shift="' . $shift . '">Collection</div></h1>';
-					echo '<div  class="text">';
-						echo $page->text();
-					echo '</div>';
+			echo '<div class="inner">';
+				$rotate = mt_rand( -25, 0 )/100;
+				$shift = mt_rand( -100, -50 )/100;
+				echo '<h1 class="title"><div class="rotate shift" data-rotate="' . $rotate . '" data-shift="' . $shift . '">Collection</div></h1>';
+				echo '<div  class="text">';
+					echo $page->text();
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';
@@ -104,50 +102,40 @@ echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . 
 	echo '</div>';
 
 	if( isset( $links ) ) {
-		echo '<div class="card full end">';
-		  echo '<div class="horz">';
-		 		echo '<div class="vert">';
-		 			echo '<div class="inner">';
-			 			echo '<div class="column">';
-				 			echo '<ul>';
-				 				echo '<li><h3>External Resources</h3></li>';
-							  foreach( $links as $index => $link ) {
-							  	echo '<li>';
-								  	echo '<a href="' . $link->url() . '" target="_bank" style="color:' . $color . '">';
-								  	  echo $link->title();
-								  	  echo '<div class="tags">';
-									  	  $tagdex = 0;
-									  	  $tags = $link->tags()->split();
-									  	  $count = sizeof( $tags );
-									  	  foreach( $tags as $tag ) {
-									  	  	echo $tag;
-									  	  	if( $count > 1 && $tagdex < $count - 1 ) {
-									  	  		echo ', ';
-									  	  	}
-									  	  	$tagdex++;
-									  	  }
-											echo '</div>';
-								  	echo '</a>';
-								  echo '</li>';
-							  }
-							echo '</ul>';
-						echo '</div>';
-					echo '</div>';
+		echo '<div class="card half end">';
+		  echo '<div class="inner">';
+	 			echo '<div class="column">';
+		 			echo '<ul>';
+		 				echo '<li><h3>External Resources</h3></li>';
+					  foreach( $links as $index => $link ) {
+					  	echo '<li>';
+						  	echo '<a href="' . $link->url() . '" target="_bank" style="color:' . $color . '">';
+						  	  echo $link->title();
+						  	  echo '<div class="tags">';
+							  	  $tagdex = 0;
+							  	  $tags = $link->tags()->split();
+							  	  $count = sizeof( $tags );
+							  	  foreach( $tags as $tag ) {
+							  	  	echo $tag;
+							  	  	if( $count > 1 && $tagdex < $count - 1 ) {
+							  	  		echo ', ';
+							  	  	}
+							  	  	$tagdex++;
+							  	  }
+									echo '</div>';
+						  	echo '</a>';
+						  echo '</li>';
+					  }
+					echo '</ul>';
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';
 	}
 
 	echo '<div class="card half end">';
-	  echo '<div class="horz">';
-	  	echo '<div class="vert">';
-				snippet( 'footer', array( 'card' => true ) );
-			echo '</div>';
-		echo '</div>';
+		snippet( 'footer', array( 'card' => true ) );
 	echo '</div>';
 
 echo '</div>';
-if( $story ) {
-	snippet( 'collection' );
-}
+snippet( 'collection' );
 ?>

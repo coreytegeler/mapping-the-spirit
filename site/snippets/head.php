@@ -13,6 +13,7 @@
   echo js(array(
     'assets/js/jquery.js',
     'assets/js/jquery-ui.js',
+    'assets/js/touch-punch.js',
     'https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js',
     'assets/js/isotope.js',
     'assets/js/masonry-horizontal.js',

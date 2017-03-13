@@ -3,8 +3,13 @@ snippet('head');
   echo '<main>';
 	  $stories = page( 'stories' )->children()->visible();
 		echo '<section id="stories" class="rows">';
-			echo '<div class="about">';
-				echo $page->brief()->kirbytext();
+			echo '<div class="inner">';
+				echo '<h2 class="title">Stories</h2>';
+				if( !$page->text()->empty() ) {
+					echo '<div class="about">';
+						echo $page->text()->kirbytext();
+					echo '</div>';
+				}
 			echo '</div>';
 			echo '<div class="rowrap">';
 				$index = 0;

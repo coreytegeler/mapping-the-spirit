@@ -37,12 +37,13 @@ $ ->
 		$body.on 'mouseleave', '.item.click', lookAway
 		$body.on 'click', '.single.folder .handle', toggleFolder
 		$body.on 'click', '.block.image:not(.noZoom) img', zoomImage
-		$body.on 'click', '#frame-bar .tools div', frameTool
+		$body.on 'click', '#frame .button', frameTool
 		$body.on 'click', '.single .paginate', paginate
 		$body.on 'click', '.single .block a.item', clickLink
 		$body.on 'click', '#error a.back', goBack
 		$body.on 'mouseover', '.row a', hoverRow
 		$body.on 'mouseleave', '.row a', unhoverRow
+		$body.on 'click', '.open-links', openLinks
 		$(window).on 'popstate', (e) ->
 			e.preventDefault()
 			browserNav(e)
@@ -71,7 +72,7 @@ $ ->
 					$(this).attr('style', '')
 			else
 				$('.resizable').resizable('enable')
-				resizeGrid()
+			resizeGrid()
 			resizeFolder()
 			resizeCollection()
 			resizeFrameBar()
@@ -79,29 +80,32 @@ $ ->
 
 	buildGrid = () ->
 		gutter = $grid.find('.gutter').innerWidth()
-		if !checkSize('phone')
-			$grid.isotope
-				layoutMode: 'masonryHorizontal',
-				itemSelector: '.item',
-				percentPosition: false,
+		# if checkSize('phone')
+		# 	$body.addClass('mobile')
+		# else
+		$grid.isotope
+			layoutMode: 'masonryHorizontal',
+			itemSelector: '.item',
+			percentPosition: false,
+			gutter: gutter,
+			transitionDuration: 0
+			masonryHorizontal: {
+				rowHeight: '.sizer',
 				gutter: gutter,
+				percentPosition: true,
 				transitionDuration: 0
-				masonryHorizontal: {
-					rowHeight: '.sizer',
-					gutter: gutter,
-					percentPosition: true,
-					transitionDuration: 0
-				},
-				animationOptions: {
-					duration: 0
-				}
+			},
+			animationOptions: {
+				duration: 0
+			}
 		$grid.addClass('loaded')
 		resizeGrid()
 		vertScroll()
 
 	resizeGrid = () ->
-		if !checkSize('phone') && $grid.is('.loaded')
-			gutter = $grid.find('.gutter').innerWidth()
+		# if !checkSize('phone') && $grid.is('.loaded')
+		gutter = $grid.find('.gutter').innerWidth()
+		if $grid.data('isotope')
 			$grid.find('.item').each () ->
 				sizeImage(this, gutter)
 				$grid.isotope('layout')
@@ -117,9 +121,9 @@ $ ->
 			sizeImage($item)
 			if $item.parents('#grid')
 				resizeGrid()
+			$img.removeClass('load')
 			$item.imagesLoaded () ->
 				$item.addClass('loaded')
-				$img.removeClass('load')
 				$img.css('width','')
 				$img.css('height','')
 				$img.css('maxHeight','')
@@ -157,9 +161,11 @@ $ ->
 		if(!$item.is('.show'))
 			$item.css
 				width: width
-			$item.addClass('show')
+			setTimeout () ->
+				$item.addClass('show')
 		else
 			$img.width('')
+
 
 	vertScroll = (self, event) ->
 		vertScrollTop = $main.scrollTop()
@@ -178,12 +184,13 @@ $ ->
 
 	horzScroll = (self, event) ->
 		if $grid.length
-			if checkSize('phone')
+			if $body.is('.mobile')
 				return
-			delta = event.deltaY
-			if(delta != 0)
-				event.preventDefault()
-				self.scrollLeft -= delta
+			if event.deltaY != 0
+				# event.preventDefault()
+				self.scrollLeft -= event.deltaY
+			if event.deltaX != 0
+				return false
 
 	dragAndDrop = () ->
 		gutter = $grid.find('.gutter').innerWidth()
@@ -289,6 +296,11 @@ $ ->
 			setTimeout () ->
 				resizeCollection()
 			, 100
+		if $body.is('.collection') && $item.is('.hide')
+			console.log $item = $grid.find('[data-slug="'+slug+'"]')
+			$item = $grid.find('[data-slug="'+slug+'"]').removeClass('hide')
+			$grid.isotope('layout')
+
 
 	uncollect = (slug) ->
 		$item = $collection.find('[data-slug="'+slug+'"]')
@@ -299,10 +311,14 @@ $ ->
 			if(!$collection.find('.item').length)
 				$collection.addClass('empty')
 		,1
+		if $body.is('.collection')
+			$grid.find('[data-slug="'+slug+'"]').addClass('hide')
+			$grid.isotope('layout')
 
 	clickItem = (e) ->
-		if !$grid
+		if !$grid.length
 			return
+		console.log '!'
 		e.preventDefault()
 		$item = $(this)
 		if $item.is('.selected')
@@ -524,7 +540,7 @@ $ ->
 
 	shiftAndRotate = (item, e) ->
 		$item = $(item)
-		if $item.is('.helper')
+		if $item.is('.helper') || $item.parents('#collection').length
 			return
 		shift = $item.attr('data-shift')
 		index = $item.attr('data-index')
@@ -608,11 +624,16 @@ $ ->
 			if $item.length
 				collect(slug)
 			else
-				createCollectionItem(slug, story)
+				createCollectionItem(slug, story, true)
+				if $body.is('.collection')
+					createCollectionItem(slug, story, false, i)
 
-	createCollectionItem = (item, story) ->
-		inFooter = !$body.is('.collection')
-		url = '/api?item='+item+'&story='+story+'&footer='+inFooter
+	createCollectionItem = (item, story, inFooter, index) ->
+		url = '/api?item='+item+'&story='+story
+		if index
+			url += '&index='+index
+		if inFooter
+			url += '&footer='+inFooter
 		if window.location.href.indexOf('secret') > 1
 			url = '/secret' + url
 		$.ajax
@@ -623,32 +644,12 @@ $ ->
 			success: (item, status, jqXHR) ->
 				if !item
 					return
-				item = JSON.parse(item)
 				addToCollection(item, story, inFooter)
 		if($body.is('.aid'))
 			$('.item[data-slug="'+item+'"]').addClass('collected')
 
 	addToCollection = (item, story, inFooter) ->
-		$item = $('<a></a>')
-		$item.addClass('click item collected')
-		$item.addClass(item.type+' '+item.display+' shift rotate')
-		$item.attr('href', item.url)
-		$item.attr('data-story', story)
-		$item.attr('data-type', item.type)
-		$item.attr('data-url', item.url)
-		$item.attr('data-slug', item.slug)
-		rotate = ((Math.random() * 1) - 25)/100;
-		shift = ((Math.random() * -100) - 200)/100;
-		$item.data('rotate', rotate)
-		$item.data('shift', shift)
-		if item.display == 'text'
-			$itemInner = $('<div class="inner"><div class="text">'+item.content+'</div><div class="shadow"></div></div>')
-			$itemInner.css('color', item.color)
-		else
-			$itemInner = $('<div class="inner"><div class="image"><img class="load" src="'+item.content+'"/></div></div>')
-			if(item.bw == 'true')
-				$itemInner.find('.image').addClass('bw').css('background', item.color)
-		$item.append($itemInner)
+		$item = $(item)
 		if inFooter
 			$('#collection .items').append($item)
 			$collection.removeClass('empty')
@@ -732,9 +733,9 @@ $ ->
 		if !url
 			url = $image.attr('src')
 		$frame = $('<div id="frame" class="block image"><div id="frame-inner" class="has-loader"><div class="window loader"></div></div></div>')
-		$tools = $('<div class="tools"><div class="expand"/><div class="out"/><div class="in"/><div class="close"/></div>')
-		$bar = $('<div id="frame-bar"></div>')
-		$bar.prepend($tools)
+		$buttons = $('<div class="buttons"><div class="button out"/><div class="button in"/><div class="button close"/></div>')
+		$bar = $('<div id="frame-bar"><div class="button expand"/></div>')
+		$frame.prepend($buttons)
 		$bar.append($text)
 		if !$text.find('.caption') || !$text.find('.caption').text().length
 			$bar.addClass('noCaption')
@@ -802,6 +803,9 @@ $ ->
 	unhoverRow = () ->
 		$row = $(this).parents('.row')
 		$row.removeClass('hover')
+
+	openLinks = () ->
+		$header.toggleClass('toggled')
 		
 	goBack = (e) ->
 		e.preventDefault()

@@ -5,12 +5,13 @@ snippet('head');
 echo '<main>';
 	echo '<section id="field-notes" class="rows">';
 		echo '<div class="inner">';
-			echo '<div class="blocks text-wrap">';
-		  	echo '<div class="block text">';
-		  		echo '<h2 class="title">' . $page->title() . '</h2>';
-	  		echo '</div>';
-	  	echo '</div>';
-	  echo '</div>';
+			echo '<h2 class="title">Field Notes</h2>';
+			if( !$page->text()->empty() ) {
+				echo '<div class="about">';
+					echo $page->text()->kirbytext();
+				echo '</div>';
+			}
+		echo '</div>';
 		echo '<div class="rowrap">';
 			$index = 0;
 			foreach( $field_notes as $field_note ) {

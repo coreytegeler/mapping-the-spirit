@@ -7,8 +7,8 @@ email: coreytegeler@gmail.com
 language: en
 role: admin
 history:
+  - field-notes
+  - stories/msta/interview-the-holy-koran-and-the-archives-of-msta
+  - stories/msta/you-are-not-negroes-colored-folks-black-people-or-ethiopians
   - stories/msta
   - collection
-  - stories/msta/prophet-s-day-2017
-  - home
-  - stories/msta/joining-the-moorish-science-temple-of-america

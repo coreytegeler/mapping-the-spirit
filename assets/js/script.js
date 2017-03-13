@@ -3,7 +3,7 @@
   var indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   $(function() {
-    var $aid, $body, $collection, $collectionItems, $frame, $grid, $header, $itemTitle, $main, $pageTitle, $secondary, $table, $window, addToCollection, browseCollection, browserNav, buildGrid, checkSize, clickItem, clickLink, closeDur, closeFrame, closeSingle, collect, collectSingle, createCollectionItem, createSingle, dragAndDrop, frameTool, goBack, horzScroll, hoverRow, init, insertCollection, loadCollection, loadImages, loadSingle, loadedSlug, lookAt, lookAway, makeResizable, noHover, openDur, paginate, pickUp, putDown, putDownAll, removeCollectedItem, resizeCollection, resizeFolder, resizeFrameBar, resizeGrid, saveCollection, scrollInterval, scrollShift, shiftAndRotate, sizeImage, toggleFolder, transEnd, uncollect, unhoverRow, vertScroll, zoomImage;
+    var $aid, $body, $collection, $collectionItems, $frame, $grid, $header, $itemTitle, $main, $pageTitle, $secondary, $table, $window, addToCollection, browseCollection, browserNav, buildGrid, checkSize, clickItem, clickLink, closeDur, closeFrame, closeSingle, collect, collectSingle, createCollectionItem, createSingle, dragAndDrop, frameTool, goBack, horzScroll, hoverRow, init, insertCollection, loadCollection, loadImages, loadSingle, loadedSlug, lookAt, lookAway, makeResizable, noHover, openDur, openLinks, paginate, pickUp, putDown, putDownAll, removeCollectedItem, resizeCollection, resizeFolder, resizeFrameBar, resizeGrid, saveCollection, scrollInterval, scrollShift, shiftAndRotate, sizeImage, toggleFolder, transEnd, uncollect, unhoverRow, vertScroll, zoomImage;
     $window = $(window);
     $body = $('body');
     $main = $('main');
@@ -46,12 +46,13 @@
       $body.on('mouseleave', '.item.click', lookAway);
       $body.on('click', '.single.folder .handle', toggleFolder);
       $body.on('click', '.block.image:not(.noZoom) img', zoomImage);
-      $body.on('click', '#frame-bar .tools div', frameTool);
+      $body.on('click', '#frame .button', frameTool);
       $body.on('click', '.single .paginate', paginate);
       $body.on('click', '.single .block a.item', clickLink);
       $body.on('click', '#error a.back', goBack);
       $body.on('mouseover', '.row a', hoverRow);
       $body.on('mouseleave', '.row a', unhoverRow);
+      $body.on('click', '.open-links', openLinks);
       $(window).on('popstate', function(e) {
         e.preventDefault();
         return browserNav(e);
@@ -83,8 +84,8 @@
           });
         } else {
           $('.resizable').resizable('enable');
-          resizeGrid();
         }
+        resizeGrid();
         resizeFolder();
         resizeCollection();
         return resizeFrameBar();
@@ -93,32 +94,30 @@
     buildGrid = function() {
       var gutter;
       gutter = $grid.find('.gutter').innerWidth();
-      if (!checkSize('phone')) {
-        $grid.isotope({
-          layoutMode: 'masonryHorizontal',
-          itemSelector: '.item',
-          percentPosition: false,
+      $grid.isotope({
+        layoutMode: 'masonryHorizontal',
+        itemSelector: '.item',
+        percentPosition: false,
+        gutter: gutter,
+        transitionDuration: 0,
+        masonryHorizontal: {
+          rowHeight: '.sizer',
           gutter: gutter,
-          transitionDuration: 0,
-          masonryHorizontal: {
-            rowHeight: '.sizer',
-            gutter: gutter,
-            percentPosition: true,
-            transitionDuration: 0
-          },
-          animationOptions: {
-            duration: 0
-          }
-        });
-      }
+          percentPosition: true,
+          transitionDuration: 0
+        },
+        animationOptions: {
+          duration: 0
+        }
+      });
       $grid.addClass('loaded');
       resizeGrid();
       return vertScroll();
     };
     resizeGrid = function() {
       var gutter;
-      if (!checkSize('phone') && $grid.is('.loaded')) {
-        gutter = $grid.find('.gutter').innerWidth();
+      gutter = $grid.find('.gutter').innerWidth();
+      if ($grid.data('isotope')) {
         return $grid.find('.item').each(function() {
           sizeImage(this, gutter);
           return $grid.isotope('layout');
@@ -138,9 +137,9 @@
         if ($item.parents('#grid')) {
           resizeGrid();
         }
+        $img.removeClass('load');
         return $item.imagesLoaded(function() {
           $item.addClass('loaded');
-          $img.removeClass('load');
           $img.css('width', '');
           $img.css('height', '');
           $img.css('maxHeight', '');
@@ -184,7 +183,9 @@
         $item.css({
           width: width
         });
-        return $item.addClass('show');
+        return setTimeout(function() {
+          return $item.addClass('show');
+        });
       } else {
         return $img.width('');
       }
@@ -209,15 +210,15 @@
       });
     };
     horzScroll = function(self, event) {
-      var delta;
       if ($grid.length) {
-        if (checkSize('phone')) {
+        if ($body.is('.mobile')) {
           return;
         }
-        delta = event.deltaY;
-        if (delta !== 0) {
-          event.preventDefault();
-          return self.scrollLeft -= delta;
+        if (event.deltaY !== 0) {
+          self.scrollLeft -= event.deltaY;
+        }
+        if (event.deltaX !== 0) {
+          return false;
         }
       }
     };
@@ -345,29 +346,39 @@
       resizeCollection();
       saveCollection();
       resizeCollection();
-      return $item.imagesLoaded(function() {
+      $item.imagesLoaded(function() {
         return setTimeout(function() {
           return resizeCollection();
         }, 100);
       });
+      if ($body.is('.collection') && $item.is('.hide')) {
+        console.log($item = $grid.find('[data-slug="' + slug + '"]'));
+        $item = $grid.find('[data-slug="' + slug + '"]').removeClass('hide');
+        return $grid.isotope('layout');
+      }
     };
     uncollect = function(slug) {
       var $item, story;
       $item = $collection.find('[data-slug="' + slug + '"]');
       story = $item.data('story');
       $item.remove();
-      return setTimeout(function() {
+      setTimeout(function() {
         removeCollectedItem(story, slug);
         if (!$collection.find('.item').length) {
           return $collection.addClass('empty');
         }
       }, 1);
+      if ($body.is('.collection')) {
+        $grid.find('[data-slug="' + slug + '"]').addClass('hide');
+        return $grid.isotope('layout');
+      }
     };
     clickItem = function(e) {
       var $item, $single, slug;
-      if (!$grid) {
+      if (!$grid.length) {
         return;
       }
+      console.log('!');
       e.preventDefault();
       $item = $(this);
       if ($item.is('.selected')) {
@@ -641,7 +652,7 @@
     shiftAndRotate = function(item, e) {
       var $item, index, rotate, shift, shiftX, shiftY, winHeight, winWidth, x, y;
       $item = $(item);
-      if ($item.is('.helper')) {
+      if ($item.is('.helper') || $item.parents('#collection').length) {
         return;
       }
       shift = $item.attr('data-shift');
@@ -744,14 +755,22 @@
         if ($item.length) {
           return collect(slug);
         } else {
-          return createCollectionItem(slug, story);
+          createCollectionItem(slug, story, true);
+          if ($body.is('.collection')) {
+            return createCollectionItem(slug, story, false, i);
+          }
         }
       });
     };
-    createCollectionItem = function(item, story) {
-      var inFooter, url;
-      inFooter = !$body.is('.collection');
-      url = '/api?item=' + item + '&story=' + story + '&footer=' + inFooter;
+    createCollectionItem = function(item, story, inFooter, index) {
+      var url;
+      url = '/api?item=' + item + '&story=' + story;
+      if (index) {
+        url += '&index=' + index;
+      }
+      if (inFooter) {
+        url += '&footer=' + inFooter;
+      }
       if (window.location.href.indexOf('secret') > 1) {
         url = '/secret' + url;
       }
@@ -765,7 +784,6 @@
           if (!item) {
             return;
           }
-          item = JSON.parse(item);
           return addToCollection(item, story, inFooter);
         }
       });
@@ -774,29 +792,8 @@
       }
     };
     addToCollection = function(item, story, inFooter) {
-      var $item, $itemInner, rotate, shift;
-      $item = $('<a></a>');
-      $item.addClass('click item collected');
-      $item.addClass(item.type + ' ' + item.display + ' shift rotate');
-      $item.attr('href', item.url);
-      $item.attr('data-story', story);
-      $item.attr('data-type', item.type);
-      $item.attr('data-url', item.url);
-      $item.attr('data-slug', item.slug);
-      rotate = ((Math.random() * 1) - 25) / 100;
-      shift = ((Math.random() * -100) - 200) / 100;
-      $item.data('rotate', rotate);
-      $item.data('shift', shift);
-      if (item.display === 'text') {
-        $itemInner = $('<div class="inner"><div class="text">' + item.content + '</div><div class="shadow"></div></div>');
-        $itemInner.css('color', item.color);
-      } else {
-        $itemInner = $('<div class="inner"><div class="image"><img class="load" src="' + item.content + '"/></div></div>');
-        if (item.bw === 'true') {
-          $itemInner.find('.image').addClass('bw').css('background', item.color);
-        }
-      }
-      $item.append($itemInner);
+      var $item;
+      $item = $(item);
       if (inFooter) {
         $('#collection .items').append($item);
         $collection.removeClass('empty');
@@ -895,7 +892,7 @@
       }
     };
     zoomImage = function() {
-      var $bar, $block, $image, $text, $tools, img, url;
+      var $bar, $block, $buttons, $image, $text, img, url;
       $image = $(this);
       $block = $image.parents('.block');
       $text = $block.find('.text-wrap').clone();
@@ -904,9 +901,9 @@
         url = $image.attr('src');
       }
       $frame = $('<div id="frame" class="block image"><div id="frame-inner" class="has-loader"><div class="window loader"></div></div></div>');
-      $tools = $('<div class="tools"><div class="expand"/><div class="out"/><div class="in"/><div class="close"/></div>');
-      $bar = $('<div id="frame-bar"></div>');
-      $bar.prepend($tools);
+      $buttons = $('<div class="buttons"><div class="button out"/><div class="button in"/><div class="button close"/></div>');
+      $bar = $('<div id="frame-bar"><div class="button expand"/></div>');
+      $frame.prepend($buttons);
       $bar.append($text);
       if (!$text.find('.caption') || !$text.find('.caption').text().length) {
         $bar.addClass('noCaption');
@@ -991,6 +988,9 @@
       var $row;
       $row = $(this).parents('.row');
       return $row.removeClass('hover');
+    };
+    openLinks = function() {
+      return $header.toggleClass('toggled');
     };
     goBack = function(e) {
       e.preventDefault();

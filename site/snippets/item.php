@@ -1,9 +1,11 @@
 <?php
 if( isset( $item ) ) {
 	$type = $item->intendedTemplate();
-	$size = $item->size();
-	if( $size->empty() ) {
-		$size = 'small';
+	if( !isset( $size ) ) {
+		$size = $item->size();
+		if( $size->empty() ) {
+			$size = 'small';
+		}
 	}
 	if( $type == 'quote' ) {
 		$display = 'text';
@@ -25,11 +27,10 @@ if( isset( $item ) ) {
 	}
 	$attrs = ' ' . $type . ' ' . $size . ' ' . $display . ' ' . $item->textSize() . '" data-shift="' . $shift . '" data-rotate="' . $rotate . '" data-story="' . $story->slug() . '" data-slug="' . $item->slug() . '" data-type="' . $type . '" data-url="' . $item->url() . '" data-title="' . $item->title() . '" data-index="' . $index . '" data-thumb="' . ( $thumb ? $thumb->url() : '' ) . '" href="' . $item->url() . '"';
 }
-// if( $imgCheck || $textCheck ) {
 echo '<a class="click item rotate shift droppable' . ( $attrs ? $attrs : '' ) . '>';
 	echo '<div class="inner" style="color:' . $color . '">';
 		if( isset( $item ) ) {
-		  snippet( 'items/' . $type, array( 'item' => $item, 'color' => $color, 'display' => $display ) );
+		  snippet( 'items/' . $type, array( 'item' => $item, 'color' => $color, 'display' => $display, 'size' => $size ) );
 		}
 	echo '</div>';
 	echo '<div class="shadow"></div>';

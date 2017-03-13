@@ -52,6 +52,7 @@
 		width: 1.5em;
 		height: 1.5em;
 		position: absolute;
+		top: .25em;
 		z-index: 100;
 		background-size: 1.5em;
 		background-repeat: no-repeat;
@@ -64,33 +65,28 @@
 		&.close-single {
 			background-image: url(../images/x.svg);
 			background-position: center;
-			right: 0;
-			top: 0;
+			right: .25em;
 		}
 		&.collect {
-			background-image: url(../images/collect.svg);
-			left: 0;
-			top: 0;
+			background-image: url(../images/math.svg);
+			right: 1.75em;
 			.tooltip {
 				height: 1.5em;
 				position: absolute;
-				left: 0em;
+				right: 1.5em;
 				top: 0;
 				padding-left: 1.5em;
 				display: none;
 				color: $medium;
-				// border: solid $medium;
-				// border-width: 0 1px 1px 0;
 				div {
 					display: none;
 					padding: .125em .5em;
-					background-color: $lightest;
 					vertical-align: middle;
 					white-space: nowrap;
+					text-shadow: -1px -1px 0px rgba($lightest, 1), 1px -1px 0px rgba($lightest, 1), -1px 1px 0px rgba($lightest, 1), 1px 1px 0px rgba($lightest, 1);
 				}
 			}
 			&:hover {
-				background-color: $lightest;
 				.tooltip {
 					display: table;
 				}
@@ -122,6 +118,7 @@
 			height: 100%;
 			overflow-y: auto;
 			overflow-x: hidden;
+			-webkit-overflow-scrolling: touch;
 		}
 		.inner {
 			height: 100%;
@@ -360,30 +357,36 @@ main .block {
 		display: table;
 		margin-left: auto;
 		margin-right: auto;
-		font-family: $sansItalic;
+		font-family: $sans;
 		.text {
 			position: relative;
-			&::before, &::after {
-				width: 1em;
-				display: inline;
-				position: absolute;
-				@include largeText;
-				font-family: $sansBlackItalic;
-				line-height: 1em;
-				color: $light;
-			}
-			&::before {
-				content: '“';
-				left: 0;
-				top: 0;
-			}
-			&::after {
-				content: '”';
-			}
+			color: rgba($dark, 0.6);
 			p {
-				display: inline;	
+				width: 100%;
+				padding: 0 2em .5em 2em;
+				display: inline-block;
+				&::before, &::after {
+					width: auto;
+					display: inline;
+					position: absolute;
+					font-family: $sansBlackItalic;
+					font-size: 4em;
+					line-height: .5em;
+					color: $light;
+				}
 				&:first-child {
-					margin-left: 1.3em;
+					&::before {
+						content: '“';
+						left: -.1em;
+						top: 0;
+					}
+				}
+				&:last-child {
+					&::after {
+						content: '”';
+						right: -.1em;
+						bottom: 0;
+					}
 				}
 			}
 		}
@@ -400,6 +403,7 @@ main .block {
 		&.large {
 			max-width: 1000px;
 			.text {
+				font-family: $sansBlack;
 				@include largeText();
 			}
 		}
@@ -459,6 +463,39 @@ main .block {
 		top: 0;
 		background-image: url(../images/x.svg);
 		z-index: 1000;
+	}
+	.buttons {
+		height: 100%;
+		position: absolute;
+		right: .25em;
+		top: .25em;
+		z-index: 1000;
+		.button {
+			float: left;
+		}
+	}
+	.button {
+		width: 1.5em;
+		height: 1.5em;
+		@include baseText;
+		background-size: 1.5em;
+		background-position: center;
+		background-repeat: no-repeat;
+		&:hover {
+			cursor: pointer;
+			opacity: .5;
+		}
+		&.in {
+			background-position: center top;
+			background-image: url(../images/math.svg);
+		}
+		&.out {
+			background-position: center bottom;
+			background-image: url(../images/math.svg);
+		}
+		&.close {
+			background-image: url(../images/x.svg);
+		}
 	}
 	.leaflet-left {
 		display: none;
@@ -531,45 +568,13 @@ main .block {
 		.caption {
 			display: block;
 		}
-	}
-	.tools {
-		height: 100%;
-		position: absolute;
-		right: 0;
-		top: 0;
-		background-color: $lighter;
-		box-shadow: -5px 0 20px 10px $lighter;
-		div {
-			width: 1.5em;
-			height: 1.5em;
-			float: left;
-			@include baseText;
-			background-size: 1em;
-			background-position: center;
-			background-repeat: no-repeat;
-			margin-top: calc(.25em - 1px);
-			&:first-child {
-				margin-left: .25em;
-			}
-			&:last-child {
-				margin-right: .25em;
-			}
-			&:hover {
-				cursor: pointer;
-				opacity: .5;
-			}
-			&.expand {
-				background-image: url(../images/up.svg);
-			}
-			&.in {
-				background-image: url(../images/in.svg);
-			}
-			&.out {
-				background-image: url(../images/out.svg);
-			}
-			&.close {
-				background-image: url(../images/x.svg);
-			}
+		.expand {
+			background-image: url(../images/up.svg);
+			position: absolute;
+			right: 0;
+			top: 0;
+			background-color: $lighter;
+			box-shadow: -5px 0 20px 10px $lighter;
 		}
 	}
 	&.toggled {
@@ -579,7 +584,7 @@ main .block {
 			white-space: pre-line;
 			padding-top: .5em
 		}
-		.tools .expand {
+		.expand {
 			background-image: url(../images/down.svg) !important;
 		}
 	}
@@ -589,48 +594,59 @@ main .block {
 		}
 	}
 }
-
-
 @include phone {
 	.single {
 		height: calc(100% - #{$headerHeight});
 		top: $headerHeight;
 		&.folder {
+			.handle {
+				display: none !important;
+			}
 			.sections {
-				width: 200vw;
-				height: 100%;
-				position: absolute;
-				left: 0;
-				top: 0;
-				transition: transform 300ms $slideEase;
+				overflow-y: auto;
 				section {
-					width: 50% !important;
-					min-width: auto;
-					.inner {
-						max-width: 100% !important;
-						margin-left: 0 !important;
-						margin-right: 0 !important;
-					}
-					&.right .inner {
-						width: calc(100% - 1em + 6px);
+					width: 100% !important;
+					height: auto !important;
+					padding: 0 !important;
+					&:first-child {
+						.inner {
+							padding-bottom: 0;
+						}
 					}
 				}
 			}
-			&.open.left .sections {
-				transform: translateX(0);
-				.right .inner {
-					opacity: 0;
-				}
-			}
-			&.open.right .sections {
-				transform: translateX(calc(-50% + 10px));	
-				.left .inner {
-					opacity: 0;
-				}
-			}
-		}
-		.arrow {
-			display: none !important;
+			// .sections {
+			// 	width: 200vw;
+			// 	height: 100%;
+			// 	position: absolute;
+			// 	left: 0;
+			// 	top: 0;
+			// 	transition: transform 300ms $slideEase;
+			// 	section {
+			// 		width: 50% !important;
+			// 		min-width: auto;
+			// 		.inner {
+			// 			max-width: 100% !important;
+			// 			margin-left: 0 !important;
+			// 			margin-right: 0 !important;
+			// 		}
+			// 		&.right .inner {
+			// 			width: calc(100% - 1em + 6px);
+			// 		}
+			// 	}
+			// }
+			// &.open.left .sections {
+			// 	transform: translateX(0);
+			// 	.right .inner {
+			// 		opacity: 0;
+			// 	}
+			// }
+			// &.open.right .sections {
+			// 	transform: translateX(calc(-50% + 10px));	
+			// 	.left .inner {
+			// 		opacity: 0;
+			// 	}
+			// }
 		}
 	}
 }

@@ -6,4 +6,4 @@ node_modules
 site/accounts
 site/cache
 kirby
-npm-debug.*
+*.log

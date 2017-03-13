@@ -5,7 +5,8 @@ body.aid, body.about, body.error, body.field-note, body.field-notes, body.storie
 	main {
 		overflow-y: scroll;
 		overflow-x: hidden;
-		height: calc(100% - 2em);
+		-webkit-overflow-scrolling: touch;
+		height: calc(100% - #{$headerHeight});
 		position: relative;
 		section {
 			width: 100%;

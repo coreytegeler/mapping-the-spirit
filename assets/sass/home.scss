@@ -1,7 +1,16 @@
 body.home {	
-	overflow-y: auto; 
+	overflow-y: auto;
+	header {
+		position: relative;
+		&.fixed {
+			left: 0;
+			top: 0;
+			position: fixed;
+		}
+	}
 	main {
 		width: 100%;
+		margin: 0;
 		display: block;
 		section#map {
 			width: 100%;

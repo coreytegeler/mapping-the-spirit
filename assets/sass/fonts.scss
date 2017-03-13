@@ -1,150 +1,51 @@
 @font-face {
 	font-family: 'Reglo';
-	src: url('./../fonts/Reglo/Reglo-Bold.eot');
-	src: url('./../fonts/Reglo/Reglo-Bold.eot?#iefix') format('embedded-opentype'),
-		url('./../fonts/Reglo/Reglo-Bold.woff2') format('woff2'),
-		url('./../fonts/Reglo/Reglo-Bold.woff') format('woff'),
-		url('./../fonts/Reglo/Reglo-Bold.ttf') format('truetype'),
-		url('./../fonts/Reglo/Reglo-Bold.svg#Reglo-Bold') format('svg');
-	font-weight: 500;
-	font-style: italic;
+	src: url('./../fonts/reglo/reglo-bold.eot');
+	src: url('./../fonts/reglo/reglo-bold.eot?#iefix') format('embedded-opentype'),
+		url('./../fonts/reglo/reglo-bold.woff') format('woff'),
+		url('./../fonts/reglo/reglo-bold.ttf') format('truetype'),
+		url('./../fonts/reglo/reglo-bold.svg#reglo-bold') format('svg');
+	font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
 	font-family: 'Chivo';
-	src: url('./../fonts/Chivo/Chivo-Regular.eot');
-	src: url('./../fonts/Chivo/Chivo-Regular.eot?#iefix') format('embedded-opentype'),
-		url('./../fonts/Chivo/Chivo-Regular.woff') format('woff'),
-		url('./../fonts/Chivo/Chivo-Regular.ttf') format('truetype'),
-		url('./../fonts/Chivo/Chivo-Regular.svg#Chivo-Regular') format('svg');
+	src: url('./../fonts/chivo/chivo-regular.eot');
+	src: url('./../fonts/chivo/chivo-regular.eot?#iefix') format('embedded-opentype'),
+		url('./../fonts/chivo/chivo-regular.woff') format('woff'),
+		url('./../fonts/chivo/chivo-regular.ttf') format('truetype'),
+		url('./../fonts/chivo/chivo-regular.svg#chivo-regular') format('svg');
 	font-weight: 300;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'Chivo Italic';
-	src: url('./../fonts/Chivo/Chivo-Italic.eot');
-	src: url('./../fonts/Chivo/Chivo-Italic.eot?#iefix') format('embedded-opentype'),
-		url('./../fonts/Chivo/Chivo-Italic.woff') format('woff'),
-		url('./../fonts/Chivo/Chivo-Italic.ttf') format('truetype'),
-		url('./../fonts/Chivo/Chivo-Italic.svg#Chivo-Italic') format('svg');
+	src: url('./../fonts/chivo/chivo-italic.eot');
+	src: url('./../fonts/chivo/chivo-italic.eot?#iefix') format('embedded-opentype'),
+		url('./../fonts/chivo/chivo-italic.woff') format('woff'),
+		url('./../fonts/chivo/chivo-italic.ttf') format('truetype'),
+		url('./../fonts/chivo/chivo-italic.svg#chivo-italic') format('svg');
 	font-weight: 300;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'Chivo Black';
-	src: url('./../fonts/Chivo/Chivo-Black.eot');
-	src: url('./../fonts/Chivo/Chivo-Black.eot?#iefix') format('embedded-opentype'),
-		url('./../fonts/Chivo/Chivo-Black.woff') format('woff'),
-		url('./../fonts/Chivo/Chivo-Black.ttf') format('truetype'),
-		url('./../fonts/Chivo/Chivo-Black.svg#Chivo-Black') format('svg');
+	src: url('./../fonts/chivo/chivo-black.eot');
+	src: url('./../fonts/chivo/chivo-black.eot?#iefix') format('embedded-opentype'),
+		url('./../fonts/chivo/chivo-black.woff') format('woff'),
+		url('./../fonts/chivo/chivo-black.ttf') format('truetype'),
+		url('./../fonts/chivo/chivo-black.svg#chivo-black') format('svg');
 	font-weight: 300;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'Chivo Black Italic';
-	src: url('./../fonts/Chivo/Chivo-BlackItalic.eot');
-	src: url('./../fonts/Chivo/Chivo-BlackItalic.eot?#iefix') format('embedded-opentype'),
-		url('./../fonts/Chivo/Chivo-BlackItalic.woff') format('woff'),
-		url('./../fonts/Chivo/Chivo-BlackItalic.ttf') format('truetype'),
-		url('./../fonts/Chivo/Chivo-BlackItalic.svg#Chivo-BlackItalic') format('svg');
+	src: url('./../fonts/chivo/chivo-black-italic.eot');
+	src: url('./../fonts/chivo/chivo-black-italic.eot?#iefix') format('embedded-opentype'),
+		url('./../fonts/chivo/chivo-black-italic.woff') format('woff'),
+		url('./../fonts/chivo/chivo-black-italic.ttf') format('truetype'),
+		url('./../fonts/chivo/chivo-black-italic.svg#chivo-black-italic') format('svg');
 	font-weight: 300;
 	font-style: normal;
 }
-
-
-
-// @font-face {
-// 	font-family: 'Office Light';
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-Light.eot');
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-Light.eot?#iefix') format('embedded-opentype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Light.woff2') format('woff2'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Light.woff') format('woff'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Light.ttf') format('truetype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Light.svg#OfficeCodePro-Light') format('svg');
-// 	font-weight: 300;
-// 	font-style: normal;
-// }
-
-// @font-face {
-// 	font-family: 'Office Light Italic';
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.eot');
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.eot?#iefix') format('embedded-opentype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.woff2') format('woff2'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.woff') format('woff'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.ttf') format('truetype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-LightItalic.svg#OfficeCodePro-LightItalic') format('svg');
-// 	font-weight: 300;
-// 	font-style: italic;
-// }
-
-// @font-face {
-// 	font-family: 'Office';
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-Regular.eot');
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-Regular.eot?#iefix') format('embedded-opentype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Regular.woff2') format('woff2'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Regular.woff') format('woff'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Regular.ttf') format('truetype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Regular.svg#OfficeCodePro-Regular') format('svg');
-// 	font-weight: normal;
-// 	font-style: normal;
-// }
-
-// @font-face {
-// 	font-family: 'Office Italic';
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.eot');
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.eot?#iefix') format('embedded-opentype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.woff2') format('woff2'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.woff') format('woff'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.ttf') format('truetype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-RegularItalic.svg#OfficeCodePro-RegularItalic') format('svg');
-// 	font-weight: normal;
-// 	font-style: italic;
-// }
-
-// @font-face {
-// 	font-family: 'Office Medium';
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-Medium.eot');
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-Medium.eot?#iefix') format('embedded-opentype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Medium.woff2') format('woff2'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Medium.woff') format('woff'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Medium.ttf') format('truetype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Medium.svg#OfficeCodePro-Medium') format('svg');
-// 	font-weight: 500;
-// 	font-style: normal;
-// }
-
-// @font-face {
-// 	font-family: 'Office Medium Italic';
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.eot');
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.eot?#iefix') format('embedded-opentype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.woff2') format('woff2'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.woff') format('woff'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.ttf') format('truetype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-MediumItalic.svg#OfficeCodePro-MediumItalic') format('svg');
-// 	font-weight: 500;
-// 	font-style: italic;
-// }
-
-// @font-face {
-// 	font-family: 'Office Bold';
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-Bold.eot');
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-Bold.eot?#iefix') format('embedded-opentype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Bold.woff2') format('woff2'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Bold.woff') format('woff'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Bold.ttf') format('truetype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-Bold.svg#OfficeCodePro-Bold') format('svg');
-// 	font-weight: bold;
-// 	font-style: normal;
-// }
-
-// @font-face {
-// 	font-family: 'Office Bold Italic';
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.eot');
-// 	src: url('./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.eot?#iefix') format('embedded-opentype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.woff2') format('woff2'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.woff') format('woff'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.ttf') format('truetype'),
-// 		url('./../fonts/OfficeCodePro/OfficeCodePro-BoldItalic.svg#OfficeCodePro-BoldItalic') format('svg');
-// 	font-weight: bold;
-// 	font-style: italic;
-// }

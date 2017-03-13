@@ -29,6 +29,9 @@
             echo '<a href="' . $field_notes->url() . '">Field Notes</a>';
           }
         }
+        if( $collection = page( 'collection' ) ) {
+          echo '<a href="' . $collection->url() . '">Collection</a>';
+        }
         if( $aid = page( 'aid' ) ) {
           echo '<a href="' . $aid->url() . '">Finding Aid</a>';
         }
@@ -36,5 +39,6 @@
       </div>
     </div>
   </div>
+  <div class="open-links"></div>
   <div class="close-singles"></div>
 </header>

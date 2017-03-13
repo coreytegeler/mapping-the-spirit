@@ -1,9 +1,10 @@
 body.story, body.collection {	
 	main {
 		width: 100%;
-		height: calc(100% - #{$headerHeight} - #{$smallItem} - 1px);
+		height: 100%;
 		position: relative;
 		overflow-x: scroll;
+		-webkit-overflow-scrolling: touch;
 		transition: opacity 500ms $fadeEase, color 500ms $fadeEase, background-color 500ms $fadeEase, border-color 500ms $fadeEase;
 		&.hide {
 	  	opacity: 0;
@@ -13,7 +14,7 @@ body.story, body.collection {
 	  	float: left;
 	  }
 	  #table {
-	  	height: 100%;
+	  	height: calc(100% - #{$smallItem} - #{$headerHeight} - 1px);
 	  	width: 100%;
 	  	position: absolute;
 	  	left: 0;
@@ -34,13 +35,23 @@ body.story, body.collection {
 		.card {
 	  	height: 100%;
 	  	background: $lightest;
-	  	display: table;
+	  	display: flex;
+			align-items: center;
 	  	float: left;
+	  	overflow-y: scroll;
 	  	h3 {
   			text-align: center;
   			display: table;
   			margin: 0 auto .5em auto;
   			text-decoration: underline;
+  		}
+  		.inner {
+  			width: 100%;
+  			max-width: $maxWidth;
+	  		max-height: 100%;
+	  		padding: 2em 0;
+				display: table;
+				margin: auto;
   		}
 	  	.horz {
 	  		max-width: $maxWidth;
@@ -55,12 +66,18 @@ body.story, body.collection {
 			}
 			&.full {
 	  		min-width: 100vw;
+	  		.inner {
+	  			padding-left: 5em;
+	  			padding-right: 5em;
+	  		}
 	  	}
 	  	&.half {
-	  		width: 50vw;
-	  		.vert {
+	  		min-width: 50vw;
+	  		max-width: 50vw;
+	  		.inner {
 	  			width: calc(100% - 2em);
-	  			padding: 0 1em;
+	  			padding-left: 1em;
+	  			padding-right: 1em;
 	  			h1 {
 	  				width: 100%;
 	  			}
@@ -92,6 +109,9 @@ body.story, body.collection {
 				align-items: center;
 				position: relative;
 				transition: color 50ms $fadeEase, background-color 50ms $fadeEase;
+			}
+			a {
+				text-decoration: none;
 			}
 			h1.title {
 				width: 50%;
@@ -149,7 +169,6 @@ body.story, body.collection {
 		}
 		#info {
 			min-width: 45em;
-			max-width: $maxWidth;
 			.details, .historical, .aid {
 				@include xSmallText;
 			}
@@ -170,8 +189,8 @@ body.story, body.collection {
 	  			}
 	  		}
 	  	}
-			.vert {
-				padding: 0 6em 0 3em;
+			.inner {
+				// padding: 0 6em 0 3em;
 			}
 			.aid {
 				padding-top: .5em;
@@ -219,6 +238,9 @@ body.story, body.collection {
 		  	transition: opacity 500ms $fadeEase;
 		  	&.show {
 		  		display: block;
+		  	}
+		  	&.hide {
+		  		display: none !important;
 		  	}
 				&.image {
 					display: none;
@@ -448,9 +470,6 @@ body.story, body.collection {
 				min-width: 20em;
 				padding-right: 1em;
 				padding-bottom: 1em;
-				&:last-child {
-					padding: 0;
-				}
 			}
 			ul {
 				max-width: 15em;
@@ -490,44 +509,53 @@ body.story, body.collection {
   		}
   	}
 	}
-	@include desktop {
-		
-	}
-	@include tablet {
-		
-	}
 	@include phone {
 		main { 
-			height: calc(100% - #{$headerHeight});
 			#table {
-				display: block;
-				overflow-x: hidden;
-				overflow-y: scroll;
-				padding: 0 1em;
-				.full {
-					width: 100% !important;
-					.vert {
-						padding: 0 !important;
+				// display: block;
+				// overflow-x: hidden;
+				// overflow-y: scroll;
+				// padding: 0 1em;
+				.card {
+					height: 100%;
+					padding: 1em 0;
+					overflow-y: auto;
+					overflow-x: hidden;
+					-webkit-overflow-scrolling: touch;
+					&.full {
+						width: 100vw !important;
 					}
-				}
-				#title {
-					height: auto;
-					padding-top: 5em;
-					.mask {
-						width: calc(100vw - 2em);
-					}
-					.image {
-						transform: 0;
-					}
-					&.odd {
-						h1.title {
-							transform: translateX(0);
+					.inner {
+						column-count: 1;
+						padding-left: 1em;
+						padding-right: 1em;
+						ul {
+							margin: auto;
 						}
 					}
-				}
-				#info {
-					height: auto;
-					padding-top: 5em;
+					&#title {
+						height: 100%;
+						.mask {
+							width: calc(100vw - 2em);
+						}
+						.image {
+							transform: 0;
+						}
+						&.odd {
+							h1.title {
+								transform: translateX(0);
+							}
+						}
+					}
+					&#info {
+						width: 100%;
+						min-width: 100%;
+						height: auto;
+					}
+					&.half {
+						max-width: 100%;
+						min-width: 100%;
+					}
 				}
 				#map {
 					height: auto;
@@ -537,31 +565,7 @@ body.story, body.collection {
 						height: auto;
 					}
 				}
-				#grid {
-					width: 100%;
-					padding-top: 5em;
-					.item {
-						width: 100%;
-						margin-right: 0;
-						.image {
-							background-color: transparent !important;
-							img {
-								max-width: 100%;
-								height: auto !important;
-							}
-						}
-						margin-bottom: $gutter;
-					}
-					.sizer {
-						display: none;
-					}
-				}
 			}
 		}
-		footer {
-			display: none;
-		}
-	}
-	&.waiting {
 	}
 }

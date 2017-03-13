@@ -1,11 +1,17 @@
 body.collection {
 	main {
-		height: calc(100% - #{$headerHeight}) !important;
+		height: calc(100% - #{$gutter}) !important;
+		#table {
+			height: calc(100% - #{$gutter});
+		}
 		#grid {
 			min-width: 50vw;
 		}
 	}
 	.single {
 		height: calc(100% - #{$headerHeight}) !important;
+	}
+	#collection {
+		display: none;
 	}
 }

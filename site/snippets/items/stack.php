@@ -2,7 +2,7 @@
 $bw = $item->bw();
 $excerpt = $item->excerpt();
 if( $display == 'image' ) {
-	$thumb = $item->getThumb(null);
+	$thumb = $item->getThumb( $size );
 	echo '<div class="image' . ( $bw == 'true' ? ' bw' : '' ) . '" style="' . ( $bw == 'true' ? 'background-color:' . $color : '' ) . '">';
 		echo '<img class="load" data-width="' . $thumb->width() . '" data-height="' . $thumb->height() . '" data-src="' . $thumb->url() . '"/>';
 	echo '</div>';

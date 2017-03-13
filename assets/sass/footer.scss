@@ -158,9 +158,6 @@
 			}
 		}
 	}
-	@include phone {
-		display: none;
-	}
 }
 footer {
 	width: 100%;
@@ -228,6 +225,25 @@ footer {
 				}
 				&.stories, &.field-notes {
 					max-width: 11em;
+				}
+			}
+		}
+	}
+}
+
+@include phone {
+	footer {
+		.inner {
+			width: 100%;
+			display: table;
+			.column {
+				width: 100%;
+				margin-bottom: 1em;
+				ul {
+					max-width: 100%;
+				}
+				&:last-child {
+					margin-bottom: 0;
 				}
 			}
 		}

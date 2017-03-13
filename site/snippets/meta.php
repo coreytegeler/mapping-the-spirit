@@ -12,7 +12,9 @@ if( !$month->empty() ) {
 	$date = $month;
 	if( !$day->empty() ) { $date .= ' ' . $day; }
 	if( !$year->empty() ) { $date .= ' ' . $year; }
-} else if ( !$year->empty() ) { $date - $year; }
+} else if ( !$year->empty() ) {
+	$date = $year;
+}
 if( $date || !$location->empty() ) {
 	echo '<div class="meta">';
 		if( $date ) {
@@ -25,7 +27,7 @@ if( $date || !$location->empty() ) {
 		  	echo $location;
 	  	echo '</div>';
 	  }
-	  if( !$attribution->empty() && $type != 'quote' ) {
+	  if( !$attribution->empty() ) {
 			echo '<div class="cell">';
 		  	echo $attribution;
 			echo '</div>';
