@@ -7,8 +7,9 @@ email: coreytegeler@gmail.com
 language: en
 role: admin
 history:
+  - >
+    stories/msta/interview-sheik-azeem-hopkins-bey-and-chairperson-terrence-hopkins-bey-discuss-ali-s-men
+  - stories/msta/robert-webb-bey-s-journey-to-the-moorish-science-temple-of-america
+  - stories/msta/unity-in-the-moorish-science-temple-of-america
+  - stories/msta/misconceptions
   - field-notes
-  - stories/msta/interview-the-holy-koran-and-the-archives-of-msta
-  - stories/msta/you-are-not-negroes-colored-folks-black-people-or-ethiopians
-  - stories/msta
-  - collection

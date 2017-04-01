@@ -196,14 +196,15 @@ header {
 		}
 	}
 	.open-links {
-		width: 1em;
-		height: 1em;
+		width: 2em;
+		height: 2em;
 		position: absolute;
-		right: .5em;
-		top: .375em;
+		right: 0;
+		top: 0;
 		z-index: 100;
 		background-size: 1em;
 		background-repeat: no-repeat;
+		background-position: center;
 		background-image: url(../images/up.svg);
 		background-image: url(../images/down.svg);
 		display: none;
@@ -336,7 +337,7 @@ main {
 				top: $headerHeight;
 				border-bottom: 1px solid $dark;
 				padding-left: .5em;
-				white-space: pre;
+				white-space: normal;
 				display: none;
 			}
 		}

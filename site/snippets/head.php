@@ -13,17 +13,17 @@
   echo js(array(
     'assets/js/jquery.js',
     'assets/js/jquery-ui.js',
-    'assets/js/touch-punch.js',
+    // 'assets/js/touch-punch.js',
     'https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js',
     'assets/js/isotope.js',
     'assets/js/masonry-horizontal.js',
     'assets/js/mousewheel.js',
     'assets/js/transit.js',
     'assets/js/leaflet.js',
-    'assets/js/script.js'
+    'assets/js/script.js?version=2.2'
   ));
   echo css( '/assets/css/leaflet.css' );
-  echo css( '/assets/css/style.css' );
+  echo css( '/assets/css/style.css?version=2.2' );
 
   if( !isset( $bodyClass ) ) {
     $bodyClass = [];

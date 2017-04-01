@@ -252,14 +252,15 @@ header {
       header .links a:last-child {
         margin-right: 0; }
   header .open-links {
-    width: 1em;
-    height: 1em;
+    width: 2em;
+    height: 2em;
     position: absolute;
-    right: .5em;
-    top: .375em;
+    right: 0;
+    top: 0;
     z-index: 100;
     background-size: 1em;
     background-repeat: no-repeat;
+    background-position: center;
     background-image: url(../images/up.svg);
     background-image: url(../images/down.svg);
     display: none; }
@@ -410,7 +411,7 @@ main {
         top: 2em;
         border-bottom: 1px solid #000000;
         padding-left: .5em;
-        white-space: pre;
+        white-space: normal;
         display: none; }
     header .open-links {
       display: block; }
@@ -508,103 +509,28 @@ body.home {
       left: 0;
       top: 0; } }
 
-body.story main, body.collection main {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-  -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), border-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), border-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-  body.story main.hide, body.collection main.hide {
-    opacity: 0;
-    pointer-events: none; }
-  body.story main .left, body.collection main .left {
-    float: left; }
-  body.story main #table, body.collection main #table {
-    height: calc(100% - 60px - 2em - 1px);
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 30;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    overflow-x: scroll;
-    overflow-y: hidden; }
-  body.story main .spacer.full, body.collection main .spacer.full {
+body.story, body.collection {
+  overflow-y: hidden; }
+  body.story main, body.collection main {
     width: 100%;
     height: 100%;
-    display: table; }
-  body.story main .card, body.collection main .card {
-    height: 100%;
-    background: #fafcfc;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    float: left;
-    overflow-y: scroll; }
-    body.story main .card h3, body.collection main .card h3 {
-      text-align: center;
-      display: table;
-      margin: 0 auto .5em auto;
-      text-decoration: underline; }
-    body.story main .card .inner, body.collection main .card .inner {
-      width: 100%;
-      max-width: 800px;
-      max-height: 100%;
-      padding: 2em 0;
-      display: table;
-      margin: auto; }
-    body.story main .card .horz, body.collection main .card .horz {
-      max-width: 800px;
-      height: 100%;
-      padding: 0 5em;
-      display: table;
-      margin: auto; }
-    body.story main .card b, body.story main .card strong, body.collection main .card b, body.collection main .card strong {
-      font-family: "Chivo Black", Helvetica, Arial, sans-serif;
-      font-weight: normal; }
-    body.story main .card.full, body.collection main .card.full {
-      min-width: 100vw; }
-      body.story main .card.full .inner, body.collection main .card.full .inner {
-        padding-left: 5em;
-        padding-right: 5em; }
-    body.story main .card.half, body.collection main .card.half {
-      min-width: 50vw;
-      max-width: 50vw; }
-      body.story main .card.half .inner, body.collection main .card.half .inner {
-        width: calc(100% - 2em);
-        padding-left: 1em;
-        padding-right: 1em; }
-        body.story main .card.half .inner h1, body.collection main .card.half .inner h1 {
-          width: 100%; }
-        body.story main .card.half .inner .text, body.collection main .card.half .inner .text {
-          max-width: 480px; }
-  body.story main #title, body.collection main #title {
-    height: 100%;
-    display: table;
     position: relative;
-    overflow: hidden; }
-    body.story main #title .mask, body.collection main #title .mask {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), border-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95), border-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+    body.story main.hide, body.collection main.hide {
+      opacity: 0;
+      pointer-events: none; }
+    body.story main .left, body.collection main .left {
+      float: left; }
+    body.story main #table, body.collection main #table {
+      height: calc(100% - 60px - 2em - 1px);
       width: 100%;
-      max-width: 1440px;
-      height: 100%;
-      display: table;
-      margin: auto;
-      overflow: hidden; }
-    body.story main #title .titleWrap, body.collection main #title .titleWrap {
-      width: 150%;
-      height: 100%;
-      color: black;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 30;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -612,388 +538,465 @@ body.story main, body.collection main {
       -webkit-box-direction: normal;
           -ms-flex-direction: row;
               flex-direction: row;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-      position: relative;
-      -webkit-transition: color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
-      transition: color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-    body.story main #title a, body.collection main #title a {
-      text-decoration: none; }
-    body.story main #title h1.title, body.collection main #title h1.title {
-      width: 50%;
-      z-index: 10;
-      text-decoration: underline; }
-    body.story main #title .image, body.collection main #title .image {
-      width: 50%;
-      max-width: none;
-      opacity: .6;
-      -webkit-transition: background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
-      transition: background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-      body.story main #title .image .img, body.collection main #title .image .img {
-        display: table;
-        background-color: #fafcfc;
-        -webkit-transition: background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
-        transition: background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-        body.story main #title .image .img img, body.collection main #title .image .img img {
-          width: 100%;
-          display: table;
-          -webkit-filter: grayscale(1) contrast(1);
-                  filter: grayscale(1) contrast(1);
-          mix-blend-mode: screen; }
-    body.story main #title.odd .titleWrap, body.collection main #title.odd .titleWrap {
-      -webkit-box-orient: horizontal;
-      -webkit-box-direction: reverse;
-          -ms-flex-direction: row-reverse;
-              flex-direction: row-reverse; }
-    body.story main #title.odd h1.title, body.collection main #title.odd h1.title {
-      text-align: left;
-      float: left;
-      -webkit-transform: translateX(7%);
-              transform: translateX(7%); }
-    body.story main #title.odd .image, body.collection main #title.odd .image {
-      float: left;
-      -webkit-transform: translateX(-75%);
-              transform: translateX(-75%); }
-      body.story main #title.odd .image .img, body.collection main #title.odd .image .img {
-        float: right; }
-    body.story main #title.even .titleWrap, body.collection main #title.even .titleWrap {
-      -webkit-box-orient: horizontal;
-      -webkit-box-direction: normal;
-          -ms-flex-direction: row;
-              flex-direction: row; }
-    body.story main #title.even h1.title, body.collection main #title.even h1.title {
-      text-align: right;
-      float: right;
-      -webkit-transform: translateX(-75%);
-              transform: translateX(-75%); }
-    body.story main #title.even .image, body.collection main #title.even .image {
-      float: right;
-      -webkit-transform: translateX(7%);
-              transform: translateX(7%); }
-  body.story main #info, body.collection main #info {
-    min-width: 45em; }
-    body.story main #info .details, body.story main #info .historical, body.story main #info .aid, body.collection main #info .details, body.collection main #info .historical, body.collection main #info .aid {
-      font-size: .75em;
-      line-height: 1.3em;
-      font-weight: normal; }
-    body.story main #info .details, body.collection main #info .details {
-      display: table; }
-      body.story main #info .details label, body.collection main #info .details label {
-        color: #878a8e;
-        text-transform: uppercase; }
-        body.story main #info .details label::after, body.collection main #info .details label::after {
-          content: ': '; }
-      body.story main #info .details .row, body.collection main #info .details .row {
-        padding-bottom: .5em; }
-        body.story main #info .details .row p, body.collection main #info .details .row p {
-          display: inline;
-          margin: 0; }
-    body.story main #info .aid, body.collection main #info .aid {
-      padding-top: .5em;
-      color: #878a8e !important; }
-      body.story main #info .aid a, body.collection main #info .aid a {
-        text-decoration: none;
-        border-bottom: 1px solid; }
-        body.story main #info .aid a:not(:hover), body.collection main #info .aid a:not(:hover) {
-          color: black !important; }
-  body.story main #map, body.collection main #map {
-    height: 100%;
-    display: block;
-    float: left;
-    padding: 0 calc(20px * 4);
-    background-color: #fafcfc; }
-    body.story main #map img, body.collection main #map img {
-      height: 100%;
-      mix-blend-mode: multiply; }
-  body.story main .chapter, body.collection main .chapter {
-    float: left; }
-  body.story main #grid, body.collection main #grid {
-    height: calc(100% - 20px);
-    margin: 20px 0 0 0;
-    display: table;
-    float: left;
-    opacity: 0;
-    -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
-    transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-    body.story main #grid.loaded, body.collection main #grid.loaded {
-      opacity: 1; }
-    body.story main #grid .item, body.collection main #grid .item {
-      display: none;
-      margin: 0 20px 0 0;
-      float: left;
-      min-height: 10em;
-      text-decoration: none;
-      overflow: hidden;
-      -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
-      transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-      body.story main #grid .item.show, body.collection main #grid .item.show {
-        display: block; }
-      body.story main #grid .item.hide, body.collection main #grid .item.hide {
-        display: none !important; }
-      body.story main #grid .item.image, body.collection main #grid .item.image {
-        display: none; }
-        body.story main #grid .item.image.show, body.collection main #grid .item.image.show {
-          display: block; }
-        body.story main #grid .item.image .inner, body.collection main #grid .item.image .inner {
-          height: 100%; }
-          body.story main #grid .item.image .inner .image, body.collection main #grid .item.image .inner .image {
-            height: 100%;
-            background-color: #f4f6fa; }
-            body.story main #grid .item.image .inner .image img, body.collection main #grid .item.image .inner .image img {
-              max-height: 100%;
-              min-height: 10em;
-              display: table;
-              margin: 0;
-              opacity: 0;
-              border: 1px solid #fafcfc;
-              -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
-              transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-        body.story main #grid .item.image.loaded .inner .image img, body.collection main #grid .item.image.loaded .inner .image img {
-          opacity: 1; }
-      body.story main #grid .item.text, body.collection main #grid .item.text {
-        width: 20em; }
-        body.story main #grid .item.text .inner, body.collection main #grid .item.text .inner {
-          display: block;
-          height: 100%;
-          background: #f4f6fa;
-          color: #000000;
-          padding: 1em;
-          font-size: 1em;
-          line-height: 1.2em;
-          font-weight: normal;
-          position: relative; }
-          body.story main #grid .item.text .inner .shadow, body.collection main #grid .item.text .inner .shadow {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            box-shadow: inset #f4f6fa 0 -20px 25px; }
-        body.story main #grid .item.text:not(:hover) .inner, body.collection main #grid .item.text:not(:hover) .inner {
-          color: black !important; }
-        body.story main #grid .item.text.smallText .text, body.collection main #grid .item.text.smallText .text {
-          font-size: 1em;
-          line-height: 1.2em;
-          font-weight: normal; }
-        body.story main #grid .item.text.mediumText, body.collection main #grid .item.text.mediumText {
-          width: 450px; }
-          body.story main #grid .item.text.mediumText .text, body.collection main #grid .item.text.mediumText .text {
-            font-family: "Reglo", Helvetica, Arial, sans-serif;
-            font-size: 2em;
-            line-height: 1.2em;
-            font-weight: normal; }
-        body.story main #grid .item.text.largeText, body.collection main #grid .item.text.largeText {
-          width: 550px; }
-          body.story main #grid .item.text.largeText .text, body.collection main #grid .item.text.largeText .text {
-            font-family: "Reglo", Helvetica, Arial, sans-serif;
-            font-size: 3.8em;
-            line-height: 1.2em;
-            font-weight: normal; }
-      body.story main #grid .item.quote, body.collection main #grid .item.quote {
-        font-family: "Chivo Italic", Helvetica, Arial, sans-serif; }
-        body.story main #grid .item.quote .text, body.collection main #grid .item.quote .text {
-          position: relative; }
-          body.story main #grid .item.quote .text p, body.collection main #grid .item.quote .text p {
-            display: inline; }
-            body.story main #grid .item.quote .text p:first-child, body.collection main #grid .item.quote .text p:first-child {
-              margin-left: 1em; }
-          body.story main #grid .item.quote .text::before, body.story main #grid .item.quote .text::after, body.collection main #grid .item.quote .text::before, body.collection main #grid .item.quote .text::after {
-            width: 1em;
-            display: inline;
-            position: absolute;
-            font-size: 2em;
-            line-height: 1.2em;
-            font-weight: normal;
-            font-family: "Chivo Black", Helvetica, Arial, sans-serif;
-            line-height: .5em;
-            opacity: .4; }
-          body.story main #grid .item.quote .text::before, body.collection main #grid .item.quote .text::before {
-            content: '“';
-            left: 0;
-            top: .2em; }
-          body.story main #grid .item.quote .text::after, body.collection main #grid .item.quote .text::after {
-            content: '”';
-            bottom: 0; }
-        body.story main #grid .item.quote:not(:hover) .text::before, body.story main #grid .item.quote:not(:hover) .text::after, body.collection main #grid .item.quote:not(:hover) .text::before, body.collection main #grid .item.quote:not(:hover) .text::after {
-          color: #878a8e;
-          opacity: 1; }
-      body.story main #grid .item:hover, body.collection main #grid .item:hover {
-        cursor: pointer; }
-    body.story main #grid:after, body.collection main #grid:after {
-      content: '';
-      display: block;
-      clear: both; }
-    body.story main #grid .sizer, body.collection main #grid .sizer {
+      overflow-x: scroll;
+      overflow-y: hidden; }
+    body.story main .spacer.full, body.collection main .spacer.full {
       width: 100%;
-      height: calc(50% - 1em);
-      display: table; }
-    body.story main #grid .gutter, body.collection main #grid .gutter {
-      width: 20px; }
-body.story.looking #collection, body.collection.looking #collection {
-  z-index: 50; }
-body.story.looking #table, body.collection.looking #table {
-  overflow-x: hidden;
-  overflow-y: hidden; }
-body.story.looking main, body.collection.looking main {
-  overflow-x: hidden;
-  overflow-y: hidden; }
-body.story #grid .item, body.story .item.ui-draggable-dragging, body.story .item.ui-sortable-helper, body.story #collection .item, body.collection #grid .item, body.collection .item.ui-draggable-dragging, body.collection .item.ui-sortable-helper, body.collection #collection .item {
-  font-family: "Chivo", Helvetica, Arial, sans-serif;
-  -webkit-transition: color 300ms cubic-bezier(0.86, 0, 0.07, 1);
-  transition: color 300ms cubic-bezier(0.86, 0, 0.07, 1);
-  text-decoration: none; }
-  body.story #grid .item img, body.story .item.ui-draggable-dragging img, body.story .item.ui-sortable-helper img, body.story #collection .item img, body.collection #grid .item img, body.collection .item.ui-draggable-dragging img, body.collection .item.ui-sortable-helper img, body.collection #collection .item img {
-    display: table;
-    -webkit-filter: grayscale(100%);
-            filter: grayscale(100%);
-    -webkit-transition: -webkit-filter 300ms cubic-bezier(0.86, 0, 0.07, 1);
-    transition: -webkit-filter 300ms cubic-bezier(0.86, 0, 0.07, 1);
-    transition: filter 300ms cubic-bezier(0.86, 0, 0.07, 1);
-    transition: filter 300ms cubic-bezier(0.86, 0, 0.07, 1), -webkit-filter 300ms cubic-bezier(0.86, 0, 0.07, 1); }
-  body.story #grid .item:not(.looking):not(.selected), body.story .item.ui-draggable-dragging:not(.looking):not(.selected), body.story .item.ui-sortable-helper:not(.looking):not(.selected), body.story #collection .item:not(.looking):not(.selected), body.collection #grid .item:not(.looking):not(.selected), body.collection .item.ui-draggable-dragging:not(.looking):not(.selected), body.collection .item.ui-sortable-helper:not(.looking):not(.selected), body.collection #collection .item:not(.looking):not(.selected) {
-    color: #000000 !important; }
-    body.story #grid .item:not(.looking):not(.selected) .image.bw, body.story .item.ui-draggable-dragging:not(.looking):not(.selected) .image.bw, body.story .item.ui-sortable-helper:not(.looking):not(.selected) .image.bw, body.story #collection .item:not(.looking):not(.selected) .image.bw, body.collection #grid .item:not(.looking):not(.selected) .image.bw, body.collection .item.ui-draggable-dragging:not(.looking):not(.selected) .image.bw, body.collection .item.ui-sortable-helper:not(.looking):not(.selected) .image.bw, body.collection #collection .item:not(.looking):not(.selected) .image.bw {
-      background-color: #000000 !important; }
-  body.story #grid .item.looking .image:not(.bw) img, body.story .item.ui-draggable-dragging.looking .image:not(.bw) img, body.story .item.ui-sortable-helper.looking .image:not(.bw) img, body.story #collection .item.looking .image:not(.bw) img, body.collection #grid .item.looking .image:not(.bw) img, body.collection .item.ui-draggable-dragging.looking .image:not(.bw) img, body.collection .item.ui-sortable-helper.looking .image:not(.bw) img, body.collection #collection .item.looking .image:not(.bw) img {
-    -webkit-filter: grayscale(0%) !important;
-            filter: grayscale(0%) !important; }
-  body.story #grid .item .image.bw img, body.story .item.ui-draggable-dragging .image.bw img, body.story .item.ui-sortable-helper .image.bw img, body.story #collection .item .image.bw img, body.collection #grid .item .image.bw img, body.collection .item.ui-draggable-dragging .image.bw img, body.collection .item.ui-sortable-helper .image.bw img, body.collection #collection .item .image.bw img {
-    mix-blend-mode: lighten; }
-  body.story #grid .item.ui-draggable-dragging, body.story #grid .item.ui-sortable-helper, body.story .item.ui-draggable-dragging.ui-draggable-dragging, body.story .item.ui-draggable-dragging.ui-sortable-helper, body.story .item.ui-sortable-helper.ui-draggable-dragging, body.story .item.ui-sortable-helper.ui-sortable-helper, body.story #collection .item.ui-draggable-dragging, body.story #collection .item.ui-sortable-helper, body.collection #grid .item.ui-draggable-dragging, body.collection #grid .item.ui-sortable-helper, body.collection .item.ui-draggable-dragging.ui-draggable-dragging, body.collection .item.ui-draggable-dragging.ui-sortable-helper, body.collection .item.ui-sortable-helper.ui-draggable-dragging, body.collection .item.ui-sortable-helper.ui-sortable-helper, body.collection #collection .item.ui-draggable-dragging, body.collection #collection .item.ui-sortable-helper {
-    max-width: 300px;
-    height: calc(60px + 1px) !important;
-    position: fixed;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    z-index: 60;
-    margin: 0;
-    background: #fafcfc;
-    border: solid black;
-    border-width: 1px;
-    -webkit-transform: translateY(1px);
-            transform: translateY(1px); }
-    body.story #grid .item.ui-draggable-dragging .inner, body.story #grid .item.ui-sortable-helper .inner, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner, body.story .item.ui-sortable-helper.ui-sortable-helper .inner, body.story #collection .item.ui-draggable-dragging .inner, body.story #collection .item.ui-sortable-helper .inner, body.collection #grid .item.ui-draggable-dragging .inner, body.collection #grid .item.ui-sortable-helper .inner, body.collection .item.ui-draggable-dragging.ui-draggable-dragging .inner, body.collection .item.ui-draggable-dragging.ui-sortable-helper .inner, body.collection .item.ui-sortable-helper.ui-draggable-dragging .inner, body.collection .item.ui-sortable-helper.ui-sortable-helper .inner, body.collection #collection .item.ui-draggable-dragging .inner, body.collection #collection .item.ui-sortable-helper .inner {
       height: 100%;
-      padding: .5em;
+      display: table; }
+    body.story main .card, body.collection main .card {
+      height: 100%;
+      background: #fafcfc;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
           -ms-flex-align: center;
               align-items: center;
-      overflow: hidden;
-      font-size: .75em;
-      line-height: 1.3em;
-      font-weight: normal; }
-      body.story #grid .item.ui-draggable-dragging .inner .image, body.story #grid .item.ui-sortable-helper .inner .image, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner .image, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner .image, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner .image, body.story .item.ui-sortable-helper.ui-sortable-helper .inner .image, body.story #collection .item.ui-draggable-dragging .inner .image, body.story #collection .item.ui-sortable-helper .inner .image, body.collection #grid .item.ui-draggable-dragging .inner .image, body.collection #grid .item.ui-sortable-helper .inner .image, body.collection .item.ui-draggable-dragging.ui-draggable-dragging .inner .image, body.collection .item.ui-draggable-dragging.ui-sortable-helper .inner .image, body.collection .item.ui-sortable-helper.ui-draggable-dragging .inner .image, body.collection .item.ui-sortable-helper.ui-sortable-helper .inner .image, body.collection #collection .item.ui-draggable-dragging .inner .image, body.collection #collection .item.ui-sortable-helper .inner .image {
+      float: left;
+      overflow-y: scroll; }
+      body.story main .card h3, body.collection main .card h3 {
+        text-align: center;
+        display: table;
+        margin: 0 auto .5em auto;
+        text-decoration: underline; }
+      body.story main .card .inner, body.collection main .card .inner {
+        width: 100%;
+        max-width: 800px;
+        max-height: 100%;
+        padding: 2em 0;
+        display: table;
+        margin: auto; }
+      body.story main .card .horz, body.collection main .card .horz {
+        max-width: 800px;
         height: 100%;
-        display: block; }
-        body.story #grid .item.ui-draggable-dragging .inner .image img, body.story #grid .item.ui-sortable-helper .inner .image img, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner .image img, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner .image img, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner .image img, body.story .item.ui-sortable-helper.ui-sortable-helper .inner .image img, body.story #collection .item.ui-draggable-dragging .inner .image img, body.story #collection .item.ui-sortable-helper .inner .image img, body.collection #grid .item.ui-draggable-dragging .inner .image img, body.collection #grid .item.ui-sortable-helper .inner .image img, body.collection .item.ui-draggable-dragging.ui-draggable-dragging .inner .image img, body.collection .item.ui-draggable-dragging.ui-sortable-helper .inner .image img, body.collection .item.ui-sortable-helper.ui-draggable-dragging .inner .image img, body.collection .item.ui-sortable-helper.ui-sortable-helper .inner .image img, body.collection #collection .item.ui-draggable-dragging .inner .image img, body.collection #collection .item.ui-sortable-helper .inner .image img {
-          height: 100% !important;
-          vertical-align: middle; }
-    body.story #grid .item.ui-draggable-dragging.text .inner, body.story #grid .item.ui-sortable-helper.text .inner, body.story .item.ui-draggable-dragging.ui-draggable-dragging.text .inner, body.story .item.ui-draggable-dragging.ui-sortable-helper.text .inner, body.story .item.ui-sortable-helper.ui-draggable-dragging.text .inner, body.story .item.ui-sortable-helper.ui-sortable-helper.text .inner, body.story #collection .item.ui-draggable-dragging.text .inner, body.story #collection .item.ui-sortable-helper.text .inner, body.collection #grid .item.ui-draggable-dragging.text .inner, body.collection #grid .item.ui-sortable-helper.text .inner, body.collection .item.ui-draggable-dragging.ui-draggable-dragging.text .inner, body.collection .item.ui-draggable-dragging.ui-sortable-helper.text .inner, body.collection .item.ui-sortable-helper.ui-draggable-dragging.text .inner, body.collection .item.ui-sortable-helper.ui-sortable-helper.text .inner, body.collection #collection .item.ui-draggable-dragging.text .inner, body.collection #collection .item.ui-sortable-helper.text .inner {
-      -webkit-box-align: start;
-          -ms-flex-align: start;
-              align-items: flex-start;
-      position: relative; }
-    body.story #grid .item.ui-draggable-dragging.over, body.story #grid .item.ui-sortable-helper.over, body.story .item.ui-draggable-dragging.ui-draggable-dragging.over, body.story .item.ui-draggable-dragging.ui-sortable-helper.over, body.story .item.ui-sortable-helper.ui-draggable-dragging.over, body.story .item.ui-sortable-helper.ui-sortable-helper.over, body.story #collection .item.ui-draggable-dragging.over, body.story #collection .item.ui-sortable-helper.over, body.collection #grid .item.ui-draggable-dragging.over, body.collection #grid .item.ui-sortable-helper.over, body.collection .item.ui-draggable-dragging.ui-draggable-dragging.over, body.collection .item.ui-draggable-dragging.ui-sortable-helper.over, body.collection .item.ui-sortable-helper.ui-draggable-dragging.over, body.collection .item.ui-sortable-helper.ui-sortable-helper.over, body.collection #collection .item.ui-draggable-dragging.over, body.collection #collection .item.ui-sortable-helper.over {
-      background-color: #fafcfc;
-      border-color: rgba(135, 138, 142, 0.5); }
-  body.story #grid .item.ui-draggable-dragging.text, body.story .item.ui-draggable-dragging.ui-draggable-dragging.text, body.story .item.ui-sortable-helper.ui-draggable-dragging.text, body.story #collection .item.ui-draggable-dragging.text, body.collection #grid .item.ui-draggable-dragging.text, body.collection .item.ui-draggable-dragging.ui-draggable-dragging.text, body.collection .item.ui-sortable-helper.ui-draggable-dragging.text, body.collection #collection .item.ui-draggable-dragging.text {
-    -webkit-transform: translateY(0px) !important;
-            transform: translateY(0px) !important; }
-body.story .end .inner, body.collection .end .inner {
-  margin: 0;
-  -webkit-column-count: 2;
-     -moz-column-count: 2;
-          column-count: 2;
-  -webkit-column-fill: balance;
-     -moz-column-fill: balance;
-          column-fill: balance;
-  font-size: .75em;
-  line-height: 1.3em;
-  font-weight: normal; }
-  body.story .end .inner .column, body.collection .end .inner .column {
-    min-width: 20em;
-    padding-right: 1em;
-    padding-bottom: 1em; }
-  body.story .end .inner ul, body.collection .end .inner ul {
-    max-width: 15em;
+        padding: 0 5em;
+        display: table;
+        margin: auto; }
+      body.story main .card b, body.story main .card strong, body.collection main .card b, body.collection main .card strong {
+        font-family: "Chivo Black", Helvetica, Arial, sans-serif;
+        font-weight: normal; }
+      body.story main .card.full, body.collection main .card.full {
+        min-width: 100vw; }
+        body.story main .card.full .inner, body.collection main .card.full .inner {
+          padding-left: 5em;
+          padding-right: 5em; }
+      body.story main .card.half, body.collection main .card.half {
+        min-width: 50vw;
+        max-width: 50vw; }
+        body.story main .card.half .inner, body.collection main .card.half .inner {
+          width: calc(100% - 2em);
+          padding-left: 1em;
+          padding-right: 1em; }
+          body.story main .card.half .inner h1, body.collection main .card.half .inner h1 {
+            width: 100%; }
+          body.story main .card.half .inner .text, body.collection main .card.half .inner .text {
+            max-width: 480px; }
+    body.story main #title, body.collection main #title {
+      height: 100%;
+      display: table;
+      position: relative;
+      overflow: hidden; }
+      body.story main #title .mask, body.collection main #title .mask {
+        width: 100%;
+        max-width: 1440px;
+        height: 100%;
+        display: table;
+        margin: auto;
+        overflow: hidden; }
+      body.story main #title .titleWrap, body.collection main #title .titleWrap {
+        width: 150%;
+        height: 100%;
+        color: black;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        position: relative;
+        -webkit-transition: color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        transition: color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+      body.story main #title a, body.collection main #title a {
+        text-decoration: none; }
+      body.story main #title h1.title, body.collection main #title h1.title {
+        width: 50%;
+        z-index: 10;
+        text-decoration: underline; }
+      body.story main #title .image, body.collection main #title .image {
+        width: 50%;
+        max-width: none;
+        opacity: .6;
+        -webkit-transition: background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        transition: background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+        body.story main #title .image .img, body.collection main #title .image .img {
+          display: table;
+          background-color: #fafcfc;
+          -webkit-transition: background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+          transition: background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+          body.story main #title .image .img img, body.collection main #title .image .img img {
+            width: 100%;
+            display: table;
+            -webkit-filter: grayscale(1) contrast(1);
+                    filter: grayscale(1) contrast(1);
+            mix-blend-mode: screen; }
+      body.story main #title.odd .titleWrap, body.collection main #title.odd .titleWrap {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+            -ms-flex-direction: row-reverse;
+                flex-direction: row-reverse; }
+      body.story main #title.odd h1.title, body.collection main #title.odd h1.title {
+        text-align: left;
+        float: left;
+        -webkit-transform: translateX(7%);
+                transform: translateX(7%); }
+      body.story main #title.odd .image, body.collection main #title.odd .image {
+        float: left;
+        -webkit-transform: translateX(-75%);
+                transform: translateX(-75%); }
+        body.story main #title.odd .image .img, body.collection main #title.odd .image .img {
+          float: right; }
+      body.story main #title.even .titleWrap, body.collection main #title.even .titleWrap {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row; }
+      body.story main #title.even h1.title, body.collection main #title.even h1.title {
+        text-align: right;
+        float: right;
+        -webkit-transform: translateX(-75%);
+                transform: translateX(-75%); }
+      body.story main #title.even .image, body.collection main #title.even .image {
+        float: right;
+        -webkit-transform: translateX(7%);
+                transform: translateX(7%); }
+    body.story main #info, body.collection main #info {
+      min-width: 45em; }
+      body.story main #info .details, body.story main #info .historical, body.story main #info .aid, body.collection main #info .details, body.collection main #info .historical, body.collection main #info .aid {
+        font-size: .75em;
+        line-height: 1.3em;
+        font-weight: normal; }
+      body.story main #info .details, body.collection main #info .details {
+        display: table; }
+        body.story main #info .details label, body.collection main #info .details label {
+          color: #878a8e;
+          text-transform: uppercase; }
+          body.story main #info .details label::after, body.collection main #info .details label::after {
+            content: ': '; }
+        body.story main #info .details .row, body.collection main #info .details .row {
+          padding-bottom: .5em; }
+          body.story main #info .details .row p, body.collection main #info .details .row p {
+            display: inline;
+            margin: 0; }
+      body.story main #info .aid, body.collection main #info .aid {
+        padding-top: .5em;
+        color: #878a8e !important; }
+        body.story main #info .aid a, body.collection main #info .aid a {
+          text-decoration: none;
+          border-bottom: 1px solid; }
+          body.story main #info .aid a:not(:hover), body.collection main #info .aid a:not(:hover) {
+            color: black !important; }
+    body.story main #map, body.collection main #map {
+      height: 100%;
+      display: block;
+      float: left;
+      padding: 0 calc(20px * 4);
+      background-color: #fafcfc; }
+      body.story main #map img, body.collection main #map img {
+        height: 100%;
+        mix-blend-mode: multiply; }
+    body.story main .chapter, body.collection main .chapter {
+      float: left; }
+    body.story main #grid, body.collection main #grid {
+      height: calc(100% - 20px);
+      margin: 20px 0 0 0;
+      display: table;
+      float: left;
+      opacity: 0;
+      -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+      transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+      body.story main #grid.loaded, body.collection main #grid.loaded {
+        opacity: 1; }
+      body.story main #grid .item, body.collection main #grid .item {
+        display: none;
+        margin: 0 20px 0 0;
+        float: left;
+        min-height: 10em;
+        text-decoration: none;
+        overflow: hidden;
+        -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+        body.story main #grid .item.show, body.collection main #grid .item.show {
+          display: block; }
+        body.story main #grid .item.hide, body.collection main #grid .item.hide {
+          display: none !important; }
+        body.story main #grid .item.image, body.collection main #grid .item.image {
+          display: none; }
+          body.story main #grid .item.image.show, body.collection main #grid .item.image.show {
+            display: block; }
+          body.story main #grid .item.image .inner, body.collection main #grid .item.image .inner {
+            height: 100%; }
+            body.story main #grid .item.image .inner .image, body.collection main #grid .item.image .inner .image {
+              height: 100%;
+              background-color: #f4f6fa; }
+              body.story main #grid .item.image .inner .image img, body.collection main #grid .item.image .inner .image img {
+                max-height: 100%;
+                min-height: 10em;
+                display: table;
+                margin: 0;
+                opacity: 0;
+                border: 1px solid #fafcfc;
+                -webkit-transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+                transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+          body.story main #grid .item.image.loaded .inner .image img, body.collection main #grid .item.image.loaded .inner .image img {
+            opacity: 1; }
+        body.story main #grid .item.text, body.collection main #grid .item.text {
+          width: 20em; }
+          body.story main #grid .item.text .inner, body.collection main #grid .item.text .inner {
+            display: block;
+            height: 100%;
+            background: #f4f6fa;
+            color: #000000;
+            padding: 1em;
+            font-size: 1em;
+            line-height: 1.2em;
+            font-weight: normal;
+            position: relative; }
+            body.story main #grid .item.text .inner .shadow, body.collection main #grid .item.text .inner .shadow {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              box-shadow: inset #f4f6fa 0 -20px 25px; }
+          body.story main #grid .item.text:not(:hover) .inner, body.collection main #grid .item.text:not(:hover) .inner {
+            color: black !important; }
+          body.story main #grid .item.text.smallText .text, body.collection main #grid .item.text.smallText .text {
+            font-size: 1em;
+            line-height: 1.2em;
+            font-weight: normal; }
+          body.story main #grid .item.text.mediumText, body.collection main #grid .item.text.mediumText {
+            width: 450px; }
+            body.story main #grid .item.text.mediumText .text, body.collection main #grid .item.text.mediumText .text {
+              font-family: "Reglo", Helvetica, Arial, sans-serif;
+              font-size: 2em;
+              line-height: 1.2em;
+              font-weight: normal; }
+          body.story main #grid .item.text.largeText, body.collection main #grid .item.text.largeText {
+            width: 550px; }
+            body.story main #grid .item.text.largeText .text, body.collection main #grid .item.text.largeText .text {
+              font-family: "Reglo", Helvetica, Arial, sans-serif;
+              font-size: 3.8em;
+              line-height: 1.2em;
+              font-weight: normal; }
+        body.story main #grid .item.quote, body.collection main #grid .item.quote {
+          font-family: "Chivo Italic", Helvetica, Arial, sans-serif; }
+          body.story main #grid .item.quote .text, body.collection main #grid .item.quote .text {
+            position: relative; }
+            body.story main #grid .item.quote .text p, body.collection main #grid .item.quote .text p {
+              display: inline; }
+              body.story main #grid .item.quote .text p:first-child, body.collection main #grid .item.quote .text p:first-child {
+                margin-left: 1em; }
+            body.story main #grid .item.quote .text::before, body.story main #grid .item.quote .text::after, body.collection main #grid .item.quote .text::before, body.collection main #grid .item.quote .text::after {
+              width: 1em;
+              display: inline;
+              position: absolute;
+              font-size: 2em;
+              line-height: 1.2em;
+              font-weight: normal;
+              font-family: "Chivo Black", Helvetica, Arial, sans-serif;
+              line-height: .5em;
+              opacity: .4; }
+            body.story main #grid .item.quote .text::before, body.collection main #grid .item.quote .text::before {
+              content: '“';
+              left: 0;
+              top: .2em; }
+            body.story main #grid .item.quote .text::after, body.collection main #grid .item.quote .text::after {
+              content: '”';
+              bottom: 0; }
+          body.story main #grid .item.quote:not(:hover) .text::before, body.story main #grid .item.quote:not(:hover) .text::after, body.collection main #grid .item.quote:not(:hover) .text::before, body.collection main #grid .item.quote:not(:hover) .text::after {
+            color: #878a8e;
+            opacity: 1; }
+        body.story main #grid .item:hover, body.collection main #grid .item:hover {
+          cursor: pointer; }
+      body.story main #grid:after, body.collection main #grid:after {
+        content: '';
+        display: block;
+        clear: both; }
+      body.story main #grid .sizer, body.collection main #grid .sizer {
+        width: 100%;
+        height: calc(50% - 1em);
+        display: table; }
+      body.story main #grid .gutter, body.collection main #grid .gutter {
+        width: 20px; }
+  body.story.looking #collection, body.collection.looking #collection {
+    z-index: 50; }
+  body.story.looking #table, body.collection.looking #table {
+    overflow-x: hidden;
+    overflow-y: hidden; }
+  body.story.looking main, body.collection.looking main {
+    overflow-x: hidden;
+    overflow-y: hidden; }
+  body.story #grid .item, body.story .item.ui-draggable-dragging, body.story .item.ui-sortable-helper, body.story #collection .item, body.collection #grid .item, body.collection .item.ui-draggable-dragging, body.collection .item.ui-sortable-helper, body.collection #collection .item {
+    font-family: "Chivo", Helvetica, Arial, sans-serif;
+    -webkit-transition: color 300ms cubic-bezier(0.86, 0, 0.07, 1);
+    transition: color 300ms cubic-bezier(0.86, 0, 0.07, 1);
+    text-decoration: none; }
+    body.story #grid .item img, body.story .item.ui-draggable-dragging img, body.story .item.ui-sortable-helper img, body.story #collection .item img, body.collection #grid .item img, body.collection .item.ui-draggable-dragging img, body.collection .item.ui-sortable-helper img, body.collection #collection .item img {
+      display: table;
+      -webkit-filter: grayscale(100%);
+              filter: grayscale(100%);
+      -webkit-transition: -webkit-filter 300ms cubic-bezier(0.86, 0, 0.07, 1);
+      transition: -webkit-filter 300ms cubic-bezier(0.86, 0, 0.07, 1);
+      transition: filter 300ms cubic-bezier(0.86, 0, 0.07, 1);
+      transition: filter 300ms cubic-bezier(0.86, 0, 0.07, 1), -webkit-filter 300ms cubic-bezier(0.86, 0, 0.07, 1); }
+    body.story #grid .item:not(.looking):not(.selected), body.story .item.ui-draggable-dragging:not(.looking):not(.selected), body.story .item.ui-sortable-helper:not(.looking):not(.selected), body.story #collection .item:not(.looking):not(.selected), body.collection #grid .item:not(.looking):not(.selected), body.collection .item.ui-draggable-dragging:not(.looking):not(.selected), body.collection .item.ui-sortable-helper:not(.looking):not(.selected), body.collection #collection .item:not(.looking):not(.selected) {
+      color: #000000 !important; }
+      body.story #grid .item:not(.looking):not(.selected) .image.bw, body.story .item.ui-draggable-dragging:not(.looking):not(.selected) .image.bw, body.story .item.ui-sortable-helper:not(.looking):not(.selected) .image.bw, body.story #collection .item:not(.looking):not(.selected) .image.bw, body.collection #grid .item:not(.looking):not(.selected) .image.bw, body.collection .item.ui-draggable-dragging:not(.looking):not(.selected) .image.bw, body.collection .item.ui-sortable-helper:not(.looking):not(.selected) .image.bw, body.collection #collection .item:not(.looking):not(.selected) .image.bw {
+        background-color: #000000 !important; }
+    body.story #grid .item.looking .image:not(.bw) img, body.story .item.ui-draggable-dragging.looking .image:not(.bw) img, body.story .item.ui-sortable-helper.looking .image:not(.bw) img, body.story #collection .item.looking .image:not(.bw) img, body.collection #grid .item.looking .image:not(.bw) img, body.collection .item.ui-draggable-dragging.looking .image:not(.bw) img, body.collection .item.ui-sortable-helper.looking .image:not(.bw) img, body.collection #collection .item.looking .image:not(.bw) img {
+      -webkit-filter: grayscale(0%) !important;
+              filter: grayscale(0%) !important; }
+    body.story #grid .item .image.bw img, body.story .item.ui-draggable-dragging .image.bw img, body.story .item.ui-sortable-helper .image.bw img, body.story #collection .item .image.bw img, body.collection #grid .item .image.bw img, body.collection .item.ui-draggable-dragging .image.bw img, body.collection .item.ui-sortable-helper .image.bw img, body.collection #collection .item .image.bw img {
+      mix-blend-mode: lighten; }
+    body.story #grid .item.ui-draggable-dragging, body.story #grid .item.ui-sortable-helper, body.story .item.ui-draggable-dragging.ui-draggable-dragging, body.story .item.ui-draggable-dragging.ui-sortable-helper, body.story .item.ui-sortable-helper.ui-draggable-dragging, body.story .item.ui-sortable-helper.ui-sortable-helper, body.story #collection .item.ui-draggable-dragging, body.story #collection .item.ui-sortable-helper, body.collection #grid .item.ui-draggable-dragging, body.collection #grid .item.ui-sortable-helper, body.collection .item.ui-draggable-dragging.ui-draggable-dragging, body.collection .item.ui-draggable-dragging.ui-sortable-helper, body.collection .item.ui-sortable-helper.ui-draggable-dragging, body.collection .item.ui-sortable-helper.ui-sortable-helper, body.collection #collection .item.ui-draggable-dragging, body.collection #collection .item.ui-sortable-helper {
+      max-width: 300px;
+      height: calc(60px + 1px) !important;
+      position: fixed;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      z-index: 60;
+      margin: 0;
+      background: #fafcfc;
+      border: solid black;
+      border-width: 1px;
+      -webkit-transform: translateY(1px);
+              transform: translateY(1px); }
+      body.story #grid .item.ui-draggable-dragging .inner, body.story #grid .item.ui-sortable-helper .inner, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner, body.story .item.ui-sortable-helper.ui-sortable-helper .inner, body.story #collection .item.ui-draggable-dragging .inner, body.story #collection .item.ui-sortable-helper .inner, body.collection #grid .item.ui-draggable-dragging .inner, body.collection #grid .item.ui-sortable-helper .inner, body.collection .item.ui-draggable-dragging.ui-draggable-dragging .inner, body.collection .item.ui-draggable-dragging.ui-sortable-helper .inner, body.collection .item.ui-sortable-helper.ui-draggable-dragging .inner, body.collection .item.ui-sortable-helper.ui-sortable-helper .inner, body.collection #collection .item.ui-draggable-dragging .inner, body.collection #collection .item.ui-sortable-helper .inner {
+        height: 100%;
+        padding: .5em;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        overflow: hidden;
+        font-size: .75em;
+        line-height: 1.3em;
+        font-weight: normal; }
+        body.story #grid .item.ui-draggable-dragging .inner .image, body.story #grid .item.ui-sortable-helper .inner .image, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner .image, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner .image, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner .image, body.story .item.ui-sortable-helper.ui-sortable-helper .inner .image, body.story #collection .item.ui-draggable-dragging .inner .image, body.story #collection .item.ui-sortable-helper .inner .image, body.collection #grid .item.ui-draggable-dragging .inner .image, body.collection #grid .item.ui-sortable-helper .inner .image, body.collection .item.ui-draggable-dragging.ui-draggable-dragging .inner .image, body.collection .item.ui-draggable-dragging.ui-sortable-helper .inner .image, body.collection .item.ui-sortable-helper.ui-draggable-dragging .inner .image, body.collection .item.ui-sortable-helper.ui-sortable-helper .inner .image, body.collection #collection .item.ui-draggable-dragging .inner .image, body.collection #collection .item.ui-sortable-helper .inner .image {
+          height: 100%;
+          display: block; }
+          body.story #grid .item.ui-draggable-dragging .inner .image img, body.story #grid .item.ui-sortable-helper .inner .image img, body.story .item.ui-draggable-dragging.ui-draggable-dragging .inner .image img, body.story .item.ui-draggable-dragging.ui-sortable-helper .inner .image img, body.story .item.ui-sortable-helper.ui-draggable-dragging .inner .image img, body.story .item.ui-sortable-helper.ui-sortable-helper .inner .image img, body.story #collection .item.ui-draggable-dragging .inner .image img, body.story #collection .item.ui-sortable-helper .inner .image img, body.collection #grid .item.ui-draggable-dragging .inner .image img, body.collection #grid .item.ui-sortable-helper .inner .image img, body.collection .item.ui-draggable-dragging.ui-draggable-dragging .inner .image img, body.collection .item.ui-draggable-dragging.ui-sortable-helper .inner .image img, body.collection .item.ui-sortable-helper.ui-draggable-dragging .inner .image img, body.collection .item.ui-sortable-helper.ui-sortable-helper .inner .image img, body.collection #collection .item.ui-draggable-dragging .inner .image img, body.collection #collection .item.ui-sortable-helper .inner .image img {
+            height: 100% !important;
+            vertical-align: middle; }
+      body.story #grid .item.ui-draggable-dragging.text .inner, body.story #grid .item.ui-sortable-helper.text .inner, body.story .item.ui-draggable-dragging.ui-draggable-dragging.text .inner, body.story .item.ui-draggable-dragging.ui-sortable-helper.text .inner, body.story .item.ui-sortable-helper.ui-draggable-dragging.text .inner, body.story .item.ui-sortable-helper.ui-sortable-helper.text .inner, body.story #collection .item.ui-draggable-dragging.text .inner, body.story #collection .item.ui-sortable-helper.text .inner, body.collection #grid .item.ui-draggable-dragging.text .inner, body.collection #grid .item.ui-sortable-helper.text .inner, body.collection .item.ui-draggable-dragging.ui-draggable-dragging.text .inner, body.collection .item.ui-draggable-dragging.ui-sortable-helper.text .inner, body.collection .item.ui-sortable-helper.ui-draggable-dragging.text .inner, body.collection .item.ui-sortable-helper.ui-sortable-helper.text .inner, body.collection #collection .item.ui-draggable-dragging.text .inner, body.collection #collection .item.ui-sortable-helper.text .inner {
+        -webkit-box-align: start;
+            -ms-flex-align: start;
+                align-items: flex-start;
+        position: relative; }
+      body.story #grid .item.ui-draggable-dragging.over, body.story #grid .item.ui-sortable-helper.over, body.story .item.ui-draggable-dragging.ui-draggable-dragging.over, body.story .item.ui-draggable-dragging.ui-sortable-helper.over, body.story .item.ui-sortable-helper.ui-draggable-dragging.over, body.story .item.ui-sortable-helper.ui-sortable-helper.over, body.story #collection .item.ui-draggable-dragging.over, body.story #collection .item.ui-sortable-helper.over, body.collection #grid .item.ui-draggable-dragging.over, body.collection #grid .item.ui-sortable-helper.over, body.collection .item.ui-draggable-dragging.ui-draggable-dragging.over, body.collection .item.ui-draggable-dragging.ui-sortable-helper.over, body.collection .item.ui-sortable-helper.ui-draggable-dragging.over, body.collection .item.ui-sortable-helper.ui-sortable-helper.over, body.collection #collection .item.ui-draggable-dragging.over, body.collection #collection .item.ui-sortable-helper.over {
+        background-color: #fafcfc;
+        border-color: rgba(135, 138, 142, 0.5); }
+    body.story #grid .item.ui-draggable-dragging.text, body.story .item.ui-draggable-dragging.ui-draggable-dragging.text, body.story .item.ui-sortable-helper.ui-draggable-dragging.text, body.story #collection .item.ui-draggable-dragging.text, body.collection #grid .item.ui-draggable-dragging.text, body.collection .item.ui-draggable-dragging.ui-draggable-dragging.text, body.collection .item.ui-sortable-helper.ui-draggable-dragging.text, body.collection #collection .item.ui-draggable-dragging.text {
+      -webkit-transform: translateY(0px) !important;
+              transform: translateY(0px) !important; }
+  body.story .end .inner, body.collection .end .inner {
     margin: 0;
-    padding: 0 0 1em 0;
-    list-style: none;
-    -webkit-column-break-inside: avoid;
-       page-break-inside: avoid;
-            break-inside: avoid-column; }
-    body.story .end .inner ul:last-of-type, body.collection .end .inner ul:last-of-type {
-      padding: 0; }
-    body.story .end .inner ul li, body.collection .end .inner ul li {
-      padding-bottom: .25em;
+    -webkit-column-count: 2;
+       -moz-column-count: 2;
+            column-count: 2;
+    -webkit-column-fill: balance;
+       -moz-column-fill: balance;
+            column-fill: balance;
+    font-size: .75em;
+    line-height: 1.3em;
+    font-weight: normal; }
+    body.story .end .inner .column, body.collection .end .inner .column {
+      min-width: 20em;
+      padding-right: 1em;
+      padding-bottom: 1em; }
+    body.story .end .inner ul, body.collection .end .inner ul {
+      max-width: 15em;
+      margin: 0;
+      padding: 0 0 1em 0;
+      list-style: none;
       -webkit-column-break-inside: avoid;
          page-break-inside: avoid;
               break-inside: avoid-column; }
-      body.story .end .inner ul li h3, body.collection .end .inner ul li h3 {
-        white-space: nowrap;
-        padding-bottom: .25em; }
-      body.story .end .inner ul li .tags, body.collection .end .inner ul li .tags {
-        font-size: .75em;
-        line-height: 1.3em;
-        font-weight: normal;
-        text-transform: uppercase; }
-      body.story .end .inner ul li .label, body.story .end .inner ul li .source, body.collection .end .inner ul li .label, body.collection .end .inner ul li .source {
-        font-size: .75em;
-        line-height: 1.3em;
-        font-weight: normal;
-        color: #878a8e;
-        text-transform: uppercase; }
-      body.story .end .inner ul li a, body.collection .end .inner ul li a {
-        text-decoration: none; }
-        body.story .end .inner ul li a:not(.story):hover, body.collection .end .inner ul li a:not(.story):hover {
-          color: #878a8e; }
-        body.story .end .inner ul li a.story:not(:hover), body.collection .end .inner ul li a.story:not(:hover) {
-          color: #000000 !important; }
-@media (max-width: 480px) {
-  body.story main #table .card, body.collection main #table .card {
-    height: 100%;
-    padding: 1em 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch; }
-    body.story main #table .card.full, body.collection main #table .card.full {
-      width: 100vw !important; }
-    body.story main #table .card .inner, body.collection main #table .card .inner {
-      -webkit-column-count: 1;
-         -moz-column-count: 1;
-              column-count: 1;
-      padding-left: 1em;
-      padding-right: 1em; }
-      body.story main #table .card .inner ul, body.collection main #table .card .inner ul {
-        margin: auto; }
-    body.story main #table .card#title, body.collection main #table .card#title {
-      height: 100%; }
-      body.story main #table .card#title .mask, body.collection main #table .card#title .mask {
-        width: calc(100vw - 2em); }
-      body.story main #table .card#title .image, body.collection main #table .card#title .image {
-        -webkit-transform: 0;
-                transform: 0; }
-      body.story main #table .card#title.odd h1.title, body.collection main #table .card#title.odd h1.title {
-        -webkit-transform: translateX(0);
-                transform: translateX(0); }
-    body.story main #table .card#info, body.collection main #table .card#info {
-      width: 100%;
-      min-width: 100%;
-      height: auto; }
-    body.story main #table .card.half, body.collection main #table .card.half {
-      max-width: 100%;
-      min-width: 100%; }
-  body.story main #table #map, body.collection main #table #map {
-    height: auto;
-    padding: 0; }
-    body.story main #table #map img, body.collection main #table #map img {
-      width: 100%;
-      height: auto; } }
+      body.story .end .inner ul:last-of-type, body.collection .end .inner ul:last-of-type {
+        padding: 0; }
+      body.story .end .inner ul li, body.collection .end .inner ul li {
+        padding-bottom: .25em;
+        -webkit-column-break-inside: avoid;
+           page-break-inside: avoid;
+                break-inside: avoid-column; }
+        body.story .end .inner ul li h3, body.collection .end .inner ul li h3 {
+          white-space: nowrap;
+          padding-bottom: .25em; }
+        body.story .end .inner ul li .tags, body.collection .end .inner ul li .tags {
+          font-size: .75em;
+          line-height: 1.3em;
+          font-weight: normal;
+          text-transform: uppercase; }
+        body.story .end .inner ul li .label, body.story .end .inner ul li .source, body.collection .end .inner ul li .label, body.collection .end .inner ul li .source {
+          font-size: .75em;
+          line-height: 1.3em;
+          font-weight: normal;
+          color: #878a8e;
+          text-transform: uppercase; }
+        body.story .end .inner ul li a, body.collection .end .inner ul li a {
+          text-decoration: none; }
+          body.story .end .inner ul li a:not(.story):hover, body.collection .end .inner ul li a:not(.story):hover {
+            color: #878a8e; }
+          body.story .end .inner ul li a.story:not(:hover), body.collection .end .inner ul li a.story:not(:hover) {
+            color: #000000 !important; }
+  @media (max-width: 480px) {
+    body.story main #table .card, body.collection main #table .card {
+      height: 100%;
+      padding: 1em 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch; }
+      body.story main #table .card.full, body.collection main #table .card.full {
+        width: 100vw !important; }
+      body.story main #table .card .inner, body.collection main #table .card .inner {
+        -webkit-column-count: 1;
+           -moz-column-count: 1;
+                column-count: 1;
+        padding-left: 1em;
+        padding-right: 1em; }
+        body.story main #table .card .inner ul, body.collection main #table .card .inner ul {
+          margin: auto; }
+      body.story main #table .card#title, body.collection main #table .card#title {
+        height: 100%; }
+        body.story main #table .card#title .mask, body.collection main #table .card#title .mask {
+          width: calc(100vw - 2em); }
+        body.story main #table .card#title .image, body.collection main #table .card#title .image {
+          -webkit-transform: 0;
+                  transform: 0; }
+        body.story main #table .card#title.odd h1.title, body.collection main #table .card#title.odd h1.title {
+          -webkit-transform: translateX(0);
+                  transform: translateX(0); }
+      body.story main #table .card#info, body.collection main #table .card#info {
+        width: 100%;
+        min-width: 100%;
+        height: auto; }
+      body.story main #table .card.half, body.collection main #table .card.half {
+        max-width: 100%;
+        min-width: 100%; }
+    body.story main #table #map, body.collection main #table #map {
+      height: auto;
+      padding: 0; }
+      body.story main #table #map img, body.collection main #table #map img {
+        width: 100%;
+        height: auto; } }
 
 body.collection main {
   height: calc(100% - 20px) !important; }
@@ -1946,6 +1949,8 @@ body.error {
     transition: opacity 250ms ease-in; }
     #collection .instruct .vert {
       text-align: center; }
+    #collection .instruct .mobile {
+      display: none; }
   #collection .items {
     width: 100%;
     height: 100%;
@@ -2114,6 +2119,11 @@ footer {
           max-width: 11em; }
 
 @media (max-width: 480px) {
+  #collection .instruct .mobile {
+    display: inline; }
+  #collection .instruct .main {
+    display: none; }
+
   footer .inner {
     width: 100%;
     display: table; }

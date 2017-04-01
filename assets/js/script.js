@@ -239,6 +239,7 @@
         },
         start: function(event, ui) {
           var $helper;
+          console.log(event);
           $helper = $(ui.helper);
           $helper.addClass('helper');
           return $grid.addClass('dragging');

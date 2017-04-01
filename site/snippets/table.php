@@ -14,7 +14,7 @@ if( isset( $story ) ) {
 	$links = $story->links()->toStructure();
 	$items = $story->children()->visible();
 	$quantity = 0;
-	foreach ($items as $item) {
+	foreach( $items as $item ) {
 		if( $item->intendedTemplate() == 'folder' ) {
 			foreach ($item->images()->filterBy( 'left', '==', 'true' ) as $image) {
 				$quantity++;
@@ -45,7 +45,7 @@ echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . 
 					$rotate = mt_rand( -25, 0 )/100;
 					$shift = mt_rand( -200, -100 )/100;
 					echo '<div class="image">';
-		  			echo '<div class="img rotate shift" style="background-color:' . $story->color() . '" data-rotate="' . $rotate .'" data-shift="' . $shift . '">';
+		  			echo '<div class="img rotate shift" style="background-color:' . $color . '" data-rotate="' . $rotate .'" data-shift="' . $shift . '">';
 		  				if( $thumb ) {
 						  	echo '<img src="' . $thumb->url() . '"/>';
 						  }
@@ -53,7 +53,7 @@ echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . 
 				  echo '</div>';
 				  $rotate = mt_rand( 0, 25 )/100;
 					$shift = mt_rand( 100, 200 )/100;
-					echo '<h1 class="title" style="color:' . $story->color() . '"><div class="rotate shift" data-rotate="' . $rotate . '" data-shift="' . $shift . '">' .  $story->title() . '</div></h1>';
+					echo '<h1 class="title" style="color:' . $color . '"><div class="rotate shift" data-rotate="' . $rotate . '" data-shift="' . $shift . '">' .  $story->title() . '</div></h1>';
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';
@@ -67,7 +67,7 @@ echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . 
 			  echo '</div>';
 		  	echo '<h3>Historical Note</h3>';
 		  	echo '<div class="historical">' . $historical . '</div>';
-		  	echo '<div class="aid">Read more on the <a href="' . page( 'aid' )->url() . '#' . $slug . '" style="color:' . $story->color() . '">Finding Aid</a></div>';
+		  	echo '<div class="aid">Read more on the <a href="' . page( 'aid' )->url() . '#' . $slug . '" style="color:' . $color . '">Finding Aid</a></div>';
 			echo '</div>';
 		echo '</div>';
 	} else {

@@ -12,6 +12,7 @@ if( isset( $item ) ) {
 	} else {
 		$display = $item->display();
 	}
+	$color = $story->color();
 	// $imgCheck = $display == 'image' && $item->getThumb( null );
 	// $textCheck = $display == 'text' && $item->excerpt();
 	if($index % 2 == 0) {
@@ -33,6 +34,5 @@ echo '<a class="click item rotate shift droppable' . ( $attrs ? $attrs : '' ) . 
 		  snippet( 'items/' . $type, array( 'item' => $item, 'color' => $color, 'display' => $display, 'size' => $size ) );
 		}
 	echo '</div>';
-	echo '<div class="shadow"></div>';
 echo '</a>';
 ?>

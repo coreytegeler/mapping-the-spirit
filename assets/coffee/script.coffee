@@ -206,6 +206,7 @@ $ ->
 				left: 0,
 				top: 0
 			start: (event, ui) ->
+				console.log event
 				$helper = $(ui.helper)
 				$helper.addClass('helper')
 				$grid.addClass('dragging')

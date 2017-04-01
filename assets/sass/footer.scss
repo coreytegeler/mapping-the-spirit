@@ -40,6 +40,9 @@
 		.vert {
 			text-align: center;
 		}
+		.mobile {
+			display: none;
+		}
 	}
 	.items {
 		width: 100%;
@@ -232,6 +235,14 @@ footer {
 }
 
 @include phone {
+	#collection .instruct {
+		.mobile {
+			display: inline;
+		}
+		.main {
+			display: none;
+		}
+	}
 	footer {
 		.inner {
 			width: 100%;
