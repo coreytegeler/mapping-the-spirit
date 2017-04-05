@@ -9,13 +9,16 @@ echo '<main>';
 		  	echo '<div class="block text">';
 		  		echo '<h2 class="title">' . $page->title() . '</h2>';
 	  		echo '</div>';
-	  		foreach($blocks as $block) {
+	  		foreach($blocks as $index => $block) {
 					$size = $block->size();
+					$textSize = $block->textSize();
+					$align = $block->align();
+					$type = $block->_fieldset();
 					if ( !$size || $size == '' ) {
 						$size = 'medium';
 					}
-					echo '<div class="block ' . $block->_fieldset() . ' ' . $size . '">';
-					  snippet( 'blocks/' . $block->_fieldset(), array( 'block' => $block ) );
+					echo '<div class="block ' . $type . ' ' . $size . ' ' . $textSize . ' ' . $align . '">';
+					  snippet( 'blocks/' . $type, array( 'block' => $block ) );
 					echo '</div>';
 				}
 			echo '</div>';

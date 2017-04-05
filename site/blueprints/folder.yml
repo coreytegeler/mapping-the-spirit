@@ -75,7 +75,7 @@ fields:
         fields:
           text:
             label: Text
-            type: wysiwyg
+            type: textarea
           month:
             label: Month
             type:  text
@@ -98,10 +98,29 @@ fields:
             label: Size
             type: select
             default: medium
+            width: 1/3
             options:
               small: Small
               medium: Medium
               large: Large
+          textSize:
+            label: Text Size
+            type: select
+            default: medium
+            width: 1/3
+            options:
+              smallText: Small
+              mediumText: Medium
+              largeText: Large
+          align:
+            label: Align
+            type: select
+            default: center
+            width: 1/3
+            options:
+              left: Left
+              center: Center
+              right: Right
       image:
         label: Image
         snippet: builder/image

@@ -30,7 +30,15 @@ body.aid {
 				&.collected {
 					.title {
 						&::after {
-							content: ' ✔';
+							width: 1.2em;
+							height: 1em;
+					    margin-bottom: -.1em;
+							display: inline-block;
+							background-image: url(../images/check.svg);
+							background-position: right bottom;
+							background-repeat: no-repeat;
+					    background-size: contain;
+							content: '';
 						}
 					}
 				}

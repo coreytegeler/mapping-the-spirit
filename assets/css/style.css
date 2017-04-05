@@ -1073,19 +1073,27 @@ body.collection #collection {
     z-index: 100;
     background-size: 1.5em;
     background-repeat: no-repeat;
-    opacity: .25;
+    opacity: .5;
     -webkit-transition: opacity 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
     transition: opacity 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-    .single .button:hover {
-      cursor: pointer;
-      opacity: 1; }
     .single .button.close-single {
       background-image: url(../images/x.svg);
       background-position: center;
       right: .25em; }
     .single .button.collect {
-      background-image: url(../images/math.svg);
       right: 1.75em; }
+      .single .button.collect .pseudo {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-image: url(../images/check.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 1.5em;
+        -webkit-transition: opacity 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        transition: opacity 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
       .single .button.collect .tooltip {
         height: 1.5em;
         position: absolute;
@@ -1102,14 +1110,15 @@ body.collection #collection {
           text-shadow: -1px -1px 0px #fafcfc, 1px -1px 0px #fafcfc, -1px 1px 0px #fafcfc, 1px 1px 0px #fafcfc; }
       .single .button.collect:hover .tooltip {
         display: table; }
-      .single .button.collect.add {
-        background-position: center top; }
-        .single .button.collect.add:hover .tooltip .add {
-          display: table-cell; }
-      .single .button.collect.remove {
-        background-position: center bottom; }
-        .single .button.collect.remove:hover .tooltip .remove {
-          display: table-cell; }
+      .single .button.collect.add .pseudo {
+        opacity: .1; }
+      .single .button.collect.add:hover .tooltip .add {
+        display: table-cell; }
+      .single .button.collect.remove:hover .tooltip .remove {
+        display: table-cell; }
+    .single .button:hover {
+      cursor: pointer;
+      opacity: 1; }
   .single section {
     width: 100%;
     height: 100%;
@@ -1135,7 +1144,8 @@ body.collection #collection {
       .single section .inner .text {
         font-size: 1em;
         line-height: 1.2em;
-        font-weight: normal; }
+        font-weight: normal;
+        display: block; }
       .single section .inner .title {
         font-family: "Chivo Black", Helvetica, Arial, sans-serif;
         font-size: 1em;
@@ -1304,13 +1314,15 @@ main .block {
     pointer-events: none; }
   main .block.quote {
     width: auto !important;
-    display: table;
+    padding: 0;
     margin-left: auto;
     margin-right: auto;
-    font-family: "Chivo", Helvetica, Arial, sans-serif; }
+    font-family: "Chivo", Helvetica, Arial, sans-serif;
+    display: table; }
     main .block.quote .text {
       position: relative;
-      color: rgba(0, 0, 0, 0.6); }
+      color: rgba(0, 0, 0, 0.8);
+      mix-blend-mode: darken; }
       main .block.quote .text p {
         width: 100%;
         padding: 0 2em .5em 2em;
@@ -1322,33 +1334,44 @@ main .block {
           font-family: "Chivo Black Italic", Helvetica, Arial, sans-serif;
           font-size: 4em;
           line-height: .5em;
-          color: #b3b4b7; }
+          opacity: .2; }
         main .block.quote .text p:first-child::before {
           content: '“';
           left: -.1em;
           top: 0; }
         main .block.quote .text p:last-child::after {
           content: '”';
-          right: -.1em;
+          right: .05em;
           bottom: 0; }
     main .block.quote .attribution {
       font-family: "Chivo Black", Helvetica, Arial, sans-serif;
       padding-top: 1em; }
-    main .block.quote.small .text {
-      font-size: 1em;
-      line-height: 1.2em;
-      font-weight: normal; }
-    main .block.quote.medium .text {
-      font-size: 1em;
-      line-height: 1.2em;
-      font-weight: normal; }
+    main .block.quote.left {
+      display: block;
+      float: left; }
+    main .block.quote.right {
+      display: block;
+      float: right; }
+    main .block.quote.small {
+      width: 35% !important; }
+    main .block.quote.medium {
+      width: 60% !important; }
     main .block.quote.large {
+      width: 100% !important;
       max-width: 1000px; }
-      main .block.quote.large .text {
-        font-family: "Chivo Black", Helvetica, Arial, sans-serif;
-        font-size: 2em;
-        line-height: 1.2em;
-        font-weight: normal; }
+    main .block.quote.smallText .text {
+      font-size: 1em;
+      line-height: 1.2em;
+      font-weight: normal; }
+    main .block.quote.mediumText .text {
+      font-size: 1.3em;
+      line-height: 1.3em;
+      font-weight: normal; }
+    main .block.quote.largeText .text {
+      font-family: "Chivo Black", Helvetica, Arial, sans-serif;
+      font-size: 2em;
+      line-height: 1.2em;
+      font-weight: normal; }
   main .block:last-child {
     padding-bottom: 0; }
 
@@ -1641,7 +1664,15 @@ body.aid main section .details .subgroup {
   body.aid main section .details .subgroup p {
     display: inline; }
 body.aid main section .wrap.item.collected .title::after {
-  content: ' ✔'; }
+  width: 1.2em;
+  height: 1em;
+  margin-bottom: -.1em;
+  display: inline-block;
+  background-image: url(../images/check.svg);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: ''; }
 @media (max-width: 480px) {
   body.aid main section .details .text {
     padding: 0; } }

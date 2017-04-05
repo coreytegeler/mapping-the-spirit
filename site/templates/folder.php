@@ -28,15 +28,17 @@ echo '<div class="sections">';
 					echo '</div>';
 					if( !$blocks->empty() ) {
 						$index = 0;
-						foreach($blocks->toStructure() as $block) {
+						foreach($blocks->toStructure() as $index => $block) {
 							$size = $block->size();
+							$textSize = $block->textSize();
+							$align = $block->align();
+							$type = $block->_fieldset();
 							if ( !$size || $size == '' ) {
 								$size = 'medium';
 							}
-							echo '<div class="block ' . $block->_fieldset() . ' ' . $size . '">';
-							  snippet( 'blocks/' . $block->_fieldset(), array( 'block' => $block, 'index' => $index ) );
+							echo '<div class="block ' . $type . ' ' . $size . ' ' . $textSize . ' ' . $align . '">';
+							  snippet( 'blocks/' . $type, array( 'block' => $block ) );
 							echo '</div>';
-							$index++;
 						}
 					}
 				echo '</div>';

@@ -56,20 +56,27 @@
 		z-index: 100;
 		background-size: 1.5em;
 		background-repeat: no-repeat;
-		opacity: .25;
+		opacity: .5;
 		transition: opacity 100ms $fadeEase;
-		&:hover {
-			cursor: pointer;
-			opacity: 1;
-		}
 		&.close-single {
 			background-image: url(../images/x.svg);
 			background-position: center;
 			right: .25em;
 		}
 		&.collect {
-			background-image: url(../images/math.svg);
 			right: 1.75em;
+			.pseudo {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				background-image: url(../images/check.svg);
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 1.5em;
+				transition: opacity 100ms $fadeEase;
+			}
 			.tooltip {
 				height: 1.5em;
 				position: absolute;
@@ -92,17 +99,22 @@
 				}
 			}
 			&.add {
-				background-position: center top;
+				.pseudo {
+					opacity: .1;
+				}
 				&:hover .tooltip .add {
 					display: table-cell;
 				}
 			}
 			&.remove {
-				background-position: center bottom;
 				&:hover .tooltip .remove {
 					display: table-cell;
 				}
 			}
+		}
+		&:hover {
+			cursor: pointer;
+			opacity: 1;
 		}
 	}
 	section {
@@ -128,6 +140,7 @@
 			transition: opacity 500ms $fadeEase;
 			.text {
 				@include smallText;
+				display: block;
 			}
 			.title {
 				font-family: $sansBlack;
@@ -354,13 +367,15 @@ main .block {
 	}
 	&.quote {
 		width: auto !important;
-		display: table;
+		padding: 0;
 		margin-left: auto;
 		margin-right: auto;
 		font-family: $sans;
+		display: table;
 		.text {
 			position: relative;
-			color: rgba($dark, 0.6);
+			color: rgba($dark, 0.8);
+			mix-blend-mode: darken;
 			p {
 				width: 100%;
 				padding: 0 2em .5em 2em;
@@ -372,7 +387,7 @@ main .block {
 					font-family: $sansBlackItalic;
 					font-size: 4em;
 					line-height: .5em;
-					color: $light;
+					opacity: .2;
 				}
 				&:first-child {
 					&::before {
@@ -384,7 +399,7 @@ main .block {
 				&:last-child {
 					&::after {
 						content: '”';
-						right: -.1em;
+						right: .05em;
 						bottom: 0;
 					}
 				}
@@ -394,14 +409,31 @@ main .block {
 			font-family: $sansBlack;
 			padding-top: 1em;
 		}
-		&.small .text {
-			@include smallText();
+		&.left {
+			display: block;
+			float: left;
 		}
-		&.medium .text {
-			@include smallText();
+		&.right {
+			display: block;
+			float: right;
+		}
+		&.small {
+			width: 35% !important;
+		}
+		&.medium {
+			width: 60% !important;
 		}
 		&.large {
+			width: 100% !important;
 			max-width: 1000px;
+		}
+		&.smallText .text {
+			@include smallText();
+		}
+		&.mediumText .text {
+			@include mediumText();
+		}
+		&.largeText {
 			.text {
 				font-family: $sansBlack;
 				@include largeText();

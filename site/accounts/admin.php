@@ -8,8 +8,8 @@ language: en
 role: admin
 history:
   - >
-    stories/msta/interview-sheik-azeem-hopkins-bey-and-chairperson-terrence-hopkins-bey-discuss-ali-s-men
+    stories/msta/interview-chairperson-terrence-hopkins-bey-discusses-his-childhood-in-the-moorish-science-temple-of-america
+  - stories/msta/act-6-divine-constitution
+  - stories/msta/interview-sheik-azeem-hopkins-bey-and-brother-terrence-hopkins-bey-ii-on-joining-the-moorish-science-temple-of-america
+  - stories/msta/interview-sheik-azeem-hopkins-bey-and-chairperson-terrence-hopkins-bey-discuss-ali-s-men
   - stories/msta/robert-webb-bey-s-journey-to-the-moorish-science-temple-of-america
-  - stories/msta/unity-in-the-moorish-science-temple-of-america
-  - stories/msta/misconceptions
-  - field-notes
