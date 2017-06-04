@@ -12,13 +12,6 @@ body.aid, body.about, body.error, body.field-note, body.field-notes, body.storie
 			width: 100%;
 			min-height: 100%;
 			padding: 2em 0 4em;
-			.inner {
-				width: 100%;
-				max-width: $maxWidth;
-				display: table;
-				margin: auto;
-				padding: 0 2em;
-			}
 			h3 {
 				text-align: center;
 				display: table;
@@ -53,6 +46,12 @@ body.aid, body.about, body.error, body.field-note, body.field-notes, body.storie
 				max-width: $maxWidth;
 				// display: table;
 				padding: 0 0 1em 0;
+			}
+			.statement {
+				padding: 1em 1em 2em 1em;
+				h2 {
+					margin: auto;
+				}
 			}
 		}
 	}

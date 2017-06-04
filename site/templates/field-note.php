@@ -4,7 +4,7 @@ $blocks = $page->blocks()->toStructure();
 snippet('head');
 echo '<main>';
 	echo '<section id="field-note">';
-		echo '<div class="inner">';
+		echo '<div class="center">';
 			echo '<div class="blocks text-wrap">';
 		  	echo '<div class="block text">';
 		  		echo '<h2 class="title">' . $page->title() . '</h2>';

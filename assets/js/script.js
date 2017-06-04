@@ -3,7 +3,7 @@
   var indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   $(function() {
-    var $aid, $body, $collection, $collectionItems, $frame, $grid, $header, $itemTitle, $main, $pageTitle, $secondary, $table, $window, addToCollection, browseCollection, browserNav, buildGrid, checkSize, clickItem, clickLink, closeDur, closeFrame, closeSingle, collect, collectSingle, createCollectionItem, createSingle, dragAndDrop, frameTool, goBack, horzScroll, hoverRow, init, insertCollection, loadCollection, loadImages, loadSingle, loadedSlug, lookAt, lookAway, makeResizable, noHover, openDur, openLinks, paginate, pickUp, putDown, putDownAll, removeCollectedItem, resizeCollection, resizeFolder, resizeFrameBar, resizeGrid, saveCollection, scrollInterval, scrollShift, shiftAndRotate, sizeImage, toggleFolder, transEnd, uncollect, unhoverRow, vertScroll, zoomImage;
+    var $aid, $body, $collection, $collectionItems, $frame, $grid, $header, $itemTitle, $main, $pageTitle, $secondary, $table, $window, addToCollection, begin, browseCollection, browserNav, buildGrid, checkSize, clickItem, clickLink, closeDur, closeFrame, closeSingle, collect, collectSingle, createCollectionItem, createSingle, dragAndDrop, frameTool, goBack, horzScroll, hoverRow, init, insertCollection, loadCollection, loadImages, loadSingle, loadedSlug, lookAt, lookAway, makeResizable, noHover, openDur, openLinks, paginate, pickUp, putDown, putDownAll, removeCollectedItem, resizeCollection, resizeFolder, resizeFrameBar, resizeGrid, saveCollection, scrollInterval, scrollShift, shiftAndRotate, sizeImage, toggleFolder, transEnd, uncollect, unhoverRow, vertScroll, zoomImage;
     $window = $(window);
     $body = $('body');
     $main = $('main');
@@ -37,6 +37,7 @@
           return shiftAndRotate(this, e);
         });
       });
+      $body.on('click', '#begin', begin);
       $body.on('click', '.button.collect', collectSingle);
       $body.on('click', '.button.close-single', closeSingle);
       $body.on('click', '.close-singles', putDownAll);
@@ -133,25 +134,27 @@
         src = $img.data('src');
         $item.append('<div class="loader"></div>');
         $img.attr('src', src);
-        sizeImage($item);
-        if ($item.parents('#grid')) {
-          resizeGrid();
-        }
-        $img.removeClass('load');
-        return $item.imagesLoaded(function() {
-          $item.addClass('loaded');
-          $img.css('width', '');
-          $img.css('height', '');
-          $img.css('maxHeight', '');
-          $item.css('width', '');
-          $item.css('height', '');
-          $item.css('maxHeight', '');
-          if ($item.parents('#table').length) {
-            if ($grid.is('.loaded')) {
-              resizeGrid();
-            }
-            return resizeCollection();
+        return $.when(sizeImage($item)).done(function() {
+          if ($item.parents('#grid')) {
+            resizeGrid();
           }
+          $img.removeClass('load');
+          $item.addClass('show');
+          return $item.imagesLoaded(function() {
+            $item.addClass('loaded');
+            $img.css('width', '');
+            $img.css('height', '');
+            $img.css('maxHeight', '');
+            $item.css('width', '');
+            $item.css('height', '');
+            $item.css('maxHeight', '');
+            if ($item.parents('#table').length) {
+              if ($grid.is('.loaded')) {
+                resizeGrid();
+              }
+              return resizeCollection();
+            }
+          });
         });
       });
     };
@@ -180,11 +183,8 @@
         maxHeight: height
       });
       if (!$item.is('.show')) {
-        $item.css({
+        return $item.css({
           width: width
-        });
-        return setTimeout(function() {
-          return $item.addClass('show');
         });
       } else {
         return $img.width('');
@@ -239,7 +239,6 @@
         },
         start: function(event, ui) {
           var $helper;
-          console.log(event);
           $helper = $(ui.helper);
           $helper.addClass('helper');
           return $grid.addClass('dragging');
@@ -353,7 +352,6 @@
         }, 100);
       });
       if ($body.is('.collection') && $item.is('.hide')) {
-        console.log($item = $grid.find('[data-slug="' + slug + '"]'));
         $item = $grid.find('[data-slug="' + slug + '"]').removeClass('hide');
         return $grid.isotope('layout');
       }
@@ -379,7 +377,6 @@
       if (!$grid.length) {
         return;
       }
-      console.log('!');
       e.preventDefault();
       $item = $(this);
       if ($item.is('.selected')) {
@@ -447,7 +444,7 @@
           return console.log(jqXHR, status, err);
         },
         success: function(html, status, jqXHR) {
-          var $content, $data, $single, title, type;
+          var $content, $data, $single, thumb, title, type;
           $single = $('<div class="single"></div>');
           $main.append($single);
           $data = $($(html)[0]);
@@ -455,6 +452,7 @@
           slug = $data.data('slug');
           type = $data.data('type');
           url = $data.data('url');
+          thumb = $data.data('thumb');
           $data.remove();
           $content = $($(html));
           $single.attr('data-title', title).attr('data-slug', slug).attr('data-type', type).attr('data-url', url).addClass(type);
@@ -463,6 +461,9 @@
             return shiftAndRotate(this);
           });
           document.title = 'Mapping The Spirit — ' + title;
+          $('meta[property="og:title"]').attr('content', 'Mapping The Spirit — ' + title);
+          $('meta[property="og:image"]').attr('content', thumb);
+          $('meta[property="og:url"]').attr('content', url);
           $itemTitle.addClass('ready');
           $itemTitle.find('a').html(title);
           $itemTitle.find('a').attr('href', url);
@@ -521,7 +522,6 @@
       var $collected, $newSingle, $openSingles, $single, data, scrollLeft, title, url;
       $single = $('.single[data-slug="' + slug + '"]');
       url = $table.data('url');
-      console.log(url);
       if (push) {
         data = {
           action: 'down',
@@ -891,6 +891,11 @@
           x: 0
         });
       }
+    };
+    begin = function() {
+      return $body.animate({
+        scrollTop: $(window).innerHeight() + 1
+      }, 800, 'easeInOutQuint');
     };
     zoomImage = function() {
       var $bar, $block, $buttons, $image, $text, img, url;

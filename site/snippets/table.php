@@ -1,4 +1,6 @@
 <?php
+$isCollection = $page->intendedTemplate() == 'collection';
+$isStory = $page->intendedTemplate() == 'story';
 if( isset( $story ) ) {
 	$title = $story->title();
 	$slug = $story->slug();
@@ -31,7 +33,7 @@ if( isset( $story ) ) {
 		}
 	}
 }
-if( $page->intendedTemplate() == 'story' || $page->intendedTemplate() == 'collection' ) {
+if( $isStory || $isCollection ) {
 	$url = $page->url();
 } else {
 	$url = $story->url();
@@ -105,11 +107,11 @@ echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . 
 		echo '<div class="card half end">';
 		  echo '<div class="inner">';
 	 			echo '<div class="column">';
-		 			echo '<ul>';
-		 				echo '<li><h3>External Resources</h3></li>';
+		 			echo '<h3>External Resources</h3>';
+		 			echo '<ol>';
 					  foreach( $links as $index => $link ) {
 					  	echo '<li>';
-						  	echo '<a href="' . $link->url() . '" target="_bank" style="color:' . $color . '">';
+						  	echo '<a href="' . $link->url() . '" target="_bank">';
 						  	  echo $link->title();
 						  	  echo '<div class="tags">';
 							  	  $tagdex = 0;
@@ -126,7 +128,7 @@ echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . 
 						  	echo '</a>';
 						  echo '</li>';
 					  }
-					echo '</ul>';
+					echo '</ol>';
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';

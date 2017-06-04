@@ -13,7 +13,10 @@ if( !kirby()->request()->ajax() ) {
 	snippet( 'footnotes' );
 	echo '<div class="single left open folder" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="folder">';
 } else {
-	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="folder"></div>';
+	if( $thumb = $item->getThumb( 'large' ) ) {
+		$thumb = $thumb->url();
+	}
+	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-thumb="' . $thumb . '" data-type="folder"></div>';
 }
 snippet( 'buttons' );
 echo '<div class="sections">';

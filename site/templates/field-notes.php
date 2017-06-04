@@ -4,7 +4,7 @@ $blocks = $page->blocks()->toStructure();
 snippet('head');
 echo '<main>';
 	echo '<section id="field-notes" class="rows">';
-		echo '<div class="inner">';
+		echo '<div class="center">';
 			echo '<h2 class="title">Field Notes</h2>';
 			if( !$page->text()->empty() ) {
 				echo '<div class="about">';

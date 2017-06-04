@@ -34,7 +34,6 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #fafcfc;
   font-family: "Chivo", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: black;
@@ -44,9 +43,6 @@ html, body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  overflow: hidden;
   position: relative;
   content: 'desktop'; }
   @media (max-width: 768px) {
@@ -56,9 +52,16 @@ html, body {
     box-sizing: border-box;
     backface-visibility: hidden; }
 
+html {
+  background-color: #f4f6fa; }
+
 body {
+  overflow-y: hidden;
+  overflow-x: hidden;
+  overflow: hidden;
   opacity: 0;
-  transition: opacity 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+  transition: opacity 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  background-color: #fafcfc; }
   body.loaded {
     opacity: 1; }
 
@@ -120,6 +123,13 @@ ul {
 .vert {
   display: table-cell;
   vertical-align: middle; }
+
+.center {
+  width: 100%;
+  max-width: 800px;
+  display: table;
+  margin: auto;
+  padding: 0 2em; }
 
 p {
   margin: 0 0 1em 0; }
@@ -196,7 +206,7 @@ header {
       transform: translateX(0); }
     header .title:not(:last-child) {
       background-size: 1em;
-      background-position: .4em .2em;
+      background-position: .4em .25em;
       background-repeat: no-repeat;
       background-image: url(../images/next.svg); }
     header .title:last-child {
@@ -381,7 +391,7 @@ body.home {
   body.home main {
     width: 100%;
     margin: 0;
-    display: block; }
+    display: table; }
     body.home main section#map {
       width: 100%;
       height: 100vh;
@@ -412,16 +422,53 @@ body.home {
           padding: 1em;
           align-self: center;
           text-align: center; }
+      body.home main section#map #begin {
+        width: 4em;
+        position: absolute;
+        left: calc(50% - 2em);
+        bottom: 1em;
+        padding: .5em 0 1.5em 0;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 900;
+        color: #b3b4b7;
+        opacity: 1;
+        background-image: url(../images/down_white.svg);
+        background-repeat: no-repeat;
+        background-size: 1.5em;
+        background-position: center bottom;
+        transition: transform 300ms cubic-bezier(0.215, 0.61, 0.355, 1), opacity 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+        body.home main section#map #begin:hover {
+          padding-top: 2em;
+          margin-top: -1.5em;
+          cursor: pointer;
+          transform: translateY(0.5em);
+          opacity: 0.5; }
     body.home main section#stories {
       border-top: 1px solid #000000;
       margin-bottom: 3em; }
+      body.home main section#stories .about, body.home main section#stories .instruct {
+        float: left; }
       body.home main section#stories .about {
-        width: calc(80% - 4em);
-        min-width: 20em;
-        max-width: 40em;
+        width: 60%;
+        max-width: 800px;
         display: table;
-        margin: auto;
-        padding: 2em; }
+        min-width: 20em;
+        padding: 4em 2em; }
+      body.home main section#stories .instruct {
+        width: 40%;
+        padding: 4em 2em;
+        max-width: 800px;
+        color: #b3b4b7; }
+        body.home main section#stories .instruct a {
+          color: #878a8e;
+          white-space: nowrap; }
+      body.home main section#stories h2.title {
+        width: 100%;
+        text-align: left;
+        border-bottom: .2em solid;
+        margin-bottom: 1.5em;
+        pointer-events: none; }
     body.home main section#field-notes {
       border-top: 1px solid #000000;
       color: #000000;
@@ -432,10 +479,12 @@ body.home {
       float: left;
       padding-top: 0; }
   @media (max-width: 768px) {
-    body.home main section#stories .about {
+    body.home main section#stories .about, body.home main section#stories .instruct {
       width: 100%;
       padding: 1em;
-      min-width: 0; } }
+      min-width: 0; }
+    body.home main section#stories .instruct {
+      padding-top: 0; } }
   @media (max-width: 480px) {
     body.home main section#map .map, body.home main section#map .title {
       width: 100%;
@@ -625,7 +674,6 @@ body.story, body.collection {
       body.story main #grid.loaded, body.collection main #grid.loaded {
         opacity: 1; }
       body.story main #grid .item, body.collection main #grid .item {
-        display: none;
         margin: 0 20px 0 0;
         float: left;
         min-height: 10em;
@@ -803,37 +851,39 @@ body.story, body.collection {
       min-width: 20em;
       padding-right: 1em;
       padding-bottom: 1em; }
-    body.story .end .inner ul, body.collection .end .inner ul {
-      max-width: 15em;
-      margin: 0;
+    body.story .end .inner h3, body.collection .end .inner h3 {
+      white-space: nowrap;
+      padding-bottom: .25em; }
+    body.story .end .inner ul, body.story .end .inner ol, body.collection .end .inner ul, body.collection .end .inner ol {
+      margin: auto;
       padding: 0 0 1em 0;
-      list-style: none;
       break-inside: avoid-column; }
-      body.story .end .inner ul:last-of-type, body.collection .end .inner ul:last-of-type {
+      body.story .end .inner ul:last-of-type, body.story .end .inner ol:last-of-type, body.collection .end .inner ul:last-of-type, body.collection .end .inner ol:last-of-type {
         padding: 0; }
-      body.story .end .inner ul li, body.collection .end .inner ul li {
+      body.story .end .inner ul li, body.story .end .inner ol li, body.collection .end .inner ul li, body.collection .end .inner ol li {
         padding-bottom: .25em;
         break-inside: avoid-column; }
-        body.story .end .inner ul li h3, body.collection .end .inner ul li h3 {
-          white-space: nowrap;
-          padding-bottom: .25em; }
-        body.story .end .inner ul li .tags, body.collection .end .inner ul li .tags {
+        body.story .end .inner ul li .tags, body.story .end .inner ol li .tags, body.collection .end .inner ul li .tags, body.collection .end .inner ol li .tags {
           font-size: .75em;
           line-height: 1.3em;
           font-weight: normal;
           text-transform: uppercase; }
-        body.story .end .inner ul li .label, body.story .end .inner ul li .source, body.collection .end .inner ul li .label, body.collection .end .inner ul li .source {
+        body.story .end .inner ul li .label, body.story .end .inner ul li .source, body.story .end .inner ol li .label, body.story .end .inner ol li .source, body.collection .end .inner ul li .label, body.collection .end .inner ul li .source, body.collection .end .inner ol li .label, body.collection .end .inner ol li .source {
           font-size: .75em;
           line-height: 1.3em;
           font-weight: normal;
           color: #878a8e;
           text-transform: uppercase; }
-        body.story .end .inner ul li a, body.collection .end .inner ul li a {
+        body.story .end .inner ul li a, body.story .end .inner ol li a, body.collection .end .inner ul li a, body.collection .end .inner ol li a {
           text-decoration: none; }
-          body.story .end .inner ul li a:not(.story):hover, body.collection .end .inner ul li a:not(.story):hover {
+          body.story .end .inner ul li a:not(.story):hover, body.story .end .inner ol li a:not(.story):hover, body.collection .end .inner ul li a:not(.story):hover, body.collection .end .inner ol li a:not(.story):hover {
             color: #878a8e; }
-          body.story .end .inner ul li a.story:not(:hover), body.collection .end .inner ul li a.story:not(:hover) {
+          body.story .end .inner ul li a.story:not(:hover), body.story .end .inner ol li a.story:not(:hover), body.collection .end .inner ul li a.story:not(:hover), body.collection .end .inner ol li a.story:not(:hover) {
             color: #000000 !important; }
+    body.story .end .inner ul, body.collection .end .inner ul {
+      list-style: none; }
+    body.story .end .inner ol, body.collection .end .inner ol {
+      list-style: decimal; }
   @media (max-width: 480px) {
     body.story main #table .card, body.collection main #table .card {
       height: 100%;
@@ -923,14 +973,18 @@ body.collection #collection {
     .single .arrow.next {
       right: 0;
       background-image: url(../images/next.svg); }
+  .single .buttons {
+    position: absolute;
+    right: 0;
+    top: .25em;
+    z-index: 10; }
   .single .button {
     width: 1.5em;
     height: 1.5em;
-    position: absolute;
-    top: .25em;
     z-index: 100;
     background-size: 1.5em;
     background-repeat: no-repeat;
+    float: left;
     opacity: .5;
     transition: opacity 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
     .single .button.close-single {
@@ -938,7 +992,7 @@ body.collection #collection {
       background-position: center;
       right: .25em; }
     .single .button.collect {
-      right: 1.75em; }
+      position: relative; }
       .single .button.collect .pseudo {
         width: 100%;
         height: 100%;
@@ -975,6 +1029,10 @@ body.collection #collection {
     .single .button:hover {
       cursor: pointer;
       opacity: 1; }
+    .single .button.facebook {
+      background-image: url(../images/facebook.svg); }
+    .single .button.twitter {
+      background-image: url(../images/twitter.svg); }
   .single section {
     width: 100%;
     height: 100%;
@@ -1415,12 +1473,6 @@ body.aid main, body.about main, body.error main, body.field-note main, body.fiel
     width: 100%;
     min-height: 100%;
     padding: 2em 0 4em; }
-    body.aid main section .inner, body.about main section .inner, body.error main section .inner, body.field-note main section .inner, body.field-notes main section .inner, body.stories main section .inner {
-      width: 100%;
-      max-width: 800px;
-      display: table;
-      margin: auto;
-      padding: 0 2em; }
     body.aid main section h3, body.about main section h3, body.error main section h3, body.field-note main section h3, body.field-notes main section h3, body.stories main section h3 {
       text-align: center;
       display: table;
@@ -1447,6 +1499,10 @@ body.aid main, body.about main, body.error main, body.field-note main, body.fiel
       width: 100%;
       max-width: 800px;
       padding: 0 0 1em 0; }
+    body.aid main section .statement, body.about main section .statement, body.error main section .statement, body.field-note main section .statement, body.field-notes main section .statement, body.stories main section .statement {
+      padding: 1em 1em 2em 1em; }
+      body.aid main section .statement h2, body.about main section .statement h2, body.error main section .statement h2, body.field-note main section .statement h2, body.field-notes main section .statement h2, body.stories main section .statement h2 {
+        margin: auto; }
 @media (max-width: 480px) {
   body.aid main section .inner, body.about main section .inner, body.error main section .inner, body.field-note main section .inner, body.field-notes main section .inner, body.stories main section .inner {
     padding: 0 .75em; }
@@ -1627,6 +1683,11 @@ section.rows {
       opacity: 1 !important; }
       section.rows#field-notes .field-note.hover .wrap .image img {
         filter: grayscale(1) !important; }
+  section.rows .more {
+    display: table;
+    margin: 1em auto 0 auto;
+    cursor: default;
+    color: #b3b4b7; }
 
 @media (max-width: 480px) {
   .rows.story {

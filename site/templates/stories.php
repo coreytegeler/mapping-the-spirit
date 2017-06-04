@@ -3,7 +3,7 @@ snippet('head');
   echo '<main>';
 	  $stories = page( 'stories' )->children()->visible();
 		echo '<section id="stories" class="rows">';
-			echo '<div class="inner">';
+			echo '<div class="center">';
 				echo '<h2 class="title">Stories</h2>';
 				if( !$page->text()->empty() ) {
 					echo '<div class="about">';
@@ -37,6 +37,7 @@ snippet('head');
 			  	echo '</div>';
 			  }
 			 echo '</div>';
+			 echo '<h3 class="more">More stories coming soon</h3>';
 		echo '</section>';
 		snippet('footer');
   echo '</main>';

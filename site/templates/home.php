@@ -12,13 +12,23 @@ snippet('head');
 		  		echo $site->title();
 		  	echo '</h1>';
 		  echo '</div>';
+		  echo '<div id="begin">Begin</div>';
 		echo '</section>';
 		echo '<section id="stories" class="rows">';
 			snippet( 'header', array( 'pageTitle' => 'STORIES' ) );
 			echo '<div class="about">';
-				echo $page->brief()->kirbytext();
+				echo '<h2>';
+					echo $page->brief()->kirbytext();
+				echo '</h2>';
 			echo '</div>';
-			// echo '<div class="dash"></div>';
+			echo '<div class="instruct">';
+				echo '<h2>Learn <a href="' . page( 'about' )->url() . '">more</a>.</h2>';
+				echo '<h2>Browse the <a href="' . page( 'aid' )->url() . '">finding aid</a>.</h2>';
+				echo '<h2>Create a <a href="' . page( 'collection' )->url() . '">collection</a>.</h2>';
+			echo '</div>';
+			echo '<div class="center">';
+				echo '<h2 class="title"></h2>';
+			echo '</div>';
 			echo '<div class="rowrap">';
 				$index = 0;
 				foreach( $stories as $story ) {
@@ -45,6 +55,7 @@ snippet('head');
 			  	echo '</div>';
 			  }
 			 echo '</div>';
+			 echo '<h3 class="more">More stories coming soon</h3>';
 		echo '</section>';
 		if( $field_notes = page( 'field-notes' ) ) {
 			$field_notes = $field_notes->children()->visible();

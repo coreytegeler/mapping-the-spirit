@@ -6,7 +6,6 @@ html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background-color: $lightest;
 	font-family: $sans;
 	font-weight: normal;
 	color: black;
@@ -14,9 +13,6 @@ html, body {
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  overflow: hidden;
   position:relative;
   content: 'desktop';
   * {
@@ -24,9 +20,16 @@ html, body {
    	backface-visibility: hidden;
   }
 }
+html {
+	background-color: $lighter;
+}
 body {
+	overflow-y: hidden;
+  overflow-x: hidden;
+  overflow: hidden;
 	opacity: 0;
 	transition: opacity 300ms $fadeEase;
+	background-color: $lightest;
 	&.loaded {
 		opacity: 1;
 	}
@@ -77,6 +80,13 @@ ul {
 .vert {
 	display: table-cell;
 	vertical-align: middle;
+}
+.center {
+	width: 100%;
+	max-width: $maxWidth;
+	display: table;
+	margin: auto;
+	padding: 0 2em;
 }
 p {
 	margin: 0 0 1em 0;
@@ -164,7 +174,7 @@ header {
 		}
 		&:not(:last-child) {
 			background-size: 1em;
-			background-position: .4em .2em;
+			background-position: .4em .25em;
 			background-repeat: no-repeat;
 			background-image: url(../images/next.svg);
 		}
@@ -189,7 +199,6 @@ header {
 		a {
 			@include smallText;
 			margin: .15em .5em 0 0;
-			// color: $light;
 			&:last-child {
 				margin-right: 0;
 			}
@@ -302,7 +311,6 @@ main {
 		}
 	}
 	header {
-		// height: calc(#{$headerHeight}*1.75);
 		@include baseText;
 		.row {
 			a {
@@ -354,14 +362,11 @@ main {
 		}
 	}
 }
-
 @include tablet {
 	html, body {
 		@include baseText;
 	}
 }
-
-
 @import 'home';
 @import 'table';
 @import 'collection';

@@ -12,7 +12,10 @@ if( !kirby()->request()->ajax() ) {
 	snippet( 'footnotes' );
 	echo '<div class="single open quote" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="quote">';
 } else {
-	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="quote"></div>';
+	if( $thumb = $item->getThumb( 'large' ) ) {
+		$thumb = $thumb->url();
+	}
+	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-thumb="' . $thumb . '" data-type="quote"></div>';
 }
 $size = $item->size();
 echo '<section class="' . $item->size() . '">';

@@ -154,6 +154,12 @@ section.rows {
 			}
 		}
 	}
+	.more {
+		display: table;
+    margin: 1em auto 0 auto;
+    cursor: default;
+    color: $light;
+	}
 }
 @include phone {
 	.rows {

@@ -12,7 +12,10 @@ if( !kirby()->request()->ajax() ) {
 	snippet( 'footnotes' );
 	echo '<div class="single open object" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="object">';
 } else {
-	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="object"></div>';
+	if( $thumb = $item->getThumb( 'large' ) ) {
+		$thumb = $thumb->url();
+	}
+	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-thumb="' . $thumb . '" data-type="object"></div>';
 }
 $image = $item->thumb();
 $type = $item->type();

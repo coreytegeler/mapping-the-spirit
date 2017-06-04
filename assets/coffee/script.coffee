@@ -28,6 +28,7 @@ $ ->
 		$body.on 'mousemove', (e) ->
 			$(this).find('.shift').each () ->
 				shiftAndRotate(this, e)
+		$body.on 'click', '#begin', begin
 		$body.on 'click', '.button.collect', collectSingle
 		$body.on 'click', '.button.close-single', closeSingle
 		$body.on 'click', '.close-singles', putDownAll
@@ -118,22 +119,23 @@ $ ->
 			src = $img.data('src')
 			$item.append('<div class="loader"></div>')
 			$img.attr('src', src)
-			sizeImage($item)
-			if $item.parents('#grid')
-				resizeGrid()
-			$img.removeClass('load')
-			$item.imagesLoaded () ->
-				$item.addClass('loaded')
-				$img.css('width','')
-				$img.css('height','')
-				$img.css('maxHeight','')
-				$item.css('width','')
-				$item.css('height','')
-				$item.css('maxHeight','')
-				if $item.parents('#table').length
-					if $grid.is('.loaded')
-						resizeGrid()
-					resizeCollection()
+			$.when(sizeImage($item)).done () ->
+				if $item.parents('#grid')
+					resizeGrid()
+				$img.removeClass('load')
+				$item.addClass('show')
+				$item.imagesLoaded () ->
+					$item.addClass('loaded')
+					$img.css('width','')
+					$img.css('height','')
+					$img.css('maxHeight','')
+					$item.css('width','')
+					$item.css('height','')
+					$item.css('maxHeight','')
+					if $item.parents('#table').length
+						if $grid.is('.loaded')
+							resizeGrid()
+						resizeCollection()
 
 	sizeImage = (item, gutter) ->	
 		$item = $(item)
@@ -161,8 +163,6 @@ $ ->
 		if(!$item.is('.show'))
 			$item.css
 				width: width
-			setTimeout () ->
-				$item.addClass('show')
 		else
 			$img.width('')
 
@@ -206,7 +206,6 @@ $ ->
 				left: 0,
 				top: 0
 			start: (event, ui) ->
-				console.log event
 				$helper = $(ui.helper)
 				$helper.addClass('helper')
 				$grid.addClass('dragging')
@@ -298,7 +297,6 @@ $ ->
 				resizeCollection()
 			, 100
 		if $body.is('.collection') && $item.is('.hide')
-			console.log $item = $grid.find('[data-slug="'+slug+'"]')
 			$item = $grid.find('[data-slug="'+slug+'"]').removeClass('hide')
 			$grid.isotope('layout')
 
@@ -319,7 +317,6 @@ $ ->
 	clickItem = (e) ->
 		if !$grid.length
 			return
-		console.log '!'
 		e.preventDefault()
 		$item = $(this)
 		if $item.is('.selected')
@@ -382,6 +379,7 @@ $ ->
 				slug = $data.data('slug')
 				type = $data.data('type')
 				url = $data.data('url')
+				thumb = $data.data('thumb')
 				$data.remove()
 				$content = $($(html))
 				$single
@@ -394,6 +392,9 @@ $ ->
 				$single.find('.rotate').each () ->
 					shiftAndRotate(this)
 				document.title = 'Mapping The Spirit — '+title
+				$('meta[property="og:title"]').attr('content', 'Mapping The Spirit — '+title)
+				$('meta[property="og:image"]').attr('content', thumb)
+				$('meta[property="og:url"]').attr('content', url)
 				$itemTitle.addClass('ready')
 				$itemTitle.find('a').html(title)
 				$itemTitle.find('a').attr('href', url)
@@ -439,7 +440,6 @@ $ ->
 	putDown = (slug, push) ->
 		$single = $('.single[data-slug="' + slug + '"]')
 		url = $table.data('url')
-		console.log url
 		if push
 			data = {action: 'down', slug: slug}
 			history.pushState(data, document.title, url)
@@ -724,6 +724,11 @@ $ ->
 		if width < winWidth
 			$collectionItems.css
 				x: 0
+
+	begin = () ->
+		$body.animate
+			scrollTop: $(window).innerHeight()+1
+		, 800, 'easeInOutQuint'
 
 
 	zoomImage = () ->

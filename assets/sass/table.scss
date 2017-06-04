@@ -230,7 +230,6 @@ body.story, body.collection {
 				opacity: 1;
 			}
 		  .item {
-		  	display: none;
 		  	margin: 0 $gutter 0 0;
 		  	float: left;
 		  	min-height: $minItem;
@@ -472,11 +471,14 @@ body.story, body.collection {
 				padding-right: 1em;
 				padding-bottom: 1em;
 			}
-			ul {
-				max-width: 15em;
-				margin: 0;
+			h3 {
+				white-space: nowrap;
+				padding-bottom: .25em;
+			}
+			ul, ol {
+				// max-width: 15em;
+				margin: auto;
 				padding: 0 0 1em 0;
-				list-style: none;
 				break-inside: avoid-column;
 				&:last-of-type {
 					padding: 0;
@@ -484,10 +486,6 @@ body.story, body.collection {
   			li {
   				padding-bottom: .25em;
   				break-inside: avoid-column;
-  				h3 {
-						white-space: nowrap;
-						padding-bottom: .25em;
-					}
   				.tags {
 	  				@include xSmallText;
 	  				text-transform: uppercase;
@@ -507,6 +505,12 @@ body.story, body.collection {
 						}
 	  			}
 	  		}
+  		}
+  		ul {
+  			list-style: none;
+  		}
+  		ol {
+  			list-style: decimal;
   		}
   	}
 	}

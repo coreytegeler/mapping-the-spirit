@@ -13,7 +13,10 @@ if( !kirby()->request()->ajax() ) {
 	snippet( 'footnotes' );
 	echo '<div class="single stack open" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="stack">';
 } else {
-	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-type="stack"></div>';
+	if( $thumb = $item->getThumb( 'large' ) ) {
+		$thumb = $thumb->url();
+	}
+	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-thumb="' . $thumb . '" data-type="stack"></div>';
 }
 echo '<section>';
 	snippet( 'buttons' );

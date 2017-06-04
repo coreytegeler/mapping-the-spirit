@@ -11,7 +11,7 @@ body.home {
 	main {
 		width: 100%;
 		margin: 0;
-		display: block;
+		display: table;
 		section#map {
 			width: 100%;
 			height: 100vh;
@@ -46,17 +46,60 @@ body.home {
 					text-align: center;
 				}
 			}
+			#begin {
+				width: 4em;
+				position: absolute;
+				left: calc(50% - 2em);
+				bottom: 1em;
+				padding: .5em 0 1.5em 0;
+				text-transform: uppercase;
+				text-align: center;
+				font-weight: 900;
+				color: $light;
+				opacity: 1;
+				background-image: url(../images/down_white.svg);
+				background-repeat: no-repeat;
+				background-size: 1.5em;
+				background-position: center bottom;
+				transition: transform 300ms $slideEase, opacity 300ms $fadeEase;
+				&:hover {
+					padding-top: 2em;
+					margin-top: -1.5em;
+					cursor: pointer;
+					transform: translateY(.5em);
+					opacity: 0.5;
+				}
+			}
 		}
 		section#stories {
 			border-top: 1px solid $dark;
 			margin-bottom: 3em;
+			.about, .instruct {
+				float: left;
+			}
 			.about {
-				width: calc(80% - 4em);
-				min-width: 20em;
-				max-width: 40em;
+				width: 60%;
+				max-width: $maxWidth;
 				display: table;
-				margin: auto;
-				padding: 2em;
+				min-width: 20em;
+				padding: 4em 2em;
+			}
+			.instruct {
+				width: 40%;
+				padding: 4em 2em;
+				max-width: $maxWidth;
+				color: $light;
+				a {
+					color: $medium;
+			    white-space: nowrap;
+				}
+			}
+			h2.title {
+				width: 100%;
+				text-align: left;
+				border-bottom: .2em solid;
+				margin-bottom: 1.5em;
+				pointer-events: none;
 			}
 		}
 		section#field-notes {
@@ -78,10 +121,13 @@ body.home {
 	@include tablet {
 		main {
 			section#stories {
-				.about {
+				.about, .instruct {
 					width: 100%;
 					padding: 1em;
 					min-width: 0;
+				}
+				.instruct {
+					padding-top: 0;
 				}
 			}
 		}
