@@ -13,15 +13,17 @@ if( $item ) {
 		$rotate = mt_rand( 0, 25 )/100;
 		$shift = mt_rand( 100, 200 )/100;
 	}
-	$full = $image->url();
+	if( $image ) {
+		$full = $image->resize(2000, 2000, 100)->url();
+	}
 	if( $detail = $image->detail() ) {
 		if( $page->image( $detail ) ) {
-			$full = $page->image( $detail )->url();
+			$full = $page->image( $detail )->resize(2000, 2000, 100)->url();
 		}
 	}
 	if( $image ) {
 		echo '<div class="item">';
-			echo '<img class="rotate shift load" data-full="' . $full . '" data-shift="' . $shift . '" data-rotate="' . $rotate . '" data-src="' . $image->resize(1500, 1500, 100)->url() . '" data-width="' . $image->width() . '" data-height="' . $image->height() . '"/>';
+			echo '<img class="rotate shift load" data-full="' . $full . '" data-shift="' . $shift . '" data-rotate="' . $rotate . '" data-src="' . $image->resize(1000, 1000, 100)->url() . '" data-width="' . $image->width() . '" data-height="' . $image->height() . '"/>';
 		echo '</div>';
 		if( !isset( $noText ) ) {
 			echo '<div class="text-wrap">';

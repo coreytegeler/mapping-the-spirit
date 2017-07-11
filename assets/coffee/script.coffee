@@ -41,13 +41,12 @@ $ ->
 		$body.on 'click', '#frame .button', frameTool
 		$body.on 'click', '.single .paginate', paginate
 		$body.on 'click', '.single .block a.item', clickLink
+		$body.on 'click', '.single .block .cite.show', showCite
 		$body.on 'click', '#error a.back', goBack
 		$body.on 'mouseover', '.row a', hoverRow
 		$body.on 'mouseleave', '.row a', unhoverRow
 		$body.on 'click', '.open-links', openLinks
-		$(window).on 'popstate', (e) ->
-			e.preventDefault()
-			browserNav(e)
+		$(window).on 'popstate', browserNav
 	  
 		if $body.is('.looking')
 			slug = $('.single').attr('data-slug')
@@ -57,7 +56,7 @@ $ ->
 
 		if $grid
 			buildGrid()
-		loadImages()
+		loadImages($grid)
 		checkSize()
 		resizeFolder()
 
@@ -111,13 +110,18 @@ $ ->
 				sizeImage(this, gutter)
 				$grid.isotope('layout')
 
-	loadImages = () ->
-		$('img.load').each (i, img) ->
+	loadImages = (parent) ->
+		if parent.length
+			$parent = $(parent)
+		else
+			$parent = $body
+		$body.find('img.load').each (i, img) ->
 			$img = $(img)
 			$item = $($img.parents('.item')[0])
 			$item.addClass('has-loader')
 			src = $img.data('src')
-			$item.append('<div class="loader"></div>')
+			if !$item.find('.loader').length
+				$item.append('<div class="loader"></div>')
 			$img.attr('src', src)
 			$.when(sizeImage($item)).done () ->
 				if $item.parents('#grid')
@@ -140,19 +144,26 @@ $ ->
 	sizeImage = (item, gutter) ->	
 		$item = $(item)
 		$img = $item.find('img')
-		ratio = $img.data('height')/$img.data('width')
+		imgWidth = $img.data('width')
+		imgHeight = $img.data('height')
+		ratio = imgWidth/imgHeight
+		if !ratio
+			return
 		# if image is in grid
 		if(gutter)
 			if($item.is('.large'))
 				height = $table.innerHeight() - gutter*2
 			else
 				height = $table.innerHeight()/2 - gutter*1.5
-			width = height/ratio
+			width = height*ratio
 		# if image is in an item page
 		else
-			width = $item.parents('.block').innerWidth()
+			parentWidth = $item.parents('.scroll').innerWidth() - parseInt($item.parents('.block').css('paddingLeft'))*2
+			if parentWidth > imgWidth
+				width = imgWidth
+			else
+				width = parentWidth
 			height = width/ratio
-
 		$item.css
 			height: height
 			maxHeight: height
@@ -211,7 +222,9 @@ $ ->
 				$grid.addClass('dragging')
 			drag: (event, ui) ->
 				$helper = $(ui.helper)
-				$helper.css 'transform', ''
+				$helper.css
+					'x': -$helper.innerWidth()/2,
+					'y': -$helper.innerHeight()
 				itemTop = ui.offset.top
 				collectionTop = $collectionItems.offset().top
 				if(itemTop >= collectionTop - 1)
@@ -228,7 +241,7 @@ $ ->
 			drop: (event, ui) ->
 				$(this).removeClass('over')
 				item = $(ui.draggable[0]).data('slug')
-				collect(item)
+				collect(item, true)
 			over: (event, ui) ->
 				$collection.addClass('over')
 			out: (event, ui) ->
@@ -261,9 +274,6 @@ $ ->
 			placeholder: 'placeholder',
 			forcePlaceholderSize: true,
 			start: (event, ui) ->
-				# $collectionItems.sortable 'option', 'cursorAt',
-				# 	left: event.offsetX
-				# 	top: event.offsetY
 				$helper = $(ui.helper)
 				$helper.addClass('deletable')
 				$collection.addClass('sorting')
@@ -273,7 +283,7 @@ $ ->
 				saveCollection()
 
 
-	collect = (slug) ->
+	collect = (slug, track) ->
 		$item = $grid.find('[data-slug="'+slug+'"]').clone()
 		$item.removeClass('shift rotate droppable')
 		$item.addClass('collected')
@@ -284,9 +294,11 @@ $ ->
 			$img = $item.find('img')
 			$img.attr('data-src', thumb)
 			$img.attr('src', thumb)
-		storySlug = $item.attr('data-story')
 		if $collection.find('[data-slug="'+slug+'"]').length
 			return
+		storySlug = $item.attr('data-story')
+		if track
+			ga 'send', 'event', 'item', 'collect', storySlug, slug
 		$collection.removeClass('empty')
 		$collectionItems.append($item)
 		resizeCollection()
@@ -358,6 +370,9 @@ $ ->
 		$collected.addClass('selected')
 		$body.addClass('looking').addClass('waiting')
 		$main.append('<div class="loader window"></div>')
+		if tempUrl = url.split('.com')[1]
+			ga('set', 'page', tempUrl)
+			ga('send', 'pageview')
 		setTimeout () ->
 			$main.addClass('has-loader')
 			createSingle(url, slug, push, over)
@@ -367,7 +382,9 @@ $ ->
 			data = {action: 'up', slug: slug}
 			history.pushState(data, document.title, url)
 		$.ajax
-			url: url
+			url: url,
+			type: 'POST',
+			data: {'request': true},
 			dataType: 'html'
 			error: (jqXHR, status, err) ->
 				console.log(jqXHR, status, err)
@@ -389,6 +406,8 @@ $ ->
 					.attr('data-url', url)
 					.addClass(type)
 				$single.html($content)
+				if $body.is('.collection')
+					replacePagination($single)
 				$single.find('.rotate').each () ->
 					shiftAndRotate(this)
 				document.title = 'Mapping The Spirit — '+title
@@ -398,7 +417,6 @@ $ ->
 				$itemTitle.addClass('ready')
 				$itemTitle.find('a').html(title)
 				$itemTitle.find('a').attr('href', url)
-
 				setTimeout () ->
 					$itemTitle.addClass('show')
 					loadSingle($single)
@@ -425,7 +443,7 @@ $ ->
 			$collectedItem.addClass('selected')
 			$single.find('.button.collect').removeClass('add').addClass('remove')
 		$body.removeClass('waiting')
-		loadImages()
+		loadImages(single)
 		$single.on 'progress', (inst, image) ->
 			$item = $(image.img).parents('.item')
 			$item.addClass('loaded')
@@ -436,6 +454,30 @@ $ ->
 				$(this).attr('target', '_blank')
 			else
 				$(this).addClass('item')
+
+	replacePagination = ($single) ->
+		slug = $single.attr('data-slug')
+		$item = $grid.find('.item[data-slug="'+slug+'"]')
+		$prevArrow = $single.find('.paginate.prev')
+		$nextArrow = $single.find('.paginate.next')
+		$nextItem = $item.next('#grid .item')
+		$prevItem = $item.prev('#grid .item')
+
+		if $nextItem.length
+			url = $nextItem.attr('data-url')
+			slug = $nextItem.attr('data-slug')
+			$nextArrow.attr('href', url).attr('data-slug', slug)
+		else
+			$nextArrow.remove()
+
+		if $prevItem.length
+			url = $prevItem.attr('data-url')
+			slug = $prevItem.attr('data-slug')
+			$prevArrow.attr('href', url).attr('data-slug', slug)
+		else
+			$prevArrow.remove()
+
+
 
 	putDown = (slug, push) ->
 		$single = $('.single[data-slug="' + slug + '"]')
@@ -574,9 +616,29 @@ $ ->
 		if $item
 			pickUp($item, true, true)
 
+	clipboard = new Clipboard('.cite.copy')
+	clipboard.on 'success', (e) ->
+		$link = $(e.trigger)
+		$citation = $link.parents('.block').find('.citation')
+		text = $link.html()
+		$link.html('Citation copied')
+		setTimeout () ->
+			$link.html(text)
+		, 1000
+
+	showCite = (e) ->
+		$block = $(this).parents('.block')
+		$citation = $block.find('.citation')
+		$citation.toggleClass('show')
+		if $citation.is('.show')
+			$(this).html('Hide citation')
+		else
+			$(this).html('Show citation')
+
 	browserNav = (e) ->
+		e.preventDefault()
 		state = history.state
-		if !$grid
+		if !$grid.length
 			return
 		if state
 			action = state.action
@@ -595,15 +657,16 @@ $ ->
 		putDown(slug, true)
 
 	collectSingle = (e) ->
+		$button = $(this)
 		slug = $(e.target).parents('.single').attr('data-slug')
-		if $(this).is('.add')
-			collect(slug)
+		if $button.is('.add')
+			collect(slug, true)
 			$collection.find('[data-slug="'+slug+'"]').addClass('selected')
-			$(this).removeClass('add')
-			$(this).addClass('remove')
+			$button.removeClass('add')
+			$button.addClass('remove')
 		else
-			$(this).removeClass('remove')
-			$(this).addClass('add')
+			$button.removeClass('remove')
+			$button.addClass('add')
 			uncollect(slug)
 
 	loadCollection = () ->
@@ -623,7 +686,7 @@ $ ->
 		$.each collection, (i, slug) ->
 			$item = $table.find('[data-slug="' + slug + '"]')
 			if $item.length
-				collect(slug)
+				collect(slug, false)
 			else
 				createCollectionItem(slug, story, true)
 				if $body.is('.collection')
@@ -635,8 +698,6 @@ $ ->
 			url += '&index='+index
 		if inFooter
 			url += '&footer='+inFooter
-		if window.location.href.indexOf('secret') > 1
-			url = '/secret' + url
 		$.ajax
 			url: url
 			dataType: 'html'
@@ -655,6 +716,8 @@ $ ->
 			$('#collection .items').append($item)
 			$collection.removeClass('empty')
 		else
+			if $item.is('.largeText')
+				$item.removeClass('largeText').addClass('mediumText')
 			$grid.append($item)
 			$grid.isotope('appended', $item)
 			$grid.isotope('layout')

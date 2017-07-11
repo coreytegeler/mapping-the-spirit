@@ -6,6 +6,9 @@ files:
     title:
       label: Title
       type: text
+    citation:
+      label: MLA Citation
+      type:  wysiwyg
     detail:
       label: Detail
       type:  selector
@@ -66,7 +69,7 @@ fields:
       youtube: YouTube
       vimeo: Vimeo
   size:
-    label: Size
+    label: Thumbnail Size
     type: select
     default: small
     width: 1/2
@@ -79,3 +82,7 @@ fields:
     default: false
     text: yes/no
     width: 1/2
+  published:
+    label: Published
+    type:  date
+    default: now

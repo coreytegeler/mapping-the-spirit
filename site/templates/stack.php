@@ -1,7 +1,7 @@
 <?php
 $item = $page;
 $blocks = $item->blocks();
-if( !kirby()->request()->ajax() ) {
+if( !isset( $_POST['request'] ) ) {
 	$story = $item->parent();
 	snippet( 'head', array( 
 		'bodyClass' => array ( 'looking', 'story' ),
@@ -18,6 +18,7 @@ if( !kirby()->request()->ajax() ) {
 	}
 	echo '<div class="data" data-slug="' . $item->slug() . '" data-title="' . $item->title() . '" data-url="' . $item->url() . '" data-thumb="' . $thumb . '" data-type="stack"></div>';
 }
+
 echo '<section>';
 	snippet( 'buttons' );
 	echo '<div class="scroll">';
@@ -41,12 +42,13 @@ echo '<section>';
 						echo '</div>';
 					}
 				}
-			echo '</div>';		
+				snippet( 'citation', $item );
+			echo '</div>';
 		echo '</div>';
 	echo '</div>';
 echo '</section>';
 snippet( 'pagination', array( 'item' => $item ) );
-if(!kirby()->request()->ajax()) {
+if( !isset( $_POST['request'] ) ) {
 	echo '</div>';
 	echo '</main>';
 	echo '</body>';

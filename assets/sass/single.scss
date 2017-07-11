@@ -160,14 +160,23 @@
 			}
 			.meta {
 				font-family: $sansItalic;
-				@include xSmallText;
+				// @include xSmallText;
 				color: $medium;
 				clear: both;
 				display: table;
 				margin-top: .25em;
+				a {
+					color: $medium;
+					border-bottom: 1px solid;
+					&:hover {
+						color: $dark;
+						cursor: pointer;
+					}
+				}
 				.cell {
-					float: left;
-	  			padding-right: 1em;
+					display: inline;
+	  			margin-right: 1em;
+			    line-height: 1.5em;
 				}
 			}
 		}
@@ -175,8 +184,18 @@
 	&.stack {
 		section {
 			width: 100%;
-			.inner {
-				
+			.block {
+				&.quote {
+					p {
+						&:first-child::before {
+							left: -.04em !important;
+							top: .05em
+						}
+						&:last-child::after {
+							
+						}
+					}
+				}
 			}
 		}
 	}
@@ -247,36 +266,58 @@
 			.inner {
 				.block {
 					color: $dark;
+					.text {
+						font-family: $sansBlack;
+					}
 					&.quote .text::before, &.quote .text::after {
 						color: $dark !important;
 					}
 				}
 			}
-			&.small .inner {
-				max-width: 500px;
-				.text {
-					@include mediumText();
-				}
-			}
-			&.medium .inner {
+			&.smallText .block {
 				max-width: 800px;
 				.text {
-					@include largeText();
+					@include mediumText;
 				}
 			}
-			&.large .inner {
+			&.mediumText .block {
 				max-width: 1000px;
 				.text {
-					@include xLargeText();
+					@include mediumLargeText;
+				}
+			}
+			&.largeText {
+				.inner, p {
+					padding: 0 0 .5em .35em !important;
+				}
+				p { 
+					&:first-child {
+						text-indent: 1.25em;
+						&::before {
+							text-indent: 0;
+							font-size: 2.5em !important;
+							left: -.0em !important;
+					    top: .175em !important;
+						}
+						&::after {
+							font-size: 2.5em !important;
+						}
+					}
+				}
+				.block {
+					max-width: 100%;
+					.text {
+						@include xLargeText;
+					}
 				}
 			}
 		}
 	}
 }
-main .block {
+main .block, .single section .inner .block {
 	width: 100%;
 	max-width: $laptopWidth;
-	display: table;
+	display: block;
 	margin: auto;
 	// margin-bottom: 2em;
 	line-height: 1.2em;
@@ -302,9 +343,18 @@ main .block {
 		text-decoration: none;
 		border-bottom: 1px solid;
 		transition: all 100ms $fadeEase;
+		&:hover {
+			color: $medium;
+		}
 	}
 	.text {
 		@include mediumText();
+	}
+	.has-loader {
+		// display: none;
+		&.show {
+			display: block;
+		}
 	}
 	&.small {max-width: 500px;}
 	&.medium {max-width: 800px;}
@@ -378,7 +428,7 @@ main .block {
 	}
 	&.quote {
 		width: auto !important;
-		padding: 0;
+		// padding: 0;
 		margin-left: auto;
 		margin-right: auto;
 		font-family: $sans;
@@ -396,7 +446,7 @@ main .block {
 					display: inline;
 					position: absolute;
 					font-family: $sansBlackItalic;
-					font-size: 4em;
+					@include xLargeText;
 					line-height: .5em;
 					opacity: .2;
 				}
@@ -432,17 +482,11 @@ main .block {
 			width: 35% !important;
 		}
 		&.medium {
-			width: 60% !important;
+			width: 55% !important;
 		}
 		&.large {
 			width: 100% !important;
 			max-width: 1000px;
-		}
-		&.smallText .text {
-			@include smallText();
-		}
-		&.mediumText .text {
-			@include mediumText();
 		}
 		&.largeText {
 			.text {
@@ -451,8 +495,54 @@ main .block {
 			}
 		}
 	}
+	&.smallText {.text{@include smallText;}}
+	&.mediumText {.text{@include mediumText;}}
+	&.largeText {.text{@include largeText;}}
 	&:last-child {
 		padding-bottom: 0;
+	}
+	&.footer {
+		// padding-top: 5em;
+	}
+}
+$indent: 3em;
+.citation {
+  width: calc(100% - 1em);
+	padding: .5em .5em .5em $indent;
+	margin: .5em 0 0 0;
+	color: $medium;
+	background: $lighter;
+	border-radius: .4em;
+	@include xSmallText;
+	transition: color 100ms $ease;
+	text-indent: calc(-#{$indent} + .5em);
+	a {
+		display: inline;
+		transition: color 100ms $ease;
+		color: $medium !important;
+		word-break: break-all;
+	}
+}
+.cell {
+	display: inline;
+	margin-right: 1em;
+  line-height: 1.5em;
+  @include xSmallText;
+  &.label {
+  	padding-left: .3em;
+    font-family: $sansBlack;
+    color: $medium;
+  }
+	&.cite {
+		color: $medium;
+		border: 0;
+    background: $lighter;
+    padding: 0 .3em;
+    border-radius: .4em;
+    &:hover {
+    	color: $dark;
+    	cursor: pointer;
+    }
 	}
 }
 #frame {

@@ -7,6 +7,7 @@ $location = $item->location();
 $month = $item->month();
 $day = $item->day();
 $year = $item->year();
+$citation = $item->citation();
 $date = '';
 if( !$month->empty() ) {
 	$date = $month;
@@ -15,26 +16,42 @@ if( !$month->empty() ) {
 } else if ( !$year->empty() ) {
 	$date = $year;
 }
-if( $date || !$location->empty() ) {
-	echo '<div class="meta">';
-		if( $date ) {
-			echo '<div class="cell">';
-		  	echo $date;
-		  echo '</div>';
-	  }
-		if( !$location->empty() ) {
-			echo '<div class="cell">';
-		  	echo $location;
-	  	echo '</div>';
-	  }
-	  if( !$attribution->empty() ) {
-			echo '<div class="cell">';
-		  	echo $attribution;
-			echo '</div>';
-		}
-	echo '</div>';
-}
+
+echo '<div class="meta">';
+	if( $date ) {
+		echo '<div class="cell">';
+	  	echo $date;
+	  echo '</div>';
+  }
+	if( !$location->empty() ) {
+		echo '<div class="cell">';
+	  	echo $location;
+  	echo '</div>';
+  }
+  if( !$attribution->empty() ) {
+		echo '<div class="cell">';
+			
+			$attribution = preg_replace('~<p>(.*?)</p>~is', '$1', $attribution, 1);
+	  	echo $attribution;
+		echo '</div>';
+	}
+	if ( !$citation->empty() ) {
+		echo '<div class="cell show cite">';
+	  	echo 'Show citation';
+		echo '</div>';	
+	}
+	if ( !$citation->empty() ) {
+		echo '<div class="cell copy cite" data-clipboard-text="' . strip_tags( $citation->kirbytext() ) . '">';
+	  	echo 'Copy citation';
+		echo '</div>';	
+	}
+echo '</div>';
 if( !$caption->empty() ) {
 	echo '<div class="caption">' . $caption . '</div>';
+}
+if ( !$citation->empty() ) {
+	echo '<div class="citation">';
+		echo $citation->kirbytext();
+	echo '</div>';
 }
 ?>

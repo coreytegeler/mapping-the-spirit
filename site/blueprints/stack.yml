@@ -28,6 +28,9 @@ files:
     caption:
       label: Caption
       type: wysiwyg
+    citation:
+      label: MLA Citation
+      type:  wysiwyg
     detail:
       label: Detail
       type:  selector
@@ -64,6 +67,14 @@ fields:
           text:
             label: Text
             type: wysiwyg
+          textSize:
+            label: Text Size
+            type: select
+            default: smallText
+            options:
+              smallText: Small
+              mediumText: Medium
+              largeText: Large
       quote:
         label: Quote
         snippet: builder/quote
@@ -180,7 +191,7 @@ fields:
     label: Excerpt
     type:  wysiwyg
   size:
-    label: Size
+    label: Thumbnail Size
     type: select
     default: small
     width: 1/4
@@ -210,3 +221,7 @@ fields:
     default: false
     text: yes/no
     width: 1/4
+  published:
+    label: Published
+    type:  date
+    default: now

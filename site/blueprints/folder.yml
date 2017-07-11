@@ -33,6 +33,9 @@ files:
     caption:
       label: Caption
       type: wysiwyg
+    citation:
+      label: MLA Citation
+      type:  wysiwyg
     detail:
       label: Detail
       type:  selector
@@ -43,6 +46,12 @@ fields:
   title:
     label: Title
     type:  text
+    width: 1/2
+  published:
+    label: Published
+    type:  date
+    width: 1/2
+    default: '2017-06-08'
   month:
     label: Month
     type:  text
@@ -187,7 +196,7 @@ fields:
     label: Excerpt
     type:  wysiwyg
   size:
-    label: Size
+    label: Thumbnail Size
     type: select
     default: small
     width: 1/4
@@ -217,3 +226,7 @@ fields:
     default: false
     text: yes/no
     width: 1/4
+  published:
+    label: Published
+    type:  date
+    default: now

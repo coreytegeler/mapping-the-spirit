@@ -3,7 +3,7 @@
   var indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   $(function() {
-    var $aid, $body, $collection, $collectionItems, $frame, $grid, $header, $itemTitle, $main, $pageTitle, $secondary, $table, $window, addToCollection, begin, browseCollection, browserNav, buildGrid, checkSize, clickItem, clickLink, closeDur, closeFrame, closeSingle, collect, collectSingle, createCollectionItem, createSingle, dragAndDrop, frameTool, goBack, horzScroll, hoverRow, init, insertCollection, loadCollection, loadImages, loadSingle, loadedSlug, lookAt, lookAway, makeResizable, noHover, openDur, openLinks, paginate, pickUp, putDown, putDownAll, removeCollectedItem, resizeCollection, resizeFolder, resizeFrameBar, resizeGrid, saveCollection, scrollInterval, scrollShift, shiftAndRotate, sizeImage, toggleFolder, transEnd, uncollect, unhoverRow, vertScroll, zoomImage;
+    var $aid, $body, $collection, $collectionItems, $frame, $grid, $header, $itemTitle, $main, $pageTitle, $secondary, $table, $window, addToCollection, begin, browseCollection, browserNav, buildGrid, checkSize, clickItem, clickLink, clipboard, closeDur, closeFrame, closeSingle, collect, collectSingle, createCollectionItem, createSingle, dragAndDrop, frameTool, goBack, horzScroll, hoverRow, init, insertCollection, loadCollection, loadImages, loadSingle, loadedSlug, lookAt, lookAway, makeResizable, noHover, openDur, openLinks, paginate, pickUp, putDown, putDownAll, removeCollectedItem, replacePagination, resizeCollection, resizeFolder, resizeFrameBar, resizeGrid, saveCollection, scrollInterval, scrollShift, shiftAndRotate, showCite, sizeImage, toggleFolder, transEnd, uncollect, unhoverRow, vertScroll, zoomImage;
     $window = $(window);
     $body = $('body');
     $main = $('main');
@@ -50,14 +50,12 @@
       $body.on('click', '#frame .button', frameTool);
       $body.on('click', '.single .paginate', paginate);
       $body.on('click', '.single .block a.item', clickLink);
+      $body.on('click', '.single .block .cite.show', showCite);
       $body.on('click', '#error a.back', goBack);
       $body.on('mouseover', '.row a', hoverRow);
       $body.on('mouseleave', '.row a', unhoverRow);
       $body.on('click', '.open-links', openLinks);
-      $(window).on('popstate', function(e) {
-        e.preventDefault();
-        return browserNav(e);
-      });
+      $(window).on('popstate', browserNav);
       if ($body.is('.looking')) {
         slug = $('.single').attr('data-slug');
         data = {
@@ -70,7 +68,7 @@
       if ($grid) {
         buildGrid();
       }
-      loadImages();
+      loadImages($grid);
       checkSize();
       resizeFolder();
       $('.shift').each(function() {
@@ -125,14 +123,22 @@
         });
       }
     };
-    loadImages = function() {
-      return $('img.load').each(function(i, img) {
+    loadImages = function(parent) {
+      var $parent;
+      if (parent.length) {
+        $parent = $(parent);
+      } else {
+        $parent = $body;
+      }
+      return $body.find('img.load').each(function(i, img) {
         var $img, $item, src;
         $img = $(img);
         $item = $($img.parents('.item')[0]);
         $item.addClass('has-loader');
         src = $img.data('src');
-        $item.append('<div class="loader"></div>');
+        if (!$item.find('.loader').length) {
+          $item.append('<div class="loader"></div>');
+        }
         $img.attr('src', src);
         return $.when(sizeImage($item)).done(function() {
           if ($item.parents('#grid')) {
@@ -159,19 +165,29 @@
       });
     };
     sizeImage = function(item, gutter) {
-      var $img, $item, height, ratio, width;
+      var $img, $item, height, imgHeight, imgWidth, parentWidth, ratio, width;
       $item = $(item);
       $img = $item.find('img');
-      ratio = $img.data('height') / $img.data('width');
+      imgWidth = $img.data('width');
+      imgHeight = $img.data('height');
+      ratio = imgWidth / imgHeight;
+      if (!ratio) {
+        return;
+      }
       if (gutter) {
         if ($item.is('.large')) {
           height = $table.innerHeight() - gutter * 2;
         } else {
           height = $table.innerHeight() / 2 - gutter * 1.5;
         }
-        width = height / ratio;
+        width = height * ratio;
       } else {
-        width = $item.parents('.block').innerWidth();
+        parentWidth = $item.parents('.scroll').innerWidth() - parseInt($item.parents('.block').css('paddingLeft')) * 2;
+        if (parentWidth > imgWidth) {
+          width = imgWidth;
+        } else {
+          width = parentWidth;
+        }
         height = width / ratio;
       }
       $item.css({
@@ -246,7 +262,10 @@
         drag: function(event, ui) {
           var $helper, collectionTop, itemTop;
           $helper = $(ui.helper);
-          $helper.css('transform', '');
+          $helper.css({
+            'x': -$helper.innerWidth() / 2,
+            'y': -$helper.innerHeight()
+          });
           itemTop = ui.offset.top;
           collectionTop = $collectionItems.offset().top;
           if (itemTop >= collectionTop - 1) {
@@ -268,7 +287,7 @@
           var item;
           $(this).removeClass('over');
           item = $(ui.draggable[0]).data('slug');
-          return collect(item);
+          return collect(item, true);
         },
         over: function(event, ui) {
           return $collection.addClass('over');
@@ -324,7 +343,7 @@
         }
       });
     };
-    collect = function(slug) {
+    collect = function(slug, track) {
       var $img, $item, storySlug, thumb;
       $item = $grid.find('[data-slug="' + slug + '"]').clone();
       $item.removeClass('shift rotate droppable');
@@ -337,9 +356,12 @@
         $img.attr('data-src', thumb);
         $img.attr('src', thumb);
       }
-      storySlug = $item.attr('data-story');
       if ($collection.find('[data-slug="' + slug + '"]').length) {
         return;
+      }
+      storySlug = $item.attr('data-story');
+      if (track) {
+        ga('send', 'event', 'item', 'collect', storySlug, slug);
       }
       $collection.removeClass('empty');
       $collectionItems.append($item);
@@ -411,7 +433,7 @@
     openDur = 600;
     closeDur = 300;
     pickUp = function(item, push, over) {
-      var $collected, $item, index, slug, storySlug, title, url;
+      var $collected, $item, index, slug, storySlug, tempUrl, title, url;
       $item = $(item);
       index = $item.attr('data-index');
       slug = $item.attr('data-slug');
@@ -423,6 +445,10 @@
       $collected.addClass('selected');
       $body.addClass('looking').addClass('waiting');
       $main.append('<div class="loader window"></div>');
+      if (tempUrl = url.split('.com')[1]) {
+        ga('set', 'page', tempUrl);
+        ga('send', 'pageview');
+      }
       return setTimeout(function() {
         $main.addClass('has-loader');
         return createSingle(url, slug, push, over);
@@ -439,6 +465,10 @@
       }
       return $.ajax({
         url: url,
+        type: 'POST',
+        data: {
+          'request': true
+        },
         dataType: 'html',
         error: function(jqXHR, status, err) {
           return console.log(jqXHR, status, err);
@@ -457,6 +487,9 @@
           $content = $($(html));
           $single.attr('data-title', title).attr('data-slug', slug).attr('data-type', type).attr('data-url', url).addClass(type);
           $single.html($content);
+          if ($body.is('.collection')) {
+            replacePagination($single);
+          }
           $single.find('.rotate').each(function() {
             return shiftAndRotate(this);
           });
@@ -501,7 +534,7 @@
         $single.find('.button.collect').removeClass('add').addClass('remove');
       }
       $body.removeClass('waiting');
-      loadImages();
+      loadImages(single);
       $single.on('progress', function(inst, image) {
         var $item;
         $item = $(image.img).parents('.item');
@@ -517,6 +550,29 @@
           return $(this).addClass('item');
         }
       });
+    };
+    replacePagination = function($single) {
+      var $item, $nextArrow, $nextItem, $prevArrow, $prevItem, slug, url;
+      slug = $single.attr('data-slug');
+      $item = $grid.find('.item[data-slug="' + slug + '"]');
+      $prevArrow = $single.find('.paginate.prev');
+      $nextArrow = $single.find('.paginate.next');
+      $nextItem = $item.next('#grid .item');
+      $prevItem = $item.prev('#grid .item');
+      if ($nextItem.length) {
+        url = $nextItem.attr('data-url');
+        slug = $nextItem.attr('data-slug');
+        $nextArrow.attr('href', url).attr('data-slug', slug);
+      } else {
+        $nextArrow.remove();
+      }
+      if ($prevItem.length) {
+        url = $prevItem.attr('data-url');
+        slug = $prevItem.attr('data-slug');
+        return $prevArrow.attr('href', url).attr('data-slug', slug);
+      } else {
+        return $prevArrow.remove();
+      }
     };
     putDown = function(slug, push) {
       var $collected, $newSingle, $openSingles, $single, data, scrollLeft, title, url;
@@ -693,10 +749,33 @@
         return pickUp($item, true, true);
       }
     };
+    clipboard = new Clipboard('.cite.copy');
+    clipboard.on('success', function(e) {
+      var $citation, $link, text;
+      $link = $(e.trigger);
+      $citation = $link.parents('.block').find('.citation');
+      text = $link.html();
+      $link.html('Citation copied');
+      return setTimeout(function() {
+        return $link.html(text);
+      }, 1000);
+    });
+    showCite = function(e) {
+      var $block, $citation;
+      $block = $(this).parents('.block');
+      $citation = $block.find('.citation');
+      $citation.toggleClass('show');
+      if ($citation.is('.show')) {
+        return $(this).html('Hide citation');
+      } else {
+        return $(this).html('Show citation');
+      }
+    };
     browserNav = function(e) {
       var $item, action, slug, state;
+      e.preventDefault();
       state = history.state;
-      if (!$grid) {
+      if (!$grid.length) {
         return;
       }
       if (state) {
@@ -719,16 +798,17 @@
       return putDown(slug, true);
     };
     collectSingle = function(e) {
-      var slug;
+      var $button, slug;
+      $button = $(this);
       slug = $(e.target).parents('.single').attr('data-slug');
-      if ($(this).is('.add')) {
-        collect(slug);
+      if ($button.is('.add')) {
+        collect(slug, true);
         $collection.find('[data-slug="' + slug + '"]').addClass('selected');
-        $(this).removeClass('add');
-        return $(this).addClass('remove');
+        $button.removeClass('add');
+        return $button.addClass('remove');
       } else {
-        $(this).removeClass('remove');
-        $(this).addClass('add');
+        $button.removeClass('remove');
+        $button.addClass('add');
         return uncollect(slug);
       }
     };
@@ -754,7 +834,7 @@
         var $item;
         $item = $table.find('[data-slug="' + slug + '"]');
         if ($item.length) {
-          return collect(slug);
+          return collect(slug, false);
         } else {
           createCollectionItem(slug, story, true);
           if ($body.is('.collection')) {
@@ -771,9 +851,6 @@
       }
       if (inFooter) {
         url += '&footer=' + inFooter;
-      }
-      if (window.location.href.indexOf('secret') > 1) {
-        url = '/secret' + url;
       }
       $.ajax({
         url: url,
@@ -799,6 +876,9 @@
         $('#collection .items').append($item);
         $collection.removeClass('empty');
       } else {
+        if ($item.is('.largeText')) {
+          $item.removeClass('largeText').addClass('mediumText');
+        }
         $grid.append($item);
         $grid.isotope('appended', $item);
         $grid.isotope('layout');

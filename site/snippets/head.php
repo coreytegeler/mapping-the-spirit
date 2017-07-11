@@ -30,7 +30,15 @@ echo '<link rel="mask-icon" href="' . $assets . '/images/icon/safari-pinned-tab.
 echo '<link rel="shortcut icon" href="' . $assets . '/images/icon/favicon.ico">';
 echo '<meta name="msapplication-config" content="' . $assets . '/images/icon/browserconfig.xml">';
 echo '<meta name="theme-color" content="#ffffff">';
+  
+  echo '<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
+    ga("create", "UA-55531055-3", "auto");
+    ga("send", "pageview")</script>';
 
+  $version = 2.3;
   echo js(array(
     'assets/js/jquery.js',
     'assets/js/jquery-ui.js',
@@ -40,11 +48,12 @@ echo '<meta name="theme-color" content="#ffffff">';
     'assets/js/mousewheel.js',
     'assets/js/transit.js',
     'assets/js/leaflet.js',
-    'assets/js/script.js?version=2.2'
+    'assets/js/clipboard.min.js',
+    'assets/js/script.js?version=' . $version
   ));
 
   echo css( '/assets/css/leaflet.css' );
-  echo css( '/assets/css/style.css?version=2.2' );
+  echo css( '/assets/css/style.css?version=' . $version );
 
   if( !isset( $bodyClass ) ) {
     $bodyClass = [];

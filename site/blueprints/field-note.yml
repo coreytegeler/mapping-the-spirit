@@ -110,6 +110,10 @@ fields:
               small: Small
               medium: Medium
               large: Large
+  published:
+    label: Published
+    type:  date
+    default: now
   thumb:
     label: Thumbnail
     type:  selector

@@ -1,3 +1,5 @@
 <?php
-echo $block->text()->kirbytext();
+echo '<div class="text">';
+	echo $block->text()->kirbytext();
+echo '</div>';
 ?>

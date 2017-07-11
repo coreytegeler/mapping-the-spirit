@@ -38,8 +38,12 @@ if( $isStory || $isCollection ) {
 } else {
 	$url = $story->url();
 }
-echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . '"' : '' ) . ' data-url="' . $url . '">';
-	$index = $pages->indexOf( $slug ) + 1;
+echo '<div id="table" class="horzScroll"' . ( isset( $slug ) ? ' data-story="' . $slug . '"' : '' ) . ' data-url="' . $url . '">';
+	if( isset( $slug ) ) {
+		$index = $pages->indexOf( $slug ) + 1;
+	} else {
+		$index = 1;
+	}
 	if( isset( $story ) ) {
 		echo '<div id="title" class="card full ' . ( $index % 2 == 0 ? 'even' : 'odd' ) . '">';
 			echo '<div class="mask">';
@@ -84,7 +88,7 @@ echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . 
 			echo '</div>';
 		echo '</div>';
 	}
-	if( $map ) {
+	if( isset( $map ) ) {
 		$rotate = mt_rand( 0, 25 )/100;
 		$shift = mt_rand( 100, 200 )/100;
 		echo '<div id="map" class="card full rotate shift" data-index="0" data-shift="' . $shift . '" data-rotate="' . $rotate . '">';
@@ -92,7 +96,7 @@ echo '<div id="table" class="horzScroll"' . ( $slug ? ' data-story="' . $slug . 
 		echo '</div>';
 	}
   echo '<div id="grid">';
-  	if( $items ) {
+  	if( isset( $items ) ) {
 		  $index = 0;
 		  foreach( $items as $slug => $item ) {
 		  	snippet( 'item', array( 'item' => $item, 'story' => $story, 'index' => $index ) );

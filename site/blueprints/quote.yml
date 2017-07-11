@@ -5,6 +5,12 @@ fields:
   title:
     label: Title
     type:  text
+    width: 1/2
+  published:
+    label: Published
+    type:  date
+    width: 1/2
+    default: '2017-06-08'
   text:
     label: Text
     type:  wysiwyg
@@ -26,11 +32,28 @@ fields:
     label: Year
     type:  text
     width: 1/3
-  size:
-    label: Size
+  excerpt:
+    label: Excerpt
+    type:  wysiwyg
+  textSize:
+    label: Text Size
     type: select
-    default: medium
+    width: 1/2
+    default: smallText
+    options:
+      smallText: Small
+      mediumText: Medium
+      largeText: Large
+  size:
+    label: Thumbnail Size
+    type: select
+    width: 1/2
+    default: small
     options:
       small: Small
-      medium: Medium
       large: Large
+  published:
+    label: Published
+    type:  date
+    default: now
+    readonly: true

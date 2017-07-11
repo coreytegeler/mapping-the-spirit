@@ -294,26 +294,27 @@ body.story, body.collection {
 					}
 					&.smallText {
 						.text {
+							font-family: $sansBlack;
 							@include smallText();
 						}
 					}
 					&.mediumText {
 						width: 450px;
 						.text {
-							font-family: $title;
+							font-family: $sansBlack;
 							@include largeText();
 						}
 					}
 					&.largeText {
 						width: 550px;
 						.text {
-							font-family: $title;
+							font-family: $sansBlack;
 							@include xLargeText();
 						}
 					}
 				}
 				&.quote {
-					font-family: $sansItalic;
+					font-family: $sansBlackItalic;
 					.text {
 						position: relative;
 						p {
@@ -457,7 +458,7 @@ body.story, body.collection {
 			}
 		}
 		&.ui-draggable-dragging.text {
-			transform: translateY(0px) !important;
+			// transform: translateY(0px) !important;
 		}
 	}
 	.end {
@@ -508,6 +509,7 @@ body.story, body.collection {
   		}
   		ul {
   			list-style: none;
+  			text-align: center;
   		}
   		ol {
   			list-style: decimal;

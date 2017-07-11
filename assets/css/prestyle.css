@@ -725,25 +725,26 @@ body.story, body.collection {
           body.story main #grid .item.text:not(:hover) .inner, body.collection main #grid .item.text:not(:hover) .inner {
             color: black !important; }
           body.story main #grid .item.text.smallText .text, body.collection main #grid .item.text.smallText .text {
+            font-family: "Chivo Black", Helvetica, Arial, sans-serif;
             font-size: 1em;
             line-height: 1.2em;
             font-weight: normal; }
           body.story main #grid .item.text.mediumText, body.collection main #grid .item.text.mediumText {
             width: 450px; }
             body.story main #grid .item.text.mediumText .text, body.collection main #grid .item.text.mediumText .text {
-              font-family: "Reglo", Helvetica, Arial, sans-serif;
+              font-family: "Chivo Black", Helvetica, Arial, sans-serif;
               font-size: 2em;
               line-height: 1.2em;
               font-weight: normal; }
           body.story main #grid .item.text.largeText, body.collection main #grid .item.text.largeText {
             width: 550px; }
             body.story main #grid .item.text.largeText .text, body.collection main #grid .item.text.largeText .text {
-              font-family: "Reglo", Helvetica, Arial, sans-serif;
+              font-family: "Chivo Black", Helvetica, Arial, sans-serif;
               font-size: 3.8em;
               line-height: 1.2em;
               font-weight: normal; }
         body.story main #grid .item.quote, body.collection main #grid .item.quote {
-          font-family: "Chivo Italic", Helvetica, Arial, sans-serif; }
+          font-family: "Chivo Black Italic", Helvetica, Arial, sans-serif; }
           body.story main #grid .item.quote .text, body.collection main #grid .item.quote .text {
             position: relative; }
             body.story main #grid .item.quote .text p, body.collection main #grid .item.quote .text p {
@@ -838,8 +839,6 @@ body.story, body.collection {
       body.story #grid .item.ui-draggable-dragging.over, body.story #grid .item.ui-sortable-helper.over, body.story .item.ui-draggable-dragging.ui-draggable-dragging.over, body.story .item.ui-draggable-dragging.ui-sortable-helper.over, body.story .item.ui-sortable-helper.ui-draggable-dragging.over, body.story .item.ui-sortable-helper.ui-sortable-helper.over, body.story #collection .item.ui-draggable-dragging.over, body.story #collection .item.ui-sortable-helper.over, body.collection #grid .item.ui-draggable-dragging.over, body.collection #grid .item.ui-sortable-helper.over, body.collection .item.ui-draggable-dragging.ui-draggable-dragging.over, body.collection .item.ui-draggable-dragging.ui-sortable-helper.over, body.collection .item.ui-sortable-helper.ui-draggable-dragging.over, body.collection .item.ui-sortable-helper.ui-sortable-helper.over, body.collection #collection .item.ui-draggable-dragging.over, body.collection #collection .item.ui-sortable-helper.over {
         background-color: #fafcfc;
         border-color: rgba(135, 138, 142, 0.5); }
-    body.story #grid .item.ui-draggable-dragging.text, body.story .item.ui-draggable-dragging.ui-draggable-dragging.text, body.story .item.ui-sortable-helper.ui-draggable-dragging.text, body.story #collection .item.ui-draggable-dragging.text, body.collection #grid .item.ui-draggable-dragging.text, body.collection .item.ui-draggable-dragging.ui-draggable-dragging.text, body.collection .item.ui-sortable-helper.ui-draggable-dragging.text, body.collection #collection .item.ui-draggable-dragging.text {
-      transform: translateY(0px) !important; }
   body.story .end .inner, body.collection .end .inner {
     margin: 0;
     column-count: 2;
@@ -881,7 +880,8 @@ body.story, body.collection {
           body.story .end .inner ul li a.story:not(:hover), body.story .end .inner ol li a.story:not(:hover), body.collection .end .inner ul li a.story:not(:hover), body.collection .end .inner ol li a.story:not(:hover) {
             color: #000000 !important; }
     body.story .end .inner ul, body.collection .end .inner ul {
-      list-style: none; }
+      list-style: none;
+      text-align: center; }
     body.story .end .inner ol, body.collection .end .inner ol {
       list-style: decimal; }
   @media (max-width: 480px) {
@@ -1065,18 +1065,25 @@ body.collection #collection {
         font-weight: normal; }
       .single section .inner .meta {
         font-family: "Chivo Italic", Helvetica, Arial, sans-serif;
-        font-size: .75em;
-        line-height: 1.3em;
-        font-weight: normal;
         color: #878a8e;
         clear: both;
         display: table;
         margin-top: .25em; }
+        .single section .inner .meta a {
+          color: #878a8e;
+          border-bottom: 1px solid; }
+          .single section .inner .meta a:hover {
+            color: #000000;
+            cursor: pointer; }
         .single section .inner .meta .cell {
-          float: left;
-          padding-right: 1em; }
+          display: inline;
+          margin-right: 1em;
+          line-height: 1.5em; }
   .single.stack section {
     width: 100%; }
+    .single.stack section .block.quote p:first-child::before {
+      left: -.04em !important;
+      top: 0.05em; }
   .single.folder .sections {
     width: 100%;
     height: 100%;
@@ -1118,173 +1125,234 @@ body.collection #collection {
       width: calc(100vw - 3em); }
   .single.quote section .inner .block {
     color: #000000; }
+    .single.quote section .inner .block .text {
+      font-family: "Chivo Black", Helvetica, Arial, sans-serif; }
     .single.quote section .inner .block.quote .text::before, .single.quote section .inner .block.quote .text::after {
       color: #000000 !important; }
-  .single.quote section.small .inner {
-    max-width: 500px; }
-    .single.quote section.small .inner .text {
+  .single.quote section.smallText .block {
+    max-width: 800px; }
+    .single.quote section.smallText .block .text {
       font-size: 1.3em;
       line-height: 1.3em;
       font-weight: normal; }
-  .single.quote section.medium .inner {
-    max-width: 800px; }
-    .single.quote section.medium .inner .text {
-      font-size: 2em;
+  .single.quote section.mediumText .block {
+    max-width: 1000px; }
+    .single.quote section.mediumText .block .text {
+      font-size: 1.7em;
       line-height: 1.2em;
       font-weight: normal; }
-  .single.quote section.large .inner {
-    max-width: 1000px; }
-    .single.quote section.large .inner .text {
+  .single.quote section.largeText .inner, .single.quote section.largeText p {
+    padding: 0 0 .5em .35em !important; }
+  .single.quote section.largeText p:first-child {
+    text-indent: 1.25em; }
+    .single.quote section.largeText p:first-child::before {
+      text-indent: 0;
+      font-size: 2.5em !important;
+      left: -.0em !important;
+      top: .175em !important; }
+    .single.quote section.largeText p:first-child::after {
+      font-size: 2.5em !important; }
+  .single.quote section.largeText .block {
+    max-width: 100%; }
+    .single.quote section.largeText .block .text {
       font-size: 3.8em;
       line-height: 1.2em;
       font-weight: normal; }
 
-main .block {
+main .block, .single section .inner .block {
   width: 100%;
   max-width: 1024px;
-  display: table;
+  display: block;
   margin: auto;
   line-height: 1.2em;
   padding: 0 0 3em 0;
   line-height: 1.3em; }
-  main .block p {
+  main .block p, .single section .inner .block p {
     margin: 0;
     padding: 0 0 .5em 0; }
-    main .block p:last-child {
+    main .block p:last-child, .single section .inner .block p:last-child {
       padding: 0; }
-    main .block p b, main .block p strong {
+    main .block p b, main .block p strong, .single section .inner .block p b, .single section .inner .block p strong {
       font-family: "Chivo Black", Helvetica, Arial, sans-serif;
       font-weight: normal; }
-    main .block p i, main .block p em {
+    main .block p i, main .block p em, .single section .inner .block p i, .single section .inner .block p em {
       font-family: "Chivo Italic", Helvetica, Arial, sans-serif;
       font-style: none; }
-  main .block a {
+  main .block a, .single section .inner .block a {
     color: black;
     text-decoration: none;
     border-bottom: 1px solid;
     transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
-  main .block .text {
+    main .block a:hover, .single section .inner .block a:hover {
+      color: #878a8e; }
+  main .block .text, .single section .inner .block .text {
     font-size: 1.3em;
     line-height: 1.3em;
     font-weight: normal; }
-  main .block.small {
+  main .block .has-loader.show, .single section .inner .block .has-loader.show {
+    display: block; }
+  main .block.small, .single section .inner .block.small {
     max-width: 500px; }
-  main .block.medium {
+  main .block.medium, .single section .inner .block.medium {
     max-width: 800px; }
-  main .block.large {
+  main .block.large, .single section .inner .block.large {
     max-width: 1440px; }
-  main .block.header {
+  main .block.header, .single section .inner .block.header {
     padding-bottom: 1em; }
-    main .block.header .title {
+    main .block.header .title, .single section .inner .block.header .title {
       font-family: "Reglo", Helvetica, Arial, sans-serif;
       font-size: 2em;
       line-height: 1.2em;
       font-weight: normal;
       padding: 0; }
-  main .block.text iframe, main .block.text object, main .block.text embed {
+  main .block.text iframe, main .block.text object, main .block.text embed, .single section .inner .block.text iframe, .single section .inner .block.text object, .single section .inner .block.text embed {
     width: 100%;
     height: 100%; }
-  main .block.image .text-wrap, main .block.video .text-wrap {
+  main .block.image .text-wrap, main .block.video .text-wrap, .single section .inner .block.image .text-wrap, .single section .inner .block.video .text-wrap {
     max-width: 800px;
     display: table;
     margin: .5em 0 0 0; }
-  main .block.image .caption, main .block.video .caption {
+  main .block.image .caption, main .block.video .caption, .single section .inner .block.image .caption, .single section .inner .block.video .caption {
     font-size: 1em;
     line-height: 1.2em;
     font-weight: normal;
     clear: both;
     margin-top: .25em; }
-  main .block.image .attribution, main .block.video .attribution {
+  main .block.image .attribution, main .block.video .attribution, .single section .inner .block.image .attribution, .single section .inner .block.video .attribution {
     font-size: .75em;
     line-height: 1.3em;
     font-weight: normal;
     font-family: "Chivo", Helvetica, Arial, sans-serif;
     color: #878a8e;
     margin-top: .15em; }
-    main .block.image .attribution *, main .block.video .attribution * {
+    main .block.image .attribution *, main .block.video .attribution *, .single section .inner .block.image .attribution *, .single section .inner .block.video .attribution * {
       color: #878a8e !important; }
-  main .block.image img {
+  main .block.image img, .single section .inner .block.image img {
     max-width: 100%;
     display: table;
     margin: auto; }
-  main .block.image:not(.noZoom) img:hover {
+  main .block.image:not(.noZoom) img:hover, .single section .inner .block.image:not(.noZoom) img:hover {
     cursor: zoom-in; }
-  main .block.video .videoWrap {
+  main .block.video .videoWrap, .single section .inner .block.video .videoWrap {
     position: relative;
     padding-bottom: 56.25%;
     /* 16:9 */
     padding-top: 25px;
     height: 0; }
-    main .block.video .videoWrap iframe {
+    main .block.video .videoWrap iframe, .single section .inner .block.video .videoWrap iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%; }
-  main .block.video.noCursor {
+  main .block.video.noCursor, .single section .inner .block.video.noCursor {
     pointer-events: none; }
-  main .block.quote {
+  main .block.quote, .single section .inner .block.quote {
     width: auto !important;
-    padding: 0;
     margin-left: auto;
     margin-right: auto;
     font-family: "Chivo", Helvetica, Arial, sans-serif;
     display: table; }
-    main .block.quote .text {
+    main .block.quote .text, .single section .inner .block.quote .text {
       position: relative;
       color: rgba(0, 0, 0, 0.8);
       mix-blend-mode: darken; }
-      main .block.quote .text p {
+      main .block.quote .text p, .single section .inner .block.quote .text p {
         width: 100%;
         padding: 0 2em .5em 2em;
         display: inline-block; }
-        main .block.quote .text p::before, main .block.quote .text p::after {
+        main .block.quote .text p::before, main .block.quote .text p::after, .single section .inner .block.quote .text p::before, .single section .inner .block.quote .text p::after {
           width: auto;
           display: inline;
           position: absolute;
           font-family: "Chivo Black Italic", Helvetica, Arial, sans-serif;
-          font-size: 4em;
+          font-size: 3.8em;
+          line-height: 1.2em;
+          font-weight: normal;
           line-height: .5em;
           opacity: .2; }
-        main .block.quote .text p:first-child::before {
+        main .block.quote .text p:first-child::before, .single section .inner .block.quote .text p:first-child::before {
           content: '“';
           left: -.1em;
           top: 0; }
-        main .block.quote .text p:last-child::after {
+        main .block.quote .text p:last-child::after, .single section .inner .block.quote .text p:last-child::after {
           content: '”';
           right: .05em;
           bottom: 0; }
-    main .block.quote .attribution {
+    main .block.quote .attribution, .single section .inner .block.quote .attribution {
       font-family: "Chivo Black", Helvetica, Arial, sans-serif;
       padding-top: 1em; }
-    main .block.quote.left {
+    main .block.quote.left, .single section .inner .block.quote.left {
       display: block;
       float: left; }
-    main .block.quote.right {
+    main .block.quote.right, .single section .inner .block.quote.right {
       display: block;
       float: right; }
-    main .block.quote.small {
+    main .block.quote.small, .single section .inner .block.quote.small {
       width: 35% !important; }
-    main .block.quote.medium {
-      width: 60% !important; }
-    main .block.quote.large {
+    main .block.quote.medium, .single section .inner .block.quote.medium {
+      width: 55% !important; }
+    main .block.quote.large, .single section .inner .block.quote.large {
       width: 100% !important;
       max-width: 1000px; }
-    main .block.quote.smallText .text {
-      font-size: 1em;
-      line-height: 1.2em;
-      font-weight: normal; }
-    main .block.quote.mediumText .text {
-      font-size: 1.3em;
-      line-height: 1.3em;
-      font-weight: normal; }
-    main .block.quote.largeText .text {
+    main .block.quote.largeText .text, .single section .inner .block.quote.largeText .text {
       font-family: "Chivo Black", Helvetica, Arial, sans-serif;
       font-size: 2em;
       line-height: 1.2em;
       font-weight: normal; }
-  main .block:last-child {
+  main .block.smallText .text, .single section .inner .block.smallText .text {
+    font-size: 1em;
+    line-height: 1.2em;
+    font-weight: normal; }
+  main .block.mediumText .text, .single section .inner .block.mediumText .text {
+    font-size: 1.3em;
+    line-height: 1.3em;
+    font-weight: normal; }
+  main .block.largeText .text, .single section .inner .block.largeText .text {
+    font-size: 2em;
+    line-height: 1.2em;
+    font-weight: normal; }
+  main .block:last-child, .single section .inner .block:last-child {
     padding-bottom: 0; }
+
+.citation {
+  width: calc(100% - 1em);
+  padding: 0.5em 0.5em 0.5em 3em;
+  margin: .5em 0 0 0;
+  color: #878a8e;
+  background: #f4f6fa;
+  border-radius: .4em;
+  font-size: .75em;
+  line-height: 1.3em;
+  font-weight: normal;
+  transition: color 100ms cubic-bezier(0.86, 0, 0.07, 1);
+  text-indent: calc(-3em + .5em); }
+  .citation a {
+    display: inline;
+    transition: color 100ms cubic-bezier(0.86, 0, 0.07, 1);
+    color: #878a8e !important;
+    word-break: break-all; }
+
+.cell {
+  display: inline;
+  margin-right: 1em;
+  line-height: 1.5em;
+  font-size: .75em;
+  line-height: 1.3em;
+  font-weight: normal; }
+  .cell.label {
+    padding-left: .3em;
+    font-family: "Chivo Black", Helvetica, Arial, sans-serif;
+    color: #878a8e; }
+  .cell.cite {
+    color: #878a8e;
+    border: 0;
+    background: #f4f6fa;
+    padding: 0 .3em;
+    border-radius: .4em; }
+    .cell.cite:hover {
+      color: #000000;
+      cursor: pointer; }
 
 #frame {
   width: 100%;

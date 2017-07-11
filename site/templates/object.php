@@ -1,6 +1,6 @@
 <?php
 $item = $page;
-if( !kirby()->request()->ajax() ) {
+if( !isset( $_POST['request'] ) ) {
 	$story = $item->parent();
 	snippet( 'head', array( 
 		'bodyClass' => array ( 'looking', 'story' ),
@@ -38,12 +38,13 @@ echo '<section>';
 						snippet( 'image', array( 'item' => $item, 'image' => $image ) );
 					echo '</div>';
 				}
+				snippet( 'citation', $item );
 			echo '</div>';
 		echo '</div>';
 	echo '</div>';
 echo '</section>';
 snippet( 'pagination', array( 'item' => $item ) );
-if( !kirby()->request()->ajax() ) {
+if( !isset( $_POST['request'] ) ) {
 	echo '</div>';
 	echo '</main>';
 	echo '<footer>';

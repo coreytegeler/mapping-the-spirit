@@ -7,8 +7,8 @@ email: coreytegeler@gmail.com
 language: en
 role: admin
 history:
-  - stories/msta
-  - about
-  - stories/msta/prophets-day-2017
-  - stories/msta/interview-chairperson-terrence-hopkins-bey-discusses-his-childhood-in-the-moorish-science-temple-of-america
-  - stories/msta/act-6-divine-constitution
+  - stories/msta/temple-11-archive
+  - stories/msta/unity-in-the-moorish-science-temple-of-america
+  - stories/msta/moorish-american-remembrance-day-and-trek
+  - stories/msta/interview-spiritual-development-and-unfolding
+  - stories/msta/flags

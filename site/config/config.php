@@ -15,10 +15,11 @@ for more information: http://getkirby.com/license
 
 */
 
-c::set('license', 'put your license key here');
+c::set('license', 'K2-PERSONAL-f555e903ce42fb15c6c7c7807f2bd267');
 c::set('autopublish.templates', array('book', 'category'));
 c::set('scssNestedCheck', true);
 c::set('panel.install', true);
+// c::set('debug', true);
 
 c::set('routes', array(
   array(
