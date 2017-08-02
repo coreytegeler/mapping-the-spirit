@@ -1464,6 +1464,8 @@ main .block, .single section .inner .block {
     font-weight: normal; }
   main .block:last-child, .single section .inner .block:last-child {
     padding-bottom: 0; }
+  main .block.footer .citation, .single section .inner .block.footer .citation {
+    display: block !important; }
 
 .citation {
   width: calc(100% - 1em);
@@ -1477,13 +1479,16 @@ main .block, .single section .inner .block {
   font-weight: normal;
   -webkit-transition: color 100ms cubic-bezier(0.86, 0, 0.07, 1);
   transition: color 100ms cubic-bezier(0.86, 0, 0.07, 1);
-  text-indent: calc(-3em + .5em); }
+  text-indent: calc(-3em + .5em);
+  display: none; }
   .citation a {
     display: inline;
     -webkit-transition: color 100ms cubic-bezier(0.86, 0, 0.07, 1);
     transition: color 100ms cubic-bezier(0.86, 0, 0.07, 1);
     color: #878a8e !important;
     word-break: break-all; }
+  .citation.show {
+    display: block; }
 
 .cell {
   display: inline;

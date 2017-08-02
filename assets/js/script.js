@@ -125,7 +125,7 @@
     };
     loadImages = function(parent) {
       var $parent;
-      if (parent.length) {
+      if (parent && parent.length) {
         $parent = $(parent);
       } else {
         $parent = $body;
@@ -165,7 +165,7 @@
       });
     };
     sizeImage = function(item, gutter) {
-      var $img, $item, height, imgHeight, imgWidth, parentWidth, ratio, width;
+      var $img, $item, height, imgHeight, imgWidth, maxWidth, padding, parentWidth, ratio, width;
       $item = $(item);
       $img = $item.find('img');
       imgWidth = $img.data('width');
@@ -182,11 +182,16 @@
         }
         width = height * ratio;
       } else {
-        parentWidth = $item.parents('.scroll').innerWidth() - parseInt($item.parents('.block').css('paddingLeft')) * 2;
+        padding = parseInt($item.parents('.block').css('paddingLeft')) * 2;
+        parentWidth = $item.parents('.inner').innerWidth() - padding;
+        maxWidth = parseInt($item.parents('.block').css('maxWidth'));
         if (parentWidth > imgWidth) {
           width = imgWidth;
         } else {
           width = parentWidth;
+        }
+        if (width > maxWidth) {
+          width = maxWidth;
         }
         height = width / ratio;
       }

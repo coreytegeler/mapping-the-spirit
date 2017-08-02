@@ -103,7 +103,6 @@ $ ->
 		vertScroll()
 
 	resizeGrid = () ->
-		# if !checkSize('phone') && $grid.is('.loaded')
 		gutter = $grid.find('.gutter').innerWidth()
 		if $grid.data('isotope')
 			$grid.find('.item').each () ->
@@ -111,7 +110,7 @@ $ ->
 				$grid.isotope('layout')
 
 	loadImages = (parent) ->
-		if parent.length
+		if parent && parent.length
 			$parent = $(parent)
 		else
 			$parent = $body
@@ -158,11 +157,15 @@ $ ->
 			width = height*ratio
 		# if image is in an item page
 		else
-			parentWidth = $item.parents('.scroll').innerWidth() - parseInt($item.parents('.block').css('paddingLeft'))*2
+			padding = parseInt($item.parents('.block').css('paddingLeft'))*2
+			parentWidth = $item.parents('.inner').innerWidth() - padding
+			maxWidth = parseInt($item.parents('.block').css('maxWidth'))
 			if parentWidth > imgWidth
 				width = imgWidth
 			else
 				width = parentWidth
+			if width > maxWidth
+				width = maxWidth
 			height = width/ratio
 		$item.css
 			height: height

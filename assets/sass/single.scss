@@ -502,7 +502,9 @@ main .block, .single section .inner .block {
 		padding-bottom: 0;
 	}
 	&.footer {
-		// padding-top: 5em;
+		.citation {
+			display: block !important;
+		}
 	}
 }
 $indent: 3em;
@@ -516,11 +518,15 @@ $indent: 3em;
 	@include xSmallText;
 	transition: color 100ms $ease;
 	text-indent: calc(-#{$indent} + .5em);
+	display: none;
 	a {
 		display: inline;
 		transition: color 100ms $ease;
 		color: $medium !important;
 		word-break: break-all;
+	}
+	&.show {
+		display: block;
 	}
 }
 .cell {
