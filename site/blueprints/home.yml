@@ -9,6 +9,11 @@ fields:
     type:  selector
     mode:  single
     types: image
+  logo:
+    label: Logo
+    type:  selector
+    mode:  single
+    types: image
   brief:
     label: Brief
     type:  textarea

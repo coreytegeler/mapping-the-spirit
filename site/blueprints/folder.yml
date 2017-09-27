@@ -226,7 +226,12 @@ fields:
     default: false
     text: yes/no
     width: 1/4
+  collaborators:
+    label: Collaborators
+    type: text
+    width: 1/2
   published:
     label: Published
     type:  date
     default: now
+    width: 1/2

@@ -52,8 +52,12 @@ fields:
     options:
       small: Small
       large: Large
+  collaborators:
+    label: Collaborators
+    type: text
+    width: 1/2
   published:
     label: Published
     type:  date
     default: now
-    readonly: true
+    width: 1/2

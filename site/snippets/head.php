@@ -38,7 +38,7 @@ echo '<meta name="theme-color" content="#ffffff">';
     ga("create", "UA-55531055-3", "auto");
     ga("send", "pageview")</script>';
 
-  $version = 2.3;
+  $version = 2.5;
   echo js(array(
     'assets/js/jquery.js',
     'assets/js/jquery-ui.js',

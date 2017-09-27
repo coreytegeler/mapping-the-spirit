@@ -46,6 +46,30 @@ body.error {
 				background-position: center;
 				background-size: cover;
 			}
+			.logo {
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: 0;
+				display: flex;
+				pointer-events: none;
+				img {
+					width: calc(100% - 2em);
+					max-width: 30em;
+					padding: 1em;
+					margin: auto;
+					align-self: center;
+				}
+				a {
+					display: table;
+					margin: auto;
+					color: $lightest;
+					transition: color 300ms $fadeEase;
+					&:hover {
+						color: $medium;
+					}
+				}
+			}
 			.title {
 				width: 100%;
 				height: 100%;

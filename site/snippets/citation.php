@@ -1,8 +1,14 @@
 <?php
 $published = $item->date( 'j M. Y', 'published' );
+$collaborators = $item->collaborators();
 $today = date( 'j M. Y' );
 $url = '&lt;<a href="' . $item->url() . '">' . $item->url() . '</a>&gt;';
-$citation = 'Rasheed, Kameelah Janan. "' . $item->title() . '." <em>Mapping The Spirit</em>, Kameelah Janan Rasheed, ' . ( $published ? $published . ',' : '' ) . ' Web. ' . ( $today ? $today . '.' : '' ) . ' ';
+$citation = 'Rasheed, Kameelah Janan';
+if( $collaborators->isNotEmpty() ) {
+	$citation .= ', ' . $collaborators;
+}
+$citation .= '. ';
+$citation .= '"' . $item->title() . '." <em>Mapping The Spirit</em>, Kameelah Janan Rasheed, ' . ( $published ? $published . ',' : '' ) . ' Web. ' . ( $today ? $today . '.' : '' ) . ' ';
 $copy = htmlspecialchars( strip_tags( $citation ) . '<' . $item->url() . '>' );
 $citation .= $url;
 echo '<div class="block medium footer">';

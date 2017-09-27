@@ -7,11 +7,18 @@ snippet('head');
 					$map = $page->image( $map )->resize( 1700, 1700, 100 )->url();
 		  	echo '<div class="map shift" style="background-image:url(' . $map . ')" data-shift="2"></div>';
 		  }
-	  	echo '<div class="shift title" data-shift="-2">';
-		  	echo '<h1>';
-		  		echo $site->title();
-		  	echo '</h1>';
-		  echo '</div>';
+		  if( $logo = $page->logo() ) {
+					$logo = $page->image( $logo )->resize( 1700, 1700, 100 )->url();
+		  	echo '<div class="logo shift" data-shift="-2">';
+		  		echo '<img src="' . $logo . '"/>';
+		  	echo '</div>';
+		  } else {
+		  	echo '<div class="shift title" data-shift="-2">';
+			  	echo '<h1>';
+			  		echo $site->title();
+			  	echo '</h1>';
+			  echo '</div>';
+			}
 		  echo '<div id="begin">Begin</div>';
 		echo '</section>';
 		echo '<section id="stories" class="rows">';

@@ -27,8 +27,7 @@ body {
 	overflow-y: hidden;
   overflow-x: hidden;
   overflow: hidden;
-	opacity: 0;
-	transition: opacity 300ms $fadeEase;
+	// transition: opacity 300ms $fadeEase;
 	background-color: $lightest;
 	&.loaded {
 		opacity: 1;

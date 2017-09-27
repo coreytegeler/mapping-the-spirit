@@ -294,14 +294,14 @@ body.story, body.collection {
 					}
 					&.smallText {
 						.text {
-							font-family: $sansBlack;
+							font-family: $sansBold;
 							@include smallText();
 						}
 					}
 					&.mediumText {
 						width: 450px;
 						.text {
-							font-family: $sansBlack;
+							font-family: $sansBold;
 							@include largeText();
 						}
 					}
