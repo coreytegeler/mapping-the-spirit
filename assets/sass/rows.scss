@@ -11,16 +11,18 @@ section.rows {
 			z-index: 2;
 			overflow: hidden;
 			.wrap {
-				width: 150%;
 				color: black;
 				display: flex;
 				align-items: center;
 				position: relative;
 				transition: color 100ms $fadeEase;
-				a.title {
+				.title {
 					width: 50%;
 					z-index: 10;
 					text-decoration: none;
+					a {
+						display: table;
+					}
 					h1 {
 						text-decoration: underline;
 					}
@@ -45,14 +47,12 @@ section.rows {
 				}
 				.title {
 					float: left;
-					transform: translateX(7%);
 					* {
 						text-align: left;
 					}
 				}
 				.image {
 					float: left;
-					transform: translateX(-75%);
 					.img {
 						float: right;
 					}
@@ -64,14 +64,12 @@ section.rows {
 				}
 				.title {
 					float: right;
-					transform: translateX(-75%);
 					* {
 						text-align: right;
 					}
 				}
 				.image {
 					float: right;
-					transform: translateX(7%);
 				}
 			}
 			&.no-thumb {
@@ -94,13 +92,16 @@ section.rows {
 		.story {
 			max-width: $desktopWidth;
 			margin-bottom: 8em;
-			.image {
-				transition: background-color 50ms $fadeEase;
-				.img {
-					background-color: $lightest;
-			    transition: background-color 100ms $fadeEase;
-					img {
-						mix-blend-mode: screen;
+			.wrap {
+				width: 150%;
+				.image {
+					transition: background-color 50ms $fadeEase;
+					.img {
+						background-color: $lightest;
+				    transition: background-color 100ms $fadeEase;
+						img {
+							mix-blend-mode: screen;
+						}
 					}
 				}
 			}
@@ -117,6 +118,22 @@ section.rows {
 					}
 				}
 			}
+			&.odd {
+				.title {
+					transform: translateX(7%);
+				}
+				.image {
+					transform: translateX(-75%);
+				}
+			}
+			&.even {
+				.title {
+					transform: translateX(-75%);
+				}
+				.image {
+					transform: translateX(7%);
+				}
+			}
 		}
 	}
 	&#field-notes {
@@ -124,19 +141,35 @@ section.rows {
 			max-width: $laptopWidth;
 			margin-bottom: 4em;
 			.wrap {
+				width: 100%;
 				color: $dark;
 				.title {
+					width: 50%;
+					a {
+						text-decoration: none;
+						overflow: visible;
+					}
 					h2 {
+						text-decoration: none;
+						margin: 0;
 						@include xLargeText;
 						@include laptop {
 							@include largeText;
 						}
 					}
+					h3 {
+						width: 100%;
+						overflow: visible;
+					}
 				}
 				.image {
-					opacity: 1;					
+					width: 50%;
+					opacity: 1;
+					a {
+						width: 100%;
+					}				
 					.img {
-						max-width: 15em;
+						width: 100%;
 						img {
 							filter: grayscale(0);
 							transition: filter 100ms $fadeEase;
@@ -152,6 +185,42 @@ section.rows {
 					opacity: 1 !important;
 					img {
 						filter: grayscale(1) !important;
+					}
+				}
+			}
+			&.odd {
+				.wrap {
+					.title {
+						a {
+							padding: 0 1em 0 2em;
+							float: right;
+						}
+						h2, h3 {
+							text-align: right;
+						}
+					}
+					.image {
+						a {
+							padding: 0 2em 0 1em;
+						}
+					}
+				}
+			}
+			&.even {
+				.wrap {
+					.title {
+						a {
+							padding: 0 2em 0 1em;
+							float: left;
+						}
+						h2, h3 {
+							text-align: left;
+						}
+					}
+					.image {
+						a {
+							padding: 0 1em 0 2em;
+						}
 					}
 				}
 			}

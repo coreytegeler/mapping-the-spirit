@@ -7,8 +7,8 @@ email: coreytegeler@gmail.com
 language: en
 role: admin
 history:
+  - field-notes/another-test
+  - field-notes/test
   - home
   - about
   - stories/msta/interview-joining-msta-father
-  - stories/msta/temple-11-archive
-  - stories/msta/unity-in-the-moorish-science-temple-of-america

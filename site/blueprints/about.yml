@@ -5,43 +5,14 @@ fields:
   title:
     label: Title
     type:  text
-
-  about_project:
-    label: About the Project
-    type:  wysiwyg
-
-  about_kameelah:
-    label: About the Founder
-    type:  wysiwyg
-
+  statement:
+    label: Statement
+    type:  textarea
   lead:
     label: Lead Image
     type:  selector
     mode:  single
     types: image
-
-  events:
-    label: Events
-    type: builder
-    fieldsets:
-      item:
-        label: Event
-        snippet: builder/event
-        fields:
-          title:
-            label: Title
-            type: text
-            required: true
-          date:
-            label: Date
-            type: date
-            required: true
-          location:
-            label: Location
-            type: text
-          link:
-            label: Link
-            type: text
   credits:
     label: Credits
     type: builder
@@ -61,7 +32,6 @@ fields:
           link:
             label: Link
             type: text
-
   press:
     label: Press
     type: builder

@@ -38,9 +38,12 @@ echo '<main>';
 						}
 					  $rotate = mt_rand( -25, 10 )/100;
 						$shift = mt_rand( -50, -25 )/100 * $sign;
-		  			echo '<a href="' . $url . '" class="title">';
-		  				echo '<h2 class="shift rotate" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index/2 . '">' .  $field_note->title() . '</h2>';
-		  			echo '</a>';
+		  			echo '<div class="title">';
+		  				echo '<a href="' . $url . '">';
+			  				echo '<h2 class="shift rotate" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index/2 . '">' .  $field_note->title() . '</h2>';
+			  				echo '<h3>' . $field_note->date( 'F d Y', 'published' ) . '</h3>';
+			  			echo '</a>';
+		  			echo '</div>';
 				  echo '</div>';
 		  	echo '</div>';
 		  }

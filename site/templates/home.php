@@ -64,13 +64,11 @@ snippet('head');
 			  }
 			  echo '<h3 class="more">More stories coming soon</h3>';
 			echo '</div>';
-			echo '<div class="dash"><div class="solid"></div></div>';
 		echo '</section>';
 		if( $field_notes = page( 'field-notes' ) ) {
 			$field_notes = $field_notes->children()->visible();
 			if( sizeof( $field_notes ) ) {
 				echo '<section id="field-notes" class="rows">';
-					// echo '<div class="dash"></div>';
 				echo '<h4>Field Notes</h4>';
 					echo '<div class="rowrap">';
 						$index = 0;
@@ -98,9 +96,12 @@ snippet('head');
 									}
 								  $rotate = mt_rand( -25, 10 )/100;
 									$shift = mt_rand( -50, -25 )/100 * $sign;
-					  			echo '<a href="' . $url . '" class="title">';
-					  				echo '<h2 class="shift rotate" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index/2 . '">' .  $field_note->title() . '</h2>';
-					  			echo '</a>';
+					  			echo '<div class="title">';
+					  				echo '<a href="' . $url . '">';
+						  				echo '<h2 class="shift rotate" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index/2 . '">' .  $field_note->title() . '</h2>';
+						  				echo '<h3>' . $field_note->date( 'F d Y', 'published' ) . '</h3>';
+						  			echo '</a>';
+					  			echo '</div>';
 							  echo '</div>';
 					  	echo '</div>';
 					  }
@@ -108,45 +109,6 @@ snippet('head');
 				echo '</section>';
 			}
 		}
-
-		$events = page( 'about' )->events()->toStructure()->flip();
-		if( $events ) {
-			echo '<section id="events" class="rows">';
-				echo '<h4>Upcoming Events</h4>';
-				echo '<div class="rowrap center">';
-				foreach( $events as $item ) {
-					// if( strtotime( '+1 day', $item->date() ) < time() )
-					echo '<div class="row event ' . ( $index % 2 == 0 ? 'odd ' : 'even ' ) . '">';
-						// echo strtotime( '+10 day', $item->date() ) . '   ' . time();
-						$link = $item->link();
-						$date = $item->date( 'l, F j' );
-						$location = $item->location();
-						if( $link->isNotEmpty() ) {
-	  					echo '<a href="' . $link . '" target="_blank">';
-						}
-						echo '<h2>';
-
-						echo '<span class="name">' . $item->title() . '</span>';
-
-						if( $date ) {
-							echo ' on ' . $date;
-						}
-
-						if( $location->isNotEmpty() ) {
-							echo  sizeof( $location );
-							echo ' at ' . $location;
-						}
-						echo '</h2>';
-
-						if( $link->isNotEmpty() ) {
-	  					echo '</a>';
-	  				}
-	  			echo '</div>';
-	  		}
-	  	echo '</div>';
-	  }
-
-
   echo '</main>';
 snippet('footer')
 ?>
