@@ -7,8 +7,8 @@ email: coreytegeler@gmail.com
 language: en
 role: admin
 history:
-  - field-notes/another-test
   - about
+  - field-notes/another-test
   - field-notes/test
   - home
   - stories/msta/interview-joining-msta-father

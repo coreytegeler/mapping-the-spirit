@@ -41,6 +41,13 @@ body.about {
 							color: $medium;
 							text-transform: uppercase;
 						}
+						&.event {
+							.label {
+								span:not(:last-child) {
+									margin-right: .25em;	
+								}
+							}
+						}
 						a {
 							text-decoration: none;
 							border: 0;

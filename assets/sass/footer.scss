@@ -235,6 +235,16 @@ footer {
 				span:not(:last-child) {
 					margin-right: .25em;
 				}
+				li.old {
+					.name {
+						color: $medium;
+						a {
+							&:hover {
+								color: $dark;
+							}
+						}
+					}
+				}
 			}
 		}
 	}

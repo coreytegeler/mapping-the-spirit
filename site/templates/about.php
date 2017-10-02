@@ -30,12 +30,14 @@ snippet('head');
 		  	echo '</div>';
 			  echo '<div class="block full">';
 				  $events = $page->events()->toStructure();
+				  echo sizeof( $events );
 			  	if( sizeof( $events ) ) {
 						echo '<ul>';
-							echo '<li><h3>Upcoming Events</h3></li>';
+							echo '<li><h3>Events</h3></li>';
 							foreach( $events as $item ) {
 								// echo strtotime( '+10 day', $item->date() ) . '   ' . time();
 								$status = ( strtotime( '+1 day', $item->date() ) < time() ? 'old' : 'new' );
+								$title = $item->title();
 								$link = $item->link();
 								$date = $item->date( 'l, F j' );
 								$location = $item->location();
@@ -48,9 +50,13 @@ snippet('head');
 											echo '<span class="location">' . $location . '</span>';
 										}
 									echo '</div>';
-									echo ( $link->isNotEmpty() ? '<a href="' . $link . '" target="_blank">' : '' );
-									echo '<span class="name">' . $item->title() . '</span>';
-									echo ( $link->isNotEmpty() ? '</a>' : '' );
+									echo '<div class="name">';
+										if( $link->isNotEmpty() ) {
+											echo '<a href="' . $link . '" target="_blank">' . $title . '</a>';
+										} else {
+											echo $title;
+										}
+									echo '</div>';
 								echo '</li>';
 							}
 						echo '</ul>';

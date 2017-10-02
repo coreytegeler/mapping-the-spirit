@@ -1859,6 +1859,8 @@ body.about main {
         font-weight: normal;
         color: #878a8e;
         text-transform: uppercase; }
+      body.about main section .inner ul li.event .label span:not(:last-child) {
+        margin-right: .25em; }
       body.about main section .inner ul li a {
         text-decoration: none;
         border: 0; }
@@ -2438,6 +2440,10 @@ footer {
         max-width: 11em; }
       footer .inner .column.events span:not(:last-child) {
         margin-right: .25em; }
+      footer .inner .column.events li.old .name {
+        color: #878a8e; }
+        footer .inner .column.events li.old .name a:hover {
+          color: #000000; }
 
 @media (max-width: 480px) {
   #collection .instruct .mobile {

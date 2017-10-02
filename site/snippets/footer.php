@@ -5,15 +5,17 @@ if( !isset( $card ) ) {
   	snippet( 'collection' );
   }
 }
+$about = page( 'about' );
 echo '<div class="inner">';
-	$events = $page->events()->toStructure()->flip();
+	$events = $about->events()->toStructure();
   if( sizeof( $events ) ) {
 		echo '<div class="column events">';
 			echo '<ul>';
-				echo '<li><h3>Upcoming Events</h3></li>';
+				echo '<li><h3>Events</h3></li>';
 				foreach( $events as $item ) {
 					// echo strtotime( '+10 day', $item->date() ) . '   ' . time();
 					$status = ( strtotime( '+1 day', $item->date() ) < time() ? 'old' : 'new' );
+					$title = $item->title();
 					$link = $item->link();
 					$date = $item->date( 'l, F j' );
 					$location = $item->location();
@@ -26,16 +28,20 @@ echo '<div class="inner">';
 								echo '<span class="location">' . $location . '</span>';
 							}
 						echo '</div>';
-						echo ( $link->isNotEmpty() ? '<a href="' . $link . '" target="_blank">' : '' );
-						echo '<span class="name">' . $item->title() . '</span>';
-						echo ( $link->isNotEmpty() ? '</a>' : '' );
+						echo '<div class="name">';
+							if( $link->isNotEmpty() ) {
+								echo '<a href="' . $link . '" target="_blank">' . $title . '</a>';
+							} else {
+								echo $title;
+							}
+						echo '</div>';
 					echo '</li>';
 				}
 			echo '</ul>';
 		echo '</div>';
 	}
 	echo '<div class="column map">';
-		$credits = page( 'about' )->credits()->toStructure();
+		$credits = $about->credits()->toStructure();
 		echo '<ul>';
 			echo '<li><h3>Site Map</h3></li>';
 			if( $home = page( 'home' ) ) {
@@ -61,12 +67,12 @@ echo '<div class="inner">';
   	echo '</ul>';
   echo '</div>';
   if( $stories = page( 'stories' ) ) {
-		$stories = $stories->children()->visible()->limit( 5 );
+		$stories = $stories->children()->visible();
 		if( sizeof( $stories ) ) {
 		  echo '<div class="column stories">';
 				echo '<ul>';
 					echo '<li><h3>Stories</h3></li>';
-	  			foreach( $stories as $story ) {
+	  			foreach( $stories->limit( 5 ) as $story ) {
 		  			echo '<li><a href="' . $story->url() . '" style="color:' . $story->color() . '" class="story">' . $story->title() . '</a></li>';
 		  		}
 		  	echo '</ul>';
@@ -74,12 +80,12 @@ echo '<div class="inner">';
 	  }
 	}
   if( $field_notes = page( 'field-notes' ) ) {
-		$field_notes = $field_notes->children()->visible()->limit( 5 );
+		$field_notes = $field_notes->children()->visible();
 		if( sizeof( $field_notes ) ) {
 		  echo '<div class="column field-notes">';
 				echo '<ul>';
 					echo '<li><h3>Field Notes</h3></li>';
-	  			foreach( $field_notes as $field_note ) {
+	  			foreach( $field_notes->sortBy( 'published', 'desc' )->limit( 5 ) as $field_note ) {
 		  			echo '<li><a href="' . $field_note->url() . '">' . $field_note->title() . '</a></li>';
 		  		}
 		  	echo '</ul>';
@@ -87,7 +93,7 @@ echo '<div class="inner">';
 		}
 	}
 	echo '<div class="column credits">';
-		$credits = page( 'about' )->credits()->toStructure();
+		$credits = $about->credits()->toStructure();
 		echo '<ul>';
 			echo '<li><h3>Credits</h3></li>';
 			foreach( $credits as $credit ) {
