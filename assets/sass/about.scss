@@ -4,6 +4,28 @@ body.about {
 		background-size: cover;
 		section {
 			.inner {
+				.block {
+					padding: 0 1em 3em 1em;
+					&.image {
+						position: relative;
+						.text {
+							width: 100%;
+							position: absolute;
+							left: 0;
+							top: 3em;
+							z-index: 100;
+							cursor: default;
+						}
+					}
+					&.text {
+						strong {
+							font-family: $sansBold;
+						}
+						em {
+							font-family: $sansItalic;
+						}
+					}
+				}
 				ul {
 					width: calc(50% - .5em);
 					float: left;

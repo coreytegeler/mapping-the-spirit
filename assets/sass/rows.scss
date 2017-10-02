@@ -104,6 +104,9 @@ section.rows {
 					}
 				}
 			}
+			&:last-of-type {
+				margin-bottom: 0;
+			}
 			&:not(.hover) {
 				.title {
 					color: $dark !important;

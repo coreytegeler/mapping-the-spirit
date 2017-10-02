@@ -68,16 +68,29 @@ body.home {
 				left: calc(50% - 2em);
 				bottom: 1em;
 				padding: .5em 0 1.5em 0;
-				text-transform: uppercase;
 				text-align: center;
 				font-weight: 900;
-				color: $light;
+				color: $lightest;
 				opacity: 1;
 				background-image: url(../images/down_white.svg);
 				background-repeat: no-repeat;
 				background-size: 1.5em;
 				background-position: center bottom;
 				transition: transform 300ms $slideEase, opacity 300ms $fadeEase;
+				div {
+					width: 100%;
+					text-transform: uppercase;
+					text-shadow: 0 0 .1em black;
+				}
+				embed {
+					width: auto;
+					height: 1em;
+					display: table;
+					margin: auto;
+				}
+				svg, svg * {
+					fill: inherit;
+				}
 				&:hover {
 					padding-top: 2em;
 					margin-top: -1.5em;

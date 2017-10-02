@@ -19,7 +19,10 @@ snippet('head');
 			  	echo '</h1>';
 			  echo '</div>';
 			}
-		  echo '<div id="begin">Begin</div>';
+			$begin_svg = url( 'assets/images/down.svg' );
+		  echo '<div id="begin">';
+		  	echo '<div>Begin</div>';
+		  echo '</div>';
 		echo '</section>';
 		echo '<section id="stories" class="rows">';
 			snippet( 'header', array( 'pageTitle' => 'STORIES' ) );
@@ -33,9 +36,7 @@ snippet('head');
 				echo '<h2>Browse the <a href="' . page( 'aid' )->url() . '">finding aid</a>.</h2>';
 				echo '<h2>Create a <a href="' . page( 'collection' )->url() . '">collection</a>.</h2>';
 			echo '</div>';
-			echo '<div class="center">';
-				echo '<h2 class="title"></h2>';
-			echo '</div>';
+			echo '<div class="dash"><div class="solid"></div></div>';
 			echo '<div class="rowrap">';
 				$index = 0;
 				foreach( $stories as $story ) {
@@ -61,8 +62,9 @@ snippet('head');
 					  echo '</div>';
 			  	echo '</div>';
 			  }
-			 echo '</div>';
-			 echo '<h3 class="more">More stories coming soon</h3>';
+			  echo '<h3 class="more">More stories coming soon</h3>';
+			echo '</div>';
+			echo '<div class="dash"><div class="solid"></div></div>';
 		echo '</section>';
 		if( $field_notes = page( 'field-notes' ) ) {
 			$field_notes = $field_notes->children()->visible();
@@ -106,6 +108,45 @@ snippet('head');
 				echo '</section>';
 			}
 		}
+
+		$events = page( 'about' )->events()->toStructure()->flip();
+		if( $events ) {
+			echo '<section id="events" class="rows">';
+				echo '<h4>Upcoming Events</h4>';
+				echo '<div class="rowrap center">';
+				foreach( $events as $item ) {
+					// if( strtotime( '+1 day', $item->date() ) < time() )
+					echo '<div class="row event ' . ( $index % 2 == 0 ? 'odd ' : 'even ' ) . '">';
+						// echo strtotime( '+10 day', $item->date() ) . '   ' . time();
+						$link = $item->link();
+						$date = $item->date( 'l, F j' );
+						$location = $item->location();
+						if( $link->isNotEmpty() ) {
+	  					echo '<a href="' . $link . '" target="_blank">';
+						}
+						echo '<h2>';
+
+						echo '<span class="name">' . $item->title() . '</span>';
+
+						if( $date ) {
+							echo ' on ' . $date;
+						}
+
+						if( $location->isNotEmpty() ) {
+							echo  sizeof( $location );
+							echo ' at ' . $location;
+						}
+						echo '</h2>';
+
+						if( $link->isNotEmpty() ) {
+	  					echo '</a>';
+	  				}
+	  			echo '</div>';
+	  		}
+	  	echo '</div>';
+	  }
+
+
   echo '</main>';
 snippet('footer')
 ?>

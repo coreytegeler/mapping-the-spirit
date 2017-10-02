@@ -138,7 +138,9 @@ $ ->
 					if $item.parents('#table').length
 						if $grid.is('.loaded')
 							resizeGrid()
-						resizeCollection()
+						setTimeout () ->
+							resizeCollection()
+						, 100
 
 	sizeImage = (item, gutter) ->	
 		$item = $(item)
@@ -792,7 +794,7 @@ $ ->
 				x: 0
 
 	begin = () ->
-		$body.animate
+		$('body, html').animate
 			scrollTop: $(window).innerHeight()+1
 		, 800, 'easeInOutQuint'
 

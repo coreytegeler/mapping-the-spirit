@@ -222,15 +222,46 @@ main {
 	background-color: $lightest;
 	margin-top: $headerHeight;
 }
+#events {
+	width: 100%;
+	.event {
+		padding: 0 0 1em 0;
+		a {
+			text-decoration: none;
+			color: $dark;
+			&:hover {
+				color: $medium;
+			}
+		}
+		h2 {
+			font-family: $sansBold;
+			text-transform: none;
+			text-align: left;
+			margin: 0;
+			.name {
+				font-family: $title;
+				text-transform: uppercase;
+			}
+		}
+		&.old {
+			opacity: .5;
+		}
+	}
+}
 .data {
 	display: none;
 }
 .dash {
-	width: 3em;
-	height: .5em;
+	width: 100%;
 	display: table;
-	margin: 2em auto;
-	background-color: black;
+	.solid {
+		width: 40%;
+		max-width: 10em;
+		height: .5em;
+		display: table;
+		margin: auto;
+		background-color: black;
+	}
 }
 .dashed {
 	svg {

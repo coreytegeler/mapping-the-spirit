@@ -48,8 +48,9 @@
 		width: 100%;
 		height: 100%;
 		position: absolute;
-		display: table;
+		display: block;
 		transition: opacity 250ms ease-in;
+		overflow-y: hidden;
 		z-index: 30;
 		&:hover {
 			.item .inner {

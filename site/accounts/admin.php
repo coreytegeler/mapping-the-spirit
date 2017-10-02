@@ -8,7 +8,7 @@ language: en
 role: admin
 history:
   - home
+  - about
   - stories/msta/interview-joining-msta-father
   - stories/msta/temple-11-archive
   - stories/msta/unity-in-the-moorish-science-temple-of-america
-  - stories/msta/moorish-american-remembrance-day-and-trek

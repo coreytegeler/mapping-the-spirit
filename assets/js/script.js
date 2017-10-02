@@ -158,7 +158,9 @@
               if ($grid.is('.loaded')) {
                 resizeGrid();
               }
-              return resizeCollection();
+              return setTimeout(function() {
+                return resizeCollection();
+              }, 100);
             }
           });
         });
@@ -978,7 +980,7 @@
       }
     };
     begin = function() {
-      return $body.animate({
+      return $('body, html').animate({
         scrollTop: $(window).innerHeight() + 1
       }, 800, 'easeInOutQuint');
     };
