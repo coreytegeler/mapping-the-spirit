@@ -319,8 +319,6 @@ main .block, .single section .inner .block {
 	max-width: $laptopWidth;
 	display: block;
 	margin: auto;
-	// margin-bottom: 2em;
-	line-height: 1.2em;
 	padding: 0 0 3em 0;
 	line-height: 1.3em;
 	p {
@@ -512,6 +510,12 @@ main .block, .single section .inner .block {
 		.citation {
 			display: block !important;
 		}
+	}
+	&.full {
+		max-width: calc(100% - 2em);
+		padding-right: 1em;
+		padding-left: 1em;
+		display: table;
 	}
 }
 $indent: 3em;

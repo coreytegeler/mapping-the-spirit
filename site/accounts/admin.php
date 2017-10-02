@@ -8,7 +8,7 @@ language: en
 role: admin
 history:
   - field-notes/another-test
+  - about
   - field-notes/test
   - home
-  - about
   - stories/msta/interview-joining-msta-father

@@ -15,6 +15,8 @@ body.about {
 							top: 3em;
 							z-index: 100;
 							cursor: default;
+							color: $lightest;
+							text-shadow: 0.125em 0.125em 0.5em rgba($dark,0.225);
 						}
 					}
 					&.text {
@@ -27,17 +29,11 @@ body.about {
 					}
 				}
 				ul {
-					width: calc(50% - .5em);
+					width: calc(33.333% - .5em);
 					float: left;
 					margin: 0;
-					padding: 0;
+					padding: 0 .25em;
 					list-style: none;
-					&:first-child {
-						padding-right: .5em;
-					}
-					&:last-child {
-						padding-left: .5em;
-					}
 					li {
 						padding-bottom: .5em;
 						.label, .source {

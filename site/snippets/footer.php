@@ -6,7 +6,34 @@ if( !isset( $card ) ) {
   }
 }
 echo '<div class="inner">';
-	// echo '<em>' . page( 'home' )->brief()->kirbytext() . '</em>';
+	$events = $page->events()->toStructure()->flip();
+  if( sizeof( $events ) ) {
+		echo '<div class="column events">';
+			echo '<ul>';
+				echo '<li><h3>Upcoming Events</h3></li>';
+				foreach( $events as $item ) {
+					// echo strtotime( '+10 day', $item->date() ) . '   ' . time();
+					$status = ( strtotime( '+1 day', $item->date() ) < time() ? 'old' : 'new' );
+					$link = $item->link();
+					$date = $item->date( 'l, F j' );
+					$location = $item->location();
+					echo '<li class="event ' . $status . '">';
+						echo '<div class="label">';
+							if( $date ) {
+								echo '<span class="date">' . $date . '</span>';
+							}
+							if( $location->isNotEmpty() ) {
+								echo '<span class="location">' . $location . '</span>';
+							}
+						echo '</div>';
+						echo ( $link->isNotEmpty() ? '<a href="' . $link . '" target="_blank">' : '' );
+						echo '<span class="name">' . $item->title() . '</span>';
+						echo ( $link->isNotEmpty() ? '</a>' : '' );
+					echo '</li>';
+				}
+			echo '</ul>';
+		echo '</div>';
+	}
 	echo '<div class="column map">';
 		$credits = page( 'about' )->credits()->toStructure();
 		echo '<ul>';

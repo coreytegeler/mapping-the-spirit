@@ -1,3 +1,3 @@
 <?php
-echo '<div>' . $data->title() . '</div>';
+echo '<h1>' . $data->title() . '</h1>';
 ?>

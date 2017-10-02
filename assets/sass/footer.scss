@@ -227,8 +227,13 @@ footer {
 						}
 					}
 				}
-				&.stories, &.field-notes {
-					max-width: 11em;
+			}
+			&.stories, &.field-notes {
+				max-width: 11em;
+			}
+			&.events {
+				span:not(:last-child) {
+					margin-right: .25em;
 				}
 			}
 		}

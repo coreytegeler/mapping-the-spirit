@@ -1222,7 +1222,6 @@ main .block, .single section .inner .block {
   max-width: 1024px;
   display: block;
   margin: auto;
-  line-height: 1.2em;
   padding: 0 0 3em 0;
   line-height: 1.3em; }
   main .block p, .single section .inner .block p {
@@ -1379,6 +1378,11 @@ main .block, .single section .inner .block {
     padding-bottom: 0; }
   main .block.footer .citation, .single section .inner .block.footer .citation {
     display: block !important; }
+  main .block.full, .single section .inner .block.full {
+    max-width: calc(100% - 2em);
+    padding-right: 1em;
+    padding-left: 1em;
+    display: table; }
 
 .citation {
   width: calc(100% - 1em);
@@ -1629,8 +1633,7 @@ body.aid main, body.about main, body.error main, body.field-note main, body.fiel
       color: black;
       text-decoration: none; }
     body.aid main section b, body.aid main section strong, body.about main section b, body.about main section strong, body.error main section b, body.error main section strong, body.field-note main section b, body.field-note main section strong, body.field-notes main section b, body.field-notes main section strong, body.stories main section b, body.stories main section strong {
-      font-family: "Chivo", Helvetica, Arial, sans-serif;
-      font-weight: normal; }
+      font-family: "Chivo Bold", Helvetica, Arial, sans-serif; }
     body.aid main section .group, body.about main section .group, body.error main section .group, body.field-note main section .group, body.field-notes main section .group, body.stories main section .group {
       width: 100%;
       max-width: 800px;
@@ -1658,21 +1661,19 @@ body.about main {
         left: 0;
         top: 3em;
         z-index: 100;
-        cursor: default; }
+        cursor: default;
+        color: #fafcfc;
+        text-shadow: 0.125em 0.125em 0.5em rgba(0, 0, 0, 0.225); }
     body.about main section .inner .block.text strong {
       font-family: "Chivo Bold", Helvetica, Arial, sans-serif; }
     body.about main section .inner .block.text em {
       font-family: "Chivo Italic", Helvetica, Arial, sans-serif; }
   body.about main section .inner ul {
-    width: calc(50% - .5em);
+    width: calc(33.333% - .5em);
     float: left;
     margin: 0;
-    padding: 0;
+    padding: 0 .25em;
     list-style: none; }
-    body.about main section .inner ul:first-child {
-      padding-right: .5em; }
-    body.about main section .inner ul:last-child {
-      padding-left: .5em; }
     body.about main section .inner ul li {
       padding-bottom: .5em; }
       body.about main section .inner ul li .label, body.about main section .inner ul li .source {
@@ -2196,8 +2197,10 @@ footer {
               color: #878a8e; }
             footer .inner .column ul li a.story:not(:hover) {
               color: #000000 !important; }
-        footer .inner .column ul.stories, footer .inner .column ul.field-notes {
-          max-width: 11em; }
+      footer .inner .column.stories, footer .inner .column.field-notes {
+        max-width: 11em; }
+      footer .inner .column.events span:not(:last-child) {
+        margin-right: .25em; }
 
 @media (max-width: 480px) {
   #collection .instruct .mobile {

@@ -25,63 +25,38 @@ snippet('head');
 						}
 				  echo '</div>';
 		  	echo '</div>';
-
-		  	$events = $page->events()->toStructure()->flip();
-		  	echo '<div class="block" id="events">';
-		  		echo '<h3>Upcoming Events</h3>';
-	  			foreach( $events as $item ) {
-	  				// echo strtotime( '+10 day', $item->date() ) . '   ' . time();
-	  				$status = ( strtotime( '+1 day', $item->date() ) < time() ? 'old' : 'new' );
-	  				$link = $item->link();
-	  				$date = $item->date( 'l, F j' );
-	  				$location = $item->location();
-		  			echo '<div class="event ' . $status . '">';
-	  					if( $link->isNotEmpty() ) {
-		  					echo '<a href="' . $link . '" target="_blank">';
-	  					}
-	  					echo '<h2>';
-
-	  					echo '<span class="name">' . $item->title() . '</span>';
-
-	  					if( $date ) {
-	  						echo ' on ' . $date;
-	  					}
-
-	  					if( $location->isNotEmpty() ) {
-	  						echo  sizeof( $location );
-	  						echo ' at ' . $location;
-	  					}
-	  					echo '</h2>';
-
-	  					if( $link->isNotEmpty() ) {
-		  					echo '</a>';
-		  				}
-		  			echo '</div>';
-		  		}
-		  	echo '</div>';
-
 		  	echo '<div class="block text columns">';
 		  		echo $about_kameelah;
 		  	echo '</div>';
-		  	echo '<div class="center">';
-				  echo '<div class="block text">';
-		  			$credits = $page->credits()->toStructure();
-		  			echo '<ul class="credits">';
-		  				echo '<li><h3>Credits</h3></li>';
-			  			foreach( $credits as $credit ) {
-				  			echo '<li class="credit">';
-				  				echo '<div class="label">' . $credit->label() . '</div>';
-				  				echo '<div class="name">';
-					  				if( $link = $credit->link() ) {
-					  					echo '<a href="' . $link . '" target="_blank">' . $credit->name() . '</a>';
-					  				} else {
-					  					echo $credit->name();
-					  				}
-					  			echo '</div>';
-				  			echo '</li>';
-				  		}
-				  	echo '</ul>';
-				  	$press = $page->press()->toStructure()->flip();
+			  echo '<div class="block full">';
+				  $events = $page->events()->toStructure();
+			  	if( sizeof( $events ) ) {
+						echo '<ul>';
+							echo '<li><h3>Upcoming Events</h3></li>';
+							foreach( $events as $item ) {
+								// echo strtotime( '+10 day', $item->date() ) . '   ' . time();
+								$status = ( strtotime( '+1 day', $item->date() ) < time() ? 'old' : 'new' );
+								$link = $item->link();
+								$date = $item->date( 'l, F j' );
+								$location = $item->location();
+								echo '<li class="event ' . $status . '">';
+									echo '<div class="label">';
+										if( $date ) {
+											echo '<span class="date">' . $date . '</span>';
+										}
+										if( $location->isNotEmpty() ) {
+											echo '<span class="location">' . $location . '</span>';
+										}
+									echo '</div>';
+									echo ( $link->isNotEmpty() ? '<a href="' . $link . '" target="_blank">' : '' );
+									echo '<span class="name">' . $item->title() . '</span>';
+									echo ( $link->isNotEmpty() ? '</a>' : '' );
+								echo '</li>';
+							}
+						echo '</ul>';
+					}
+			  	$press = $page->press()->toStructure();
+			  	if( sizeof( $press ) ) {
 				  	echo '<ul class="press">';
 				  		echo '<li><h3>Press</h3></li>';
 			  			foreach( $press as $item ) {
@@ -97,8 +72,26 @@ snippet('head');
 				  			echo '</li>';
 				  		}
 				  	echo '</ul>';
-				  echo '</div>';
-		  	echo '</div>';
+				  }
+			  	$credits = $page->credits()->toStructure();
+			  	if( sizeof( $credits ) ) {
+		  			echo '<ul class="credits">';
+		  				echo '<li><h3>Credits</h3></li>';
+			  			foreach( $credits as $credit ) {
+				  			echo '<li class="credit">';
+				  				echo '<div class="label">' . $credit->label() . '</div>';
+				  				echo '<div class="name">';
+					  				if( $link = $credit->link() ) {
+					  					echo '<a href="' . $link . '" target="_blank">' . $credit->name() . '</a>';
+					  				} else {
+					  					echo $credit->name();
+					  				}
+					  			echo '</div>';
+				  			echo '</li>';
+				  		}
+				  	echo '</ul>';
+				  }
+			  echo '</div>';
 		  echo '</div>';
 		echo '</section>';
 		snippet('footer');
