@@ -1,6 +1,6 @@
 <?php
-$about_project = $page->about_project()->kirbytext();
-$about_kameelah = $page->about_kameelah()->kirbytext();
+$statement = $page->statement()->kirbytext();
+$bio = $page->bio()->kirbytext();
 if( $page->lead()->isNotEmpty() ) {
 	$lead = $page->image( $page->lead() )->resize( 1000, 1000, 100 );
 }
@@ -17,7 +17,7 @@ snippet('head');
 	  			$rotate = mt_rand( -25, 0 )/100;
 					$shift = mt_rand( -200, -100 )/100;
 	  			echo '<div class="text shift rotate" data-shift="' . $shift . '" data-rotate="' . $rotate .'">';
-			  		echo '<h2>' . $about_project . '</h2>';
+			  		echo '<h2>' . $statement . '</h2>';
 			  	echo '</div>';
 					echo '<div class="img">';
 						if( isset( $lead ) ) {
@@ -26,11 +26,10 @@ snippet('head');
 				  echo '</div>';
 		  	echo '</div>';
 		  	echo '<div class="block text columns">';
-		  		echo $about_kameelah;
+		  		echo $bio;
 		  	echo '</div>';
 			  echo '<div class="block full">';
 				  $events = $page->events()->toStructure();
-				  echo sizeof( $events );
 			  	if( sizeof( $events ) ) {
 						echo '<ul>';
 							echo '<li><h3>Events</h3></li>';

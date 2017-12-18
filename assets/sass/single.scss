@@ -376,6 +376,10 @@ main .block, .single section .inner .block {
 			p {
 				display: inline-block;
 			}
+			@include phone {
+				column-count: 1;
+				column-gap: 0;
+			}
 		}
 	}
 	&.image, &.video {

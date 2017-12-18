@@ -211,10 +211,11 @@ footer {
 						white-space: nowrap;
 						padding-bottom: .25em;
 					}
-					.label, .source {
+					.label {
 						@include xSmallText();
 						color: $medium;
 						text-transform: uppercase;
+						margin: .5em 0 .25em 0;
 					}
 					a {
 						text-decoration: none;
@@ -225,6 +226,9 @@ footer {
 						&.story:not(:hover) {
 							color: $dark !important;
 						}
+					}
+					&:nth-child(2) .label {
+						margin: 0;
 					}
 				}
 			}
@@ -237,8 +241,8 @@ footer {
 				}
 				li.old {
 					.name {
-						color: $medium;
 						a {
+							color: $medium;
 							&:hover {
 								color: $dark;
 							}
@@ -265,7 +269,9 @@ footer {
 			display: table;
 			.column {
 				width: 100%;
+				max-width: 100% !important;
 				margin-bottom: 1em;
+				padding: 0;
 				ul {
 					max-width: 100%;
 				}

@@ -9,14 +9,20 @@ body.about {
 					&.image {
 						position: relative;
 						.text {
-							width: 100%;
+							width: calc(100% - 2em);
 							position: absolute;
 							left: 0;
 							top: 3em;
+							padding: 0 1em;
 							z-index: 100;
 							cursor: default;
 							color: $lightest;
 							text-shadow: 0.125em 0.125em 0.5em rgba($dark,0.225);
+							@include phone {
+								color: $dark;
+								text-shadow: none;
+								position: static;
+							}
 						}
 					}
 					&.text {
@@ -34,6 +40,10 @@ body.about {
 					margin: 0;
 					padding: 0 .25em;
 					list-style: none;
+					@include phone {
+						width: 100%;
+						padding: 0 0 1em 0;
+					}
 					li {
 						padding-bottom: .5em;
 						.label, .source {
