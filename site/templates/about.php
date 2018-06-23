@@ -33,12 +33,12 @@ snippet('head');
 			  	if( sizeof( $events ) ) {
 						echo '<ul>';
 							echo '<li><h3>Events</h3></li>';
-							foreach( $events as $item ) {
+							foreach( $events->sortBy( 'date', 'DESC' ) as $item ) {
 								// echo strtotime( '+10 day', $item->date() ) . '   ' . time();
 								$status = ( strtotime( '+1 day', $item->date() ) < time() ? 'old' : 'new' );
 								$title = $item->title();
 								$link = $item->link();
-								$date = $item->date( 'l, F j' );
+								$date = $item->date( 'l, F j, Y' );
 								$location = $item->location();
 								echo '<li class="event ' . $status . '">';
 									echo '<div class="label">';
@@ -46,7 +46,7 @@ snippet('head');
 											echo '<span class="date">' . $date . '</span>';
 										}
 										if( $location->isNotEmpty() ) {
-											echo '<span class="location">' . $location . '</span>';
+											echo 'at <span class="location">' . $location . '</span>';
 										}
 									echo '</div>';
 									echo '<div class="name">';
@@ -68,10 +68,12 @@ snippet('head');
 				  			echo '<li class="press">';
 					  			echo '<div class="source">' . $item->source() . '</div>';
 				  				echo '<div class="title">';
-				  					if( $link = $item->link() ) {
-					  					echo '<a href="' . $link . '" target="_blank">' . $item->title() . '</a>';
+					  				$link = $item->link();
+				  					$title = $item->title();
+				  					if( $link->isNotEmpty() ) {
+					  					echo '<a href="' . $link . '" target="_blank">' . $title . '</a>';
 					  				} else {
-					  					echo $item->title();
+					  					echo $title;
 					  				}
 					  			echo '</div>';
 				  			echo '</li>';
@@ -86,10 +88,12 @@ snippet('head');
 				  			echo '<li class="credit">';
 				  				echo '<div class="label">' . $credit->label() . '</div>';
 				  				echo '<div class="name">';
-					  				if( $link = $credit->link() ) {
-					  					echo '<a href="' . $link . '" target="_blank">' . $credit->name() . '</a>';
+					  				$link = $credit->link();
+					  				$name = $credit->name();
+					  				if( $link->isNotEmpty() ) {
+					  					echo '<a href="' . $link . '" target="_blank">' . $name . '</a>';
 					  				} else {
-					  					echo $credit->name();
+					  					echo $name;
 					  				}
 					  			echo '</div>';
 				  			echo '</li>';

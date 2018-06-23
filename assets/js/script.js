@@ -3,7 +3,7 @@
   var indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   $(function() {
-    var $aid, $body, $collection, $collectionItems, $frame, $grid, $header, $itemTitle, $main, $pageTitle, $secondary, $table, $window, addToCollection, begin, browseCollection, browserNav, buildGrid, checkSize, clickItem, clickLink, clipboard, closeDur, closeFrame, closeSingle, collect, collectSingle, createCollectionItem, createSingle, dragAndDrop, frameTool, goBack, horzScroll, hoverRow, init, insertCollection, loadCollection, loadImages, loadSingle, loadedSlug, lookAt, lookAway, makeResizable, noHover, openDur, openLinks, paginate, pickUp, putDown, putDownAll, removeCollectedItem, replacePagination, resizeCollection, resizeFolder, resizeFrameBar, resizeGrid, saveCollection, scrollInterval, scrollShift, shiftAndRotate, showCite, sizeImage, toggleFolder, transEnd, uncollect, unhoverRow, vertScroll, zoomImage;
+    var $aid, $body, $collection, $collectionItems, $frame, $grid, $header, $itemTitle, $main, $pageTitle, $secondary, $table, $window, addToCollection, begin, browseCollection, browserNav, buildGrid, cardLeave, cardScroll, checkSize, clickItem, clickLink, clipboard, closeDur, closeFrame, closeSingle, collect, collectSingle, createCollectionItem, createSingle, dragAndDrop, frameTool, goBack, horzScroll, hoverRow, init, insertCollection, loadCollection, loadImages, loadSingle, loadedSlug, lookAt, lookAway, makeResizable, noHover, openDur, openLinks, paginate, pickUp, putDown, putDownAll, removeCollectedItem, replacePagination, resizeCollection, resizeFolder, resizeFrameBar, resizeGrid, saveCollection, scrollInterval, scrollShift, shiftAndRotate, showCite, sizeImage, toggleFolder, transEnd, uncollect, unhoverRow, vertScroll, zoomImage;
     $window = $(window);
     $body = $('body');
     $main = $('main');
@@ -32,6 +32,9 @@
       $body.scroll(function(event) {
         return vertScroll(this, event);
       });
+      $body.on('mousewheel', '.card', function(event) {
+        return cardScroll(this, event);
+      });
       $body.on('mousemove', function(e) {
         return $(this).find('.shift').each(function() {
           return shiftAndRotate(this, e);
@@ -54,6 +57,7 @@
       $body.on('click', '#error a.back', goBack);
       $body.on('mouseover', '.row a', hoverRow);
       $body.on('mouseleave', '.row a', unhoverRow);
+      $body.on('mouseleave', '.card', cardLeave);
       $body.on('click', '.open-links', openLinks);
       $(window).on('popstate', browserNav);
       if ($body.is('.looking')) {
@@ -115,12 +119,17 @@
     };
     resizeGrid = function() {
       var gutter;
-      gutter = $grid.find('.gutter').innerWidth();
-      if ($grid.data('isotope')) {
-        return $grid.find('.item').each(function() {
-          sizeImage(this, gutter);
-          return $grid.isotope('layout');
+      if ($grid.length) {
+        $grid.css({
+          minWidth: $grid[0].style.width
         });
+        gutter = $grid.find('.gutter').innerWidth();
+        if ($grid.data('isotope')) {
+          return $grid.find('.item').each(function() {
+            sizeImage(this, gutter);
+            return $grid.isotope('layout');
+          });
+        }
       }
     };
     loadImages = function(parent) {
@@ -233,7 +242,7 @@
       });
     };
     horzScroll = function(self, event) {
-      if ($grid.length) {
+      if ($grid.length && !$grid.is('.noScroll')) {
         if ($body.is('.mobile')) {
           return;
         }
@@ -244,6 +253,33 @@
           return false;
         }
       }
+    };
+    cardScroll = function(self, event) {
+      var $card, forward, hitBottom, rightEdgle, scrollable;
+      $card = $(self);
+      scrollable = $card[0].scrollHeight > $card.innerHeight();
+      if (!scrollable) {
+        return;
+      }
+      forward = event.deltaY < 0;
+      console.log(forward);
+      rightEdgle = $card.offset().left + $card.innerWidth();
+      hitBottom = $card[0].scrollHeight - $card.scrollTop() === $card.innerHeight();
+      if (rightEdgle <= $(window).innerWidth()) {
+        if (!hitBottom) {
+          $grid.addClass('noScroll');
+          $card.addClass('responsible');
+        }
+        if (hitBottom || $card.scrollTop() === 0) {
+          $grid.removeClass('noScroll');
+          return $card.removeClass('responsible');
+        }
+      } else {
+        return event.preventDefault();
+      }
+    };
+    cardLeave = function(e) {
+      return $grid.removeClass('noScroll');
     };
     dragAndDrop = function() {
       var gutter;
@@ -1018,9 +1054,7 @@
           minZoom: 2,
           maxZoom: 4,
           zoom: 1,
-          center: [0, 0]
-        });
-        ({
+          center: [0, 0],
           zoomControl: false,
           crs: L.CRS.Simple
         });
@@ -1105,9 +1139,8 @@
       touch = indexOf.call(document.documentElement, 'ontouchstart') >= 0 || (navigator.MaxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
       if (!touch) {
         return;
-        try {
-
-        } catch (undefined) {}
+      }
+      try {
         ref = document.styleSheets;
         results = [];
         for (j = 0, len = ref.length; j < len; j++) {
@@ -1133,7 +1166,7 @@
           })());
         }
         return results;
-      }
+      } catch (undefined) {}
     };
     return init();
   });

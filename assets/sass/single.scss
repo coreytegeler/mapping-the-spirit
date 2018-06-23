@@ -340,7 +340,7 @@ main .block, .single section .inner .block {
 		color: black;
 		text-decoration: none;
 		border-bottom: 1px solid;
-		transition: all 100ms $fadeEase;
+		transition: opacity 100ms $fadeEase, color 100ms $fadeEase;
 		&:hover {
 			color: $medium;
 		}
@@ -749,6 +749,11 @@ $indent: 3em;
 	}
 }
 @include phone {
+	main .block, .single section .inner .block {
+		&.quote .text p {
+			padding: 0 .5em .5em .5em;
+		}
+	}
 	.single {
 		height: calc(100% - #{$headerHeight});
 		top: $headerHeight;

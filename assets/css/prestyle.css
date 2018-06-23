@@ -126,6 +126,11 @@ ul {
   padding-left: 1.2em;
   margin: 0; }
 
+blockquote {
+  width: calc(100% - 2em);
+  margin: 0 1em 1em 1em;
+  font-family: "Chivo Italic", Helvetica, Arial, sans-serif; }
+
 .horz {
   display: table;
   margin: auto; }
@@ -586,7 +591,8 @@ body.story, body.collection {
       display: flex;
       align-items: center;
       float: left;
-      overflow-y: scroll; }
+      overflow-y: scroll;
+      position: relative; }
       body.story main .card h3, body.collection main .card h3 {
         text-align: center;
         display: table;
@@ -647,10 +653,16 @@ body.story, body.collection {
         transition: color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95), background-color 50ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
       body.story main #title a, body.collection main #title a {
         text-decoration: none; }
-      body.story main #title h1.title, body.collection main #title h1.title {
+      body.story main #title .title, body.collection main #title .title {
         width: 50%;
-        z-index: 10;
-        text-decoration: underline; }
+        z-index: 10; }
+        body.story main #title .title h1, body.collection main #title .title h1 {
+          text-decoration: underline; }
+        body.story main #title .title .date, body.collection main #title .title .date {
+          margin: .5em 0 0 0;
+          font-size: .75em;
+          line-height: 1.3em;
+          font-weight: normal; }
       body.story main #title .image, body.collection main #title .image {
         width: 50%;
         max-width: none;
@@ -667,7 +679,7 @@ body.story, body.collection {
             mix-blend-mode: screen; }
       body.story main #title.odd .titleWrap, body.collection main #title.odd .titleWrap {
         flex-direction: row-reverse; }
-      body.story main #title.odd h1.title, body.collection main #title.odd h1.title {
+      body.story main #title.odd .title, body.collection main #title.odd .title {
         text-align: left;
         float: left;
         transform: translateX(7%); }
@@ -678,7 +690,7 @@ body.story, body.collection {
           float: right; }
       body.story main #title.even .titleWrap, body.collection main #title.even .titleWrap {
         flex-direction: row; }
-      body.story main #title.even h1.title, body.collection main #title.even h1.title {
+      body.story main #title.even .title, body.collection main #title.even .title {
         text-align: right;
         float: right;
         transform: translateX(-75%); }
@@ -724,9 +736,10 @@ body.story, body.collection {
       float: left; }
     body.story main #grid, body.collection main #grid {
       height: calc(100% - 20px);
+      position: absolute;
       margin: 20px 0 0 0;
-      display: table;
-      float: left;
+      display: block;
+      clear: both;
       opacity: 0;
       transition: opacity 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
       body.story main #grid.loaded, body.collection main #grid.loaded {
@@ -963,7 +976,7 @@ body.story, body.collection {
           width: calc(100vw - 2em); }
         body.story main #table .card#title .image, body.collection main #table .card#title .image {
           transform: 0; }
-        body.story main #table .card#title.odd h1.title, body.collection main #table .card#title.odd h1.title {
+        body.story main #table .card#title.odd .title, body.collection main #table .card#title.odd .title {
           transform: translateX(0); }
       body.story main #table .card#info, body.collection main #table .card#info {
         width: 100%;
@@ -1239,7 +1252,7 @@ main .block, .single section .inner .block {
     color: black;
     text-decoration: none;
     border-bottom: 1px solid;
-    transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
+    transition: opacity 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95), color 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95); }
     main .block a:hover, .single section .inner .block a:hover {
       color: #878a8e; }
   main .block .text, .single section .inner .block .text {
@@ -1594,6 +1607,9 @@ main .block, .single section .inner .block {
     display: none !important; }
 
 @media (max-width: 480px) {
+  main .block.quote .text p, .single section .inner .block.quote .text p {
+    padding: 0 .5em .5em .5em; }
+
   .single {
     height: calc(100% - 2em);
     top: 2em; }
@@ -1770,6 +1786,11 @@ section.rows {
             display: table; }
           section.rows .rowrap .row .wrap .title h1 {
             text-decoration: underline; }
+        section.rows .rowrap .row .wrap .date {
+          margin: .5em 0 0 0;
+          font-size: .75em;
+          line-height: 1.3em;
+          font-weight: normal; }
         section.rows .rowrap .row .wrap .image {
           width: 50%;
           max-width: none;
@@ -1822,6 +1843,8 @@ section.rows {
     section.rows#stories .story:last-of-type {
       margin-bottom: 0; }
     section.rows#stories .story:not(.hover) .title {
+      color: #000000 !important; }
+    section.rows#stories .story:not(.hover) .date {
       color: #000000 !important; }
     section.rows#stories .story:not(.hover) .image .img {
       background-color: #000000 !important; }
@@ -1877,14 +1900,14 @@ section.rows {
     section.rows#field-notes .field-note.odd .wrap .title a {
       padding: 0 1em 0 2em;
       float: right; }
-    section.rows#field-notes .field-note.odd .wrap .title h2, section.rows#field-notes .field-note.odd .wrap .title h3 {
+    section.rows#field-notes .field-note.odd .wrap .title h2, section.rows#field-notes .field-note.odd .wrap .title h3, section.rows#field-notes .field-note.odd .wrap .title .date {
       text-align: right; }
     section.rows#field-notes .field-note.odd .wrap .image a {
       padding: 0 2em 0 1em; }
     section.rows#field-notes .field-note.even .wrap .title a {
       padding: 0 2em 0 1em;
       float: left; }
-    section.rows#field-notes .field-note.even .wrap .title h2, section.rows#field-notes .field-note.even .wrap .title h3 {
+    section.rows#field-notes .field-note.even .wrap .title h2, section.rows#field-notes .field-note.even .wrap .title h3, section.rows#field-notes .field-note.even .wrap .title .date {
       text-align: left; }
     section.rows#field-notes .field-note.even .wrap .image a {
       padding: 0 1em 0 2em; }

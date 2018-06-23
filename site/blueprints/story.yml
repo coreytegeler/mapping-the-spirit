@@ -52,3 +52,7 @@ fields:
       url:
         label: URL
         type: text
+  published:
+    label: Published
+    type:  date
+    default: now

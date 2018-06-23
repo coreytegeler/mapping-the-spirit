@@ -59,7 +59,17 @@ echo '<div id="table" class="horzScroll"' . ( isset( $slug ) ? ' data-story="' .
 				  echo '</div>';
 				  $rotate = mt_rand( 0, 25 )/100;
 					$shift = mt_rand( 100, 200 )/100;
-					echo '<h1 class="title" style="color:' . $color . '"><div class="rotate shift" data-rotate="' . $rotate . '" data-shift="' . $shift . '">' .  $story->title() . '</div></h1>';
+					echo '<div class="title">';
+						echo '<h1 style="color:' . $color . '"><div class="rotate shift" data-rotate="' . $rotate . '" data-shift="' . $shift . '">' .  $story->title() . '</div></h1>';
+						$published = $story->date(  'F j Y', 'published' );
+		  			$modified = $story->modified( 'F j Y' );
+		  			echo '<div class="date">';
+			  			echo 'Published ' . $published;
+			  			if( $published != $modified ) {
+			  				echo ' | Updated ' . $modified;
+			  			}
+		  			echo '</div>';
+		  		echo '</div>';
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';

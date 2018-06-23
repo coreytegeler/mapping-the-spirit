@@ -7,25 +7,25 @@ if( !isset( $card ) ) {
 }
 $about = page( 'about' );
 echo '<div class="inner">';
-	$events = $about->events()->toStructure();
+	$events = $about->events()->toStructure()->filterBy( 'date', '>', time() );
   if( sizeof( $events ) ) {
 		echo '<div class="column events">';
 			echo '<ul>';
 				echo '<li><h3>Events</h3></li>';
-				foreach( $events as $item ) {
-					// echo strtotime( '+10 day', $item->date() ) . '   ' . time();
-					$status = ( strtotime( '+1 day', $item->date() ) < time() ? 'old' : 'new' );
-					$title = $item->title();
-					$link = $item->link();
-					$date = $item->date( 'l, F j' );
-					$location = $item->location();
+				foreach( $events->sortBy( 'date', 'ASC' ) as $event ) {
+					// echo strtotime( '+10 day', $event->date() ) . '   ' . time();
+					$status = ( strtotime( '+1 day', $event->date() ) < time() ? 'old' : 'new' );
+					$title = $event->title();
+					$link = $event->link();
+					$date = $event->date( 'l, F j, Y' );
+					$location = $event->location();
 					echo '<li class="event ' . $status . '">';
 						echo '<div class="label">';
 							if( $date ) {
-								echo '<span class="date">' . $date . '</span>';
+								echo '<span class="date">' . $date . ' </span>';
 							}
 							if( $location->isNotEmpty() ) {
-								echo '<span class="location">' . $location . '</span>';
+								echo 'at <span class="location">' . $location . '</span>';
 							}
 						echo '</div>';
 						echo '<div class="name">';
@@ -100,11 +100,13 @@ echo '<div class="inner">';
   			echo '<li class="credit">';
   				echo '<div class="label">' . $credit->label() . '</div>';
   				echo '<div class="name">';
-	  				if( $link = $credit->link() ) {
-	  					echo '<a href="' . $link . '" target="_blank">' . $credit->name() . '</a>';
-	  				} else {
-	  					echo $credit->name();
-	  				}
+  					$link = $credit->link();
+  					$name = $credit->name();
+	  				if( $link->isNotEmpty() ) {
+							echo '<a href="' . $link . '" target="_blank">' . $name . '</a>';
+						} else {
+							echo $name;
+						}
 	  			echo '</div>';
   			echo '</li>';
   		}

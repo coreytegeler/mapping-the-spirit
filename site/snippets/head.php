@@ -2,7 +2,7 @@
 <?php
 echo '<html lang="en">';
 echo '<head>';
-
+  $version = 2.7;
   echo '<meta charset="utf-8" />';
   echo '<meta name="viewport" content="width=device-width,initial-scale=1.0">';
   $siteTitle = $site->title()->html();
@@ -38,12 +38,11 @@ echo '<meta name="theme-color" content="#ffffff">';
     ga("create", "UA-55531055-3", "auto");
     ga("send", "pageview")</script>';
 
-  $version = 2.5;
   echo js(array(
     'assets/js/jquery.js',
     'assets/js/jquery-ui.js',
     'https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js',
-    'assets/js/isotope.js',
+    'assets/js/isotope.min.js',
     'assets/js/masonry-horizontal.js',
     'assets/js/mousewheel.js',
     'assets/js/transit.js',

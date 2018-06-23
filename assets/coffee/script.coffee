@@ -25,6 +25,8 @@ $ ->
 			horzScroll(this, event)
 		$body.scroll (event) ->
 			vertScroll(this, event)
+		$body.on 'mousewheel', '.card', (event) ->
+			cardScroll(this, event)
 		$body.on 'mousemove', (e) ->
 			$(this).find('.shift').each () ->
 				shiftAndRotate(this, e)
@@ -45,9 +47,10 @@ $ ->
 		$body.on 'click', '#error a.back', goBack
 		$body.on 'mouseover', '.row a', hoverRow
 		$body.on 'mouseleave', '.row a', unhoverRow
+		$body.on 'mouseleave', '.card', cardLeave
 		$body.on 'click', '.open-links', openLinks
 		$(window).on 'popstate', browserNav
-	  
+		
 		if $body.is('.looking')
 			slug = $('.single').attr('data-slug')
 			data = {action: 'up', slug: slug}
@@ -80,9 +83,6 @@ $ ->
 
 	buildGrid = () ->
 		gutter = $grid.find('.gutter').innerWidth()
-		# if checkSize('phone')
-		# 	$body.addClass('mobile')
-		# else
 		$grid.isotope
 			layoutMode: 'masonryHorizontal',
 			itemSelector: '.item',
@@ -103,11 +103,14 @@ $ ->
 		vertScroll()
 
 	resizeGrid = () ->
-		gutter = $grid.find('.gutter').innerWidth()
-		if $grid.data('isotope')
-			$grid.find('.item').each () ->
-				sizeImage(this, gutter)
-				$grid.isotope('layout')
+		if $grid.length
+			$grid.css
+				minWidth: $grid[0].style.width
+			gutter = $grid.find('.gutter').innerWidth()
+			if $grid.data('isotope')
+				$grid.find('.item').each () ->
+					sizeImage(this, gutter)
+					$grid.isotope('layout')
 
 	loadImages = (parent) ->
 		if parent && parent.length
@@ -199,14 +202,35 @@ $ ->
 			paddingTop: paddingTop
 
 	horzScroll = (self, event) ->
-		if $grid.length
+		if $grid.length && !$grid.is('.noScroll')
 			if $body.is('.mobile')
 				return
 			if event.deltaY != 0
-				# event.preventDefault()
 				self.scrollLeft -= event.deltaY
 			if event.deltaX != 0
 				return false
+
+	cardScroll = (self, event) ->
+		$card = $(self)
+		scrollable = $card[0].scrollHeight > $card.innerHeight()
+		if !scrollable
+			return
+		forward = event.deltaY < 0
+		console.log forward
+		rightEdgle = $card.offset().left + $card.innerWidth()
+		hitBottom = $card[0].scrollHeight - $card.scrollTop() == $card.innerHeight()
+		if rightEdgle <= $(window).innerWidth()
+			if !hitBottom
+				$grid.addClass('noScroll')
+				$card.addClass('responsible')
+			if hitBottom || $card.scrollTop() == 0
+				$grid.removeClass('noScroll')
+				$card.removeClass('responsible')
+		else
+			event.preventDefault()
+					
+	cardLeave = (e) ->
+		$grid.removeClass('noScroll')
 
 	dragAndDrop = () ->
 		gutter = $grid.find('.gutter').innerWidth()
@@ -825,10 +849,10 @@ $ ->
 			height = $frame.innerHeight()
 			width = (height/imgHeight)*imgWidth
 			window.frame = L.map 'frame-inner',
-			  minZoom: 2,
-			  maxZoom: 4,
-			  zoom: 1,
-			  center: [0, 0],
+				minZoom: 2,
+				maxZoom: 4,
+				zoom: 1,
+				center: [0, 0],
 				zoomControl: false,
 				crs: L.CRS.Simple
 			southWest = frame.unproject([0, height], frame.getMaxZoom()-1)
@@ -898,7 +922,7 @@ $ ->
 		touch = 'ontouchstart' in document.documentElement || (navigator.MaxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)
 		if(!touch)
 			return
-	  try
+		try
 			for si in document.styleSheets
 				styleSheet = document.styleSheets[si]
 				if styleSheet.rules

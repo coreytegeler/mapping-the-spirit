@@ -72,6 +72,11 @@ ul {
 	padding-left: 1.2em;
 	margin: 0;
 }
+blockquote {
+	width: calc(100% - 2em);
+	margin: 0 1em 1em 1em;
+	font-family: $sansItalic;
+}
 .horz {
 	display: table;
 	margin: auto;

@@ -58,6 +58,14 @@ snippet('head');
 						  	$rotate = mt_rand( -25, 10 )/100;
 								$shift = mt_rand( -100, -50 )/100;
 				  			echo '<h1 class="shift rotate" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index/2 . '">' .  $story->title() . '</h1>';
+				  			$published = $story->date(  'F j Y', 'published' );
+				  			$modified = $story->modified( 'F j Y' );
+				  			echo '<div class="date">';
+					  			echo 'Published ' . $published;
+					  			if( $published != $modified ) {
+					  				echo ' | Updated ' . $modified;
+					  			}
+				  			echo '</div>';
 				  		echo '</a>';
 					  echo '</div>';
 			  	echo '</div>';
@@ -83,11 +91,12 @@ snippet('head');
 							$thumb = $field_note->getThumb( 'large' );
 							$rotate = mt_rand( -25, 10 )/100;
 							$shift = mt_rand( -50, -25 )/100 * $sign;
+							$color = $field_note->color();
 					  	echo '<div class="row field-note ' . ( $index % 2 == 0 ? 'odd ' : 'even ' ) . ( !$thumb ? ' no-thumb' : '' ) . '">';
 						  	echo '<div class="wrap">';
 						  	 if( $thumb ) {
 							  		echo '<div class="image">';
-							  			echo '<a href="' . $url . '" class="img rotate shift" style="background-color:' . $field_note->color() . '" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index . '">';
+							  			echo '<a href="' . $url . '" class="img rotate shift" style="background-color:' . $color . '" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index . '">';
 							  				if( $thumb ) {
 											  	echo '<img src="' . $thumb->url() . '"/>';
 											  }
@@ -99,7 +108,7 @@ snippet('head');
 					  			echo '<div class="title">';
 					  				echo '<a href="' . $url . '">';
 						  				echo '<h2 class="shift rotate" data-shift="' . $shift . '" data-rotate="' . $rotate .'" data-index="' . $index/2 . '">' .  $field_note->title() . '</h2>';
-						  				echo '<h3>' . $field_note->date( 'F d Y', 'published' ) . '</h3>';
+						  				echo '<div class="date">' . $field_note->date( 'F d Y', 'published' ) . '</div>';
 						  			echo '</a>';
 					  			echo '</div>';
 							  echo '</div>';

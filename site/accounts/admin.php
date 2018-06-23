@@ -7,8 +7,8 @@ email: coreytegeler@gmail.com
 language: en
 role: admin
 history:
+  - stories/msta
   - about
-  - field-notes/another-test
-  - field-notes/test
-  - home
-  - stories/msta/interview-joining-msta-father
+  - stories/msta/prophets-day-2017
+  - stories/msta/robert-webb-iii
+  - stories/msta/misconceptions
